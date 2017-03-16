@@ -151,7 +151,13 @@ namespace University.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
+                    FirstName = model.FirstName,
+                    SurName = model.SurName,
+                    PatronymicName = model.PatronymicName,
+                    BirthDate = model.BirthDate,
+                    Photo = ""
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

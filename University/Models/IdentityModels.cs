@@ -1,8 +1,20 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using University.Models.Tables;
+
+
+// enable-migrations
+
+// Add-Migration "DataMigration"
+
+// Update-Database
+
+
 
 namespace University.Models
 {
@@ -14,12 +26,56 @@ namespace University.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("FirstName", this.FirstName));
+            userIdentity.AddClaim(new Claim("SurName", this.SurName));
+            userIdentity.AddClaim(new Claim("PatronymicName", this.PatronymicName));
+            userIdentity.AddClaim(new Claim("Photo", this.Photo));
+            userIdentity.AddClaim(new Claim("BirthDate", this.BirthDate.ToString()));
             return userIdentity;
+        }
+
+        public string FirstName { get; set; }
+
+        public string SurName { get; set; }
+
+        public string PatronymicName { get; set; }
+
+        public string Photo { get; set; }
+
+        public DateTime BirthDate { get; set; }
+
+        public StudentGroup StudentGroup { get; set; }
+
+        public ApplicationUser()
+        {
+            StudentGroup = new StudentGroup();
         }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Department> Departments { get; set; }
+
+        public DbSet<Faculty> Faculties { get; set; }
+
+        public DbSet<Semester> Semesters { get; set; }
+
+        public DbSet<Speciality> Specialities { get; set; }
+
+        public DbSet<StudentGroup> StudentGroups { get; set; }
+
+        public DbSet<Subject> Subjects { get; set; }
+
+        public DbSet<SubjectsToSemesterInGroup> SubjectsToSemesterInGroup { get; set; }
+
+        public DbSet<Friend> Friends { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
+
+        public DbSet<Dialog> Dialogs { get; set; }
+
+        public DbSet<UserToDialog> UserToDialogs { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
