@@ -30,7 +30,7 @@ namespace University.Models
             userIdentity.AddClaim(new Claim("SurName", this.SurName));
             userIdentity.AddClaim(new Claim("PatronymicName", this.PatronymicName));
             userIdentity.AddClaim(new Claim("Photo", this.Photo));
-            userIdentity.AddClaim(new Claim("BirthDate", this.BirthDate.ToString()));
+            userIdentity.AddClaim(new Claim("BirthDate", this.BirthDate.ToShortDateString()));
             return userIdentity;
         }
 
