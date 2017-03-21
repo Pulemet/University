@@ -9,15 +9,8 @@ namespace University.Models.Tables
     {
         public int Id { get; set; }
 
-        public ApplicationUser UserOne { get; set; }
+        public string UserOneId { get; set; }
 
-        public ApplicationUser UserTwo { get; set; }
-
-        public Friend()
-        {
-            UserOne = new ApplicationUser();
-
-            UserTwo  = new ApplicationUser();
-        }
+        public string UserTwoId { get; set; }
     }
 }

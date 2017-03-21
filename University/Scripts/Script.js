@@ -32,3 +32,35 @@
             return ok;
         });
 });
+
+$(function () {
+    $("#ListUsers").on("click", ".js-add-friend-button", function () {
+        var data = $(this).attr("id");
+        $.post("/FindUser/AddFriend", { id: data }, function () {
+            $('#' + data).text("Добавлен");
+            $('#' + data).prop('disabled', true);
+        });
+    });
+});
+
+$(function () {
+    $("#ListFriends").on("click", ".js-new-msg-button", function () {
+        var data = $(this).attr("id");
+        var url = '/Home/DialogPage';
+        $.post("/Home/OpenDialog", { recipientId: data },
+            function (response) {
+                $.get(url, response);
+            });
+    });
+});
+
+$(document).ready(function () {
+    $('#sendMessage').submit(function (event) {
+        event.preventDefault();
+        var data = $(this).serialize();
+        var url = $(this).attr('action');
+        $.post(url, data, function (responce) {
+            $('#formMessages').append(responce);
+        });
+    });
+});

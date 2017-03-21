@@ -14,10 +14,10 @@ namespace University.Models.Tables
         [MaxLength]
         public string Text { get; set; }
 
-        public ApplicationUser Sender { get; set; }
+        public string SenderId { get; set; }
 
         public DateTime DateSend { get; set; }
 
-        public Dialog Dialog { get; set; }
+        public int DialogId { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model University.Models.Dto.DialogDto
+
+
+<style>
+    
+    .form-element-textarea {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    div {
+        word-wrap:break-word;
+    }
+
+    .color-header-message {
+        color: cadetblue;
+        font-size: 110%;
+    }
+
+</style>
+
+
+<form method="POST" id="sendMessage" action="/Home/SendMessage">
+    <div>
+        <input type="text" name="DialogId" value="@Model.Id" class="hide">
+        <textarea class="form-element form-element-textarea" name="Value" rows="5" id="Description" placeholder="Введите ваше сообщение"></textarea>
+        <br />
+        <br />
+        <p>
+            <button type="submit" class="btn btn-success btn-sm">Отправить</button>
+        </p>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+﻿@model University.Models.Dto.DialogDto
+
+@{
+    ViewBag.Title = "DialogPage";
+}
+
+<h2>Сообщения</h2>
+
+<div id="id1">
+    <div id="formMessages" class="form-horizontal col-md-6 col-lg-offset-3">
+        @{
+            if (Model.Messages == null)
+            {
+                <p>Список сообщений пуст</p>
+            }
+            else
+            {
+                foreach (var msg in Model.Messages)
+                {
+                    @Html.Partial("Message", msg)
+                }
+            }
+        }
+    </div>
+    <div class="form-horizontal col-md-6 col-lg-offset-3">
+        @Html.Partial("PartialSendMessage")
+    </div>
+</div>

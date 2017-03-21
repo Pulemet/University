@@ -9,8 +9,8 @@ namespace University.Models.Tables
     {
         public int Id { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public string UserId { get; set; }
 
-        public Dialog Dialog { get; set; }
+        public int DialogId { get; set; }
     }
 }

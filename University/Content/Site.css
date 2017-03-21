@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.js-add-friend-button {
+    border: 0;
+}
+
+.js-new-msg-button {
+    border: 0;
+}

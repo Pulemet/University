@@ -8,19 +8,10 @@ namespace University.Models.Tables
     public class SubjectsToSemesterInGroup
     {
         public int Id { get; set; }
-        public Semester Semester { get; set; }
+        public int SemesterId { get; set; }
 
-        public StudentGroup StudentGroup { get; set; }
+        public int StudentGroupId { get; set; }
 
-        public Subject Subject { get; set; }
-
-        public SubjectsToSemesterInGroup()
-        {
-            Semester = new Semester();
-
-            StudentGroup = new StudentGroup();
-
-            Subject = new Subject();
-        }
+        public int SubjectId { get; set; }
     }
 }

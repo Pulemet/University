@@ -11,11 +11,6 @@ namespace University.Models.Tables
 
         public string Name { get; set; }
 
-        public Speciality Speciality { get; set; }
-
-        public StudentGroup()
-        {
-            Speciality = new Speciality();
-        }
+        public int SpecialityId { get; set; }
     }
 }

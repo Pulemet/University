@@ -14,11 +14,6 @@ namespace University.Models.Tables
 
         public string NameAbridgment { get; set; }
 
-        public Faculty Faculty { get; set; }
-
-        public Department()
-        {
-            Faculty = new Faculty();
-        }
+        public int FacultyId { get; set; }
     }
 }

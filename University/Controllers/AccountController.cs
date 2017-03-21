@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -161,6 +162,11 @@ namespace University.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if(model.Role == "Teacher")
+                        await UserManager.AddToRoleAsync(user.Id, "teacher");
+                    if(model.Role == "Student")
+                        await UserManager.AddToRoleAsync(user.Id, "student");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
