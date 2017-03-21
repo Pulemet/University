@@ -10,6 +10,11 @@ namespace University.Models.Dto
     {
         public int Id { get; set; }
 
-        public List<Message> Messages { get; set; }
+        public List<MessageDto> Messages { get; set; }
+
+        public DialogDto()
+        {
+            Messages = new List<MessageDto>();
+        }
     }
 }

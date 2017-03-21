@@ -1,7 +1,7 @@
-﻿@model University.Models.Tables.Message
+﻿@model University.Models.Dto.MessageDto
 
 <hr />
-<label class="control-label form-element-label-name"><b>@Model.Sender.SurName @Model.Sender.FirstName</b></label> <label class="control-label form-element-label-time">@String.Format("{0:dd.MM.yyyy}", Model.DateSend) в @String.Format("{0:H.mm}", Model.DateSend)</label>
+<label class="control-label form-element-label-name"><b>@Model.SurName @Model.FirstName</b></label> <label class="control-label form-element-label-time">@String.Format("{0:dd.MM.yyyy}", Model.DateSend) в @String.Format("{0:H.mm}", Model.DateSend)</label>
 <br />
 <div>
     <p class="form-element-label-time">@Model.Text</p>

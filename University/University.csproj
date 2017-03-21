@@ -193,6 +193,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbInitializer.cs" />
     <Compile Include="Models\Dto\DialogDto.cs" />
+    <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Tables\Department.cs" />
@@ -331,7 +332,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Dialog.cshtml" />
     <Content Include="Views\Home\Message.cshtml" />
     <Content Include="Views\Friends\Index.cshtml" />
     <Content Include="Views\Friends\PartialViewFriend.cshtml" />

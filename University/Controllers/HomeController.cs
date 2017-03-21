@@ -49,38 +49,19 @@ namespace University.Controllers
             return View(listFriends);
         }
 
-        [HttpPost]
-        public ActionResult SendMessage(Message message)
-        {
-            var userId = User.Identity.GetUserId();
-            message.DateSend = DateTime.Now;
-            message.SenderId = db.Users.Find(userId).Id;
-            db.Messages.Add(message);
-            db.SaveChanges();
-            var allMessagesForDialog = db.Messages.Where(m=>m.DialogId == message.DialogId).Select(m=>m).ToList();
-            int id = allMessagesForDialog.Last().Id;
-            return RedirectToAction("Message", new { messageId = id });
-        }
-
         [HttpGet]
-        public ActionResult Message(int messageId)
+        public ActionResult OpenDialog(string id)
         {
-            var message = db.Messages.Find(messageId);
-            return PartialView(message);
-        }
+            // id = message recipient id
 
-        [HttpGet]
-        public ActionResult OpenDialog(string recipientId)
-        {
-            DialogDto dialog = new DialogDto();
             var userId = User.Identity.GetUserId();
 
             var listDialogs1 = db.UserToDialogs.Where(u => u.UserId == userId).Select(u => u).ToList();
-            var listDialogs2 = db.UserToDialogs.Where(u => u.UserId == recipientId).Select(u => u).ToList();
+            var listDialogs2 = db.UserToDialogs.Where(u => u.UserId == id).Select(u => u).ToList();
 
             var dialogId = listDialogs1.Join(listDialogs2, u => u.DialogId, d => d.DialogId, (u, d) => new
             {
-                dialogId = u.Id
+                dialogId = u.DialogId
             }).FirstOrDefault();
 
             // ---------------------------------------------------------------------------------------------------
@@ -88,16 +69,12 @@ namespace University.Controllers
             {
                 dialogId = u.Id
             }).ToList();
-            if(dialogIdTest.Count > 1)
+
+            if (dialogIdTest.Count > 1)
                 throw new Exception("Несколько одинаковых диалогов");
             // ---------------------------------------------------------------------------------------------------
 
-            if (dialogId != null)
-            {
-                dialog.Id = dialogId.dialogId;
-                dialog.Messages = db.Messages.Where(m => m.DialogId == dialogId.dialogId).Select(m => m).ToList();
-            }
-            else
+            if (dialogId == null)
             {
                 db.Dialogs.Add(new Dialog());
                 db.SaveChanges();
@@ -105,19 +82,91 @@ namespace University.Controllers
                 var lislDialogs = db.Dialogs.ToList();
                 int lastDialogId = lislDialogs.Last().Id;
 
-                db.UserToDialogs.Add(new UserToDialog() {DialogId = lastDialogId, UserId = userId});
-                db.UserToDialogs.Add(new UserToDialog() { DialogId = lastDialogId, UserId = recipientId });
+                db.UserToDialogs.Add(new UserToDialog() { DialogId = lastDialogId, UserId = userId });
+                db.UserToDialogs.Add(new UserToDialog() { DialogId = lastDialogId, UserId = id });
                 db.SaveChanges();
-
-                dialog.Id = lastDialogId;
-                dialog.Messages = new List<Message>();
             }
-            return RedirectToAction("DialogPage", dialog);
+
+            return RedirectToAction("DialogPage", new { id = dialogId != null ? dialogId.dialogId : 0 });
         }
 
-        public ActionResult DialogPage(DialogDto dialog)
+        public ActionResult DialogPage(int id)
         {
+            DialogDto dialog = new DialogDto();
+
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+
+            if (id != 0)
+            {
+                dialog.Id = id;
+                var messagesInDialog = db.Messages.Where(m => m.DialogId == id).Select(m => m).ToList();
+                if (messagesInDialog.Count != 0)
+                {
+                    foreach (var msg in messagesInDialog)
+                    {
+                        MessageDto msgDto = new MessageDto();
+
+                        if (msg != null)
+                        {
+                            msgDto.Id = msg.Id;
+                            msgDto.DateSend = msg.DateSend;
+                            msgDto.Text = msg.Text;
+                            msgDto.SenderId = msg.SenderId;
+                            var sender = db.Users.Find(msg.SenderId);
+                            msgDto.FirstName = sender.FirstName;
+                            msgDto.SurName = sender.SurName;
+                        }
+
+                        dialog.Messages.Add(msgDto);
+                    }
+                }
+            }
+            else
+            {
+                var lislDialogs = db.Dialogs.ToList();
+                int lastDialogId = lislDialogs.Last().Id;
+
+                dialog.Id = lastDialogId;
+
+            }
+
             return View(dialog);
+        }
+
+        [HttpPost]
+        public ActionResult SendMessage(Message msg)
+        {
+            var userId = User.Identity.GetUserId();
+            msg.DateSend = DateTime.Now;
+            msg.SenderId = userId;
+            db.Messages.Add(msg);
+            db.SaveChanges();
+            var allMsg = db.Messages.ToList();
+            int id = allMsg.Last().Id;
+            return RedirectToAction("Message", new { msgId = id });
+        }
+
+        [HttpGet]
+        public ActionResult Message(int msgId)
+        {
+            var msg = db.Messages.Find(msgId);
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+
+            MessageDto msgDto = new MessageDto();
+
+            if (msg != null)
+            {
+                msgDto.Id = msg.Id;
+                msgDto.DateSend = msg.DateSend;
+                msgDto.Text = msg.Text;
+                msgDto.SenderId = msg.SenderId;
+                msgDto.FirstName = user.FirstName;
+                msgDto.SurName = user.SurName;
+            }
+            
+            return PartialView(msgDto);
         }
 
 
