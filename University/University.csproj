@@ -185,9 +185,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
-    <Compile Include="Migrations\201703260618488_DataMigration.cs" />
-    <Compile Include="Migrations\201703260618488_DataMigration.Designer.cs">
-      <DependentUpon>201703260618488_DataMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201703261138385_DataMigration.cs" />
+    <Compile Include="Migrations\201703261138385_DataMigration.Designer.cs">
+      <DependentUpon>201703261138385_DataMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -271,6 +271,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\account.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -340,6 +341,8 @@
     <Content Include="Views\FindUser\PartialViewUser.cshtml" />
     <Content Include="Views\Home\PartialSendMessage.cshtml" />
     <Content Include="Views\Home\DialogPage.cshtml" />
+    <Content Include="Views\Account\GetSpecialities.cshtml" />
+    <Content Include="Views\Account\GetGroups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,8 +356,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703260618488_DataMigration.resx">
-      <DependentUpon>201703260618488_DataMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703261138385_DataMigration.resx">
+      <DependentUpon>201703261138385_DataMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

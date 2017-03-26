@@ -103,7 +103,7 @@ namespace University.Models
         public DateTime BirthDate { get; set; }
 
         [Required]
-        [Display(Name = "Кто вы?")]
+        [Display(Name = "Роль")]
         public string Role { get; set; }
 
         [Required]
@@ -116,7 +116,7 @@ namespace University.Models
 
         [Required]
         [Display(Name = "Группа")]
-        public string StudentGroup { get; set; }
+        public string Group { get; set; }
 
     }
 

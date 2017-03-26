@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -10,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using University.Models;
+using University.Models.Tables;
 
 namespace University.Controllers
 {
@@ -140,16 +142,31 @@ namespace University.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            int selectedIndex = 1;
-            SelectList faculties = new SelectList(db.Faculties, "Id", "Name", selectedIndex);
-            ViewBag.Faculties = faculties;
-            SelectList specialities = new SelectList(db.Specialities.Where(c => c.FacultyId == selectedIndex), "Id", "Name");
-            ViewBag.Specialities = specialities;
-
-            //Проверить что передает в SelectedValue и какой список генерит епта
-            SelectList groups = new SelectList(db.StudentGroups.Where(c => c.SpecialityId == selectedIndex), "Id", "Name", specialities.SelectedValue.ToString());
-            ViewBag.Groups = groups;
+            SelectList faculties = new SelectList(db.Faculties, "Id", "NameAbridgment");
+            ViewData["Faculties"] = faculties;
+            SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
+            ViewData["Specialities"] = specialities;
+            SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
+            ViewData["Groups"] = groups;
             return View();
+        }
+
+        ApplicationDbContext db = new ApplicationDbContext();
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult GetSpecialities(string id)
+        {
+            int facultyId = Int32.Parse(id);
+            return PartialView(db.Specialities.Where(s => s.FacultyId == facultyId).ToList());
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult GetGroups(string id)
+        {
+            int groupId = Int32.Parse(id);
+            return PartialView(db.StudentGroups.Where(g => g.SpecialityId == groupId).ToList());
         }
 
         //
@@ -161,93 +178,66 @@ namespace University.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
-                    FirstName = model.FirstName,
-                    SurName = model.SurName,
-                    PatronymicName = model.PatronymicName,
-                    BirthDate = model.BirthDate,
-                    Photo = ""
-                };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                try
                 {
-                    if(model.Role == "Teacher")
-                        await UserManager.AddToRoleAsync(user.Id, "teacher");
-                    if(model.Role == "Student")
-                        await UserManager.AddToRoleAsync(user.Id, "student");
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        FirstName = model.FirstName,
+                        SurName = model.SurName,
+                        PatronymicName = model.PatronymicName,
+                        BirthDate = model.BirthDate,
+                        Photo = "",
+                        GroupId = Int32.Parse(model.Group)
+                    };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        if (model.Role == "Teacher")
+                            await UserManager.AddToRoleAsync(user.Id, "teacher");
+                        if (model.Role == "Student")
+                            await UserManager.AddToRoleAsync(user.Id, "student");
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
-            }
+                catch
+                {
+                    SelectList faculties = new SelectList(db.Faculties, "Id", "NameAbridgment");
+                    ViewData["Faculties"] = faculties;
+                    SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
+                    ViewData["Specialities"] = specialities;
 
-            // If we got this far, something failed, redisplay form
+                    //Проверить что передает в SelectedValue и какой список генерит епта
+                    SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
+                    ViewData["Groups"] = groups;
+                    return View(model);
+                }
+                
+            }
+            else
+            {
+                SelectList faculties = new SelectList(db.Faculties, "Id", "NameAbridgment");
+                ViewData["Faculties"] = faculties;
+                SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
+                ViewData["Specialities"] = specialities;
+
+                //Проверить что передает в SelectedValue и какой список генерит епта
+                SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
+                ViewData["Groups"] = groups;
+                return View(model);
+            }
             return View(model);
-        }
-
-
-        ApplicationDbContext db = new ApplicationDbContext();
-
-        [HttpGet]
-        public ActionResult GetAllFaculty()
-        {
-            var allFaculty = db.Faculties.ToList();
-            return Json(new
-            {
-                allFaculty
-            });
-        }
-
-        [HttpGet]
-        public ActionResult GetSpecialities(string facultyName)
-        {
-            List<string> listSpecialities = new List<string>();
-
-            var faculty = db.Faculties.Where(f => f.NameAbridgment == facultyName).FirstOrDefault();
-
-            int facultyId = faculty != null ? faculty.Id : 0;
-
-            var specialities = db.Specialities.Where(s=>s.FacultyId == facultyId);
-
-            foreach (var speciality in specialities)
-            {
-                listSpecialities.Add(speciality.NameAbridgment);
-            }
-
-            return Json(new
-            {
-                listSpecialities
-            });
-        }
-
-        [HttpGet]
-        public ActionResult GetGroups(string specialityName)
-        {
-            List<string> listGroups = new List<string>();
-
-            var speciality = db.Specialities.Where(f => f.NameAbridgment == specialityName).FirstOrDefault();
-
-            int specialityId = speciality != null ? speciality.Id : 0;
-
-            var groups = db.StudentGroups.Where(s => s.SpecialityId == specialityId).ToList();
-
-            foreach (var group in groups)
-            {
-                listGroups.Add(group.Name);
-            }
-
-            return Json(new
-            {
-                listGroups
-            });
         }
 
         //

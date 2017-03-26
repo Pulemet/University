@@ -31,6 +31,7 @@ namespace University.Models
             userIdentity.AddClaim(new Claim("PatronymicName", this.PatronymicName));
             userIdentity.AddClaim(new Claim("Photo", this.Photo));
             userIdentity.AddClaim(new Claim("BirthDate", this.BirthDate.ToShortDateString()));
+            userIdentity.AddClaim(new Claim("GroupId", this.GroupId.ToString()));
             return userIdentity;
         }
 
@@ -44,12 +45,7 @@ namespace University.Models
 
         public DateTime BirthDate { get; set; }
 
-        public StudentGroup StudentGroup { get; set; }
-
-        public ApplicationUser()
-        {
-            StudentGroup = new StudentGroup();
-        }
+        public int GroupId { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

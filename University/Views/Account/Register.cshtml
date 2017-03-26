@@ -5,8 +5,11 @@
     ViewBag.Title = "Регистрация";
 }
 
+@Scripts.Render("~/scripts/jquery-3.1.1.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+
 <head>
-    <script type="text/javascript" src="/scripts/Script.js">
+    <script type="text/javascript" src="/scripts/account.js">
     </script>
 </head>
 
@@ -81,30 +84,28 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Role, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Role, roles, "- Please select a state -", new { @class = "css-class" })
+                @Html.DropDownListFor(m => m.Role, roles, "- Выберите роль -", new { @class = "css-class" })
             </div>
         </div>
-
-        <!--    Check Check Check Check Check Check Check Check Check    -->
 
         <div class="form-group">
             @Html.LabelFor(m => m.Faculty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Faculty, ViewBag.Faculties as SelectList, new { @class = "css-class", id = "faculty" })
+                @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "- Выберите факультет -", new { @class = "css-class", id = "faculty" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Speciality, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Speciality, ViewBag.Specialities as SelectList, new { @class = "css-class", id = "speciality" })
+                @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "- Выберите специальность -", new { @class = "css-class", id = "speciality" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.StudentGroup, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Group, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.StudentGroup, ViewBag.Groups as SelectList, new { @class = "css-class", id = "group" })
+                @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "- Выберите группу -", new { @class = "css-class", id = "group" })
             </div>
         </div>
 
