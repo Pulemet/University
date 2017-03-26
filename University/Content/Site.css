@@ -30,3 +30,77 @@ textarea {
 .js-new-msg-button {
     border: 0;
 }
+
+.input-file-row-1:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.input-file-row-1{
+    display: inline-block;
+	margin-top: 25px;
+	position: relative;
+}
+
+html[xmlns] .input-file-row-1{
+    display: block;
+}
+
+* html .input-file-row-1 {
+    height: 1%;
+}
+
+.upload-file-container { 
+	position: relative; 
+	overflow: hidden;
+	float: left;
+	margin-left: 23px;
+} 
+
+.upload-file-container:first-child { 
+	margin-left: 0;
+} 
+
+.upload-file-container > img {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.upload-file-container-text{
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	color: #719d2b;
+	line-height: 17px;
+	text-align: center;
+	display: block;
+	position: absolute; 
+	left: 0; 
+	bottom: 0; 
+	width: 100px; 
+	height: 35px;
+}
+
+.upload-file-container-text > span{
+	border-bottom: 1px solid #719d2b;
+	cursor: pointer;
+}
+
+.upload-file-container input  { 
+	position: absolute; 
+	left: 0; 
+	bottom: 0; 
+	font-size: 1px; 
+	opacity: 0;
+	filter: alpha(opacity=0);	
+	margin: 0; 
+	padding: 0; 
+	border: none; 
+	width: 70px; 
+	height: 50px; 
+	cursor: pointer;
+}

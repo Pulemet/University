@@ -172,22 +172,6 @@ namespace University.Controllers
             return PartialView(db.StudentGroups.Where(g => g.SpecialityId == groupId).ToList());
         }
 
-        /*[HttpPost]
-        [AllowAnonymous]
-        public ActionResult Upload(HttpPostedFileBase image)
-        {
-            string fileName = System.IO.Path.GetFileName(image.FileName);
-            // сохраняем файл в папку Files в проекте
-            string imgPath = Server.MapPath("~/Files/Temp" + fileName);
-            image.SaveAs(imgPath);
-            return RedirectToAction("Avatar", imgPath);
-        }
-
-        public ActionResult Avatar(string imgPath)
-        {
-            return View(imgPath);
-        }*/
-
         //
         // POST: /Account/Register
         [HttpPost]
@@ -204,7 +188,7 @@ namespace University.Controllers
                     {
                         fileName = model.FirstName.GetHashCode() + "-" +
                                    model.BirthDate.GetHashCode() + "-" +
-                                   model.Email.GetHashCode();
+                                   model.Email.GetHashCode() + ".jpg";
                         fileName = Path.Combine(Server.MapPath(_avatarsFolder), fileName);
                         image.SaveAs(fileName);
                     }

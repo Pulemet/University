@@ -344,7 +344,6 @@
     <Content Include="Views\Home\DialogPage.cshtml" />
     <Content Include="Views\Account\GetSpecialities.cshtml" />
     <Content Include="Views\Account\GetGroups.cshtml" />
-    <Content Include="Views\Account\Avatar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
