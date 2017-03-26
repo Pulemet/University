@@ -1,0 +1,8 @@
+﻿@using University.Models
+@model string
+
+<div>
+    @Html.Image(Url.Content(@Model.ToString()),
+               "Мое фото",
+               new { id = "avatar", border = "0" })
+</div>

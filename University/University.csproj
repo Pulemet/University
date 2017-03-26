@@ -196,6 +196,7 @@
     <Compile Include="Models\Dto\Infrastructure.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Helper\ImageHelper.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Tables\Department.cs" />
     <Compile Include="Models\Tables\Dialog.cs" />
@@ -343,9 +344,11 @@
     <Content Include="Views\Home\DialogPage.cshtml" />
     <Content Include="Views\Account\GetSpecialities.cshtml" />
     <Content Include="Views\Account\GetGroups.cshtml" />
+    <Content Include="Views\Account\Avatar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Avatars\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

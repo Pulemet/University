@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace University.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private string _avatarsFolder = "/Files/Avatars";
 
         public AccountController()
         {
@@ -169,17 +172,43 @@ namespace University.Controllers
             return PartialView(db.StudentGroups.Where(g => g.SpecialityId == groupId).ToList());
         }
 
+        /*[HttpPost]
+        [AllowAnonymous]
+        public ActionResult Upload(HttpPostedFileBase image)
+        {
+            string fileName = System.IO.Path.GetFileName(image.FileName);
+            // сохраняем файл в папку Files в проекте
+            string imgPath = Server.MapPath("~/Files/Temp" + fileName);
+            image.SaveAs(imgPath);
+            return RedirectToAction("Avatar", imgPath);
+        }
+
+        public ActionResult Avatar(string imgPath)
+        {
+            return View(imgPath);
+        }*/
+
         //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
                 try
-                {
+                {                 
+                    string fileName = "";
+                    if (image != null)
+                    {
+                        fileName = model.FirstName.GetHashCode() + "-" +
+                                   model.BirthDate.GetHashCode() + "-" +
+                                   model.Email.GetHashCode();
+                        fileName = Path.Combine(Server.MapPath(_avatarsFolder), fileName);
+                        image.SaveAs(fileName);
+                    }
+
                     var user = new ApplicationUser
                     {
                         UserName = model.Email,
@@ -188,8 +217,8 @@ namespace University.Controllers
                         SurName = model.SurName,
                         PatronymicName = model.PatronymicName,
                         BirthDate = model.BirthDate,
-                        Photo = "",
-                        GroupId = Int32.Parse(model.Group)
+                        Photo = fileName,
+                        GroupId = Int32.Parse(model.Group) 
                     };
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
@@ -217,8 +246,6 @@ namespace University.Controllers
                     ViewData["Faculties"] = faculties;
                     SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
                     ViewData["Specialities"] = specialities;
-
-                    //Проверить что передает в SelectedValue и какой список генерит епта
                     SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
                     ViewData["Groups"] = groups;
                     return View(model);
@@ -231,8 +258,6 @@ namespace University.Controllers
                 ViewData["Faculties"] = faculties;
                 SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
                 ViewData["Specialities"] = specialities;
-
-                //Проверить что передает в SelectedValue и какой список генерит епта
                 SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
                 ViewData["Groups"] = groups;
                 return View(model);
