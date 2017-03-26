@@ -92,7 +92,7 @@ namespace University.Models
         [Display(Name = "Фамилия")]
         public string SurName { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Отчество")]
         public string PatronymicName { get; set; }
 
@@ -105,6 +105,19 @@ namespace University.Models
         [Required]
         [Display(Name = "Кто вы?")]
         public string Role { get; set; }
+
+        [Required]
+        [Display(Name = "Факультет")]
+        public string Faculty { get; set; }
+
+        [Required]
+        [Display(Name = "Специальность")]
+        public string Speciality { get; set; }
+
+        [Required]
+        [Display(Name = "Группа")]
+        public string StudentGroup { get; set; }
+
     }
 
     public class ResetPasswordViewModel

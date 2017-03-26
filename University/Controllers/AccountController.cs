@@ -140,6 +140,15 @@ namespace University.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            int selectedIndex = 1;
+            SelectList faculties = new SelectList(db.Faculties, "Id", "Name", selectedIndex);
+            ViewBag.Faculties = faculties;
+            SelectList specialities = new SelectList(db.Specialities.Where(c => c.FacultyId == selectedIndex), "Id", "Name");
+            ViewBag.Specialities = specialities;
+
+            //Проверить что передает в SelectedValue и какой список генерит епта
+            SelectList groups = new SelectList(db.StudentGroups.Where(c => c.SpecialityId == selectedIndex), "Id", "Name", specialities.SelectedValue.ToString());
+            ViewBag.Groups = groups;
             return View();
         }
 
@@ -182,6 +191,63 @@ namespace University.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+
+        ApplicationDbContext db = new ApplicationDbContext();
+
+        [HttpGet]
+        public ActionResult GetAllFaculty()
+        {
+            var allFaculty = db.Faculties.ToList();
+            return Json(new
+            {
+                allFaculty
+            });
+        }
+
+        [HttpGet]
+        public ActionResult GetSpecialities(string facultyName)
+        {
+            List<string> listSpecialities = new List<string>();
+
+            var faculty = db.Faculties.Where(f => f.NameAbridgment == facultyName).FirstOrDefault();
+
+            int facultyId = faculty != null ? faculty.Id : 0;
+
+            var specialities = db.Specialities.Where(s=>s.FacultyId == facultyId);
+
+            foreach (var speciality in specialities)
+            {
+                listSpecialities.Add(speciality.NameAbridgment);
+            }
+
+            return Json(new
+            {
+                listSpecialities
+            });
+        }
+
+        [HttpGet]
+        public ActionResult GetGroups(string specialityName)
+        {
+            List<string> listGroups = new List<string>();
+
+            var speciality = db.Specialities.Where(f => f.NameAbridgment == specialityName).FirstOrDefault();
+
+            int specialityId = speciality != null ? speciality.Id : 0;
+
+            var groups = db.StudentGroups.Where(s => s.SpecialityId == specialityId).ToList();
+
+            foreach (var group in groups)
+            {
+                listGroups.Add(group.Name);
+            }
+
+            return Json(new
+            {
+                listGroups
+            });
         }
 
         //

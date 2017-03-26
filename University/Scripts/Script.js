@@ -43,17 +43,6 @@ $(function () {
     });
 });
 
-$(function () {
-    $("#ListFriends").on("click", ".js-new-msg-button", function () {
-        var data = $(this).attr("id");
-        var url = '/Home/DialogPage';
-        $.post("/Home/OpenDialog", { recipientId: data },
-            function (response) {
-                $.get(url, response);
-            });
-    });
-});
-
 $(document).ready(function () {
     $('#sendMessage').submit(function (event) {
         event.preventDefault();

@@ -14,7 +14,6 @@ namespace University.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         NameFull = c.String(),
                         NameAbridgment = c.String(),
-                        FacultyId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -99,7 +98,7 @@ namespace University.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         NameFull = c.String(),
                         NameAbridgment = c.String(),
-                        DepartmentId = c.Int(nullable: false),
+                        FacultyId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

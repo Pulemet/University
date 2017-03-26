@@ -12,7 +12,7 @@ namespace University.Models.Tables
         public string NameFull { get; set; }
 
         public string NameAbridgment { get; set; }
-
-        public int DepartmentId { get; set; }
+ 
+        public int FacultyId { get; set; }
     }
 }
