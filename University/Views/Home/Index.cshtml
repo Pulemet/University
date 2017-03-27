@@ -1,8 +1,15 @@
-﻿@{
+﻿@model University.Models.ApplicationUser
+@{
     ViewBag.Title = "Home Page";
 }
 
+<h2>@Model.SurName @Model.FirstName</h2>
+
 <div class="jumbotron">
-    <p><a href="/FindUser/Index">Поиск людей</a></p>
-    <p><a href="/Friends/Index">Мои друзья</a></p>
+    <p><a href="/FindUser/Index">Поиск людей</a>
+    </p>
+    <p><a href="/Friends/Index">Мои друзья</a>
+    </p>
+    <p><a href="/Communion/Index">Сообщения</a>
+    </p>
 </div>

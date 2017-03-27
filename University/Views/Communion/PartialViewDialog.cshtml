@@ -1,0 +1,10 @@
+﻿@model University.Models.Dto.DialogToUsersDto
+
+<tr>
+    <td>
+        <div class="alert-success">@Model.Members[0].SurName @Model.Members[0].FirstName</div>
+    </td>
+    <td>
+        <a href="/Home/DialogPage/@Model.Id" class="btn btn-success btn-sm">Открыть диалог</a>
+    </td>
+</tr>

@@ -32,7 +32,8 @@ namespace University.Controllers
                 return Redirect("/Account/Register");
             }
 
-            return View();
+            ApplicationUser currentUser = db.Users.Find(User.Identity.GetUserId());
+            return View(currentUser);
         }
 
         public ActionResult ShowFriedns(string userId)

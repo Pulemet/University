@@ -177,6 +177,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommunionController.cs" />
     <Compile Include="Controllers\FindUserController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbInitializer.cs" />
     <Compile Include="Models\Dto\DialogDto.cs" />
+    <Compile Include="Models\Dto\DialogToUsersDto.cs" />
     <Compile Include="Models\Dto\Infrastructure.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -344,6 +346,8 @@
     <Content Include="Views\Home\DialogPage.cshtml" />
     <Content Include="Views\Account\GetSpecialities.cshtml" />
     <Content Include="Views\Account\GetGroups.cshtml" />
+    <Content Include="Views\Communion\Index.cshtml" />
+    <Content Include="Views\Communion\PartialViewDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
