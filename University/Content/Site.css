@@ -105,6 +105,14 @@ html[xmlns] .input-file-row-1{
 	cursor: pointer;
 }
 
-.dialog-container:hover {
+.dialog-container a {
+    display: block;
+}
+
+.dialog-container a:hover {
     text-decoration: none; /* Убирает подчеркивание для ссылок */
 } 
+
+.dialog-container td:hover {
+    background-color: lightskyblue;
+}

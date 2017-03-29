@@ -1,7 +1,7 @@
 ﻿@model University.Models.Dto.DialogToUsersDto
 
-<tr>
+<tr class="dialog-container">
     <td>
-        <a class="alert-success dialog-container" href="@Url.Action("DialogPage", "Home", new {id = Model.Id})">@Model.Members[0].SurName @Model.Members[0].FirstName</a>
+        <a href="@Url.Action("DialogPage", "Home", new {id = Model.Id})">@Model.Members[0].SurName @Model.Members[0].FirstName</a>
     </td>
 </tr>
