@@ -3,13 +3,34 @@
     ViewBag.Title = "Home Page";
 }
 
-<h2>@Model.SurName @Model.FirstName</h2>
+<style>
+    img {
+        display: block;
+        max-width:230px;
+        max-height:250px;
+        width: auto;
+        height: auto;
+    }
+</style>
 
-<div class="jumbotron">
-    <p><a href="/FindUser/Index">Поиск людей</a>
-    </p>
-    <p><a href="/Friends/Index">Мои друзья</a>
-    </p>
-    <p><a href="/Communion/Index">Сообщения</a>
-    </p>
+
+<div class="container">
+    <div class="jumbotron col-md-4">
+        <p>
+            <a href="/FindUser/Index">Поиск людей</a>
+        </p>
+        <p>
+            <a href="/Friends/Index">Мои друзья</a>
+        </p>
+
+        <p>
+            <a href="/Communion/Index">Сообщения</a>
+        </p>
+    </div>
+ 
+    <div class="col-md-4 stock-group-item large">
+        <h2>@Model.SurName @Model.FirstName</h2>
+        <br/>
+        <img class="image" src="@Model.Photo" alt="loh">
+    </div>
 </div>

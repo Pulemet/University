@@ -182,6 +182,7 @@
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,11 +196,13 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Helper\ImageHelper.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Tables\Answer.cs" />
     <Compile Include="Models\Tables\Department.cs" />
     <Compile Include="Models\Tables\Dialog.cs" />
     <Compile Include="Models\Tables\Faculty.cs" />
     <Compile Include="Models\Tables\Friend.cs" />
     <Compile Include="Models\Tables\Message.cs" />
+    <Compile Include="Models\Tables\Question.cs" />
     <Compile Include="Models\Tables\Semester.cs" />
     <Compile Include="Models\Tables\Speciality.cs" />
     <Compile Include="Models\Tables\StudentGroup.cs" />
@@ -343,6 +346,8 @@
     <Content Include="Views\Account\GetGroups.cshtml" />
     <Content Include="Views\Communion\Index.cshtml" />
     <Content Include="Views\Communion\PartialViewDialog.cshtml" />
+    <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Subjects\PartialViewSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

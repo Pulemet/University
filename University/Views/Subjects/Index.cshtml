@@ -1,0 +1,20 @@
+﻿@model IEnumerable<University.Models.Tables.Subject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Предметы</h2>
+
+<div class="container">
+    <div class="col-md-6">
+        <table class="table" id="ListFriends">
+            <tbody>
+                @foreach (var subject in Model)
+                {
+                    @Html.Partial("PartialViewSubject", subject)
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

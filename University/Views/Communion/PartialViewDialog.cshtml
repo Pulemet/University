@@ -2,9 +2,6 @@
 
 <tr>
     <td>
-        <div class="alert-success">@Model.Members[0].SurName @Model.Members[0].FirstName</div>
-    </td>
-    <td>
-        <a href="/Home/DialogPage/@Model.Id" class="btn btn-success btn-sm">Открыть диалог</a>
+        <a class="alert-success" href="@Url.Action("DialogPage", "Home", new {id = Model.Id})">@Model.Members[0].SurName @Model.Members[0].FirstName</a>
     </td>
 </tr>

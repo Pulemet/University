@@ -22,7 +22,7 @@ namespace University.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private string _avatarsFolder = "/Files/Avatars";
+        private string _avatarsFolder = "/Files/Avatars/";
 
         public AccountController()
         {
@@ -189,7 +189,7 @@ namespace University.Controllers
                         fileName = model.FirstName.GetHashCode() + "-" +
                                    model.BirthDate.GetHashCode() + "-" +
                                    model.Email.GetHashCode() + ".jpg";
-                        fileName = Path.Combine(Server.MapPath(_avatarsFolder), fileName);
+                        fileName = _avatarsFolder + fileName;
                         image.SaveAs(fileName);
                     }
 
