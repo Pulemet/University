@@ -104,3 +104,7 @@ html[xmlns] .input-file-row-1{
 	height: 250px; 
 	cursor: pointer;
 }
+
+.dialog-container:hover {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+} 
