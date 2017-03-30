@@ -30,7 +30,6 @@
 <div class="container">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
     {
-
         SelectList roles = new SelectList(
             new List<SelectListItem>
             {

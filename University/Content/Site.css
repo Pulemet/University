@@ -1,7 +1,40 @@
 ﻿body {
+    height: 100%;
     padding-top: 50px;
     padding-bottom: 20px;
+    margin: 0;
+    font-family: sans-serif;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgb(255, 255, 255), #323B55);
 }
+
+.login-button {
+    width: 100%;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+    margin-top: 10px;
+    background-image: linear-gradient(rgb(255, 255, 255), #5b705a);
+    font-weight: 500;
+    font-size: 14px;
+    height: 36px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    -o-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -webkit-transition: all 0.218s;
+    transition: all 0.218s;
+}
+
+.login-button:hover,
+.login-button:active,
+.login-button:focus {
+    background-image: linear-gradient(rgb(255, 255, 255), #2e312f);
+}
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -40,13 +73,13 @@ textarea {
     height: 0;
 }
 
-.input-file-row-1{
+.input-file-row-1 {
     display: inline-block;
-	margin-top: 25px;
-	position: relative;
+    margin-top: 25px;
+    position: relative;
 }
 
-html[xmlns] .input-file-row-1{
+html[xmlns] .input-file-row-1 {
     display: block;
 }
 
@@ -54,64 +87,64 @@ html[xmlns] .input-file-row-1{
     height: 1%;
 }
 
-.upload-file-container { 
-	position: relative; 
-	overflow: hidden;
-	float: left;
-	margin-left: 23px;
-} 
-
-.upload-file-container:first-child { 
-	margin-left: 0;
-} 
-
-.upload-file-container > img {
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+.upload-file-container {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    margin-left: 23px;
 }
 
-.upload-file-container-text{
-	font-family: Arial, sans-serif;
-	font-size: 12px;
-	color: #719d2b;
-	line-height: 17px;
-	text-align: center;
-	display: block;
-	position: absolute; 
-	left: 0; 
-	bottom: 0; 
-	width: 100px; 
-	height: 35px;
+    .upload-file-container:first-child {
+        margin-left: 0;
+    }
+
+    .upload-file-container > img {
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+    }
+
+.upload-file-container-text {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #719d2b;
+    line-height: 17px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 35px;
 }
 
-.upload-file-container-text > span{
-	border-bottom: 1px solid #719d2b;
-	cursor: pointer;
-}
+    .upload-file-container-text > span {
+        border-bottom: 1px solid #719d2b;
+        cursor: pointer;
+    }
 
-.upload-file-container input  { 
-	position: absolute; 
-	left: 0; 
-	bottom: 0; 
-	font-size: 1px; 
-	opacity: 0;
-	filter: alpha(opacity=0);	
-	margin: 0; 
-	padding: 0; 
-	border: none; 
-	width: 230px; 
-	height: 250px; 
-	cursor: pointer;
+.upload-file-container input {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 1px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: 230px;
+    height: 250px;
+    cursor: pointer;
 }
 
 .dialog-container a {
     display: block;
 }
 
-.dialog-container a:hover {
-    text-decoration: none; /* Убирает подчеркивание для ссылок */
-} 
+    .dialog-container a:hover {
+        text-decoration: none; /* Убирает подчеркивание для ссылок */
+    }
 
 .dialog-container td:hover {
     background-color: lightskyblue;
