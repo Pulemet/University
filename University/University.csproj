@@ -201,6 +201,7 @@
     <Compile Include="Models\Tables\Dialog.cs" />
     <Compile Include="Models\Tables\Faculty.cs" />
     <Compile Include="Models\Tables\Friend.cs" />
+    <Compile Include="Models\Tables\Material.cs" />
     <Compile Include="Models\Tables\Message.cs" />
     <Compile Include="Models\Tables\Question.cs" />
     <Compile Include="Models\Tables\Semester.cs" />
@@ -348,6 +349,7 @@
     <Content Include="Views\Communion\PartialViewDialog.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Subjects\PartialViewSubject.cshtml" />
+    <Content Include="Views\Subjects\MaterialsSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

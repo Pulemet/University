@@ -17,12 +17,6 @@ namespace University.Models.Tables
 
         public int SubjectId { get; set; }
 
-        public string Type { get; set; }
-    }
-
-    public enum TypeQuestion
-    {
-        Lecture,
-        Practic
+        public string TypeQuestion { get; set; }
     }
 }
