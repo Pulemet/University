@@ -72,6 +72,12 @@ namespace University.Models
 
         public DbSet<UserToDialog> UserToDialogs { get; set; }
 
+        public DbSet<Material> Materials { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+
+        public DbSet<Answer> Answers { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
