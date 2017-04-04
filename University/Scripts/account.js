@@ -6,7 +6,7 @@ $(function () {
         var id = $(this).val();
         if (!removeFirstSelect) {
             $("#faculty option:first").remove();
-            a = true;
+            removeFirstSelect = true;
         }
         
         
