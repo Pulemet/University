@@ -814,20 +814,6 @@ body.state-logged .header--user {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* HOME */
 
 .stock-navigation-wrapper {
@@ -2054,28 +2040,27 @@ body.state-logged .header--user {
 }
 .form-element::-webkit-input-placeholder {
     /* WebKit browsers */
-    color: #c7c7c7;
+    color: rgba(255, 255, 255, .15);
 }
 .form-element:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
-    color: #c7c7c7;
+    color: rgba(255, 255, 255, .15);
     opacity: 1;
 }
 .form-element::-moz-placeholder {
     /* Mozilla Firefox 19+ */
-    color: #c7c7c7;
+    color: rgba(255, 255, 255, .15);
     opacity: 1;
 }
 .form-element:-ms-input-placeholder {
     /* Internet Explorer 10+ */
-    color: #c7c7c7;
+    color: rgba(255, 255, 255, .15);
 }
 
 textarea.form-element {
     min-height: 140px;
     resize: none;
 }
-
 
 
 
