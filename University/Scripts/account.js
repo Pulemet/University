@@ -2,6 +2,9 @@
     $('#faculty').change(function () {
         // получаем выбранный id
         var id = $(this).val();
+
+        $("#faculty option:contains('- Выберите факультет -')").remove();
+        
         $.get("/Account/GetSpecialities",
             { id: id },
             function(data) {
