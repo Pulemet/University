@@ -1,7 +1,7 @@
 ﻿@model University.Models.Tables.Subject
 
-<tr>
+<tr class="dialog-container">
     <td>
-        <div class="alert-success">@Model.NameFull</div>
+        <a href="@Url.Action("MaterialsSubject", "Subjects", new {id = Model.Id})">@Model.NameFull</a>
     </td>
 </tr>
