@@ -278,6 +278,7 @@
     <Content Include="Scripts\account.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\communion.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -285,6 +286,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -351,10 +354,13 @@
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Subjects\PartialViewSubject.cshtml" />
     <Content Include="Views\Subjects\MaterialsSubject.cshtml" />
+    <Content Include="Views\Subjects\PartialViewMaterial.cshtml" />
+    <Content Include="Views\Subjects\PartialViewMaterials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Avatars\" />
+    <Folder Include="Files\Materials\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
