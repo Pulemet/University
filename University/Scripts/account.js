@@ -1,9 +1,14 @@
-﻿$(function () {
+﻿var removeFirstSelect = false;
+
+$(function () {
     $('#faculty').change(function () {
         // получаем выбранный id
         var id = $(this).val();
-
-        $("#faculty option:contains('- Выберите факультет -')").remove();
+        if (!removeFirstSelect) {
+            $("#faculty option:first").remove();
+            a = true;
+        }
+        
         
         $.get("/Account/GetSpecialities",
             { id: id },
