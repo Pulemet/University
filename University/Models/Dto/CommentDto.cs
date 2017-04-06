@@ -5,13 +5,13 @@ using System.Web;
 
 namespace University.Models.Dto
 {
-    public class MessageDto
+    public class CommentDto
     {
         public int Id { get; set; }
 
-        public string Text { get; set; }
+        public DateTime DateAdd { get; set; }
 
-        public DateTime DateSend { get; set; }
+        public string Text { get; set; }
 
         public string FirstName { get; set; }
 

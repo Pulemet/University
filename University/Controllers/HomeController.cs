@@ -113,7 +113,6 @@ namespace University.Controllers
                             msgDto.Id = msg.Id;
                             msgDto.DateSend = msg.DateSend;
                             msgDto.Text = msg.Text;
-                            msgDto.SenderId = msg.SenderId;
                             var sender = db.Users.Find(msg.SenderId);
                             msgDto.FirstName = sender.FirstName;
                             msgDto.SurName = sender.SurName;
@@ -152,17 +151,14 @@ namespace University.Controllers
         public ActionResult Message(int msgId)
         {
             var msg = db.Messages.Find(msgId);
-            var userId = User.Identity.GetUserId();
-            var user = db.Users.Find(userId);
-
             MessageDto msgDto = new MessageDto();
 
             if (msg != null)
             {
+                var user = db.Users.Find(msg.SenderId);
                 msgDto.Id = msg.Id;
                 msgDto.DateSend = msg.DateSend;
                 msgDto.Text = msg.Text;
-                msgDto.SenderId = msg.SenderId;
                 msgDto.FirstName = user.FirstName;
                 msgDto.SurName = user.SurName;
             }

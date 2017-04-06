@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Provider;
 using University.Models;
+using University.Models.Dto;
 using University.Models.Tables;
 
 namespace University.Controllers
@@ -25,14 +26,14 @@ namespace University.Controllers
         [HttpGet]
         public ActionResult MaterialsSubject(int id)
         {
-            var materials = db.Materials.Where(m => m.SubjectId == id).Select(m=>m).ToList();
-            return View(materials);
+            return View(SelectMaterials(db.Materials.Where(m => m.SubjectId == id).Select(m => m).ToList()));
         }
 
         [HttpPost]
         public ActionResult PartialViewMaterials()
         {
             Material material = new Material();
+            material.DateLoad = DateTime.Now;
             material.AuthorId = User.Identity.GetUserId();
             material.SubjectId = Int32.Parse(Request.Form[0]);
             material.Name = Request.Form[1];
@@ -51,7 +52,84 @@ namespace University.Controllers
 
             db.Materials.Add(material);
             db.SaveChanges();
-            return PartialView(db.Materials.Where(m => m.SubjectId == material.SubjectId));
+            return PartialView(SelectMaterials(db.Materials.Where(m => m.SubjectId == material.SubjectId).Select(m => m).ToList()));
+        }
+
+        public ActionResult Material(int id)
+        {
+            Material material = db.Materials.Find(id);
+            MaterialDto mDto = new MaterialDto(material);
+            if (material != null)
+            {
+                ApplicationUser user = db.Users.Find(material.AuthorId);
+                mDto.FirstName = user.FirstName;
+                mDto.SurName = user.SurName;
+            }
+            var comments = db.MaterialComments.Where(c => c.MaterialId == material.Id).Select(c => c).ToList();
+            foreach (var comment in comments)
+            {
+               CommentDto commentDto = new CommentDto();
+
+                if (comment != null)
+                {
+                    commentDto.Id = comment.Id;
+                    commentDto.DateAdd = comment.DateAdd;
+                    commentDto.Text = comment.Text;
+                    var author = db.Users.Find(comment.AuthorId);
+                    commentDto.FirstName = author.FirstName;
+                    commentDto.SurName = author.SurName;
+                }
+
+                mDto.Comments.Add(commentDto);
+            }
+            
+            return View(mDto);
+        }
+
+        [HttpPost]
+        public ActionResult AddComment(MaterialComment comment)
+        {
+            var userId = User.Identity.GetUserId();
+            comment.DateAdd = DateTime.Now;
+            comment.AuthorId = userId;
+            db.MaterialComments.Add(comment);
+            db.SaveChanges();
+            var allComments = db.MaterialComments.ToList();
+            int id = allComments.Last().Id;
+            return RedirectToAction("Comment", new { commentId = id });
+        }
+
+        [HttpGet]
+        public ActionResult Comment(int commentId)
+        {
+            var comment = db.MaterialComments.Find(commentId);
+            CommentDto commentDto = new CommentDto();
+
+            if (comment != null)
+            {
+                var user = db.Users.Find(comment.AuthorId);
+                commentDto.Id = comment.Id;
+                commentDto.DateAdd = comment.DateAdd;
+                commentDto.Text = comment.Text;
+                commentDto.FirstName = user.FirstName;
+                commentDto.SurName = user.SurName;
+            }
+
+            return PartialView(commentDto);
+        }
+
+        public List<MaterialDto> SelectMaterials(List<Material> listMaterials)
+        {
+            List<MaterialDto> materialsDto = new List<MaterialDto>();
+            foreach (var material in listMaterials)
+            {
+                MaterialDto mDto = new MaterialDto(material);
+                ApplicationUser user = db.Users.Find(material.AuthorId);
+                mDto.FirstName = user.FirstName;
+                mDto.SurName = user.SurName;
+                materialsDto.Add(mDto);
+            }
+            return materialsDto;
         }
     }    
 }

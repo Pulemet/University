@@ -18,6 +18,8 @@ namespace University.Models.Tables
         public string TypeLesson { get; set; }
 
         public string AuthorId { get; set; }
+
+        public DateTime DateLoad { get; set; }
     }
 
     public enum TypeLesson

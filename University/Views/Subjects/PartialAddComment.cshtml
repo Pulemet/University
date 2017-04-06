@@ -1,0 +1,26 @@
+﻿@model University.Models.Dto.MaterialDto
+
+
+<style>
+    .form-element-textarea {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    div {
+        word-wrap: break-word;
+    }
+</style>
+
+
+<form method="POST" id="addComment" action="/Subjects/AddComment">
+    <div>
+        <input type="text" name="MaterialId" value="@Model.Id" class="hide">
+        <textarea class="form-element form-element-textarea" name="Text" rows="5" id="Text" placeholder="Введите ваш комментарий"></textarea>
+        <br />
+        <br />
+        <p>
+            <button type="submit" class="btn btn-success btn-sm">Опубликовать</button>
+        </p>
+    </div>
+</form>

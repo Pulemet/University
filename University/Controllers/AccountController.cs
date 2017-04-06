@@ -189,8 +189,9 @@ namespace University.Controllers
                         fileName = model.FirstName.GetHashCode() + "-" +
                                    model.BirthDate.GetHashCode() + "-" +
                                    model.Email.GetHashCode() + ".jpg";
+                        var saveFile = Server.MapPath(_avatarsFolder + fileName);
+                        image.SaveAs(saveFile);
                         fileName = _avatarsFolder + fileName;
-                        image.SaveAs(fileName);
                     }
 
                     var user = new ApplicationUser

@@ -189,9 +189,11 @@
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbInitializer.cs" />
+    <Compile Include="Models\Dto\CommentDto.cs" />
     <Compile Include="Models\Dto\DialogDto.cs" />
     <Compile Include="Models\Dto\DialogToUsersDto.cs" />
     <Compile Include="Models\Dto\Infrastructure.cs" />
+    <Compile Include="Models\Dto\MaterialDto.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Helper\ImageHelper.cs" />
@@ -202,6 +204,7 @@
     <Compile Include="Models\Tables\Faculty.cs" />
     <Compile Include="Models\Tables\Friend.cs" />
     <Compile Include="Models\Tables\Material.cs" />
+    <Compile Include="Models\Tables\MaterialComment.cs" />
     <Compile Include="Models\Tables\Message.cs" />
     <Compile Include="Models\Tables\Question.cs" />
     <Compile Include="Models\Tables\Semester.cs" />
@@ -356,6 +359,9 @@
     <Content Include="Views\Subjects\MaterialsSubject.cshtml" />
     <Content Include="Views\Subjects\PartialViewMaterial.cshtml" />
     <Content Include="Views\Subjects\PartialViewMaterials.cshtml" />
+    <Content Include="Views\Subjects\Comment.cshtml" />
+    <Content Include="Views\Subjects\PartialAddComment.cshtml" />
+    <Content Include="Views\Subjects\Material.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
