@@ -49,7 +49,11 @@ $(document).ready(function () {
         var data = $(this).serialize();
         var url = $(this).attr('action');
         $.post(url, data, function (responce) {
+            $('#messageInput').val('');
             $('#formMessages').append(responce);
+            if ($('#noMessages').length > 0) {
+                $('#noMessages').remove();
+            }
         });
     });
 });
@@ -60,7 +64,11 @@ $(document).ready(function () {
         var data = $(this).serialize();
         var url = $(this).attr('action');
         $.post(url, data, function (responce) {
+            $('#commentInput').val('');
             $('#formComments').append(responce);
+            if ($('#noComments').length > 0) {
+                $('#noComments').remove();
+            }      
         });
     });
 });
