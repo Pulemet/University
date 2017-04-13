@@ -250,28 +250,32 @@ body {
 
 
 /* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #000;
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
     line-height: 1.2em;
-    margin: .8em 0;
-    font-weight: normal;
+    margin-top: 20px;
+    margin-bottom: 1px;
+    font-weight: 500;
+    font-family: inherit;
 }
-h1 {
+
+.h1 {
     font-size: 2.2em;
 }
-h2 {
-    font-size: 1.5em;
+.h2 {
+    font-family: inherit;
+    font-size: 30px;
+    color: aliceblue;
 }
-h3 {
+.h3 {
     font-family: Lato-medium;
     font-size: 19px;
 }
-h4 {
+.h4 {
     font-family: Lato-medium;
     font-size: 15px;
 }
@@ -297,13 +301,12 @@ blockquote p {
     margin: 0;
 }
 
-
 hr {
-    background-color: gainsboro;
-    border: none;
-    height: 1px;
-    margin: 1em 0;
-    padding: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+  color: azure;
 }
 
 
@@ -316,8 +319,6 @@ dl {
     margin: 1.6em 0;
     padding: 0 0 0 40px;
 }
-
-
 
 
 
@@ -1897,31 +1898,13 @@ body.state-logged .header--user {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* FOOOTER */
 
 .footer {
     background-color: #313640;
     color: #fff;
     font-size: 13px;
-    padding: 30px 0;
+    flex: 0 0 auto;
 }
 .footer:after {
     clear: both;
@@ -2001,15 +1984,18 @@ body.state-logged .header--user {
     margin-bottom: 15px;
     position: relative;
 }
+
 .field .title {
     margin-bottom: 4px;
 }
+
 .field .description {
     color: #bbb;
     font-family: Lato-Italic;
     padding-top: 8px;
     font-size: 12px;
 }
+
 .form-element {
     background-color: #fff;
     border: 1px solid #eee;
@@ -2020,21 +2006,18 @@ body.state-logged .header--user {
     padding: 8px 12px;
     position: relative;
     width: 60px;
-
     -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     -webkit-transition: all .15s ease-in-out;
-         -o-transition: all .15s ease-in-out;
-            transition: all .15s ease-in-out;
-
+    -o-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
     -webkit-border-radius: 2px;
-       -moz-border-radius: 2px;
-            border-radius: 2px;
-
-        -ms-box-sizing: border-box;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -ms-box-sizing: border-box;
 }
+
 .form-element:focus {
     border-color: #aaa;
 }
