@@ -19,8 +19,7 @@ namespace University.Controllers
         // GET: Subjects
         public ActionResult Index()
         {
-            var subjects = db.Subjects.ToList();
-            return View(subjects);
+            return View(db.Subjects.ToList());
         }
 
         [HttpGet]
@@ -68,19 +67,7 @@ namespace University.Controllers
             var comments = db.MaterialComments.Where(c => c.MaterialId == material.Id).Select(c => c).ToList();
             foreach (var comment in comments)
             {
-               CommentDto commentDto = new CommentDto();
-
-                if (comment != null)
-                {
-                    commentDto.Id = comment.Id;
-                    commentDto.DateAdd = comment.DateAdd;
-                    commentDto.Text = comment.Text;
-                    var author = db.Users.Find(comment.AuthorId);
-                    commentDto.FirstName = author.FirstName;
-                    commentDto.SurName = author.SurName;
-                }
-
-                mDto.Comments.Add(commentDto);
+                mDto.Comments.Add(GetComment(comment));
             }
             
             return View(mDto);
@@ -102,20 +89,7 @@ namespace University.Controllers
         [HttpGet]
         public ActionResult Comment(int commentId)
         {
-            var comment = db.MaterialComments.Find(commentId);
-            CommentDto commentDto = new CommentDto();
-
-            if (comment != null)
-            {
-                var user = db.Users.Find(comment.AuthorId);
-                commentDto.Id = comment.Id;
-                commentDto.DateAdd = comment.DateAdd;
-                commentDto.Text = comment.Text;
-                commentDto.FirstName = user.FirstName;
-                commentDto.SurName = user.SurName;
-            }
-
-            return PartialView(commentDto);
+            return PartialView(GetComment(db.MaterialComments.Find(commentId)));
         }
 
         public List<MaterialDto> SelectMaterials(List<Material> listMaterials)
@@ -130,6 +104,23 @@ namespace University.Controllers
                 materialsDto.Add(mDto);
             }
             return materialsDto;
+        }
+
+        public CommentDto GetComment(MaterialComment comment)
+        {
+            CommentDto commentDto = new CommentDto();
+
+            if (comment != null)
+            {
+                var user = db.Users.Find(comment.AuthorId);
+                commentDto.Id = comment.Id;
+                commentDto.DateAdd = comment.DateAdd;
+                commentDto.Text = comment.Text;
+                commentDto.FirstName = user.FirstName;
+                commentDto.SurName = user.SurName;
+            }
+
+            return commentDto;
         }
     }    
 }

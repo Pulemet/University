@@ -72,3 +72,18 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('#addAnswer').submit(function (event) {
+        event.preventDefault();
+        var data = $(this).serialize();
+        var url = $(this).attr('action');
+        $.post(url, data, function (responce) {
+            $('#answerInput').val('');
+            $('#formAnswers').append(responce);
+            if ($('#noAnswers').length > 0) {
+                $('#noAnswers').remove();
+            }
+        });
+    });
+});

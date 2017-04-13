@@ -1,0 +1,10 @@
+﻿@model University.Models.Dto.QuestionDto
+
+<tr class="dialog-container">
+    <td>
+        <a href="@Url.Action("Question", "Questions", new {id = Model.Id})">@Model.Topic</a>
+        <p></p><label class="control-label form-element-label-name">@String.Format("{0:dd.MM.yyyy}", Model.CreateDate) в @String.Format("{0:H.mm}", Model.CreateDate)</label>
+        <label class="control-label form-element-label-time"><b>@Model.SurName @Model.FirstName</b></label>
+        <br />
+    </td>
+</tr>

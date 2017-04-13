@@ -1,0 +1,45 @@
+﻿@using University.Models.Tables
+@model IEnumerable<University.Models.Tables.Subject>
+
+@{
+    ViewBag.Title = "NewQuestion";
+}
+
+<h2>Задать вопрос</h2>
+
+<div class="container">
+    <div class="col-md-6">
+        @using (Html.BeginForm("AddQuestion", "Questions", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+        {
+            <label>Описание</label>
+            <br/>
+            <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="7" placeholder="Описание"></textarea>
+            <hr/>
+            <br/>
+
+            <select name="SubjectId" id="SubjectId">
+                @foreach (var subject in Model)
+                {
+                    <option value="@subject.Id">@subject.NameAbridgment</option>
+                }
+            </select>
+            <br/>
+
+            <select name="TypeQuestion" id="TypeQuestion">
+                <option value="Lecture">Лекции</option>
+                <option value="Practic">Практические занятия</option>
+            </select>
+
+            <label class="control-label">Выберите файл</label>
+            <p>
+                <input type="file" name="file" id="file"/>
+            </p>
+            <br/>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-success" value="Добавить"></button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

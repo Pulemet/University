@@ -1,0 +1,32 @@
+﻿@using University.Models.Tables
+@model IEnumerable<University.Models.Dto.QuestionDto>
+
+@{
+    ViewBag.Title = "Questions";
+}
+
+<h2>Вопросы</h2>
+
+<div id="listQuestions">
+    <label class="control-label form-element-label-name"><b>Вопросы к лекциям</b></label>
+    <br />
+    <table class="table">
+        <tbody>
+            @foreach (var question in Model.Where(q => q.TypeQuestion == Enum.GetName(typeof(TypeLesson), 0)))
+            {
+                @Html.Partial("PartialViewQuestion", question)
+            }
+        </tbody>
+    </table>
+    <br />
+    <label class="control-label form-element-label-name"><b>Вопросы к практическим занятиям</b></label>
+    <br />
+    <table class="table">
+        <tbody>
+            @foreach (var question in Model.Where(q => q.TypeQuestion == Enum.GetName(typeof(TypeLesson), 1)))
+            {
+                @Html.Partial("PartialViewQuestion", question)
+            }
+        </tbody>
+    </table>
+</div>

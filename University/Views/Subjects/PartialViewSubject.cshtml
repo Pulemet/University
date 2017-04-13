@@ -1,7 +1,9 @@
 ﻿@model University.Models.Tables.Subject
 
-<tr class="dialog-container">
-    <td>
-        <a href="@Url.Action("MaterialsSubject", "Subjects", new {id = Model.Id})">@Model.NameFull</a>
-    </td>
-</tr>
+<div>
+    <h5>@Model.NameFull</h5>
+    <p>
+        <a href="@Url.Action("MaterialsSubject", "Subjects", new {id = Model.Id})">Перейти к материалам</a>
+        <a href="@Url.Action("Questions", "Questions", new {id = Model.Id})">Перейти к вопросам</a>
+    </p>
+</div>

@@ -182,6 +182,7 @@
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,12 +190,14 @@
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppDbInitializer.cs" />
+    <Compile Include="Models\Dto\AnswerDto.cs" />
     <Compile Include="Models\Dto\CommentDto.cs" />
     <Compile Include="Models\Dto\DialogDto.cs" />
     <Compile Include="Models\Dto\DialogToUsersDto.cs" />
     <Compile Include="Models\Dto\Infrastructure.cs" />
     <Compile Include="Models\Dto\MaterialDto.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
+    <Compile Include="Models\Dto\QuestionDto.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Helper\ImageHelper.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -362,6 +365,12 @@
     <Content Include="Views\Subjects\Comment.cshtml" />
     <Content Include="Views\Subjects\PartialAddComment.cshtml" />
     <Content Include="Views\Subjects\Material.cshtml" />
+    <Content Include="Views\Questions\PartialViewQuestion.cshtml" />
+    <Content Include="Views\Questions\Questions.cshtml" />
+    <Content Include="Views\Questions\NewQuestion.cshtml" />
+    <Content Include="Views\Questions\Question.cshtml" />
+    <Content Include="Views\Questions\Answer.cshtml" />
+    <Content Include="Views\Questions\PartialAddAnswer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

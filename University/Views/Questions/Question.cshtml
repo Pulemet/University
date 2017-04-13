@@ -1,0 +1,45 @@
+﻿@model University.Models.Dto.QuestionDto
+
+@{
+    ViewBag.Title = "Question";
+}
+
+@Scripts.Render("~/scripts/jquery-3.1.1.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+
+<head>
+    <script type="text/javascript" src="/scripts/Script.js">
+    </script>
+    <link href="/Content/Site.css" rel="stylesheet">
+</head>
+
+<h2>@Model.Topic</h2>
+<div class="container">
+    <div class="col-md-8">
+        <div class="form-horizontal" id="questionInfo">
+            <label class="control-label form-element-label-name">@String.Format("{0:dd.MM.yyyy}", Model.CreateDate) в @String.Format("{0:H.mm}", Model.CreateDate)</label>
+            <label class="control-label form-element-label-time"><b>@Model.SurName @Model.FirstName</b></label>
+        </div>
+
+        <div id="formAnswers" class="form-horizontal">
+            @{
+                if (Model.Answers.Count == 0)
+                {
+                    <div id="noAnswers">
+                        <p>Будьте первым, напишите свой ответ</p>
+                    </div>
+                }
+                else
+                {
+                    foreach (var msg in Model.Answers)
+                    {
+                        @Html.Partial("Answer", msg)
+                    }
+                }
+            }
+        </div>
+        <div class="form-horizontal">
+            @Html.Partial("PartialAddAnswer")
+        </div>
+    </div>
+</div>

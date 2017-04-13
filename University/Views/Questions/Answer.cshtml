@@ -1,0 +1,20 @@
+﻿@model University.Models.Dto.AnswerDto
+
+<style>
+    .form-element-textarea {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    div {
+        word-wrap: break-word;
+    }
+</style>
+
+<hr />
+<label class="control-label form-element-label-name"><b>@Model.SurName @Model.FirstName</b></label>
+<label class="control-label form-element-label-time">@String.Format("{0:dd.MM.yyyy}", Model.CreateDate) в @String.Format("{0:H.mm}", Model.CreateDate)</label>
+<br />
+<div>
+    <p class="form-element-label-time">@Model.Text</p>
+</div>

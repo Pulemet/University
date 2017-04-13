@@ -8,13 +8,9 @@
 
 <div class="container">
     <div class="col-md-6">
-        <table class="table" id="ListSubjects">
-            <tbody>
-                @foreach (var subject in Model)
-                {
-                    @Html.Partial("PartialViewSubject", subject)
-                }
-            </tbody>
-        </table>
+        @foreach (var subject in Model)
+        {
+            @Html.Partial("PartialViewSubject", subject)
+        }
     </div>
 </div>
