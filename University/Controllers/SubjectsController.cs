@@ -25,6 +25,7 @@ namespace University.Controllers
         [HttpGet]
         public ActionResult MaterialsSubject(int id)
         {
+            ViewBag.SubjectName = db.Subjects.Find(id) != null ? db.Subjects.Find(id).NameFull : "Undefined";
             return View(SelectMaterials(db.Materials.Where(m => m.SubjectId == id).Select(m => m).ToList()));
         }
 
@@ -69,7 +70,6 @@ namespace University.Controllers
             {
                 mDto.Comments.Add(GetComment(comment));
             }
-            
             return View(mDto);
         }
 
