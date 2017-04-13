@@ -23,6 +23,7 @@ namespace University.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private string _avatarsFolder = "/Files/Avatars/";
+        private string _invalidLogin = "Неаверный логин или пароль";
 
         public AccountController()
         {
@@ -92,7 +93,7 @@ namespace University.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", _invalidLogin);
                     return View(model);
             }
         }
