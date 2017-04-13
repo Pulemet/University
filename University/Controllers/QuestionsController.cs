@@ -22,6 +22,7 @@ namespace University.Controllers
         [HttpGet]
         public ActionResult Questions(int id)
         {
+            ViewBag.SubjectName = db.Subjects.Find(id) != null ? db.Subjects.Find(id).NameFull : "Undefined";
             return View(SelectQuestions(db.Questions.Where(q => q.SubjectId == id).Select(q => q).ToList()));
         }
 
