@@ -39,6 +39,11 @@ namespace University.Controllers
             return View(listFriends);
         }
 
+        public ActionResult CompletionRegistration()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult OpenDialog(string id)
         {

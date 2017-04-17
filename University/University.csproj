@@ -380,6 +380,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Account\ConfirmRegistration.cshtml" />
     <Content Include="Views\Account\PartialAwaitingUser.cshtml" />
+    <Content Include="Views\Home\CompletionRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

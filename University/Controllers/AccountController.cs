@@ -254,7 +254,8 @@ namespace University.Controllers
                         if (model.Role == "Student")
                             await UserManager.AddToRoleAsync(user.Id, "student");
 
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        // вход под только созданной учетной записью
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
@@ -262,7 +263,7 @@ namespace University.Controllers
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("CompletionRegistration", "Home");
                     }
                     AddErrors(result);
                 }
