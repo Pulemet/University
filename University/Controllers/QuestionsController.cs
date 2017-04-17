@@ -13,6 +13,7 @@ namespace University.Controllers
     public class QuestionsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
+        private string _materialsForQuestionsFolder = "/Files/MaterialsForQuestions/";
         // GET: Questions
         public ActionResult Index()
         {
@@ -69,7 +70,17 @@ namespace University.Controllers
         {
             question.AuthorId = User.Identity.GetUserId();
             question.CreateDate = DateTime.Now;
-            db.Questions.Add(question);
+
+            if (file != null)
+            {
+                string fileName = question.Topic.GetHashCode() + "-" +
+                           question.AuthorId.GetHashCode() + "-" +
+                           question.GetHashCode() + "." + file.FileName.Split('.').LastOrDefault();
+                var saveFile = Server.MapPath(_materialsForQuestionsFolder + fileName);
+                file.SaveAs(saveFile);
+                question.FileLink = _materialsForQuestionsFolder + fileName;
+            }
+
             db.SaveChanges();
             return RedirectToAction("Questions", new { id = question.SubjectId });
         }

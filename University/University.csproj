@@ -177,6 +177,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CommunionController.cs" />
     <Compile Include="Controllers\FindUserController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
@@ -210,11 +211,9 @@
     <Compile Include="Models\Tables\MaterialComment.cs" />
     <Compile Include="Models\Tables\Message.cs" />
     <Compile Include="Models\Tables\Question.cs" />
-    <Compile Include="Models\Tables\Semester.cs" />
     <Compile Include="Models\Tables\Speciality.cs" />
     <Compile Include="Models\Tables\StudentGroup.cs" />
     <Compile Include="Models\Tables\Subject.cs" />
-    <Compile Include="Models\Tables\SubjectsToSemesterInGroup.cs" />
     <Compile Include="Models\Tables\UserToDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -375,10 +374,12 @@
     <Content Include="Views\Questions\Question.cshtml" />
     <Content Include="Views\Questions\Answer.cshtml" />
     <Content Include="Views\Questions\PartialAddAnswer.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Avatars\" />
+    <Folder Include="Files\MaterialsForQuestions\" />
     <Folder Include="Files\Materials\" />
   </ItemGroup>
   <ItemGroup>

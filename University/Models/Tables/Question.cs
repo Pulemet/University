@@ -18,5 +18,7 @@ namespace University.Models.Tables
         public int SubjectId { get; set; }
 
         public string TypeQuestion { get; set; }
+
+        public string FileLink { get; set; }
     }
 }

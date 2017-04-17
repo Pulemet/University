@@ -54,15 +54,11 @@ namespace University.Models
 
         public DbSet<Faculty> Faculties { get; set; }
 
-        public DbSet<Semester> Semesters { get; set; }
-
         public DbSet<Speciality> Specialities { get; set; }
 
         public DbSet<StudentGroup> StudentGroups { get; set; }
 
         public DbSet<Subject> Subjects { get; set; }
-
-        public DbSet<SubjectsToSemesterInGroup> SubjectsToSemesterInGroup { get; set; }
 
         public DbSet<Friend> Friends { get; set; }
 
