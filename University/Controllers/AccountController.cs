@@ -20,10 +20,36 @@ namespace University.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        protected ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private string _avatarsFolder = "/Files/Avatars/";
-        private string _invalidLogin = "Неаверный логин или пароль";
+        private string _invalidLogin = "Неверный логин или пароль";
+
+
+        public ActionResult ConfirmRegistration()
+        {
+            var users = db.Users.Join(db.AwaitingUsers, u => u.Id, a => a.UserId, (u, a) => u);
+            return View(users);
+        }
+
+        [HttpPost]
+        public string DeleteUser(string id)
+        {
+            var user = db.Users.Find(id);
+            if (user != null)
+            {
+                FileInfo file = new FileInfo(Server.MapPath(user.Photo));
+                if(file.Exists)
+                    file.Delete();
+ 
+                db.Users.Remove(user);
+                db.SaveChanges();
+
+                return "Регистрация отменена";
+            }
+            return "Ошибка";
+        }
 
         public AccountController()
         {
@@ -80,9 +106,21 @@ namespace University.Controllers
                 return View(model);
             }
 
+            // проверка подтверждения регистрации
+            var user = await UserManager.FindAsync(model.Email, model.Password);
+            if (user != null)
+            {
+                var submitRegistration = db.AwaitingUsers.FirstOrDefault(a => a.UserId == user.Id);
+                if(submitRegistration != null)
+                {
+                    ModelState.AddModelError("", "Ваш аккаунт не подтвержден!");
+                    return View(model);
+                }
+            }
+
             // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,8 +193,6 @@ namespace University.Controllers
             return View();
         }
 
-        ApplicationDbContext db = new ApplicationDbContext();
-
         [HttpGet]
         [AllowAnonymous]
         public ActionResult GetSpecialities(string id)
@@ -209,6 +245,10 @@ namespace University.Controllers
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        // добавление метки пользователя для подтверждения регистрации
+                        db.AwaitingUsers.Add(new AwaitingUser() {UserId = user.Id});
+                        db.SaveChanges();
+
                         if (model.Role == "Teacher")
                             await UserManager.AddToRoleAsync(user.Id, "teacher");
                         if (model.Role == "Student")

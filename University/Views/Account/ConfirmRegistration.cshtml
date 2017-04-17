@@ -1,0 +1,29 @@
+﻿@model IEnumerable<University.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "ConfirmRegistration";
+}
+
+@Scripts.Render("~/scripts/jquery-3.1.1.js")
+@Scripts.Render("~/scripts/jquery.min.js")
+
+<head>
+    <script type="text/javascript" src="/scripts/Script.js"> 
+    </script>
+</head>
+
+<h3>Ожидающие подтверждения регистрации</h3>
+
+<div class="container">
+    <div class="col-md-6">
+        <table class="table" id="tableAwaitingUsers">
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    @Html.Partial("PartialAwaitingUser", user)
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

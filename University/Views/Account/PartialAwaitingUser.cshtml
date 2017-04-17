@@ -1,0 +1,10 @@
+﻿@model University.Models.ApplicationUser
+
+<tr class="dialog-container" id="@Model.Id">
+    <td>
+        <a href="@Url.Action("Index", "Home", new {id = Model.Id})">@Model.SurName @Model.FirstName</a>
+    </td>
+    <td>
+        <button type="submit" class="btn btn-danger btn-sm" onclick="DeleteUser('@Model.Id')">Отклонить</button>
+    </td>
+</tr>

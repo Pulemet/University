@@ -76,6 +76,8 @@ namespace University.Models
 
         public DbSet<MaterialComment> MaterialComments { get; set; }
 
+        public DbSet<AwaitingUser> AwaitingUsers { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
