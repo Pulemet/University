@@ -42,11 +42,28 @@ namespace University.Controllers
                 FileInfo file = new FileInfo(Server.MapPath(user.Photo));
                 if(file.Exists)
                     file.Delete();
- 
+  
+                var awaitingUser = db.AwaitingUsers.FirstOrDefault(a => a.UserId == user.Id);
+                db.AwaitingUsers.Remove(awaitingUser);
                 db.Users.Remove(user);
                 db.SaveChanges();
 
                 return "Регистрация отменена";
+            }
+            return "Ошибка";
+        }
+
+        [HttpPost]
+        public string SubmitUser(string id)
+        {
+            var user = db.Users.Find(id);
+            if (user != null)
+            {
+                var awaitingUser = db.AwaitingUsers.FirstOrDefault(a => a.UserId == user.Id);
+                db.AwaitingUsers.Remove(awaitingUser);
+                db.SaveChanges();
+
+                return String.Format("Учетная запись {0} активирована", user.Email);
             }
             return "Ошибка";
         }

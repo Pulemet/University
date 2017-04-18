@@ -87,9 +87,3 @@ $(document).ready(function () {
         });
     });
 });
-
-function DeleteUser(userId) {
-    $.post("/Account/DeleteUser", { id: userId }, function () {
-        $("#" + userId).remove();
-    });
-}
