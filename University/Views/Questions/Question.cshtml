@@ -19,7 +19,11 @@
         <div class="form-horizontal" id="questionInfo">
             <label class="control-label form-element-label-name">@String.Format("{0:dd.MM.yyyy}", Model.CreateDate) в @String.Format("{0:H.mm}", Model.CreateDate)</label>
             <label class="control-label form-element-label-time"><b>@Model.SurName @Model.FirstName</b></label>
-        </div>
+            <p>
+                <a href="@Model.FileLink" download>Скачать файл</a>
+            <p>
+                <br />
+</div>
 
         <div id="formAnswers" class="form-horizontal">
             @{
