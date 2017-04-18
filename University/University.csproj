@@ -199,6 +199,7 @@
     <Compile Include="Models\Dto\MaterialDto.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\Dto\QuestionDto.cs" />
+    <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Helper\ImageHelper.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -313,7 +314,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\Script.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -381,6 +382,7 @@
     <Content Include="Views\Account\ConfirmRegistration.cshtml" />
     <Content Include="Views\Account\PartialAwaitingUser.cshtml" />
     <Content Include="Views\Home\CompletionRegistration.cshtml" />
+    <Content Include="Views\Admin\PageSubmitRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
