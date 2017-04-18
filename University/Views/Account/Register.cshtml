@@ -11,129 +11,128 @@
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 
 <head>
-    <script type="text/javascript" src="/scripts/account.js">
+    <script type = "text/javascript" src = "/scripts/account.js">
     </script>
-    
+
     <style>
         img {
-          display: block;
-          max-width:230px;
-          max-height:250px;
-          width: auto;
-          height: auto;
+            display: block;
+            max-width: 230px;
+            max-height: 250px;
+            width: auto;
+            height: auto;
         }
-
     </style>
 </head>
 
-<h2>@ViewBag.Title.</h2>
+<h2> @ViewBag.Title </h2>
 
-<div class="container">
+<div class = "container">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
     {
         SelectList roles = new SelectList(
             new List<SelectListItem>
             {
-            new SelectListItem {Text = "Студент", Value = "Student"},
-            new SelectListItem {Text = "Преподаватель", Value = "Teacher"},
+            new SelectListItem { Text = "Студент", Value = "Student" },
+            new SelectListItem { Text = "Преподаватель", Value = "Teacher" },
             }, "Value", "Text");
 
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
 
-        <div class="col-md-8">
-            <div class="form-group">
+        <div class = "col-md-8">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.SurName, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.TextBoxFor(m => m.SurName, new { @class = "form-control" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.PatronymicName, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.TextBoxFor(m => m.PatronymicName, new { @class = "form-control" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 datetime-picker" })
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.BirthDate)
+            <div class = "form-group">
+                @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
+                <div class = "col-md-10">
+                    @Html.EditorFor(m => m.BirthDate, new { @class = "date-input" })
                     @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.Role, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.Role, roles, new { @class = "form-control" })
+                <div class = "col-md-10">
+                    @Html.DropDownListFor(m => m.Role, roles)
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.Faculty, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "", new { @class = "form-control", id = "faculty" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.Speciality, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "", new { @class = "form-control", id = "speciality" })
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class = "form-group">
                 @Html.LabelFor(m => m.Group, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class = "col-md-10">
                     @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "", new { @class = "form-control", id = "group" })
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-success" value="Регистрация" />
+            <div class = "form-group">
+                <div class = "col-md-offset-2 col-md-10">
+                    <input type="submit" class = "btn btn-success" value = "Регистрация" />
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-                    <img id="output" src="/Files/Avatars/NoImage.jpg" alt="" aligh="left"/>
-                <br/>
-            <div class="upload-file-container-text stock-group-item">
-                <br/>
-                <input type="file" name="image" class="image" accept="image/*" onchange="loadFile(event)">
+        <div class = "col-md-4">
+            <img id = "output" src = "/Files/Avatars/NoImage.jpg" alt = "Фото" aligh = "left" />
+            <br />
+            <div class = "upload-file-container-text stock-group-item">
+                <br />
+                <input type = "file" name = "image" class = "image" accept = "image/*" onchange = "loadFile(event)">
                 <label class="control-label">Добавить фото</label>
             </div>
         </div>
