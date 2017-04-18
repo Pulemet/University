@@ -1,26 +1,14 @@
 ﻿@model University.Models.Dto.MaterialDto
 
 
-<style>
-    .form-element-textarea {
-        width: 100%;
-        max-width: 600px;
-    }
-
-    div {
-        word-wrap: break-word;
-    }
-</style>
-
-
 <form method="POST" id="addComment" action="/Subjects/AddComment">
     <div>
         <input type="text" name="MaterialId" value="@Model.Id" class="hide">
-        <textarea class="form-element form-element-textarea" id="commentInput" name="Text" rows="5" placeholder="Введите комментарий..."></textarea>
+        <textarea class="form-element form-element-textarea" id="commentInput" name="Text" rows="5" oninput="LockedButton('commentInput', 'buttonAddComment')" placeholder="Введите комментарий..."></textarea>
         <br />
         <br />
         <p>
-            <button type="submit" class="btn btn-success btn-sm">Опубликовать</button>
+            <button type="submit" class="btn btn-success btn-sm" id="buttonAddComment" disabled>Опубликовать</button>
         </p>
     </div>
 </form>

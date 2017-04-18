@@ -1,26 +1,14 @@
 ﻿@model University.Models.Dto.QuestionDto
 
 
-<style>
-    .form-element-textarea {
-        width: 100%;
-        max-width: 600px;
-    }
-
-    div {
-        word-wrap: break-word;
-    }
-</style>
-
-
 <form method="POST" id="addAnswer" action="/Questions/AddAnswer">
     <div>
         <input type="text" name="QuestionId" value="@Model.Id" class="hide">
-        <textarea class="form-element form-element-textarea" id="answerInput" name="Text" rows="5" placeholder="Напишите ответ..."></textarea>
+        <textarea class="form-element form-element-textarea" id="answerInput" oninput="LockedButton('answerInput', 'buttonAddAnswer')" name="Text" rows="5" placeholder="Напишите ответ..."></textarea>
         <br />
         <br />
         <p>
-            <button type="submit" class="btn btn-success btn-sm">Опубликовать</button>
+            <button type="submit" id="buttonAddAnswer" class="btn btn-success btn-sm" disabled>Опубликовать</button>
         </p>
     </div>
 </form>

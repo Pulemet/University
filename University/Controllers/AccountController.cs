@@ -26,7 +26,7 @@ namespace University.Controllers
         private string _avatarsFolder = "/Files/Avatars/";
         private string _invalidLogin = "Неверный логин или пароль";
 
-
+        [Authorize(Roles = "admin")]
         public ActionResult ConfirmRegistration()
         {
             var users = db.Users.Join(db.AwaitingUsers, u => u.Id, a => a.UserId, (u, a) => u);

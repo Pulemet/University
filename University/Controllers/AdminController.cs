@@ -12,11 +12,13 @@ namespace University.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult PageSubmitRegistration(string id)
         {
             ApplicationUser user = db.Users.Find(id);
