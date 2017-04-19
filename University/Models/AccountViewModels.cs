@@ -106,15 +106,12 @@ namespace University.Models
         [Display(Name = "Роль")]
         public string Role { get; set; }
 
-        [Required]
         [Display(Name = "Факультет")]
         public string Faculty { get; set; }
 
-        [Required]
         [Display(Name = "Специальность")]
         public string Speciality { get; set; }
 
-        [Required]
         [Display(Name = "Группа")]
         public string Group { get; set; }
 

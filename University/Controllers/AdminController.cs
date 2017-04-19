@@ -26,7 +26,8 @@ namespace University.Controllers
             if (user != null)
             {
                 UserDto uDto = new UserDto(user);
-                uDto.Group = db.StudentGroups.Find(user.GroupId).Name;
+                var group = db.StudentGroups.Find(user.GroupId);
+                uDto.Group = group != null ? group.Name : "Является преподавателем";
                 return View(uDto);
             }
             ModelState.AddModelError("", "User does not exist");

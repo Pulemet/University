@@ -92,7 +92,7 @@ $(document).ready(function () {
 });
 
 function LockedButton(thisInput, lockedButton) {
-    if ($("#" + thisInput).val() === '') {
+    if ($("#" + thisInput).val() == '') {
         $("#" + lockedButton).prop('disabled', true);
     } else {
         $("#" + lockedButton).prop('disabled', false);

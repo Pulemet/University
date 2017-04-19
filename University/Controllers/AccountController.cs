@@ -220,9 +220,13 @@ namespace University.Controllers
                         SurName = model.SurName,
                         PatronymicName = model.PatronymicName,
                         BirthDate = model.BirthDate,
-                        Photo = fileName,
-                        GroupId = Int32.Parse(model.Group) 
+                        Photo = fileName
                     };
+
+                    // если преподаватель, то группа не будет указана
+                    if (model.Group != null)
+                        user.GroupId = Int32.Parse(model.Group);
+
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {

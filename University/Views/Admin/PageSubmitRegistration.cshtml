@@ -25,39 +25,39 @@
 
 <div class="container">
     <div class="col-md-8">
-        <div class="form-group">
-            @Html.Label("Фамилия:", new {@class = "col-md-2 control-label"})
+        <div class="form-group col-md-12">
+            @Html.Label("Фамилия", new {@class = "col-md-2 control-label"})
             <div class="col-md-10">@Model.SurName</div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-12">
             @Html.Label("Имя", new {@class = "col-md-2 control-label"})
             <div class="col-md-10">@Model.FirstName</div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-12">
             @Html.Label("Отчество", new { @class = "col-md-2 control-label"})
             <div class="col-md-10">@Model.PatronymicName</div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-12">
             @Html.Label("Дата рождения", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">@Model.BirthDate.ToLongDateString()</div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             @Html.Label("Группа", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">@Model.Group</div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Адрес: ", new { @class = "col-md-2 control-label" })
+        <div class="form-group col-md-12">
+            @Html.Label("Электронный адрес", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">@Model.Email</div>
         </div>
 
-        <div class="form-group col-md-6">
-            <button type="submit" class="col-md-6 btn btn-success btn-sm" onclick="SubmitUser('@Model.Id')">Принять</button>
-            <button type="submit" class="col-md-6 btn btn-danger btn-sm" onclick="DeleteUser('@Model.Id')">Отклонить</button>
-        </div>
+        <p>
+            <button type="submit" class="btn btn-primary btn-sm" onclick="SubmitUser('@Model.Id')">Принять</button>
+            <button type="submit" class="btn btn-danger btn-sm" onclick="DeleteUser('@Model.Id')">Отклонить</button>
+        </p>
     </div>
 
     <div class="col-md-4 stock-group-item large">

@@ -95,28 +95,30 @@
             <div class = "form-group">
                 @Html.LabelFor(m => m.Role, new { @class = "control-label col-md-2" })
                 <div class = "col-md-10">
-                    @Html.DropDownListFor(m => m.Role, roles)
+                    @Html.DropDownListFor(m => m.Role, roles, new { @class = "form-control", id = "role" })
                 </div>
             </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.Faculty, new { @class = "control-label col-md-2" })
-                <div class = "col-md-10">
-                    @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "", new { @class = "form-control", id = "faculty" })
+            <div id="studentParams">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Faculty, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "", new { @class = "form-control", id = "faculty" })
+                    </div>
                 </div>
-            </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.Speciality, new { @class = "control-label col-md-2" })
-                <div class = "col-md-10">
-                    @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "", new { @class = "form-control", id = "speciality" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Speciality, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "", new { @class = "form-control", id = "speciality" })
+                    </div>
                 </div>
-            </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.Group, new { @class = "control-label col-md-2" })
-                <div class = "col-md-10">
-                    @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "", new { @class = "form-control", id = "group" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Group, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "", new { @class = "form-control", id = "group" })
+                    </div>
                 </div>
             </div>
 

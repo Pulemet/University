@@ -31,7 +31,7 @@ namespace University.Models
                 roleManager.Create(role3);
 
                 // создаем пользователей
-                var admin = new ApplicationUser { Email = "runec@mail.ru", UserName = "runec@mail.ru", BirthDate = DateTime.Now, Photo = "", FirstName = "", SurName = "", PatronymicName = ""};
+                var admin = new ApplicationUser { Email = "runec@mail.ru", UserName = "runec@mail.ru", BirthDate = DateTime.Now, Photo = "/Files/icons/NoImage.jpg", FirstName = "Катя", SurName = "Админ", PatronymicName = ""};
                 string password = "12!Qaz";
                 var result = userManager.Create(admin, password);
 

@@ -36,6 +36,17 @@ $(function () {
     });
 });
 
+$(function() {
+    $('#role').change(function() {
+        var id = $(this).val();
+        if (id === 'Student') {
+            $('#studentParams').show();
+        } else {
+            $('#studentParams').hide();
+        }
+    });
+});
+
 var loadFile = function (event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
