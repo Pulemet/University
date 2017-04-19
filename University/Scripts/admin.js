@@ -1,6 +1,11 @@
 ﻿function DeleteUser(userId) {
-    $.post("/Account/DeleteUser", { id: userId }, function () {
-        $("#" + userId).remove();
+    $.post("/Account/DeleteUser", { id: userId }, function (responce) {
+        alert(responce);
+        if (document.location.href.indexOf("/Account/ConfirmRegistration") > -1) {
+            $("#" + userId).remove();
+        } else {
+            document.location.href = "/Account/ConfirmRegistration";
+        }
     });
 }
 

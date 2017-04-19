@@ -6,7 +6,7 @@ using System.Web;
 using MimeKit;
 using MailKit.Net.Smtp;
 
-namespace University.Models.Email
+namespace University.Models.Helper
 {
     public class EmailService
     {
@@ -26,7 +26,14 @@ namespace University.Models.Email
             {
                 await client.ConnectAsync("smtp.yandex.ru", 25, false);
                 await client.AuthenticateAsync("universityBSUIR@yandex.ru", "12!Qaz23");
-                await client.SendAsync(emailMessage);
+                try
+                {
+                    await client.SendAsync(emailMessage);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
 
                 await client.DisconnectAsync(true);
             }

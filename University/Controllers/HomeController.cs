@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using University.Models;
 using University.Models.Dto;
-using University.Models.Email;
 using University.Models.Tables;
 
 namespace University.Controllers

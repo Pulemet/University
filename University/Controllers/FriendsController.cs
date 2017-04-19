@@ -15,15 +15,9 @@ namespace University.Controllers
         public ActionResult Index()
         {
             string userId = User.Identity.GetUserId();
-            var listRelationsUsers = db.Friends.Where(t => t.UserOneId == userId || t.UserTwoId == userId).Select(t=>t).ToList();
-            List<ApplicationUser> listFriends = new List<ApplicationUser>();
-
-            foreach (var relationsUsers in listRelationsUsers)
-            {
-                listFriends.Add(relationsUsers.UserOneId == userId ?
-                                db.Users.Find(relationsUsers.UserTwoId) :
-                                db.Users.Find(relationsUsers.UserOneId));
-            }
+            var listRelationsUsers = db.Friends.Where(t => t.UserOneId == userId || t.UserTwoId == userId).Select(t=>t);
+            var listFriends = db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == userId ? f.UserTwoId : f.UserOneId, (u, f) => u).
+                                       OrderBy(u => u.SurName);
 
             return View(listFriends);
         }

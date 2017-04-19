@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using University.Models;
-using University.Models.Email;
+using University.Models.Helper;
 using University.Models.Tables;
 
 namespace University.Controllers
@@ -32,12 +32,12 @@ namespace University.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult ConfirmRegistration()
         {
-            var users = db.Users.Join(db.AwaitingUsers, u => u.Id, a => a.UserId, (u, a) => u);
+            var users = db.Users.Join(db.AwaitingUsers, u => u.Id, a => a.UserId, (u, a) => u).OrderBy(u => u.SurName);
             return View(users);
         }
 
         [HttpPost]
-        public string DeleteUser(string id)
+        public async Task<string> DeleteUser(string id)
         {
             var user = db.Users.Find(id);
             if (user != null)
@@ -51,7 +51,13 @@ namespace University.Controllers
                 db.Users.Remove(user);
                 db.SaveChanges();
 
-                return "Регистрация отменена";
+                EmailService emailService = new EmailService();
+                var message = String.Format("Уважаемый {0} {1}. Активация вашей учетной записи " +
+                                            "была отклонена администратором.", user.SurName,
+                                                                               user.FirstName);
+                await emailService.SendEmailAsync(user.Email, _subjectName, message);
+
+                return String.Format("Регистрация учетной записи {0} отклонена", user.Email); ;
             }
             return "Ошибка";
         }

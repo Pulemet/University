@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -18,10 +19,18 @@ namespace University.Controllers
         public ActionResult Index()
         {
             string strRoleAdmin = "admin";
+            string userId = User.Identity.GetUserId();
+            var listRelationsUsers = db.Friends.Where(t => t.UserOneId == userId || t.UserTwoId == userId).Select(t => t);
+            var listFriends = db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == userId ? f.UserTwoId : f.UserOneId, (u, f) => u);
+
             var role = db.Roles.Where(r => r.Name == strRoleAdmin).Select(r => r).FirstOrDefault();
-            List < ApplicationUser > users = db.Users.ToList().Where(t=>t.Id != User.Identity.GetUserId()).
-                                                               Where(m => !m.Roles.Select(r => r.RoleId).Contains(role.Id)).
-                                                               Select(m => m).ToList();
+            var users = db.Users.ToList().Where(t=>t.Id != userId).
+                                          Where(m => !m.Roles.Select(r => r.RoleId).Contains(role.Id)).
+                                          Select(m => m);
+
+            // убрать из списка ожидающих активацию аккаунта и друзей
+            users = (from user in users where !(from a in db.AwaitingUsers.ToList() select a.UserId).Contains(user.Id) select user);
+            users = users.Except(listFriends).OrderBy(u => u.SurName);
 
             return View(users);
         }
