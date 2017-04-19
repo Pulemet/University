@@ -28,6 +28,7 @@ namespace University.Controllers
         private string _avatarsFolder = "/Files/Avatars/";
         private string _invalidLogin = "Неверный логин или пароль";
         private string _subjectName = "Ответ на регистрацию ";
+        private string _existUser = "Пользователь с таким email уже существует";
 
         [Authorize(Roles = "admin")]
         public ActionResult ConfirmRegistration()
@@ -173,12 +174,7 @@ namespace University.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            SelectList faculties = new SelectList(db.Faculties, "Id", "NameAbridgment");
-            ViewData["Faculties"] = faculties;
-            SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
-            ViewData["Specialities"] = specialities;
-            SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
-            ViewData["Groups"] = groups;
+            ViewData = GetViewData();
             return View();
         }
 
@@ -208,7 +204,16 @@ namespace University.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {                 
+                {
+                    if (db.Users.FirstOrDefault(u => u.Email == model.Email) != null)
+                    {
+                        ViewData = GetViewData();
+                        model.Faculty = "";
+                        model.Speciality = "";
+                        model.Group = "";
+                        ModelState.AddModelError("", _existUser);
+                        return View(model);
+                    }              
                     string fileName = "";
                     if (image != null)
                     {
@@ -262,29 +267,36 @@ namespace University.Controllers
                 }
                 catch
                 {
-                    SelectList faculties = new SelectList(db.Faculties, "Id", "NameAbridgment");
-                    ViewData["Faculties"] = faculties;
-                    SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
-                    ViewData["Specialities"] = specialities;
-                    SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
-                    ViewData["Groups"] = groups;
+                    ViewData = GetViewData();
+                    model.Faculty = "";
+                    model.Speciality = "";
+                    model.Group = "";
                     return View(model);
                 }
                 
             }
             else
             {
-                SelectList faculties = new SelectList(db.Faculties, "Id", "NameAbridgment");
-                ViewData["Faculties"] = faculties;
-                SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
-                ViewData["Specialities"] = specialities;
-                SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
-                ViewData["Groups"] = groups;
+                ViewData = GetViewData();
+                model.Faculty = "";
+                model.Speciality = "";
+                model.Group = "";
                 return View(model);
             }
             return View(model);
         }
 
+        private ViewDataDictionary GetViewData()
+        {
+            ViewDataDictionary viewData = new ViewDataDictionary();
+            SelectList faculties = new SelectList(db.Faculties, "Id", "NameAbridgment");
+            viewData["Faculties"] = faculties;
+            SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");
+            viewData["Specialities"] = specialities;
+            SelectList groups = new SelectList(new List<StudentGroup>(), "Id", "Name");
+            viewData["Groups"] = groups;
+            return viewData;
+        }
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]

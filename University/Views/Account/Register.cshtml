@@ -88,7 +88,6 @@
                 @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
                 <div class = "col-md-10">
                     @Html.EditorFor(m => m.BirthDate, new { @class = "date-input" })
-                    @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -103,21 +102,21 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Faculty, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "", new { @class = "form-control", id = "faculty" })
+                        @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "", new { @class = "form-control", id = "faculty", required = "true", data_val_required = "Выберите факультет", data_val = "true" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.Speciality, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "", new { @class = "form-control", id = "speciality" })
+                        @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "", new { @class = "form-control", id = "speciality", required = "true", data_val_required = "Выберите специальность", data_val = "true" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.Group, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "", new { @class = "form-control", id = "group" })
+                        @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "", new { @class = "form-control", id = "group", required = "true", data_val_required = "Выберите группу", data_val = "true" })
                     </div>
                 </div>
             </div>

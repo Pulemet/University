@@ -41,8 +41,10 @@ $(function() {
         var id = $(this).val();
         if (id === 'Student') {
             $('#studentParams').show();
+            $("li").attr("style", "display:none");
         } else {
             $('#studentParams').hide();
+            $("li").attr("style", "display:none");
         }
     });
 });
