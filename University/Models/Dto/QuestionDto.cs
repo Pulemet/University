@@ -21,6 +21,7 @@ namespace University.Models.Dto
             CreateDate = question.CreateDate;
             SubjectId = question.SubjectId;
             TypeQuestion = question.TypeQuestion;
+            FileLink = question.FileLink;
 
             Answers = new List<AnswerDto>();
         }
@@ -39,6 +40,8 @@ namespace University.Models.Dto
         public int SubjectId { get; set; }
 
         public string TypeQuestion { get; set; }
+
+        public string FileLink { get; set; }
 
         public List<AnswerDto> Answers { get; set; }
     }

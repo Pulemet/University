@@ -81,6 +81,7 @@ namespace University.Controllers
                 question.FileLink = _materialsForQuestionsFolder + fileName;
             }
 
+            db.Questions.Add(question);
             db.SaveChanges();
             return RedirectToAction("Questions", new { id = question.SubjectId });
         }

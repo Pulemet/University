@@ -51,6 +51,7 @@ $(document).ready(function () {
         $.post(url, data, function (responce) {
             $('#messageInput').val('');
             $('#formMessages').append(responce);
+            $('#buttonSendMessage').prop('disabled', true);
             if ($('#noMessages').length > 0) {
                 $('#noMessages').remove();
             }
@@ -66,6 +67,7 @@ $(document).ready(function () {
         $.post(url, data, function (responce) {
             $('#commentInput').val('');
             $('#formComments').append(responce);
+            $('#buttonAddComment').prop('disabled', true);
             if ($('#noComments').length > 0) {
                 $('#noComments').remove();
             }      
@@ -81,9 +83,50 @@ $(document).ready(function () {
         $.post(url, data, function (responce) {
             $('#answerInput').val('');
             $('#formAnswers').append(responce);
+            $('#buttonAddAnswer').prop('disabled', true);
             if ($('#noAnswers').length > 0) {
                 $('#noAnswers').remove();
             }
         });
     });
 });
+
+function LockedButton(thisInput, lockedButton) {
+    if ($("#" + thisInput).val() == '') {
+        $("#" + lockedButton).prop('disabled', true);
+    } else {
+        $("#" + lockedButton).prop('disabled', false);
+    }
+}
+
+function AddMaterialClick() {
+    var formData = new FormData();
+    var file = document.getElementById("loadFile").files[0];
+
+    var subjectId = $("#SubjectId").val();
+    var name = $("#inputDescriptionMaterial").val();
+    var typeLesson = $("#TypeLesson").val();
+
+    formData.append("loadFile", file);
+    formData.append("SubjectId", subjectId);
+    formData.append("Name", name);
+    formData.append("TypeLesson", typeLesson);
+
+    $.ajax({
+        type: "POST",
+        url: '/Subjects/PartialViewMaterials',
+        data: formData,
+        dataType: 'html',
+        contentType: false,
+        processData: false,
+        success: function (responce) {
+            $('#inputDescriptionMaterial').val('');
+            $('#buttonAddMaterial').prop('disabled', true);
+            $('#listMaterials').replaceWith(responce);
+        },
+        error: function () {
+            window.location.reload();
+            alert("Error");
+        }
+    });
+}

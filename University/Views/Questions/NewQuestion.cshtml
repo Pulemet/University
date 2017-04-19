@@ -5,6 +5,11 @@
     ViewBag.Title = "NewQuestion";
 }
 
+<head>
+    <script type="text/javascript" src="/scripts/script.js">
+    </script>
+</head>
+
 <h2>Задать вопрос</h2>
 
 <div class="container">
@@ -13,7 +18,7 @@
         {
             <label>Описание</label>
             <br/>
-            <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="7" placeholder="Описание"></textarea>
+            <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="7" oninput="LockedButton('Topic', 'buttonNewQuestion')" placeholder="Описание"></textarea>
             <hr/>
             <br/>
 
@@ -37,7 +42,7 @@
             <br/>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-success" value="Добавить"></button>
+                    <button type="submit" class="btn btn-success" value="Добавить" id="buttonNewQuestion" disabled>Задать вопрос</button>
                 </div>
             </div>
         }
