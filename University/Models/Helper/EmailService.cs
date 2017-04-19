@@ -32,7 +32,7 @@ namespace University.Models.Helper
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    System.Diagnostics.Debug.WriteLine("Exception: {0}", ex.Message);
                 }
 
                 await client.DisconnectAsync(true);

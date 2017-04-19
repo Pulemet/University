@@ -67,12 +67,12 @@ namespace University.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Введите адрес электронной почты")]
+        [EmailAddress(ErrorMessage = "Некорректный адрес электронной почты")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите пароль")]
         [StringLength(100, ErrorMessage = "{0} должен быть минимум {2} символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
@@ -84,19 +84,18 @@ namespace University.Models
         public string ConfirmPassword { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Введите имя")]
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите фамилию")]
         [Display(Name = "Фамилия")]
         public string SurName { get; set; }
 
-        //[Required]
         [Display(Name = "Отчество")]
         public string PatronymicName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Выберите дату рождения")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Дата Рождения")]
