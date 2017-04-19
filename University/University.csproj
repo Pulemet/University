@@ -292,14 +292,8 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Files\icons\cd-icon-email.svg" />
-    <Content Include="Files\icons\cd-icon-password.svg" />
-    <Content Include="Files\icons\cd-icon-username.svg" />
-    <Content Include="Files\icons\cd-logo.svg" />
-    <Content Include="Files\icons\logo-1.png" />
-    <Content Include="Files\icons\logo-2.png" />
-    <Content Include="Files\icons\logo-3.png" />
-    <Content Include="Files\icons\logo-4.png" />
+    <Content Include="Files\icons\bg.jpg" />
+    <Content Include="Files\icons\logo.png" />
     <Content Include="Files\icons\NoImage.jpg" />
     <Content Include="Files\icons\search.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
