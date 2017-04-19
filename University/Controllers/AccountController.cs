@@ -27,7 +27,7 @@ namespace University.Controllers
         private ApplicationUserManager _userManager;
         private string _avatarsFolder = "/Files/Avatars/";
         private string _invalidLogin = "Неверный логин или пароль";
-        private string _subjectName = "Подтверждение учетной записи";
+        private string _subjectName = "Ответ на регистрацию ";
 
         [Authorize(Roles = "admin")]
         public ActionResult ConfirmRegistration()
@@ -55,7 +55,8 @@ namespace University.Controllers
                 var message = String.Format("Уважаемый {0} {1}. Активация вашей учетной записи " +
                                             "была отклонена администратором.", user.SurName,
                                                                                user.FirstName);
-                await emailService.SendEmailAsync(user.Email, _subjectName, message);
+                var subjectName = String.Format("{0} {1} {2}", _subjectName, user.SurName, user.FirstName);
+                await emailService.SendEmailAsync(user.Email, subjectName, message);
 
                 return String.Format("Регистрация учетной записи {0} отклонена", user.Email); ;
             }
@@ -75,7 +76,8 @@ namespace University.Controllers
                 EmailService emailService = new EmailService();
                 var message = String.Format("Уважаемый {0} {1}, ваша учетная запись подтверждена.", user.SurName,
                                                                                                     user.FirstName);
-                await emailService.SendEmailAsync(user.Email, _subjectName, message);
+                var subjectName = String.Format("{0} {1} {2}", _subjectName, user.SurName, user.FirstName);
+                await emailService.SendEmailAsync(user.Email, subjectName, message);
                 return String.Format("Учетная запись {0} активирована", user.Email);
             }
             return "Ошибка";
