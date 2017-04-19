@@ -1,44 +1,50 @@
-﻿@model University.Models.ApplicationUser
+﻿@using System.Drawing
+@using University.Models
+@model University.Models.ApplicationUser
 @{
     ViewBag.Title = "Home Page";
 }
 
-<style>
-    img {
-        display: block;
-        max-width:230px;
-        max-height:250px;
-        width: auto;
-        height: auto;
-    }
-</style>
+<head>
+    <style>
+        img {
+            display: block;
+            max-width: 230px;
+            max-height: 250px;
+            width: auto;
+            height: auto;
+        }
+    </style>
+</head>
 
+<h2> @ViewBag.Title </h2>
 
 <div class="container">
-    <div class="nav-drawer">
-        <div class="drawer-link">
-            <a href="FindUser/Index" class="drawer-item-icon">
-                <img src="../Files/icons/courses.png" class="drawer-item-icon">
-                Поиск людей
-            </a>
-        </div>
-        <div class="drawer-link">
-            <a href="Friends/Index" class="drawer-item-icon">
-                <img src="../Files/icons/courses.png" class="drawer-item-icon">
-                Мои друзья
-            </a>
-        </div>
-        <div class="drawer-link">
-            <a href="Communion/Index" class="drawer-item-icon">
-                <img src="../Files/icons/messages.png" class="drawer-item-icon">
-                Сообщения
-            </a>
+    <div class="col-md-8">
+        <div class="nav-drawer">
+            <div class="drawer-link">
+                <a href="FindUser/Index" class="drawer-item-icon">
+                    <!--<img src="../Files/icons/courses.png" class="drawer-item-icon">-->
+                    Поиск людей
+                </a>
+            </div>
+            <div class="drawer-link">
+                <a href="Friends/Index" class="drawer-item-icon">
+                    <!--<img src="../Files/icons/courses.png" class="drawer-item-icon">-->
+                    Мои друзья
+                </a>
+            </div>
+            <div class="drawer-link">
+                <a href="Communion/Index" class="drawer-item-icon">
+                    <!--<img src="../Files/icons/messages.png" class="drawer-item-icon">-->
+                    Сообщения
+                </a>
+            </div>
         </div>
     </div>
-
     <div class="col-md-4 stock-group-item large">
         <h2>@Model.SurName @Model.FirstName</h2>
-        <br/>
+        <br />
         <img class="image" src="@Model.Photo">
     </div>
 </div>

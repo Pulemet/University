@@ -36,21 +36,21 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Отчество", new {@class = "col-md-2 control-label"})
+            @Html.Label("Отчество", new { @class = "col-md-2 control-label"})
             <div class="col-md-10">@Model.PatronymicName</div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Дата рождения", new {@class = "col-md-2 control-label" })
+            @Html.Label("Дата рождения", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">@Model.BirthDate.ToLongDateString()</div>
         </div>
         <div class="form-group">
-            @Html.Label("Группа", new {@class = "col-md-2 control-label"})
+            @Html.Label("Группа", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">@Model.Group</div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Адрес: ", new {@class = "col-md-2 control-label" })
+            @Html.Label("Адрес: ", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">@Model.Email</div>
         </div>
 

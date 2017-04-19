@@ -1,24 +1,24 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "main-nav" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
 
-        <nav class="main-nav">
+        <nav class = "main-nav">
             <ul>
-                <li>@Html.ActionLink("Manage", "Index", "Manage", routeValues: null, htmlAttributes: new { id = "ManageLink", @class = "cd-signin" })</li>
-                <li><a class="cd-signout" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                <li>@Html.ActionLink("Редактировать", "Index", "Manage", routeValues: null, htmlAttributes: new { id = "ManageLink", @class = "cd-signin" }) </li>
+               <li><a class="cd-signout" href="javascript:document.getElementById('logoutForm').submit()"> Выйти </a> </li>
             </ul>
         </nav>
     }
 }
 else
 {
-    <nav class="main-nav">
+    <nav class = "main-nav">
         <ul>
-            <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "cd-signin" })</li>
-            <li>@Html.ActionLink("Войти", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "cd-signup" })</li>
+            <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "cd-signin" }) </li>
+            <li>@Html.ActionLink("Войти", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "cd-signup" }) </li>
         </ul>
     </nav>
 }
