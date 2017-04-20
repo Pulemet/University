@@ -668,3 +668,84 @@ h2, .h2 {
     font-size: 30px;
     margin-left: 5px;
 }
+
+#block-search{
+    width: 409px;
+    height: 33px;
+}
+
+#input-search{
+    max-width: none;
+    height: 33px;
+    width: 355px;
+    border: 1px solid #D8D8D8;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#input-search:focus{
+    border: 1px solid #75D9FF;
+}
+
+#form-search{
+    background: url(/Files/icons/button-search-norm.png) no-repeat;
+    width: 54px;
+    height: 33px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+
+#form-search:hover{
+    background: url(/Files/icons/button-search-hover.png) no-repeat;
+    width: 54px;
+    height: 33px;
+}
+/* Результат поиска */
+#block-search-result{
+    border-left: 1px solid #E1DFDD;
+    border-right: 1px solid #E1DFDD;
+    border-bottom: 1px solid #E1DFDD;
+    width: 355px;
+    height:  auto;
+    background-color: white;
+    position: absolute;
+    z-index: 9999;
+    display: none;
+}
+        
+#list-search-result {
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+
+#list-search-result > li{ 
+    min-height: 28px;
+    height: auto;
+    padding-left: 10px;
+}
+
+#list-search-result > li:hover {
+    background-color: gray;
+}
+.block-title-price{
+    width: 325px;
+    text-align: left;
+}
+.block-title-price > a{
+    font: 15px sans-serif;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;  
+}
+.block-title-price > a:hover{
+    text-decoration: none;  
+}
+.block-title-price > p{
+    font: 15px sans-serif;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;  
+}

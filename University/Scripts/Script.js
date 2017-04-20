@@ -147,7 +147,7 @@ function SearchUser() {
         for (var index = 0, len = userNames.length; index < len; ++index)
         {
             if (userNames[index].includes(inputSearch)) {
-                data = data + '<li class="add-li"><div class="block-title-price" >' + '<a href="#">' + '<span>' + userNames[index] + "</a></div></li>";
+                data = data + '<li class="add-li"><div class="block-title-price" >' + '<a href="#">' + userNames[index] + "</a></div></li>";
             }
         }
     } 
