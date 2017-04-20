@@ -16,7 +16,7 @@ body {
     font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Login button. */
+/* 'Login' button. */
 .login-button {
     width: 100%;
     -moz-user-select: none;
@@ -41,7 +41,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* Signup button. */
+/* 'Signup' button. */
 .signup-button {
     width: 100%;
     -moz-user-select: none;
@@ -96,7 +96,7 @@ footer {
     }
 }
 
-.cd-login, .cd-signup {
+.cd-signup {
     display: none;
 }
 
@@ -205,7 +205,7 @@ footer {
     outline-width: thin;
 }
 
-/* Login form. */
+/* 'Login' form. */
 .login-form {
     width: 400px;
     padding: 25px;
@@ -223,14 +223,13 @@ footer {
 }
 
 .login-form-container {
-    margin-left: 25%;
-    margin-right:25%;
-    width: 50%;
+    margin: auto auto;
+    width: 400px;
     padding-top: 100px;
     display: block;
 }
 
-/* Remember me element. */
+/* 'Remember me' element. */
 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
     position: absolute;
     margin-top: 4px \9;
@@ -254,7 +253,7 @@ header[role=banner] {
     background: #343642;
 }
 
-    header[role=banner] #cd-logo {
+    header[role=banner] #cd-logo img {
         float: left;
         /* reduce logo size on mobile and make sure it is left aligned with the transform-origin property */
         -webkit-transform-origin: 0 50%;
@@ -274,7 +273,7 @@ header[role=banner] {
             width: 100px;
             height: 60px;
             margin-top: 5px;
-            margin-left: 80px; 
+            margin-left: 80px;
             margin-right: 10px;
         }
 
@@ -290,14 +289,14 @@ header[role=banner] {
         height: 80px;
     }
 
-        header[role=banner] #cd-logo {
+        header[role=banner] #cd-logo img {
             -webkit-transform: scale(1);
             -moz-transform: scale(1);
             -ms-transform: scale(1);
             -o-transform: scale(1);
             transform: scale(1);
             margin-top: 5px;
-            margin-left: 80px; 
+            margin-left: 80px;
             margin-right: 10px;
         }
 }
@@ -661,7 +660,7 @@ hr {
     border: 0;
     border-top: 1px solid #eee;
     color: azure;
-    margin-left: -15px;
+    margin-left: 15px;
     margin-right: 15px;
 }
 
