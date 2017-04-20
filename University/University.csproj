@@ -400,6 +400,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Avatars\" />
+    <Folder Include="Files\icons\bg\" />
     <Folder Include="Files\MaterialsForQuestions\" />
     <Folder Include="Files\Materials\" />
   </ItemGroup>
