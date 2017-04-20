@@ -130,3 +130,43 @@ function AddMaterialClick() {
         }
     });
 }
+
+var userNames;
+
+function initArrayInExternFile(ar) {
+    userNames = ar;
+}
+
+function SearchUser() {
+    var inputSearch = $("#input-search").val();
+    // Проверяем поисковое значение. Если оно больше или ровняется Трём, то всё нормально и также если меньше 50 символов.
+    var data = "";
+    if (inputSearch.length >= 3 && inputSearch.length < 50) {
+        // Делаем запрос в обработчик в котором будет происходить поиск.
+        
+        for (var index = 0, len = userNames.length; index < len; ++index)
+        {
+            if (userNames[index].includes(inputSearch)) {
+                data = data + '<li class="add-li"><div class="block-title-price" >' + '<a href="#">' + '<span>' + userNames[index] + "</a></div></li>";
+            }
+        }
+    } 
+    if (data !== "") {
+        $("#block-search-result").show(); // Показываем блок с результатом.
+        $("#list-search-result").html(data); // Добавляем в список результат поиска.
+    } else {
+        // Если ничего не найдено, то скрываем выпадающий список.
+        $("#block-search-result").hide();
+    }
+}
+
+$(document).ready(function () {
+    $("#list-search-result").on("click", ".add-li", function () {
+        var userName = $(this).text();
+        $.get("/FindUser/SearchUser", { name: userName }, function (responce) {
+            $('#input-search').val('');
+            $("#block-search-result").hide();
+            $('#ListUsers').replaceWith(responce);
+        });
+    });
+});

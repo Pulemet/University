@@ -9,21 +9,123 @@
 
 <head>
     <script type="text/javascript" src="/scripts/script.js">
+
+    
     </script>
+
+    @{ List<string> userNamesCs = (List<string>)@ViewData["UserNames"]; }
+
+    <!--приводим массив к виду понятному движку JS-->
+    <script type="text/javascript">
+        var ar = new Array();
+        var i = 0;
+
+        @foreach (string str in userNamesCs)
+        {
+            <text>
+                ar[i] = '@str';
+                i++;
+            </text>
+        }
+
+        //пока не вышли из скрипта инициализируем полученный массив; пусть функция initArrayInExternalFile() находится в externalfile.js
+        initArrayInExternFile(ar);
+    </script>
+
+    <style>
+        .add-li {
+        }
+
+         A {
+             text-decoration: none;
+             color: Black;
+         }
+        #block-search{
+            width: 409px;
+            height: 33px;
+        }
+
+        #input-search{
+            height: 33px;
+            width: 355px;
+            border: 1px solid #D8D8D8;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        #input-search:focus{
+            border: 1px solid #75D9FF;
+        }
+
+        #form-search{
+            background: url(/Files/icons/button-search-norm.png) no-repeat;
+            width: 54px;
+            height: 33px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        #form-search:hover{
+            background: url(/Files/icons/button-search-hover.png) no-repeat;
+            width: 54px;
+            height: 33px;
+        }
+        /* Результат поиска */
+        #block-search-result{
+            border-left: 1px solid #E1DFDD;
+            border-right: 1px solid #E1DFDD;
+            border-bottom: 1px solid #E1DFDD;
+            width: 355px;
+            height:  auto;
+            background-color: white;
+            position: absolute;
+            z-index: 9999;
+            display: none;
+        }
+        #list-search-result > li{ 
+            border-bottom: 1px solid #EAEAEA;
+            min-height: 35px;
+            height: auto;
+        }
+        .block-title-price{
+            width: 325px;
+            text-align: left;
+        }
+        .block-title-price > a{
+            font: 15px sans-serif;
+            color: #287FC3;
+            margin-top: 10px;
+            display: block;  
+        }
+        .block-title-price > a:hover{
+            text-decoration: none;  
+        }
+        .block-title-price > p{
+            font: 15px sans-serif;
+            color: black;
+            margin: 10px 0;
+            display: block;  
+        }
+    </style>
 </head>
 
 <h2>Пользователи</h2>
 
 <div class="container">
     <div class="col-md-6">
-        <table class="table" id="ListUsers">
-            <tbody>
-                @foreach (var user in Model)
-                {
-                    @Html.Partial("PartialViewUser", user)
-                }
-            </tbody>
-        </table>
+            <div id="block-search">
+                <form method="get">
+                    <input type="text" id="input-search" oninput="SearchUser()" placeholder="Поиск">
+                    <input type="submit" id="form-search" value=" ">
+                </form>
+                <div id="block-search-result">
+                    <ul id="list-search-result" style="list-style-type: none;"></ul> 
+                </div>
+            </div>
+        <hr/>
+        @Html.Partial("PartialViewUsers", Model)
     </div>
-</div>
+
+    </div>
 

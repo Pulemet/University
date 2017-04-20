@@ -1,0 +1,10 @@
+﻿@model IEnumerable<University.Models.ApplicationUser>
+    
+<table class="table" id="ListUsers">
+    <tbody>
+        @foreach (var user in Model)
+            {
+            @Html.Partial("PartialViewUser", user)
+        }
+    </tbody>
+</table>

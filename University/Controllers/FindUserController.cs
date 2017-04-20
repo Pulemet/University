@@ -31,7 +31,8 @@ namespace University.Controllers
             // убрать из списка ожидающих активацию аккаунта и друзей
             users = (from user in users where !(from a in db.AwaitingUsers.ToList() select a.UserId).Contains(user.Id) select user);
             users = users.Except(listFriends).OrderBy(u => u.SurName);
-
+            List<string> userNames = (from u in users select u.SurName + " " + u.FirstName).Distinct().ToList();
+            ViewData["UserNames"] = userNames;
             return View(users);
         }
 
@@ -56,6 +57,16 @@ namespace University.Controllers
                     db.SaveChanges();
                 } 
             }
+        }
+
+        [HttpGet]
+        public ActionResult SearchUser(string name)
+        {
+            List<ApplicationUser> users = new List<ApplicationUser>();
+            string surName = name.Split(' ')[0];
+            string firstName = name.Split(' ')[1];
+            users = db.Users.Where(u => u.FirstName == firstName && u.SurName == surName).Select(u => u).ToList();
+            return PartialView("PartialViewUsers", users);
         }
     }
 }
