@@ -466,36 +466,6 @@ header[role=banner] {
     width: 280px;
 }
 
-.btn-success {
-    background-color: #3f4652;
-    border-color: #4cae4c;
-    width: 100%;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: default;
-    margin-top: 10px;
-    font-weight: 500;
-    font-size: 14px;
-    height: 36px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: none;
-    -o-transition: all 0.218s;
-    -moz-transition: all 0.218s;
-    -webkit-transition: all 0.218s;
-    transition: all 0.218s;
-}
-
-    .btn-success:hover,
-    .btn-success:active,
-    .btn-success:focus {
-        color: #fff;
-        background-color: #449d44;
-        border-color: #255625;
-    }
-
 .nav-drawer {
     padding-bottom: 10px;
     margin-bottom: 10px;
