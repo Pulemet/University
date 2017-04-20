@@ -27,8 +27,8 @@ body {
     background-color: #5cb85c;
     border-color: #4cae4c;
     font-weight: 500;
-    font-size: 14px;
-    height: 36px;
+    font-size: 16px;
+    height: 40px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -52,8 +52,8 @@ body {
     background-color: #5cb85c;
     border-color: #4cae4c;
     font-weight: 500;
-    font-size: 14px;
-    height: 36px;
+    font-size: 16px;
+    height: 40px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -76,8 +76,12 @@ body {
         border-color: #255625;
     }
 
-p {
+p #cd-footer {
     text-align: center;
+}
+
+#cd-h3 {
+     margin-left: 160px;
 }
 
 footer {
@@ -225,7 +229,7 @@ footer {
 .login-form-container {
     margin: auto auto;
     width: 400px;
-    padding-top: 100px;
+    padding-top: 70px;
     display: block;
 }
 
@@ -625,13 +629,32 @@ html[xmlns] .input-file-row-1 {
 }
 
 hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     border: 0;
     border-top: 1px solid #eee;
     color: azure;
     margin-left: 15px;
     margin-right: 15px;
+}
+
+/* Button for file upload. */
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+}
+
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
 
 h2, .h2 {
