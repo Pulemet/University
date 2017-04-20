@@ -3,14 +3,17 @@
 }
 
 body {
-    height: 100%;
     margin: 0;
     padding: 0;
-    background: url(../Files/icons/bg.jpg) no-repeat center center fixed;
+    background: url(../Files/icons/bg/15.jpg) center center fixed;
     -moz-background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    position: relative;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Login button. */
@@ -72,6 +75,20 @@ body {
         background-color: #449d44;
         border-color: #255625;
     }
+
+p {
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    background-color: transparent;
+    text-align: center;
+}
 
 @media only screen and (min-width: 1170px) {
     .cd-close-form {
@@ -206,8 +223,9 @@ body {
 }
 
 .login-form-container {
-    margin: auto auto;
-    width: 400px;
+    margin-left: 25%;
+    margin-right:25%;
+    width: 50%;
     padding-top: 100px;
     display: block;
 }
