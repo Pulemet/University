@@ -40,11 +40,18 @@ $(function() {
     $('#role').change(function() {
         var id = $(this).val();
         if (id === 'Student') {
-            $('#studentParams').show();
-            $("li").attr("style", "display:none");
+            $('#studentParams').show();     
         } else {
             $('#studentParams').hide();
-            $("li").attr("style", "display:none");
+            if (removeFirstSelect) {             
+                $('#faculty').prepend("<option value=''></option>");
+                $('#faculty').val($("#faculty option:first").val());
+                $('#speciality').find('option').remove();
+                $('#speciality').prepend("<option value=''></option>");
+                $('#group').find('option').remove();
+                $('#group').prepend("<option value=''></option>");
+                removeFirstSelect = false;
+            }
         }
     });
 });
