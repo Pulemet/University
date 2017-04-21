@@ -24,11 +24,7 @@
             margin-top: 15px;
         }
 
-        .labeled {
-            color: #696969;
-        }
-
-        .control-label {
+        .control-label, .labeled {
             color: #494949;
         }
 
@@ -77,7 +73,7 @@
         {
             string labelRole = Model.UserRole == UserRoles.admin ? "Администратор" : "Преподаватель";
             <div class="form-group col-md-12">
-                @Html.Label(labelRole, new {@class = "col-md-12 control-label", align = "center"})
+                @Html.Label(labelRole, new {@class = "col-md-12 control-label", align = "center" })
             </div>
         }
     </div>

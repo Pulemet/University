@@ -153,7 +153,7 @@ function SearchUser() {
         
         for (var index = 0, len = userNames.length; index < len; ++index)
         {
-            if (userNames[index].includes(inputSearch)) {
+            if (userNames[index].toLowerCase().substring(0, inputSearch.length) === inputSearch.toLowerCase()) {
                 data = data + '<li class="add-li"><div class="block-title-price" >' + '<a href="#">' + userNames[index] + "</a></div></li>";
             }
         }
