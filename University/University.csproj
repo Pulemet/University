@@ -222,6 +222,7 @@
     <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\Dto\QuestionDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
+    <Compile Include="Models\Helper\ConstDictionary.cs" />
     <Compile Include="Models\Helper\EmailService.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Helper\ImageHelper.cs" />
@@ -396,6 +397,8 @@
     <Content Include="Views\Home\CompletionRegistration.cshtml" />
     <Content Include="Views\Admin\PageSubmitRegistration.cshtml" />
     <Content Include="Views\FindUser\PartialViewUsers.cshtml" />
+    <Content Include="Views\Home\UserPage.cshtml" />
+    <Content Include="Views\Home\PartialViewSaidBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

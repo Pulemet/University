@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Provider;
 using University.Models;
 using University.Models.Dto;
+using University.Models.Helper;
 using University.Models.Tables;
 
 namespace University.Controllers
@@ -15,7 +16,6 @@ namespace University.Controllers
     public class SubjectsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        private string _materialsFolder = "/Files/Materials/";
         // GET: Subjects
         public ActionResult Index()
         {
@@ -45,9 +45,9 @@ namespace University.Controllers
                 string fileName = material.Name.GetHashCode() + "-" +
                            material.AuthorId.GetHashCode() + "-" +
                            material.GetHashCode() + "." + loadFile.FileName.Split('.').LastOrDefault(); 
-                var saveFile = Server.MapPath(_materialsFolder + fileName);
+                var saveFile = Server.MapPath(ConstDictionary.MATERIALS_FOLDER + fileName);
                 loadFile.SaveAs(saveFile);
-                material.FileLink = _materialsFolder + fileName;
+                material.FileLink = ConstDictionary.MATERIALS_FOLDER + fileName;
             }
 
             db.Materials.Add(material);

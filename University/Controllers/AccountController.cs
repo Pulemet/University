@@ -25,7 +25,6 @@ namespace University.Controllers
         protected ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private string _avatarsFolder = "/Files/Avatars/";
         private string _invalidLogin = "Неверный логин или пароль";
         private string _subjectName = "Ответ на регистрацию ";
         private string _existUser = "Пользователь с таким email уже существует";
@@ -220,9 +219,9 @@ namespace University.Controllers
                         fileName = model.FirstName.GetHashCode() + "-" +
                                    model.BirthDate.GetHashCode() + "-" +
                                    model.Email.GetHashCode() + ".jpg";
-                        var saveFile = Server.MapPath(_avatarsFolder + fileName);
+                        var saveFile = Server.MapPath(ConstDictionary.AVATARS_FOLDER + fileName);
                         image.SaveAs(saveFile);
-                        fileName = _avatarsFolder + fileName;
+                        fileName = ConstDictionary.AVATARS_FOLDER + fileName;
                     }
 
                     var user = new ApplicationUser

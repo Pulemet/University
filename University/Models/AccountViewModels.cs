@@ -58,7 +58,7 @@ namespace University.Models
         [Display(Name = "Дата Рождения")]
         public DateTime BirthDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Выберите роль")]
         [Display(Name = "Роль")]
         public string Role { get; set; }
 

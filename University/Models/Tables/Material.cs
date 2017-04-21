@@ -21,10 +21,4 @@ namespace University.Models.Tables
 
         public DateTime DateLoad { get; set; }
     }
-
-    public enum TypeLesson
-    {
-        Lecture,
-        Practic
-    }
 }

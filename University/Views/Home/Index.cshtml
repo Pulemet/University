@@ -1,8 +1,9 @@
 ﻿@using System.Drawing
 @using University.Models
-@model University.Models.ApplicationUser
+@using University.Models.Helper
+@model University.Models.Dto.UserDto
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Моя страница";
 }
 
 <head>
@@ -14,37 +15,66 @@
             width: auto;
             height: auto;
         }
+        
+        .block-image {
+            margin-top: 30px;
+        }
+
+        .block-said-bar {
+            margin-top: 15px;
+        }
+
+        .control-label, .labeled {
+            color: #494949;
+        }
+
+        .block-name {
+            padding-left: 30px;
+        }
     </style>
 </head>
 
-<h2> @ViewBag.Title </h2>
-
 <div class="container">
-    <div class="col-md-8">
-        <div class="nav nav-pills nav-stacked">
-            <div class="drawer-link">
-                <a href="FindUser/Index" class="drawer-item-icon">
-                    <!--<img src="../Files/icons/courses.png" class="drawer-item-icon">-->
-                    Поиск людей
-                </a>
-            </div>
-            <div class="drawer-link">
-                <a href="Friends/Index" class="drawer-item-icon">
-                    <!--<img src="../Files/icons/courses.png" class="drawer-item-icon">-->
-                    Мои друзья
-                </a>
-            </div>
-            <div class="drawer-link">
-                <a href="Communion/Index" class="drawer-item-icon">
-                    <!--<img src="../Files/icons/messages.png" class="drawer-item-icon">-->
-                    Сообщения
-                </a>
-            </div>
-        </div>
+    <div class="col-md-2 block-said-bar">
+        <h4> @ViewBag.Title </h4>
+        @Html.Partial("PartialViewSaidBar")
     </div>
-    <div class="col-md-4 stock-group-item large">
-        <h2>@Model.SurName @Model.FirstName</h2>
-        <br />
+
+    <div class="col-md-3 block-image" float="right">
         <img class="image" src="@Model.Photo">
+    </div>
+
+    <div class="col-md-4">
+        <div class="block-name">
+            <h3>@Model.SurName @Model.PatronymicName @Model.FirstName</h3>
+        </div>
+        <br/>
+        <div class="form-group col-md-12">
+            @Html.Label("Дата рождения", new {@class = "col-md-6 control-label"})
+            <div class="col-md-6 labeled">@Model.BirthDate.ToLongDateString()</div>
+        </div>
+        @if (Model.UserRole == UserRoles.student)
+        {
+            <div class="form-group col-md-12">
+                @Html.Label("Группа", new {@class = "col-md-6 control-label"})
+                <div class="col-md-6 labeled">@Model.Group</div>
+            </div>
+            <div class="form-group col-md-12">
+                @Html.Label("Специальность", new {@class = "col-md-6 control-label"})
+                <div class="col-md-6 labeled">@Model.Speciality</div>
+            </div>
+
+            <div class="form-group col-md-12">
+                @Html.Label("Факультет", new {@class = "col-md-6 control-label"})
+                <div class="col-md-6 labeled">@Model.Faculty</div>
+            </div>
+        }
+        else
+        {
+            string labelRole = Model.UserRole == UserRoles.admin ? "Администратор" : "Преподаватель";
+            <div class="form-group col-md-12">
+                @Html.Label(labelRole, new {@class = "col-md-12 control-label", align = "center" })
+            </div>
+        }
     </div>
 </div>

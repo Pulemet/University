@@ -1,11 +1,11 @@
 ﻿@model University.Models.ApplicationUser
 
-<tr>
+<tr class="dialog-container">
     <td>
-        <div class="alert-success">@Model.SurName @Model.FirstName</div>
+        <a href="/Home/UserPage/@Model.Id">@Model.SurName @Model.FirstName</a>
     </td>
     <td>
-        <button type="submit" class="btn btn-danger btn-sm js-add-friend-button" id="@Model.Id">Добавить</button>
+        <button type="submit" class="btn btn-danger btn-sm js-add-friend-button" id="@Model.Id">Добавить в друзья</button>
     </td>
 </tr>
 

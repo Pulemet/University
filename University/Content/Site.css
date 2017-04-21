@@ -726,7 +726,7 @@ h2, .h2 {
 }
 
 #list-search-result > li:hover {
-    background-color: gray;
+    background-color: #E1DFDD;
 }
 .block-title-price{
     width: 325px;

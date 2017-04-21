@@ -1,10 +1,10 @@
 ﻿@model University.Models.ApplicationUser
     
-<tr>
+<tr class="dialog-container">
     <td>
-        <div class="alert-success">@Model.SurName @Model.FirstName</div>
+        <a href="/Home/UserPage/@Model.Id">@Model.SurName @Model.FirstName</a>
     </td>
     <td>
-        <a href="/Home/OpenDialog/@Model.Id" class="btn btn-success btn-sm">Написать</a>
+        <a href="/Home/OpenDialog/@Model.Id" class="btn btn-success btn-sm">Написать сообщение</a>
     </td>
 </tr>

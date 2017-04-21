@@ -43,6 +43,13 @@ $(function () {
     });
 });
 
+function AddFriend(id) {
+    $.post("/FindUser/AddFriend", { id: id }, function () {
+        $("#buttonAddFriend").text("Добавлен");
+        $("#buttonAddFriend").prop('disabled', true);
+    });
+}
+
 $(document).ready(function () {
     $('#sendMessage').submit(function (event) {
         event.preventDefault();
@@ -146,7 +153,7 @@ function SearchUser() {
         
         for (var index = 0, len = userNames.length; index < len; ++index)
         {
-            if (userNames[index].includes(inputSearch)) {
+            if (userNames[index].toLowerCase().substring(0, inputSearch.length) === inputSearch.toLowerCase()) {
                 data = data + '<li class="add-li"><div class="block-title-price" >' + '<a href="#">' + userNames[index] + "</a></div></li>";
             }
         }
