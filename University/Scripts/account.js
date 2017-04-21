@@ -1,38 +1,40 @@
-﻿var removeFirstSelect = false;
+﻿var optionSpeciality = "<option value=''>Выбор специальности</option>";
+var optionGroup = "<option value=''>Выбор группы</option>";
 
 $(function () {
     $('#faculty').change(function () {
         // получаем выбранный id
-        var id = $(this).val();
-        if (!removeFirstSelect) {
-            $("#faculty option:first").remove();
-            removeFirstSelect = true;
-        }
-        
-        
-        $.get("/Account/GetSpecialities",
+        var id = $(this).val();   
+        if (id !== "") {
+            $.get("/Account/GetSpecialities",
             { id: id },
             function(data) {
                 // заменяем содержимое присланным частичным представлением
                 $('#speciality').replaceWith(data);
                 $('#speciality').change(function () {
                     var id = $(this).val();
-                    $.get("/Account/GetGroups",
-                        { id: id },
-                         function (data) {
-                             $('#group').replaceWith(data);
-                               
-                        });
+                    if (id !== "") {
+                        $.get("/Account/GetGroups",
+                            { id: id },
+                            function(data) {
+                                $('#group').replaceWith(data);
+                                $('#group').prepend(optionGroup);
+                                $("#group option:first").attr('selected', 'selected');
+                            });
+                    } else {
+                        $('#group').find('option').remove();
+                        $('#group').prepend(optionGroup);
+                    }
                 });
+                $('#speciality').prepend(optionSpeciality);
                 $("#speciality option:first").attr('selected', 'selected');
-                var selectSpecialityId = $('#speciality').val();
-                $.get("/Account/GetGroups", { id: selectSpecialityId},
-                    function (data) {
-                        $('#group').replaceWith(data);
-                        $('#speciality').change();
-                        $("#group option:first").attr('selected', 'selected');
-                });
         });
+        } else {
+            $('#speciality').find('option').remove();
+            $('#speciality').prepend(optionSpeciality);
+            $('#group').find('option').remove();
+            $('#group').prepend(optionGroup);
+        }
     });
 });
 
@@ -42,16 +44,12 @@ $(function() {
         if (id === 'Student') {
             $('#studentParams').show();     
         } else {
-            $('#studentParams').hide();
-            if (removeFirstSelect) {             
-                $('#faculty').prepend("<option value=''></option>");
-                $('#faculty').val($("#faculty option:first").val());
-                $('#speciality').find('option').remove();
-                $('#speciality').prepend("<option value=''></option>");
-                $('#group').find('option').remove();
-                $('#group').prepend("<option value=''></option>");
-                removeFirstSelect = false;
-            }
+            $('#studentParams').hide();            
+            $('#faculty').val($("#faculty option:first").val());
+            $('#speciality').find('option').remove();
+            $('#speciality').prepend(optionSpeciality);
+            $('#group').find('option').remove();
+            $('#group').prepend(optionGroup);
         }
     });
 });

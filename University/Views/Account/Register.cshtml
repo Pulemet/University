@@ -91,31 +91,27 @@
             </div>
 
             <div class = "form-group">
-                @Html.LabelFor(m => m.Role, new { @class = "control-label col-md-2" })
-                <div class = "col-md-10">
-                    @Html.DropDownListFor(m => m.Role, roles, new { @class = "form-control", id = "role" })
+                <div class = "col-md-10  col-md-offset-2">
+                    @Html.DropDownListFor(m => m.Role, roles, "Выбор роли", new { @class = "form-control", id = "role" })
                 </div>
             </div>
 
-            <div id="studentParams">
+            <div id="studentParams" hidden>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Faculty, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "", new { @class = "form-control", id = "faculty", required = "true", data_val_required = "Выберите факультет", data_val = "true" })
+                    <div class="col-md-10 col-md-offset-2">
+                        @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "Выбор факультета", new { @class = "form-control", id = "faculty", required = "true", data_val_required = "Выберите факультет", data_val = "true" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Speciality, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "", new { @class = "form-control", id = "speciality", required = "true", data_val_required = "Выберите специальность", data_val = "true" })
+                    <div class="col-md-10 col-md-offset-2">
+                        @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "Выбор специальности", new { @class = "form-control", id = "speciality", required = "true", data_val_required = "Выберите специальность", data_val = "true" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Group, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "", new { @class = "form-control", id = "group", required = "true", data_val_required = "Выберите группу", data_val = "true" })
+                    <div class="col-md-10 col-md-offset-2">
+                        @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "Выбор группы", new { @class = "form-control", id = "group", required = "true", data_val_required = "Выберите группу", data_val = "true" })
                     </div>
                 </div>
             </div>
