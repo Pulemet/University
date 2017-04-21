@@ -1,5 +1,4 @@
-﻿@using System.Drawing
-@using University.Models
+﻿@using University.Models.Helper
 @model University.Models.RegisterViewModel
 
 @{
@@ -129,7 +128,7 @@
         </div>
 
         <div class = "col-md-4">
-            <img id = "output" src = "/Files/icons/NoImage.jpg" alt = "Фото" aligh = "left" />
+            <img id = "output" src = "@ConstDictionary.NO_IMAGE" alt = "Фото" aligh = "left" />
             <br />
 
             <div class="fileUpload btn btn-primary">

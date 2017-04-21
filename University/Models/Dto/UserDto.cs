@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using University.Models.Helper;
 
 namespace University.Models.Dto
 {
@@ -16,7 +17,7 @@ namespace University.Models.Dto
             SurName = user.SurName;
             PatronymicName = user.PatronymicName;
             BirthDate = user.BirthDate;
-            Photo = user.Photo;
+            Photo = user.Photo == "" ? ConstDictionary.NO_IMAGE : user.Photo;
             Email = user.Email;
         }
 
@@ -34,6 +35,12 @@ namespace University.Models.Dto
 
         public string Group { get; set; }
 
+        public string Speciality { get; set; }
+
+        public string Faculty { get; set; }
+
         public string Email { get; set; }
+
+        public UserRoles UserRole { get; set; }
     }
 }

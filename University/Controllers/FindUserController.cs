@@ -18,7 +18,7 @@ namespace University.Controllers
         // GET: FindUser
         public ActionResult Index()
         {
-            string strRoleAdmin = "admin";
+            const string strRoleAdmin = "admin";
             string userId = User.Identity.GetUserId();
             var listRelationsUsers = db.Friends.Where(t => t.UserOneId == userId || t.UserTwoId == userId).Select(t => t);
             var listFriends = db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == userId ? f.UserTwoId : f.UserOneId, (u, f) => u);

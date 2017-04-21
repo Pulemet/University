@@ -1,12 +1,14 @@
-﻿@using System.Drawing
-@using University.Models
-@using University.Models.Helper
+﻿@using University.Models.Helper
 @model University.Models.Dto.UserDto
-@{
-    ViewBag.Title = "Моя страница";
-}
+
+@Scripts.Render("~/scripts/jquery-3.1.1.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 
 <head>
+    <script type="text/javascript" src="/scripts/script.js">
+    
+    </script>
+
     <style>
         img {
             display: block;
@@ -15,13 +17,9 @@
             width: auto;
             height: auto;
         }
-        
+
         .block-image {
             margin-top: 30px;
-        }
-
-        .block-said-bar {
-            margin-top: 15px;
         }
 
         .labeled {
@@ -39,46 +37,50 @@
 </head>
 
 <div class="container">
-    <div class="col-md-2 block-said-bar">
-        <h4> @ViewBag.Title </h4>
-        @Html.Partial("PartialViewSaidBar")
-    </div>
 
-    <div class="col-md-3 block-image" float="right">
+    <div class="col-md-3 col-md-offset-2 block-image" float="right">
         <img class="image" src="@Model.Photo">
     </div>
 
     <div class="col-md-4">
         <div class="block-name">
-            <h3>@Model.SurName @Model.PatronymicName @Model.FirstName</h3>
+            <h3>@Model.SurName @Model.FirstName</h3>
         </div>
-        <br/>
+        <br />
         <div class="form-group col-md-12">
-            @Html.Label("Дата рождения", new {@class = "col-md-6 control-label"})
+            @Html.Label("Дата рождения", new { @class = "col-md-6 control-label" })
             <div class="col-md-6 labeled">@Model.BirthDate.ToLongDateString()</div>
         </div>
         @if (Model.UserRole == UserRoles.student)
         {
             <div class="form-group col-md-12">
-                @Html.Label("Группа", new {@class = "col-md-6 control-label"})
+                @Html.Label("Группа", new { @class = "col-md-6 control-label" })
                 <div class="col-md-6 labeled">@Model.Group</div>
             </div>
             <div class="form-group col-md-12">
-                @Html.Label("Специальность", new {@class = "col-md-6 control-label"})
+                @Html.Label("Специальность", new { @class = "col-md-6 control-label" })
                 <div class="col-md-6 labeled">@Model.Speciality</div>
             </div>
 
             <div class="form-group col-md-12">
-                @Html.Label("Факультет", new {@class = "col-md-6 control-label"})
+                @Html.Label("Факультет", new { @class = "col-md-6 control-label" })
                 <div class="col-md-6 labeled">@Model.Faculty</div>
             </div>
         }
         else
         {
-            string labelRole = Model.UserRole == UserRoles.admin ? "Администратор" : "Преподаватель";
             <div class="form-group col-md-12">
-                @Html.Label(labelRole, new {@class = "col-md-12 control-label", align = "center"})
+                @Html.Label("Преподаватель", new { @class = "col-md-12 control-label", align = "center" })
             </div>
         }
+
+        <p>
+            <a href="/Home/OpenDialog/@Model.Id" class="btn btn-success btn-sm">Написать сообщение</a>
+            @if (!(bool)ViewData["IsFriend"])
+            {
+                <button type="submit" class="btn btn-danger btn-sm" id="buttonAddFriend" onclick="AddFriend('@Model.Id')">Добавить в друзья</button>
+            }            
+        </p>
+
     </div>
 </div>

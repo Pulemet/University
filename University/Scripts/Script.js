@@ -43,6 +43,13 @@ $(function () {
     });
 });
 
+function AddFriend(id) {
+    $.post("/FindUser/AddFriend", { id: id }, function () {
+        $("#buttonAddFriend").text("Добавлен");
+        $("#buttonAddFriend").prop('disabled', true);
+    });
+}
+
 $(document).ready(function () {
     $('#sendMessage').submit(function (event) {
         event.preventDefault();

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using University.Models;
 using University.Models.Dto;
+using University.Models.Helper;
 using University.Models.Tables;
 
 namespace University.Controllers
@@ -21,10 +22,49 @@ namespace University.Controllers
                 return Redirect("/Account/Register");
             }
 
-            ApplicationUser currentUser = db.Users.Find(User.Identity.GetUserId());
-            return View(currentUser);
+            var user = db.Users.Find(User.Identity.GetUserId());
+            return View(GetUserDto(user));
         }
 
+        [Authorize]
+        public ActionResult UserPage(string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+            var userId = User.Identity.GetUserId();
+            var listRelationsUsers = db.Friends.Where(t => t.UserOneId == user.Id || t.UserTwoId == user.Id).Select(t => t);
+            var isFriend = db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == user.Id ? f.UserTwoId : f.UserOneId, (u, f) => u).
+                                       FirstOrDefault(u => u.Id == userId);
+            ViewData["IsFriend"] = isFriend != null;
+            return View(GetUserDto(user));
+        }
+
+        private UserDto GetUserDto(ApplicationUser user)
+        {
+            UserDto uDto = new UserDto(user);
+
+            var role = db.Roles.Where(r => r.Name == ConstDictionary.ROLE_STUDENT).Select(r => r).FirstOrDefault();
+            if (user.Roles.Select(r => r.RoleId).Contains(role.Id))
+            {
+                var group = db.StudentGroups.Find(user.GroupId);
+                var speciality = db.Specialities.Find(group.SpecialityId);
+                var facultity = db.Faculties.Find(speciality.FacultyId);
+                uDto.Group = group.Name;
+                uDto.Speciality = speciality.NameAbridgment;
+                uDto.Faculty = facultity.NameAbridgment;
+                uDto.UserRole = UserRoles.student;
+            }
+            else
+            {
+                role = db.Roles.Where(r => r.Name == ConstDictionary.ROLE_ADMIN).Select(r => r).FirstOrDefault();
+                uDto.UserRole = user.Roles.Select(r => r.RoleId).Contains(role.Id)
+                                       ? UserRoles.admin
+                                       : UserRoles.teacher;
+            }
+
+            return uDto;
+        }
+
+        [Authorize]
         public ActionResult ShowFriedns(string userId)
         {
             var listFriendsId = db.Friends.Where(t => t.UserOneId == userId);
@@ -44,6 +84,7 @@ namespace University.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult OpenDialog(string id)
         {
@@ -85,6 +126,7 @@ namespace University.Controllers
             return RedirectToAction("DialogPage", new { id = dialogId != null ? dialogId.dialogId : 0 });
         }
 
+        [Authorize]
         public ActionResult DialogPage(int id)
         {
             DialogDto dialog = new DialogDto();
