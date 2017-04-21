@@ -13,29 +13,32 @@
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form" }))
             {
             @Html.AntiForgeryToken()
-            <h2> @ViewBag.Title </h2>
+            <h3> @ViewBag.Title </h3>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <form class="login-form">
-                    @Html.LabelFor(m => m.Email, new { @class = "control-label", id = "label-login" })
-                    <div class="login-label">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "label-login" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            <form class = "login-form">
+                <div class = "login-label">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "label-login", placeholder = "E-mail" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class = "login-label">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "label-login", placeholder = "Пароль" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class = "row">
+                    <div class = "col-sm-4">
+                        <input type = "submit" value = "Войти" class = "login-button" />
                     </div>
 
-                    @Html.LabelFor(m => m.Password, new { @class = "control-label", id = "label-login" })
-                    <div class="login-label">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "label-login" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <div class = "col-sm-4">
+                        <label class = "checkbox" id = "remember-me">
+                            <input type = "checkbox" value = "remember-me"> Запомнить меня
+                        </label>
                     </div>
-                    <div class="checkbox">
-                        @Html.CheckBoxFor(m => m.RememberMe)
-                        @Html.LabelFor(m => m.RememberMe)
-                    </div>
-                    <div>
-                        <input type="submit" value="Войти" class="login-button" />
-                    </div>
-                </form>
+                </div>
+            </form>
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
