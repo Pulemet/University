@@ -1,9 +1,11 @@
 ﻿@model University.Models.Tables.Subject
 
 <div>
-    <h5>@Model.NameFull</h5>
-    <p>
-        <a href="@Url.Action("MaterialsSubject", "Subjects", new {id = Model.Id})">Перейти к материалам</a>
-        <a href="@Url.Action("Questions", "Questions", new {id = Model.Id})">Перейти к вопросам</a>
-    </p>
+    <h5> @Model.NameFull </h5>
+    <div class="row" display="inline-block">
+        <p>
+            <a href="@Url.Action("MaterialsSubject", "Subjects", new { id = Model.Id, @left = "50px"> Перейти к материалам </a>
+            <a href="@Url.Action("Questions", "Questions", new { id = Model.Id })"> Перейти к вопросам </a>
+        </p>
+    </div>
 </div>

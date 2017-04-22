@@ -3,14 +3,19 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="col-md-8">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <h3> Предметы </h3>
+        </div>
+    </div>
 
-<h2>Предметы</h2>
-
-<div class="container">
-    <div class="col-md-6">
-        @foreach (var subject in Model)
-        {
-            @Html.Partial("PartialViewSubject", subject)
-        }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @foreach (var subject in Model)
+            {
+                @Html.Partial("PartialViewSubject", subject)
+            }
+        </div>
     </div>
 </div>

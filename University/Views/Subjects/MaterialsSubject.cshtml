@@ -11,15 +11,20 @@
 
 <head>
     <script type="text/javascript" src="/scripts/script.js">
-        
     </script>
 </head>
 
-<h3>@ViewBag.SubjectName</h3>
+<div class="col-md-8">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <h3> @ViewBag.SubjectName </h3>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <div class="col-md-6">
-            @Html.Partial("PartialViewMaterials", Model)
+        @Html.Partial("PartialViewMaterials", Model)
     </div>
 
     <div class="col-md-6">
@@ -27,27 +32,30 @@
 
             <input type="text" name="SubjectId" id="SubjectId" value="@Int32.Parse(subjectId)" class="hide">
 
-            <label>Описание</label>
-            <br/>
-            <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="7" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Описание"></textarea>
-            <hr/>
-            <br/>
-
-            <select name="TypeLesson" id="TypeLesson">
-                <option value="Lecture">Лекции</option>
-                <option value="Practic">Практические занятия</option>
-            </select>
-
-            <label class="control-label">Выберите файл</label>
-            <p>
-                <input type="file" name="loadFile" id="loadFile"/>
-            </p>
-            <br/>
+            <br />
+            <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="7" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Добавьте описание"> </textarea>
+            <br />
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn" onclick="AddMaterialClick()" id="buttonAddMaterial" disabled>Добавить</button>
+                <select class="form-material" name="TypeLesson" id="TypeLesson">
+                    <option value="Lecture"> Лекции </option>
+                    <option value="Practic"> Практические занятия </option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="fileUpload btn-upload">
+                        <span> Прикрепить </span>
+                        <input type="file" class="upload" name="loadFile" id="loadFile" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn" onclick="AddMaterialClick()" id="buttonAddMaterial" disabled> Добавить </button>
+                    </div>
                 </div>
             </div>
         }
-</div>
+    </div>
 </div>

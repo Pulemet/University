@@ -10,7 +10,7 @@
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 
 <head>
-    <script type = "text/javascript" src = "/scripts/account.js">
+    <script type="text/javascript" src="/scripts/account.js">
     </script>
 
     <style>
@@ -24,150 +24,114 @@
     </style>
 </head>
 
-<h3 id = "cd-h3"> @ViewBag.Title </h3>
 
-<div class = "container">
+<div class="container">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
-    {
-        SelectList roles = new SelectList(
-            new List<SelectListItem>
             {
+                SelectList roles = new SelectList(
+                    new List<SelectListItem>
+                    {
             new SelectListItem { Text = "Студент", Value = "Student" },
             new SelectListItem { Text = "Преподаватель", Value = "Teacher" },
-            }, "Value", "Text");
+                    }, "Value", "Text");
 
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
 
-        <div class = "col-md-8">
-            <div class = "form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class = "col-md-10">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        <div class="col-md-8">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <h3> @ViewBag.Title </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Ваш e-mail" })
                 </div>
             </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                <div class = "col-md-10">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Введите пароль" })
                 </div>
             </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                <div class = "col-md-10">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Повторите пароль" })
                 </div>
             </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
-                <div class = "col-md-10">
-                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Ваше имя" })
                 </div>
             </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.SurName, new { @class = "col-md-2 control-label" })
-                <div class = "col-md-10">
-                    @Html.TextBoxFor(m => m.SurName, new { @class = "form-control" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.TextBoxFor(m => m.SurName, new { @class = "form-control", placeholder = "Ваша фамилия" })
                 </div>
             </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.PatronymicName, new { @class = "col-md-2 control-label" })
-                <div class = "col-md-10">
-                    @Html.TextBoxFor(m => m.PatronymicName, new { @class = "form-control" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.TextBoxFor(m => m.PatronymicName, new { @class = "form-control", placeholder = "Ваше отчество" })
                 </div>
             </div>
 
-            <div class = "form-group">
-                @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
-                <div class = "col-md-10">
-                    @Html.EditorFor(m => m.BirthDate, new { @class = "date-input" })
-                </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "date-input", placeholder = "Дата рождения" } })
+                 </div>
             </div>
 
-            <div class = "form-group">
-                <div class = "col-md-10  col-md-offset-2">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
                     @Html.DropDownListFor(m => m.Role, roles, "Выбор роли", new { @class = "form-control", id = "role" })
                 </div>
             </div>
 
             <div id="studentParams" hidden>
                 <div class="form-group">
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-offset-2 col-md-10">
                         @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "Выбор факультета", new { @class = "form-control", id = "faculty", required = "true", data_val_required = "Выберите факультет", data_val = "true" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-offset-2 col-md-10">
                         @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "Выбор специальности", new { @class = "form-control", id = "speciality", required = "true", data_val_required = "Выберите специальность", data_val = "true" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-offset-2 col-md-10">
                         @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "Выбор группы", new { @class = "form-control", id = "group", required = "true", data_val_required = "Выберите группу", data_val = "true" })
                     </div>
                 </div>
             </div>
 
-            <div class = "form-group">
-                <div class = "col-md-offset-2 col-md-10">
-                    <input type="submit" class = "signup-button" value = "Регистрация" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="signup-button" value="Регистрация" />
                 </div>
             </div>
         </div>
 
-        <div class = "col-md-4">
-            <img id = "output" src = "@ConstDictionary.NO_IMAGE" alt = "Фото" aligh = "left" />
+        <div class="col-md-4">
+            <img id="output" src="@ConstDictionary.NO_IMAGE" alt="Фото" aligh="left" />
             <br />
 
             <div class="fileUpload btn btn-primary">
-                <span>Upload</span>
-                <input type="file" class="upload" onchange = "loadFile(event)" />
+                <span> Загрузить фото </span>
+                <input type="file" class="upload" onchange="loadFile(event)" />
             </div>
         </div>
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
 

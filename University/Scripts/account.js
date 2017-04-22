@@ -1,10 +1,10 @@
-﻿var optionSpeciality = "<option value=''>Выбор специальности</option>";
-var optionGroup = "<option value=''>Выбор группы</option>";
+﻿var optionSpeciality = "<option value='' color='#999'> Выбор специальности </option>";
+var optionGroup = "<option value='' color='#999'> Выбор группы </option>";
 
 $(function () {
     $('#faculty').change(function () {
         // получаем выбранный id
-        var id = $(this).val();   
+        var id = $(this).val();
         if (id !== "") {
             $.get("/Account/GetSpecialities",
             { id: id },
@@ -19,7 +19,7 @@ $(function () {
                             function(data) {
                                 $('#group').replaceWith(data);
                                 $('#group').prepend(optionGroup);
-                                $("#group option:first").attr('selected', 'selected');
+                                $("#group option:first").attr('selected', 'selected').css('color', '#999');
                             });
                     } else {
                         $('#group').find('option').remove();
@@ -27,7 +27,7 @@ $(function () {
                     }
                 });
                 $('#speciality').prepend(optionSpeciality);
-                $("#speciality option:first").attr('selected', 'selected');
+                $("#speciality option:first").attr('selected', 'selected').css('color', '#999');
         });
         } else {
             $('#speciality').find('option').remove();
