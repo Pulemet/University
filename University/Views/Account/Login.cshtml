@@ -17,17 +17,17 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <form class="login-form">
-                <div class="login-label">
+                <div class="form-group">
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "label-login", placeholder = "E-mail" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
 
-                <div class="login-label">
+                <div class="form-group">
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "label-login", placeholder = "Пароль" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
 
-                <div class="row">
+                <div class="row form-group">
                     <div class="col-sm-4">
                         <input type="submit" value="Войти" class="login-button" />
                     </div>

@@ -2,7 +2,7 @@
 @model IEnumerable<University.Models.Dto.MaterialDto>
 
 @{
-    ViewBag.Title = "Materials";
+    ViewBag.Title = "Материалы";
 }
 
 @Scripts.Render("~/scripts/jquery-3.1.1.js")
@@ -29,12 +29,11 @@
 
     <div class="col-md-6">
         @{ string subjectId = Url.RequestContext.RouteData.Values["id"].ToString();
-
             <input type="text" name="SubjectId" id="SubjectId" value="@Int32.Parse(subjectId)" class="hide">
-
             <br />
-            <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="7" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Добавьте описание"> </textarea>
+            <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="7" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Добавьте описание"></textarea>
             <br />
+            
             <div class="form-group">
                 <select class="form-material" name="TypeLesson" id="TypeLesson">
                     <option value="Lecture"> Лекции </option>

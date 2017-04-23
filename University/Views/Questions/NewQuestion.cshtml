@@ -2,7 +2,7 @@
 @model IEnumerable<University.Models.Tables.Subject>
 
 @{
-    ViewBag.Title = "NewQuestion";
+    ViewBag.Title = "Задать вопрос";
 }
 
 <head>
@@ -10,41 +10,50 @@
     </script>
 </head>
 
-<h2>Задать вопрос</h2>
+@Styles.Render("~/Content/css")
 
-<div class="container">
-    <div class="col-md-6">
-        @using (Html.BeginForm("AddQuestion", "Questions", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+<div class="question-form-container">
+    <section id="loginForm">
+        @using (Html.BeginForm("AddQuestion", "Questions", FormMethod.Post, new { @class = "login-form", role = "form", enctype = "multipart/form-data" }))
         {
-            <label>Описание</label>
-            <br/>
-            <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="7" oninput="LockedButton('Topic', 'buttonNewQuestion')" placeholder="Описание"></textarea>
-            <hr/>
-            <br/>
-
-            <select name="SubjectId" id="SubjectId">
-                @foreach (var subject in Model)
-                {
-                    <option value="@subject.Id">@subject.NameAbridgment</option>
-                }
-            </select>
-            <br/>
-
-            <select name="TypeQuestion" id="TypeQuestion">
-                <option value="Lecture">Лекции</option>
-                <option value="Practic">Практические занятия</option>
-            </select>
-
-            <label class="control-label">Выберите файл</label>
-            <p>
-                <input type="file" name="file" id="file"/>
-            </p>
-            <br/>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-success" value="Добавить" id="buttonNewQuestion" disabled>Задать вопрос</button>
+            @Html.AntiForgeryToken()
+            <h3> @ViewBag.Title </h3>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <form class="login-form">
+                <div class="login-label">
+                    <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="7" oninput="LockedButton('Topic', 'buttonNewQuestion')" placeholder="Добавьте описание"></textarea>
                 </div>
-            </div>
+
+                <div class="login-label">
+                    <select class="form-question" name="SubjectId" id="SubjectId">
+                        @foreach (var subject in Model)
+                        {
+                            <option value="@subject.Id">@subject.NameAbridgment</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="login-label">
+                    <select class="form-question" name="TypeQuestion" id="TypeQuestion">
+                        <option value="Lecture"> Лекции </option>
+                        <option value="Practic"> Практические занятия </option>
+                    </select>
+                </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="fileUpload btn-upload" id="file">
+                                <span> Прикрепить </span>
+                                <input type="file" class="upload" name="loadFile" id="file" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn" onclick="AddMaterialClick()" id="buttonNewQuestion" disabled> Отправить </button>
+                        </div>
+                    </div>
+</form>
         }
-    </div>
+    </section>
 </div>
