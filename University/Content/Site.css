@@ -41,6 +41,10 @@ body {
     transition: all 0.218s;
 }
 
+.col-sm-4 {
+    padding-right: 90px;
+}
+
 /* 'Signup' button. */
 .signup-button {
     width: 270px;
@@ -738,6 +742,11 @@ hr {
     position: relative;
     overflow: hidden;
     margin: 0;
+}
+
+header[role="banner"] .wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .fileUpload input.upload {
