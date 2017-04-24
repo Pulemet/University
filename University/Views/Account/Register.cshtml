@@ -11,6 +11,16 @@
 
 <head>
     <script type="text/javascript" src="/scripts/account.js">
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            StartSelect("role");
+            StartSelect("gender");
+            StartSelect("faculty");
+            StartSelect("department");
+        });
     </script>
 
     <style>
@@ -20,19 +30,26 @@
             max-height: 250px;
             width: auto;
             height: auto;
-        }
+        } 
     </style>
 </head>
 
 
 <div class="container">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        SelectList roles = new SelectList(
+            new List<SelectListItem>
             {
-                SelectList roles = new SelectList(
+            new SelectListItem { Text = "Студент", Value = "student" },
+            new SelectListItem { Text = "Преподаватель", Value = "teacher" },
+            }, "Value", "Text");
+
+        SelectList genders = new SelectList(
                     new List<SelectListItem>
                     {
-            new SelectListItem { Text = "Студент", Value = "Student" },
-            new SelectListItem { Text = "Преподаватель", Value = "Teacher" },
+            new SelectListItem { Text = "Мужской", Value = "male" },
+            new SelectListItem { Text = "Женский", Value = "female" },
                     }, "Value", "Text");
 
         @Html.AntiForgeryToken()
@@ -83,48 +100,62 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    @Html.TextBoxFor(m => m.PatronymicName, new { @class = "form-control", placeholder = "Ваше отчество" })
+                    @Html.TextBoxFor(m => m.PatronymicName, new {@class = "form-control", placeholder = "Ваше отчество"})
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "date-input", placeholder = "Дата рождения" } })
+                    @Html.DropDownListFor(m => m.Gender, genders, "Пол", new { @class = "form-control select-default", id = "gender", onchange= "ChangedColorSelect('gender')" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    @Html.DropDownListFor(m => m.Role, roles, "Выбор роли", new { @class = "form-control", id = "role" })
+                    @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "date-input form-control select-default", placeholder = "Дата рождения", id = "date" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.DropDownListFor(m => m.Role, roles, "Выбор роли", new {@class = "form-control select-default", id = "role"})
+                </div>
+            </div>
+
+            <div id="teacherParams" hidden>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.DropDownListFor(m => m.Department, ViewData["Departments"] as SelectList, "Выбор кафедры", new {@class = "form-control select-default", id = "department", required = "true", data_val_required = "Выберите кафедру", data_val = "true", onchange = "ChangedColorSelect('department')" })
+                    </div>
                 </div>
             </div>
 
             <div id="studentParams" hidden>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "Выбор факультета", new { @class = "form-control", id = "faculty", required = "true", data_val_required = "Выберите факультет", data_val = "true" })
+                        @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "Выбор факультета", new {@class = "form-control select-default", id = "faculty", required = "true", data_val_required = "Выберите факультет", data_val = "true"})
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "Выбор специальности", new { @class = "form-control", id = "speciality", required = "true", data_val_required = "Выберите специальность", data_val = "true" })
+                        @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "Выбор специальности", new {@class = "form-control select-default", id = "speciality", required = "true", data_val_required = "Выберите специальность", data_val = "true"})
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "Выбор группы", new { @class = "form-control", id = "group", required = "true", data_val_required = "Выберите группу", data_val = "true" })
+                        @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "Выбор группы", new {@class = "form-control select-default", id = "group", required = "true", data_val_required = "Выберите группу", data_val = "true"})
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="signup-button" value="Регистрация" />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="signup-button" value="Регистрация" />
+                    </div>
                 </div>
             </div>
-        </div>
 
         <div class="col-md-4">
             <div class="form-group">
@@ -133,7 +164,7 @@
             <div class="form-group">
                 <div class="fileUpload btn btn-primary">
                     <span> Загрузить фото </span>
-                    <input type="file" class="upload" onchange="loadFile(event)" />
+                    <input type="file" name="image" class="upload" onchange="loadFile(event)" />
                 </div>
             </div>
         </div>

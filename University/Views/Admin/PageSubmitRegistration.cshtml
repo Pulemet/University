@@ -1,4 +1,5 @@
-﻿@model University.Models.Dto.UserDto
+﻿@using University.Models.Helper
+@model University.Models.Dto.UserDto
 
 @{
     ViewBag.Title = "PageSubmitRegistration";
@@ -36,18 +37,35 @@
         </div>
 
         <div class="form-group col-md-12">
-            @Html.Label("Отчество", new { @class = "col-md-2 control-label"})
+            @Html.Label("Отчество", new {@class = "col-md-2 control-label"})
             <div class="col-md-10">@Model.PatronymicName</div>
         </div>
 
+        @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский";}
         <div class="form-group col-md-12">
-            @Html.Label("Дата рождения", new { @class = "col-md-2 control-label" })
+            @Html.Label("Пол", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10 labeled">@gender</div>
+        </div>
+
+        <div class="form-group col-md-12">
+            @Html.Label("Дата рождения", new {@class = "col-md-2 control-label"})
             <div class="col-md-10">@Model.BirthDate.ToLongDateString()</div>
         </div>
-        <div class="form-group col-md-12">
-            @Html.Label("Группа", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">@Model.Group</div>
-        </div>
+
+        @if (Model.UserRole == UserRoles.Student)
+        {
+            <div class="form-group col-md-12">
+                @Html.Label("Группа", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">@Model.Group</div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group col-md-12">
+                @Html.Label("Преподаватель кафедры", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10 labeled">@Model.Department</div>
+            </div>
+        }
 
         <div class="form-group col-md-12">
             @Html.Label("Электронный адрес", new { @class = "col-md-2 control-label" })

@@ -29,6 +29,7 @@ namespace University.Models
             userIdentity.AddClaim(new Claim("FirstName", this.FirstName));
             userIdentity.AddClaim(new Claim("SurName", this.SurName));
             userIdentity.AddClaim(new Claim("PatronymicName", this.PatronymicName));
+            userIdentity.AddClaim(new Claim("Gender", this.Gender));
             userIdentity.AddClaim(new Claim("Photo", this.Photo));
             userIdentity.AddClaim(new Claim("BirthDate", this.BirthDate.ToShortDateString()));
             userIdentity.AddClaim(new Claim("GroupId", this.GroupId.ToString()));
@@ -40,6 +41,8 @@ namespace University.Models
         public string SurName { get; set; }
 
         public string PatronymicName { get; set; }
+
+        public string Gender { get; set; }
 
         public string Photo { get; set; }
 
@@ -77,6 +80,8 @@ namespace University.Models
         public DbSet<MaterialComment> MaterialComments { get; set; }
 
         public DbSet<AwaitingUser> AwaitingUsers { get; set; }
+
+        public DbSet<TeacherToSubject> TeacherToSubjects { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
