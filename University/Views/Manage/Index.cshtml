@@ -1,14 +1,78 @@
-﻿@model University.Models.IndexViewModel
+﻿@using University.Models.Helper
+@using University.Models.Tables
+@model University.Models.IndexViewModel
 @{
     ViewBag.Title = "Изменение личных данных";
 }
 
-<h3>@ViewBag.Title.</h3>
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/scripts/jquery-3.1.1.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+
+<head>
+    <script type="text/javascript" src="/scripts/account.js">
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            StartSelect("subject");
+        });
+    </script>
+
+    <style>
+        img {
+            display: block;
+            max-width: 230px;
+            max-height: 250px;
+            width: auto;
+            height: auto;
+        }
+    </style>
+</head>
+
+
+<h3>@ViewBag.Title</h3>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <hr />
+<div class="container">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="form-group">
+                <img id="output" src="@ViewBag.SubjectName" alt="Фото" aligh="left"/>
+            </div>
+            <div class="form-group">
+                <div class="fileUpload btn btn-primary">
+                    <span>Выбрать другое фото</span>
+                    <input type="file" id="avatar" class="upload" onchange="changeAvatar(event)"/>
+                </div>
+            </div>
+            <button type="submit" class="btn" onclick="SubmitAvatar()" id="buttonChangePhoto" disabled>Изменить</button>
+        </div>
+        @if(ViewBag.IsTeacher)
+        {
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.DropDownList("Subject", ViewData["Subjects"] as SelectList, " Выбор предмета ", new {@class = "form-control select-default col-md-4", id = "subject", required = "true", data_val_required = "Выберите предмет", data_val = "true"})
+                    </div>
+                    <div class="col-md-5 col-md-offset-1">
+                        <button type="submit" class="btn" id="buttonAddSubject" onclick="AddSubjectToTeacher()" disabled>Добавить</button>
+                    </div>
+                </div>
+                <div class="form-group" id="listSubjects">
+                    <p><b>Мои предметы:</b></p>
+                    @foreach (var subject in (List<Subject>) ViewData["MySubjects"])
+                    {
+                        <p>@subject.NameAbridgment</p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
     <div class="dl-horizontal">
+        <hr />
         @Html.ActionLink("Изменить пароль", "ChangePassword")
     </div>
 </div>

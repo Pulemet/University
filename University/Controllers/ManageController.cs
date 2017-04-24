@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -7,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using University.Models;
+using University.Models.Helper;
+using University.Models.Tables;
 
 namespace University.Controllers
 {
@@ -38,6 +42,32 @@ namespace University.Controllers
             }
         }
 
+        ApplicationDbContext db = new ApplicationDbContext();
+
+        [HttpPost]
+        public void ChangeAvatar()
+        {
+            if (Request.Files.Count != 0 && Request.Files[0] != null)
+            {
+                var image = Request.Files[0];
+                var user = db.Users.Find(User.Identity.GetUserId());
+
+                FileInfo file = new FileInfo(Server.MapPath(user.Photo));
+                if (file.Exists)
+                    file.Delete();
+
+                var fileName = user.FirstName.GetHashCode() + "-" +
+                                   user.BirthDate.GetHashCode() + "-" +
+                                   user.Email.GetHashCode() + ".jpg";
+                var saveFile = Server.MapPath(ConstDictionary.AVATARS_FOLDER + fileName);
+                image.SaveAs(saveFile);
+                fileName = ConstDictionary.AVATARS_FOLDER + fileName;
+                user.Photo = fileName;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
         public ApplicationUserManager UserManager
         {
             get
@@ -63,12 +93,39 @@ namespace University.Controllers
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+            var user = db.Users.Find(userId);
+            ViewBag.SubjectName = user.Photo == "" ? ConstDictionary.NO_IMAGE : user.Photo;
+
+            var role = db.Roles.Where(r => r.Name == ConstDictionary.ROLE_TEACHER).Select(r => r).FirstOrDefault();
+            ViewBag.IsTeacher = user.Roles.Select(r => r.RoleId).Contains(role.Id);
+            if (ViewBag.IsTeacher)
+            {
+                var mySubjects =
+                    db.Subjects.Join((db.TeacherToSubjects.Where(ts => ts.TeacherId == userId).Select(ts => ts)),
+                        s => s.Id, ts => ts.SubjectId, (s, ts) => s);
+                ViewData["MySubjects"] = mySubjects.ToList();
+                var otherSubjects = db.Subjects.Except(mySubjects);
+                SelectList otherSubjectsList = new SelectList(otherSubjects, "Id", "NameAbridgment");
+                ViewData["Subjects"] = otherSubjectsList;
+            }
             return View(model);
+        }
+
+
+        [HttpGet]
+        public ActionResult AddSubject(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            TeacherToSubject teacherToSubject = new TeacherToSubject() { SubjectId = id, TeacherId = userId };
+            db.TeacherToSubjects.Add(teacherToSubject);
+            db.SaveChanges();
+            var mySubjects = db.Subjects.Join((db.TeacherToSubjects.Where(ts => ts.TeacherId == userId).Select(ts => ts)),
+                                                                          s => s.Id, ts => ts.SubjectId, (s, ts) => s);
+            var otherSubjects = db.Subjects.Except(mySubjects).ToList();
+            return PartialView("GetSubjects", otherSubjects);
         }
 
         //

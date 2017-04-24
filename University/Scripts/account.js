@@ -1,5 +1,6 @@
 ﻿var optionSpeciality = "<option value=''> Выбор специальности </option>";
 var optionGroup = "<option value=''> Выбор группы </option>";
+var optionSubject = "<option value=''> Выбор предмета </option>";
 
 function StartSelect(nameSelect) {
     $("#" + nameSelect).attr('class', 'form-control select-default');
@@ -93,9 +94,16 @@ $(function() {
     });
 });
 
-var loadFile = function (event) {
+var addAvatar = function (event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
+};
+
+var changeAvatar = function (event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    $("#buttonChangePhoto").prop('disabled', false);
+    $("#buttonChangePhoto").text("Изменить");
 };
 
 $(function() {
@@ -107,3 +115,60 @@ $(function() {
         }
     });
 });
+
+function SubmitAvatar() {
+    var formData = new FormData();
+    var file = document.getElementById("avatar").files[0];
+    formData.append("loadFile", file);
+    $.ajax({
+        type: "POST",
+        url: '/Manage/ChangeAvatar',
+        data: formData,
+        dataType: 'html',
+        contentType: false,
+        processData: false,
+        success: function () {
+            $('#buttonChangePhoto').prop('disabled', true);
+            $("#buttonChangePhoto").text("Изменено");
+        },
+        error: function () {
+            window.location.reload();
+            alert("Error");
+        }
+    });
+}
+
+$(function() {
+    $('#subject').change(function() {
+        ChangedColorSelect("subject");
+        if ($(this).val() !== "") {
+            $('#buttonAddSubject').prop('disabled', false); 
+        } else {
+            $('#buttonAddSubject').prop('disabled', true);
+        }
+    });
+});
+
+function AddSubjectToTeacher() {
+    var id = $('#subject').val();
+    var text = $('#subject option:selected').text();
+    $.get("/Manage/AddSubject",
+        { id: id },
+        function(data) {
+            $('#subject').replaceWith(data);
+            $('#subject').prepend(optionSubject);
+            $("#subject option:first").attr('selected', 'selected');
+            StartSelect("subject");
+            $('#buttonAddSubject').prop('disabled', true);
+            var newSubject = "<p>" + text + "</p>";
+            $('#listSubjects').append(newSubject);
+            $('#subject').change(function() {
+                ChangedColorSelect("subject");
+                if ($(this).val() !== "") {
+                    $('#buttonAddSubject').prop('disabled', false);
+                } else {
+                    $('#buttonAddSubject').prop('disabled', true);
+                }
+            });
+        });
+}

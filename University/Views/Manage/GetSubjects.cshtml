@@ -1,8 +1,9 @@
-﻿@model IEnumerable<University.Models.Tables.Speciality>
+﻿@model IEnumerable<University.Models.Tables.Subject>
 
-<select id="speciality" name="Speciality">
+<select id="subject" name="Subject">
     @foreach (var item in Model)
     {
         <option value="@item.Id">@item.NameAbridgment</option>
     }
 </select>
+

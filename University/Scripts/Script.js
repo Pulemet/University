@@ -140,8 +140,8 @@ function AddMaterialClick() {
 
 var userNames;
 
-function initArrayInExternFile(ar) {
-    userNames = ar;
+function initArrayInExternFile(arr) {
+    userNames = arr;
 }
 
 function SearchUser() {

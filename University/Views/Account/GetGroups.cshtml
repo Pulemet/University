@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<University.Models.Tables.StudentGroup>
 
-<select id="group" name="Group" class="form-control">
+<select id="group" name="Group">
     @foreach (var item in Model)
     {
         <option value="@item.Id">@item.Name</option>

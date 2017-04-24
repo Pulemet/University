@@ -400,6 +400,7 @@
     <Content Include="Views\FindUser\PartialViewUsers.cshtml" />
     <Content Include="Views\Home\UserPage.cshtml" />
     <Content Include="Views\Home\PartialViewSaidBar.cshtml" />
+    <Content Include="Views\Manage\GetSubjects.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
