@@ -53,7 +53,14 @@
             @Html.Label("Дата рождения", new {@class = "col-md-6 control-label"})
             <div class="col-md-6 labeled">@Model.BirthDate.ToLongDateString()</div>
         </div>
-        @if (Model.UserRole == UserRoles.student)
+
+        @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский";}
+        <div class="form-group col-md-12">
+            @Html.Label("Пол", new {@class = "col-md-6 control-label"})
+            <div class="col-md-6 labeled">@gender</div>
+        </div>
+
+        @if (Model.UserRole == UserRoles.Student)
         {
             <div class="form-group col-md-12">
                 @Html.Label("Группа", new {@class = "col-md-6 control-label"})
@@ -71,10 +78,19 @@
         }
         else
         {
-            string labelRole = Model.UserRole == UserRoles.admin ? "Администратор" : "Преподаватель";
-            <div class="form-group col-md-12">
-                @Html.Label(labelRole, new {@class = "col-md-12 control-label", align = "center" })
-            </div>
+            if (Model.UserRole == UserRoles.Admin)
+            {
+                <div class="form-group col-md-12">
+                    @Html.Label("Администратор", new { @class = "col-md-12 control-label", align = "center" })
+                </div>
+            }
+            else
+            {
+                <div class="form-group col-md-12">
+                    @Html.Label("Преподаватель кафедры", new { @class = "col-md-6 control-label" })
+                    <div class="col-md-6 labeled">@Model.Department</div>
+                </div>
+            }
         }
     </div>
 </div>

@@ -212,7 +212,8 @@ namespace University.Controllers
                         model.Group = "";
                         ModelState.AddModelError("", _existUser);
                         return View(model);
-                    }              
+                    }
+                      
                     string fileName = "";
                     if (image != null)
                     {
@@ -231,25 +232,25 @@ namespace University.Controllers
                         FirstName = model.FirstName,
                         SurName = model.SurName,
                         PatronymicName = model.PatronymicName,
+                        Gender = model.Gender,
                         BirthDate = model.BirthDate,
-                        Photo = fileName
+                        Photo = fileName,
+                        GroupId = model.Group != null ? Int32.Parse(model.Group) : Int32.Parse(model.Department)
                     };
-
-                    // если преподаватель, то группа не будет указана
-                    if (model.Group != null)
-                        user.GroupId = Int32.Parse(model.Group);
 
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
                         // добавление метки пользователя для подтверждения регистрации
-                        db.AwaitingUsers.Add(new AwaitingUser() {UserId = user.Id});
+                        db.AwaitingUsers.Add(new AwaitingUser() { UserId = user.Id });
                         db.SaveChanges();
 
-                        if (model.Role == "Teacher")
-                            await UserManager.AddToRoleAsync(user.Id, "teacher");
-                        if (model.Role == "Student")
-                            await UserManager.AddToRoleAsync(user.Id, "student");
+                        if (model.Role == "teacher")
+                        {
+                            await UserManager.AddToRoleAsync(user.Id, ConstDictionary.RoleTeacher.Name);
+                        }
+                        if (model.Role == "student")
+                            await UserManager.AddToRoleAsync(user.Id, ConstDictionary.RoleStudent.Name);
 
                         // вход под только созданной учетной записью
                         //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -288,6 +289,8 @@ namespace University.Controllers
         private ViewDataDictionary GetViewData()
         {
             ViewDataDictionary viewData = new ViewDataDictionary();
+            SelectList departments = new SelectList(db.Departments, "Id", "NameAbridgment");
+            viewData["Departments"] = departments;
             SelectList faculties = new SelectList(db.Faculties, "Id", "NameAbridgment");
             viewData["Faculties"] = faculties;
             SelectList specialities = new SelectList(new List<Speciality>(), "Id", "NameAbridgment");

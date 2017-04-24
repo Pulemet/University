@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using University.Models.Helper;
 using University.Models.Tables;
 
 namespace University.Models
@@ -20,18 +21,13 @@ namespace University.Models
 
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-                // создаем две роли
-                var role1 = new IdentityRole { Name = "admin" };
-                var role2 = new IdentityRole { Name = "student" };
-                var role3 = new IdentityRole { Name = "teacher" };
-
                 // добавляем роли в бд
-                roleManager.Create(role1);
-                roleManager.Create(role2);
-                roleManager.Create(role3);
+                roleManager.Create(ConstDictionary.RoleAdmin);
+                roleManager.Create(ConstDictionary.RoleStudent);
+                roleManager.Create(ConstDictionary.RoleTeacher);
 
                 // создаем пользователей
-                var admin = new ApplicationUser { Email = "runec@mail.ru", UserName = "runec@mail.ru", BirthDate = DateTime.Now, Photo = "/Files/icons/NoImage.jpg", FirstName = "Катя", SurName = "Админ", PatronymicName = ""};
+                var admin = new ApplicationUser { Email = "runec@mail.ru", UserName = "runec@mail.ru", BirthDate = DateTime.Now, Photo = "/Files/icons/NoImage.jpg", FirstName = "Катя", SurName = "Админ", PatronymicName = "", Gender = "female"};
                 string password = "12!Qaz";
                 var result = userManager.Create(admin, password);
 
@@ -39,7 +35,7 @@ namespace University.Models
                 if (result.Succeeded)
                 {
                     // добавляем для пользователя роль
-                    userManager.AddToRole(admin.Id, role1.Name);
+                    userManager.AddToRole(admin.Id, ConstDictionary.RoleAdmin.Name);
                 }
                 else
                 {
@@ -52,6 +48,13 @@ namespace University.Models
 
     public class DbInitData
     {
+        public static readonly List<Department> Departments = new List<Department>()
+        {
+            new Department() { NameAbridgment = "ИИТ", NameFull = "Интеллектуальных информационных технологий"},
+            new Department() { NameAbridgment = "СУ", NameFull = "Систем управления"},
+            new Department() { NameAbridgment = "ТОЭ", NameFull = "Теоретических основ электротехники"},
+            new Department() { NameAbridgment = "ЭИ", NameFull = "Экономической информатики"}
+        };
         public static readonly List<Faculty> Faculties = new List<Faculty>()
         {
             new Faculty() { NameAbridgment = "ФИТУ", NameFull = "Факультет информационных технологий и управления"},
@@ -95,6 +98,7 @@ namespace University.Models
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
+            db.Departments.AddRange(Departments);
             db.Faculties.AddRange(Faculties);
             db.Specialities.AddRange(Specialities);
             db.StudentGroups.AddRange(Groups);

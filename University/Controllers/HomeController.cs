@@ -51,14 +51,19 @@ namespace University.Controllers
                 uDto.Group = group.Name;
                 uDto.Speciality = speciality.NameAbridgment;
                 uDto.Faculty = facultity.NameAbridgment;
-                uDto.UserRole = UserRoles.student;
+                uDto.UserRole = UserRoles.Student;
             }
             else
             {
                 role = db.Roles.Where(r => r.Name == ConstDictionary.ROLE_ADMIN).Select(r => r).FirstOrDefault();
                 uDto.UserRole = user.Roles.Select(r => r.RoleId).Contains(role.Id)
-                                       ? UserRoles.admin
-                                       : UserRoles.teacher;
+                                       ? UserRoles.Admin
+                                       : UserRoles.Teacher;
+                if (uDto.UserRole == UserRoles.Teacher)
+                {
+                    var department = db.Departments.Find(user.GroupId);
+                    uDto.Department = department.NameAbridgment;
+                }
             }
 
             return uDto;

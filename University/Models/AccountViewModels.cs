@@ -49,8 +49,13 @@ namespace University.Models
         [Display(Name = "Фамилия")]
         public string SurName { get; set; }
 
+        [Required(ErrorMessage = "Введите отчество")]
         [Display(Name = "Отчество")]
         public string PatronymicName { get; set; }
+
+        [Required(ErrorMessage = "Выберите пол")]
+        [Display(Name = "Пол")]
+        public string Gender { get; set; }
 
         [Required(ErrorMessage = "Выберите дату рождения")]
         [DataType(DataType.Date)]
@@ -70,6 +75,10 @@ namespace University.Models
 
         [Display(Name = "Группа")]
         public string Group { get; set; }
+
+        [Display(Name = "Факультет")]
+        public string Department { get; set; }
+
 
     }
 

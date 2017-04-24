@@ -837,3 +837,11 @@ h2, .h2 {
     padding-bottom: 5px;
     display: block;  
 }
+
+.select-default {
+    color: #999;
+}
+
+.select-elem {
+    color: #000000;
+}
