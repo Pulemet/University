@@ -51,22 +51,6 @@ function AddFriend(id) {
 }
 
 $(document).ready(function () {
-    $('#sendMessage').submit(function (event) {
-        event.preventDefault();
-        var data = $(this).serialize();
-        var url = $(this).attr('action');
-        $.post(url, data, function (responce) {
-            $('#messageInput').val('');
-            $('#formMessages').append(responce);
-            $('#buttonSendMessage').prop('disabled', true);
-            if ($('#noMessages').length > 0) {
-                $('#noMessages').remove();
-            }
-        });
-    });
-});
-
-$(document).ready(function () {
     $('#addComment').submit(function (event) {
         event.preventDefault();
         var data = $(this).serialize();
@@ -177,3 +161,11 @@ $(document).ready(function () {
         });
     });
 });
+
+function clickSendMessage(id) {
+    var url = $('#buttonOpenPageSendMessage').href;
+    $.get(url, { id: id }, function (data) {
+        $('#dialogContent').html(data);
+        $('#modDialog').modal('show');
+    });
+}

@@ -2,6 +2,6 @@
 
 <tr class="dialog-container">
     <td>
-        <a href="@Url.Action("DialogPage", "Home", new {id = Model.Id})">@Model.Members[0].SurName @Model.Members[0].FirstName</a>
+        <a href="#" onclick="OpenDialog(@Model.Id)">@Model.Members[0].SurName @Model.Members[0].FirstName</a>
     </td>
 </tr>

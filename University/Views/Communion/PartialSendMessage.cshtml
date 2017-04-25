@@ -1,7 +1,7 @@
 ﻿@model University.Models.Dto.DialogDto
 
 
-<form method="POST" id="sendMessage" action="/Home/SendMessage">
+<form method="POST" id="sendMessage" onsubmit="return SendMessage()" action="/Communion/SendMessageInDialog">
     <div>
         <input type="text" name="DialogId" value="@Model.Id" class="hide">
         <textarea class="form-element form-element-textarea" id="messageInput" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="5" placeholder="Напишите сообщение..."></textarea>

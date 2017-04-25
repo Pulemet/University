@@ -23,17 +23,25 @@
 </div>
 
 <div class="container">
+    
     <div class="col-md-6">
-        @Html.Partial("PartialViewMaterials", Model)
+        <div class="col-md-8">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.Partial("PartialViewMaterials", Model)
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col-md-6">
-        @{ string subjectId = Url.RequestContext.RouteData.Values["id"].ToString();
+        @{
+            string subjectId = Url.RequestContext.RouteData.Values["id"].ToString();
             <input type="text" name="SubjectId" id="SubjectId" value="@Int32.Parse(subjectId)" class="hide">
-            <br />
+            <br/>
             <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="7" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Добавьте описание"></textarea>
-            <br />
-            
+            <br/>
+
             <div class="form-group">
                 <select class="form-material" name="TypeLesson" id="TypeLesson">
                     <option value="Lecture"> Лекции </option>
@@ -45,7 +53,7 @@
                 <div class="col-sm-3">
                     <div class="fileUpload btn-upload">
                         <span> Прикрепить </span>
-                        <input type="file" class="upload" name="loadFile" id="loadFile" />
+                        <input type="file" class="upload" name="loadFile" id="loadFile"/>
                     </div>
                 </div>
 
@@ -57,4 +65,5 @@
             </div>
         }
     </div>
+
 </div>

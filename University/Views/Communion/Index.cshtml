@@ -9,7 +9,33 @@
 <head>
     <script type="text/javascript" src="/scripts/script.js">
     </script>
+    <script type="text/javascript" src="/scripts/communion.js">
+    </script>
     <link href="/Content/Site.css" rel="stylesheet">
+    <style>
+        .form-element-label-name {
+            font: inherit;
+            font-size: 120%;
+        }
+
+        .form-element-label-time {
+            font: inherit;
+            font-size: 90%;
+        }
+
+        .form-element-textarea {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        div {
+            word-wrap: break-word;
+        }
+
+        .aaa {
+            
+        }
+    </style>
 </head>
 
 <h2>Диалоги</h2>
@@ -19,11 +45,14 @@
     <div class="col-md-6">
         <table class="table" id="ListDialogs">
             <tbody>
-                @foreach (var dialog in Model)
-                {
-                    @Html.Partial("PartialViewDialog", dialog)
-                }
+            @foreach (var dialog in Model)
+            {
+                @Html.Partial("PartialViewDialog", dialog)
+            }
             </tbody>
         </table>
+    </div>
+    <div class="col-md-6" id="currentDialog">
+        <p>Выберите диалог или создайте новый</p>
     </div>
 </div>
