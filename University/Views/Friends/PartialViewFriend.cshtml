@@ -5,6 +5,6 @@
         <a href="/Home/UserPage/@Model.Id">@Model.SurName @Model.FirstName</a>
     </td>
     <td>
-        <a href="/Home/OpenDialog/@Model.Id" class="btn btn-success btn-sm">Написать сообщение</a>
+        <a onclick="ShowFormSendMessageD('@Model.Id', '@Model.SurName @Model.FirstName')" id="show-button" class="btn btn-success btn-sm">Написать сообщение</a>
     </td>
 </tr>

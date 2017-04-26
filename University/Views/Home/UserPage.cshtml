@@ -3,6 +3,7 @@
 
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/scripts/jquery-3.1.1.js")
+@Scripts.Render("~/scripts/jquery-ui-1.12.1.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 
 <head>
@@ -16,13 +17,14 @@
     </script>
 
     <style>
-        img {
-            display: block;
-            max-width: 230px;
-            max-height: 250px;
-            width: auto;
-            height: auto;
-        }
+        
+         img {
+             display: block;
+             max-width: 230px;
+             max-height: 250px;
+             width: auto;
+             height: auto;
+         }
 
         .block-image {
             margin-top: 30px;
@@ -41,48 +43,48 @@
         }
 
         #prompt-form {
-          display: inline-block;
-          padding: 5px 5px 5px 70px;
-          width: 500px;
-          border: 1px solid black;
-          background: white url(https://js.cx/clipart/prompt.png) no-repeat left 5px;
-          vertical-align: middle;
+            display: inline-block;
+            padding: 5px 5px 5px 70px;
+            width: 500px;
+            border: 1px solid black;
+            background: white url(https://js.cx/clipart/prompt.png) no-repeat left 5px;
+            vertical-align: middle;
         }
 
         #prompt-form-container {
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 9999;
-          display: none;
-          width: 100%;
-          height: 100%;
-          text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: none;
+            width: 100%;
+            height: 100%;
+            text-align: center;
         }
 
         #prompt-form-container:before {
-          display: inline-block;
-          height: 100%;
-          content: '';
-          vertical-align: middle;
+            display: inline-block;
+            height: 100%;
+            content: '';
+            vertical-align: middle;
         }
 
         #cover-div {
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 9000;
-          width: 100%;
-          height: 100%;
-          background-color: gray;
-          opacity: 0.3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9000;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            opacity: 0.3;
         }
 
         #prompt-form textarea[name="text"] {
-          max-width: none;
-          display: block;
-          margin: 5px;
-          width: 95%;  
+            max-width: none;
+            display: block;
+            margin: 5px;
+            width: 95%;  
         }
 
     </style>
@@ -93,7 +95,7 @@
     <div id="prompt-form-container">
         <form id="prompt-form">
             <div id="prompt-message">Новое сообщение</div>
-            <textarea name="text" type="text" oninput="LockedButton('messageInput', 'buttonSendMessage')" rows="5"></textarea>
+            <textarea name="text" type="text" rows="5"></textarea>
             <input type="submit" value="Отправить">
             <input type="button" name="cancel" value="Отмена">
         </form>

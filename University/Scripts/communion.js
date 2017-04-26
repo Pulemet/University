@@ -14,8 +14,25 @@ function SendMessage() {
         $('#messageInput').val('');
         $('#formMessages').append(responce);
         $('#buttonSendMessage').prop('disabled', true);
+        var div = document.getElementById('formMessages');
+        div.scrollTop = div.scrollHeight - div.clientHeight;
         if ($('#noMessages').length > 0) {
             $('#noMessages').remove();
         }
     });
+}
+
+function NewDialog() {
+    $("#dialogsBar").hide();
+    $("#newDialogBar").show();
+}
+
+function CreateDialog() {
+    $("#newDialogBar").hide();
+    $("#dialogsBar").show();
+}
+
+function ShowDialogs() {
+    $("#newDialogBar").hide();
+    $("#dialogsBar").show();
 }

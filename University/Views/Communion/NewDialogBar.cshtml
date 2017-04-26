@@ -1,0 +1,11 @@
+﻿@model IEnumerable<University.Models.ApplicationUser>
+
+<div id="newDialogBar" hidden>
+    <a href="#" class="btn btn-success btn-sm" onclick="CreateDialog()">Создать беседу</a>
+    <a href="#" class="btn btn-warning btn-sm" onclick="ShowDialogs()">Отменить</a>
+    <input type="text" id="NameConversation"/>
+    @foreach (var user in Model)
+    {
+        @Html.Partial("PartialViewUser", user)
+    }
+</div>

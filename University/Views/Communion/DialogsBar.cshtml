@@ -1,0 +1,17 @@
+﻿@model IEnumerable<University.Models.Dto.DialogToUsersDto>
+
+<div id="dialogsBar">
+    <table class="table" id="ListDialogs">
+        <tbody>
+            <tr>
+                <td>
+                    <a href="#" class="btn btn-success btn-sm" onclick="NewDialog()">Начать беседу</a>
+                </td>
+            </tr>
+            @foreach (var dialog in Model)
+            {
+                @Html.Partial("PartialViewDialog", dialog)
+            }
+        </tbody>
+    </table>
+</div>

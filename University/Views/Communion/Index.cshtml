@@ -1,4 +1,6 @@
-﻿@model IEnumerable<University.Models.Dto.DialogToUsersDto>
+﻿@using System.Web.Mvc.Html
+@using University.Models
+@model IEnumerable<University.Models.Dto.DialogToUsersDto>
 @{
     ViewBag.Title = "Index";
 }
@@ -40,14 +42,8 @@
 
 <div class="container">
     <div class="col-md-6">
-        <table class="table" id="ListDialogs">
-            <tbody>
-            @foreach (var dialog in Model)
-            {
-                @Html.Partial("PartialViewDialog", dialog)
-            }
-            </tbody>
-        </table>
+        @Html.Partial("DialogsBar", Model)
+        @Html.Partial("NewDialogBar", (List<ApplicationUser>)ViewData["Friends"])
     </div>
     <div class="col-md-6" id="currentDialog">
         <p>Выберите диалог или создайте новый</p>

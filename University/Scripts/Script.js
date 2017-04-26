@@ -232,6 +232,11 @@ function showPrompt(text, callback) {
     form.elements.text.focus();
 }
 
+function ShowFormSendMessageD(id, name) {
+    userName = name;
+    ShowFormSendMessage(id);
+}
+
 function ShowFormSendMessage (id) {
     showPrompt(id, function (value) {
         if (value !== null) {

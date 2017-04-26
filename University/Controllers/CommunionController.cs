@@ -21,6 +21,12 @@ namespace University.Controllers
             var listDialogId = db.UserToDialogs.Where(d => d.UserId == currentUserId).Select(d=>d.DialogId).ToList();
             List<DialogToUsersDto> dialogs = new List<DialogToUsersDto>();
 
+            var listRelationsUsers = db.Friends.Where(t => t.UserOneId == currentUserId || t.UserTwoId == currentUserId).Select(t => t);
+            var listFriends = db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == currentUserId ? f.UserTwoId : f.UserOneId, (u, f) => u).
+                                       OrderBy(u => u.SurName).ToList();
+
+            ViewData["Friends"] = listFriends;
+
             foreach (var dialogId in listDialogId)
             {
                 var listUserId = db.UserToDialogs.Where(u => u.DialogId == dialogId).Select(u => u.UserId).ToList();

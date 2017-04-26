@@ -403,6 +403,9 @@
     <Content Include="Views\Home\PartialViewSaidBar.cshtml" />
     <Content Include="Views\Manage\GetSubjects.cshtml" />
     <Content Include="Views\Communion\Dialog.cshtml" />
+    <Content Include="Views\Communion\DialogsBar.cshtml" />
+    <Content Include="Views\Communion\NewDialogBar.cshtml" />
+    <Content Include="Views\Communion\PartialViewUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
