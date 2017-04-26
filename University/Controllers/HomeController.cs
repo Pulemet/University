@@ -89,12 +89,6 @@ namespace University.Controllers
             return View();
         }
 
-        public ActionResult PopUpSendMessage(string id)
-        {
-            ApplicationUser user = db.Users.Find(id);
-            return PartialView(user);
-        }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -41,13 +41,6 @@ namespace University.Controllers
             return View(dialogs);
         }
 
-        // JSON результат (ПРИМЕР)
-        //[HttpGet]
-        //public JsonResult GetDialog(int id)
-        //{
-        //    return Json(DialogJson(id), JsonRequestBehavior.AllowGet);
-        //}
-
         [HttpGet]
         public ActionResult GetDialog(int id)
         {
@@ -152,3 +145,10 @@ namespace University.Controllers
         }
     }
 }
+
+// JSON результат (ПРИМЕР)
+//[HttpGet]
+//public JsonResult GetResult()
+//{
+//    return Json(Объект, JsonRequestBehavior.AllowGet);
+//}

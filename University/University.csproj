@@ -375,7 +375,6 @@
     <Content Include="Views\FindUser\Index.cshtml" />
     <Content Include="Views\FindUser\PartialViewUser.cshtml" />
     <Content Include="Views\Communion\PartialSendMessage.cshtml" />
-    <Content Include="Views\Home\PopUpSendMessage.cshtml" />
     <Content Include="Views\Account\GetSpecialities.cshtml" />
     <Content Include="Views\Account\GetGroups.cshtml" />
     <Content Include="Views\Communion\Index.cshtml" />
