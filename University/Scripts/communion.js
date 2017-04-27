@@ -3,6 +3,7 @@
         { id: id },
         function(data) {
             $('#currentDialog').replaceWith(data);
+            ScrollingDialog();
         });
 }
 
@@ -13,6 +14,7 @@ function SendMessage() {
     $.post(url, data, function (responce) {
         $('#messageInput').val('');
         $('#formMessages').append(responce);
+        ScrollingDialog();
         $('#buttonSendMessage').prop('disabled', true);
         var div = document.getElementById('formMessages');
         div.scrollTop = div.scrollHeight - div.clientHeight;
@@ -20,6 +22,11 @@ function SendMessage() {
             $('#noMessages').remove();
         }
     });
+}
+
+function ScrollingDialog() {
+    var div = document.getElementById('formMessages');
+    div.scrollTop = div.scrollHeight - div.clientHeight;
 }
 
 function NewDialog() {

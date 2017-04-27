@@ -17,20 +17,10 @@ namespace University.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: FindUser
         public ActionResult Index()
-        {
-            const string strRoleAdmin = "admin";
+        {  
             string userId = User.Identity.GetUserId();
-            var listRelationsUsers = db.Friends.Where(t => t.UserOneId == userId || t.UserTwoId == userId).Select(t => t);
-            var listFriends = db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == userId ? f.UserTwoId : f.UserOneId, (u, f) => u);
 
-            var role = db.Roles.Where(r => r.Name == strRoleAdmin).Select(r => r).FirstOrDefault();
-            var users = db.Users.ToList().Where(t=>t.Id != userId).
-                                          Where(m => !m.Roles.Select(r => r.RoleId).Contains(role.Id)).
-                                          Select(m => m);
-
-            // убрать из списка ожидающих активацию аккаунта и друзей
-            users = (from user in users where !(from a in db.AwaitingUsers.ToList() select a.UserId).Contains(user.Id) select user);
-            users = users.Except(listFriends).OrderBy(u => u.SurName);
+            var users = GetUsers(userId);
             List<string> userNames = (from u in users select u.SurName + " " + u.FirstName).Distinct().ToList();
             ViewData["UserNames"] = userNames;
             return View(users);
@@ -62,11 +52,29 @@ namespace University.Controllers
         [HttpGet]
         public ActionResult SearchUser(string name)
         {
-            List<ApplicationUser> users = new List<ApplicationUser>();
+            string userId = User.Identity.GetUserId();
             string surName = name.Split(' ')[0];
             string firstName = name.Split(' ')[1];
-            users = db.Users.Where(u => u.FirstName == firstName && u.SurName == surName).Select(u => u).ToList();
+            var allUsers = GetUsers(userId);
+            var users = allUsers.Where(u => u.FirstName == firstName && u.SurName == surName).Select(u => u);
             return PartialView("PartialViewUsers", users);
+        }
+
+        private IEnumerable<ApplicationUser> GetUsers(string id)
+        {
+            const string strRoleAdmin = "admin";
+            var listRelationsUsers = db.Friends.Where(t => t.UserOneId == id || t.UserTwoId == id).Select(t => t);
+            var listFriends = db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == id ? f.UserTwoId : f.UserOneId, (u, f) => u);
+
+            var role = db.Roles.Where(r => r.Name == strRoleAdmin).Select(r => r).FirstOrDefault();
+            var users = db.Users.ToList().Where(t => t.Id != id).
+                                          Where(m => !m.Roles.Select(r => r.RoleId).Contains(role.Id)).
+                                          Select(m => m);
+
+            // убрать из списка ожидающих активацию аккаунта и друзей
+            users = (from user in users where !(from a in db.AwaitingUsers.ToList() select a.UserId).Contains(user.Id) select user);
+            users = users.Except(listFriends).OrderBy(u => u.SurName);
+            return users;
         }
     }
 }
