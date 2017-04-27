@@ -5,7 +5,6 @@
 body {
     margin: 0;
     padding: 0;
-    background: url(../Files/icons/bg/15.jpg) center center fixed;
     -moz-background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -13,6 +12,8 @@ body {
     position: relative;
     padding-bottom: 6rem;
     min-height: 100%;
+    width: 100%;
+    background: linear-gradient(141deg, #b0e0e6 0%, #87ceeb 51%, #f5fffa 75%) center center fixed;
     font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -744,6 +745,16 @@ hr {
     color: azure;
     margin-left: 0;
     margin-right: 0;
+}
+
+#form-line{
+    width: 10%;
+    color: #fff;
+    margin: 0 auto;
+    max-width: 330px;
+    padding: inherit;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* Button for file upload. */

@@ -8,46 +8,59 @@
 
 @Styles.Render("~/Content/css")
 
-<div class="login-form-container">
-    <section id="loginForm">
-        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form" }))
-            {
-            @Html.AntiForgeryToken()
-            <h3> @ViewBag.Title </h3>
-            <hr />
-            <div class="col-md-8">
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
-                    </div>
-                </div>
+<head>
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
+</head>
+
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Войти в личный кабинет</h1>
+                <hr id="form-line" />
             </div>
-
-            <form class="login-form">
-                <div class="form-group">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "label-login", placeholder = "E-mail" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="main-login main-center">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="cols-sm-10">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
                 </div>
-
                 <div class="form-group">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "label-login", placeholder = "Пароль" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="row form-group">
-                    <div class="col-sm-4">
-                        <input type="submit" value="Войти" class="login-button" />
+                    @Html.Label("E-mail", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                            </span>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", name = "name", id = "name", placeholder = "Ваш e-mail" })
+                        </div>
                     </div>
-
-                    <div class="col-sm-4">
+                </div>
+                <div class="form-group">
+                    @Html.Label("Пароль", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                            </span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", name = "password", id = "password", placeholder = "Введите пароль" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
                         <label class="checkbox" id="remember-me">
-                            <input type="checkbox" value="remember-me"> Запомнить меня
-                        </label>
+                            <input type="checkbox" value="remember-me">Запомнить меня</label>
                     </div>
                 </div>
-            </form>
-        }
-    </section>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Войти"/>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 
 @section Scripts {

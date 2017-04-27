@@ -12,7 +12,7 @@
 <head>
     <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
     <script type="text/javascript" src="/scripts/account.js">
-    
+
     </script>
 
     <script>
@@ -31,7 +31,7 @@
             max-height: 250px;
             width: auto;
             height: auto;
-        } 
+        }
     </style>
 </head>
 
@@ -41,7 +41,7 @@
         <div class="panel-heading">
             <div class="panel-title text-center">
                 <h1 class="title">Регистрация</h1>
-                <hr />
+                <hr id="form-line"/>
             </div>
         </div>
         <div class="main-login main-center">
@@ -62,166 +62,164 @@
                             }, "Value", "Text");
 
                 @Html.AntiForgeryToken()
-
                 <div class="cols-sm-10">
                     @Html.ValidationSummary("", new { @class = "text-danger" })
                 </div>
 
+                <div class="form-group">
+                    @Html.Label("E-mail", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                            </span>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", name = "name", id = "name", placeholder = "Ваш e-mail" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Пароль", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                            </span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", name = "password", id = "password", placeholder = "Введите пароль" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Повторите пароль", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                            </span>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", name = "confirm", id = "confirm", placeholder = "Повторите пароль" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Имя", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa" aria-hidden="true"></i>
+                            </span>
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", name = "name", id = "name", placeholder = "Введите имя" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Фамилия", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa" aria-hidden="true"></i>
+                            </span>
+                            @Html.TextBoxFor(m => m.SurName, new { @class = "form-control", name = "surname", id = "surname", placeholder = "Введите фамилию" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Отчество", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa" aria-hidden="true"></i>
+                            </span>
+                            @Html.TextBoxFor(m => m.PatronymicName, new { @class = "form-control", name = "patronymic", id = "patronymic", placeholder = "Введите отчество" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Пол", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-genderless fa" aria-hidden="true"></i>
+                            </span>
+                            @Html.DropDownListFor(m => m.Gender, genders, "Выберите пол", new { @class = "form-control select-default", id = "gender", name = "gender", onchange = "ChangedColorSelect('gender')" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Дата рождения", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar fa" aria-hidden="true"></i>
+                            </span>
+                            @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "form-control date-input select-default", id = "date", name = "date", placeholder = "Введите дату рождения" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Роль", new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-male fa" aria-hidden="true"></i>
+                            </span>
+                            @Html.DropDownListFor(m => m.Role, roles, "Выберите роль", new { @class = "form-control select-default", id = "role", name = "role" })
+                        </div>
+                    </div>
+                </div>
+                <div id="teacherParams" hidden>
                     <div class="form-group">
-                        @Html.Label("E-mail", new { @class = "cols-sm-2 control-label" })
+                        @Html.Label("Кафедра", new { @class = "cols-sm-2 control-label" })
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                                    <i class="fa fa-building fa" aria-hidden="true"></i>
                                 </span>
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", name = "name", id = "name", placeholder = "Ваш e-mail" })
+                                @Html.DropDownListFor(m => m.Department, ViewData["Departments"] as SelectList, "Выберите кафедру", new { @class = "form-control select-default", id = "department", name = "department", required = "true", data_val_required = "Выберите кафедру", data_val = "true", onchange = "ChangedColorSelect('department')" })
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="studentParams" hidden>
                     <div class="form-group">
-                        @Html.Label("Пароль", new { @class = "cols-sm-2 control-label" })
+                        @Html.Label("Факультет", new { @class = "cols-sm-2 control-label" })
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                    <i class="fa fa-list fa" aria-hidden="true"></i>
                                 </span>
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", name = "password", id = "password", placeholder = "Введите пароль" })
+                                @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "Выберите факультет", new { @class = "form-control select-default", id = "faculty", name = "faculty", required = "true", data_val_required = "Выберите факультет", data_val = "true" })
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.Label("Повторите пароль", new { @class = "cols-sm-2 control-label" })
+                        @Html.Label("Специальность", new { @class = "cols-sm-2 control-label" })
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                    <i class="fa fa-th fa" aria-hidden="true"></i>
                                 </span>
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", name = "confirm", id = "confirm", placeholder = "Повторите пароль" })
+                                @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "Выберите специальность", new { @class = "form-control select-default", id = "speciality", name = "speciality", required = "true", data_val_required = "Выберите специальность", data_val = "true" })
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.Label("Имя", new { @class = "cols-sm-2 control-label" })
+                        @Html.Label("Группа", new { @class = "cols-sm-2 control-label" })
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                                    <i class="fa fa-tag fa" aria-hidden="true"></i>
                                 </span>
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", name = "name", id = "name", placeholder = "Введите имя" })
+                                @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "Выберите группу", new { @class = "form-control select-default", id = "group", name = "group", required = "true", data_val_required = "Выберите группу", data_val = "true" })
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.Label("Фамилия", new { @class = "cols-sm-2 control-label" })
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-user fa" aria-hidden="true"></i>
-                                </span>
-                                @Html.TextBoxFor(m => m.SurName, new { @class = "form-control", name = "surname", id = "surname", placeholder = "Введите фамилию" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Отчество", new { @class = "cols-sm-2 control-label" })
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-user fa" aria-hidden="true"></i>
-                                </span>
-                                @Html.TextBoxFor(m => m.PatronymicName, new { @class = "form-control", name = "patronymic", id = "patronymic", placeholder = "Введите отчество" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Пол", new { @class = "cols-sm-2 control-label" })
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-genderless fa" aria-hidden="true"></i>
-                                </span>
-                                @Html.DropDownListFor(m => m.Gender, genders, "Выберите пол", new { @class = "form-control select-default", id = "gender", name = "gender", onchange = "ChangedColorSelect('gender')" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Дата рождения", new { @class = "cols-sm-2 control-label" })
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-calendar fa" aria-hidden="true"></i>
-                                </span>
-                                @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "form-control date-input select-default", id = "date", name = "date", placeholder = "Введите дату рождения" } })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Роль", new { @class = "cols-sm-2 control-label" })
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-male fa" aria-hidden="true"></i>
-                                </span>
-                                @Html.DropDownListFor(m => m.Role, roles, "Выберите роль", new { @class = "form-control select-default", id = "role", name = "role" })
-                            </div>
-                        </div>
-                    </div>
-                    <div id="teacherParams" hidden>
-                        <div class="form-group">
-                            @Html.Label("Кафедра", new { @class = "cols-sm-2 control-label" })
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-building fa" aria-hidden="true"></i>
-                                    </span>
-                                    @Html.DropDownListFor(m => m.Department, ViewData["Departments"] as SelectList, "Выберите кафедру", new { @class = "form-control select-default", id = "department", name = "department", required = "true", data_val_required = "Выберите кафедру", data_val = "true", onchange = "ChangedColorSelect('department')" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="studentParams" hidden>
-                        <div class="form-group">
-                            @Html.Label("Факультет", new { @class = "cols-sm-2 control-label" })
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-list fa" aria-hidden="true"></i>
-                                    </span>
-                                    @Html.DropDownListFor(m => m.Faculty, ViewData["Faculties"] as SelectList, "Выберите факультет", new { @class = "form-control select-default", id = "faculty", name = "faculty", required = "true", data_val_required = "Выберите факультет", data_val = "true" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.Label("Специальность", new { @class = "cols-sm-2 control-label" })
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-th fa" aria-hidden="true"></i>
-                                    </span>
-                                    @Html.DropDownListFor(m => m.Speciality, ViewData["Specialities"] as SelectList, "Выберите специальность", new { @class = "form-control select-default", id = "speciality", name = "speciality", required = "true", data_val_required = "Выберите специальность", data_val = "true" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.Label("Группа", new { @class = "cols-sm-2 control-label" })
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-tag fa" aria-hidden="true"></i>
-                                    </span>
-                                    @Html.DropDownListFor(m => m.Group, ViewData["Groups"] as SelectList, "Выберите группу", new { @class = "form-control select-default", id = "group", name = "group", required = "true", data_val_required = "Выберите группу", data_val = "true" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Регистрация" />
-                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Регистрация" />
+                </div>
             }
         </div>
     </div>
-
-
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -8,31 +8,31 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <header role="banner">
-        <div id="cd-logo">
-            <a href="~/">
-                <img src="~/Files/icons/logo.png" alt="Logo" />
-            </a>
-        </div>
-
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Study With Pleasure</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Предметы", "Index", "Subjects")</li>
+                        <li>@Html.ActionLink("Задать вопрос", "NewQuestion", "Questions")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                </div>
             </div>
-            <ul class="nav nav-pills">
-                <li>@Html.ActionLink("Предметы", "Index", "Subjects")</li>
-                <li>@Html.ActionLink("Задать вопрос", "NewQuestion", "Questions")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                @Html.Partial("_LoginPartial")
-            </ul>
         </div>
-    </header>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
+        </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <footer>
