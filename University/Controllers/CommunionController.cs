@@ -59,8 +59,8 @@ namespace University.Controllers
             dialogDto.Members = db.Users.Join(dialogUsers, u => u.Id, d => d.UserId, (u, d) => u).ToList();
 
             dialogDto.Name = dialog.IsConversation ? dialog.Name : (dialogDto.Members.Count == 2 ? (dialogDto.Members[0].Id == User.Identity.GetUserId()
-                                                                    ? dialogDto.Members[0].SurName + dialogDto.Members[0].FirstName
-                                                                    : dialogDto.Members[1].SurName + dialogDto.Members[1].FirstName) : "Undefined" );
+                                                                    ? dialogDto.Members[1].SurName + " " + dialogDto.Members[1].FirstName
+                                                                    : dialogDto.Members[0].SurName + " " + dialogDto.Members[0].FirstName) : "Undefined" );
 
             var messagesInDialog = db.Messages.Where(m => m.DialogId == id).Select(m => m).ToList();
             if (messagesInDialog.Count != 0)
@@ -104,13 +104,13 @@ namespace University.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-            var listDialogs1 = db.UserToDialogs.Where(u => u.UserId == userId).Select(u => u).ToList();
-            var listDialogs2 = db.UserToDialogs.Where(u => u.UserId == id).Select(u => u).ToList();
+            var listDialogs1 = db.UserToDialogs.Where(u => u.UserId == userId).Select(u => u);
+            var listDialogs2 = db.UserToDialogs.Where(u => u.UserId == id).Select(u => u);
 
             var dialogs = listDialogs1.Join(listDialogs2, u => u.DialogId, d => d.DialogId, (u, d) => u);
 
             var dialog = db.Dialogs.Join(dialogs, d1 => d1.Id, d2 => d2.DialogId, (d1, d2) => d1)
-                                   .FirstOrDefault(d => !d.IsConversation);
+                                    .FirstOrDefault(d => d.IsConversation == false);
 
             int dialogId = dialog != null ? dialog.Id : 0;
 

@@ -2,7 +2,7 @@
 
 <tr class="dialog-container">
     <td>
-        if(@Model.IsConversation)
+        @if(Model.IsConversation)
         {
             <a href="#" onclick="OpenDialog(@Model.Id)">@Model.Name</a>
         }
