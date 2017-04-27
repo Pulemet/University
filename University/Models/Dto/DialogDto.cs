@@ -12,15 +12,17 @@ namespace University.Models.Dto
 
         public string Name { get; set; }
 
+        public bool IsConversation { get; set; }
+
         public List<MessageDto> Messages { get; set; }
 
-        public List<ApplicationUser> Users { get; set; }
+        public List<ApplicationUser> Members { get; set; }
 
         public DialogDto()
         {
             Messages = new List<MessageDto>();
 
-            Users = new List<ApplicationUser>();
+            Members = new List<ApplicationUser>();
         }
     }
 }

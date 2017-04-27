@@ -216,7 +216,6 @@
     <Compile Include="Models\Dto\AnswerDto.cs" />
     <Compile Include="Models\Dto\CommentDto.cs" />
     <Compile Include="Models\Dto\DialogDto.cs" />
-    <Compile Include="Models\Dto\DialogToUsersDto.cs" />
     <Compile Include="Models\Dto\Infrastructure.cs" />
     <Compile Include="Models\Dto\MaterialDto.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
@@ -242,7 +241,6 @@
     <Compile Include="Models\Tables\Subject.cs" />
     <Compile Include="Models\Tables\TeacherToSubject.cs" />
     <Compile Include="Models\Tables\UserToDialog.cs" />
-    <Compile Include="Models\Tables\UserToConversation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
