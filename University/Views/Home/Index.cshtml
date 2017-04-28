@@ -44,10 +44,6 @@
                                         <td>Дата рождения</td>
                                         <td>@Model.BirthDate.ToLongDateString()</td>
                                     </tr>
-                                    <tr>
-                                        <td>Роль</td>
-                                        <td>@Model.UserRole</td>
-                                    </tr>
                                     @if (Model.UserRole == UserRoles.Student)
                                     {
                                         <tr>
