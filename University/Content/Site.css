@@ -134,11 +134,11 @@ tr {
 .circular-square {
     width: 150px;
     height: 150px;
-    -webkit-border-radius: 150px;
-    -moz-border-radius: 150px;
-    -ms-border-radius: 150px;
-    -o-border-radius: 150px;
     border-radius: 150px;
+}
+
+.panel-title {
+    font-size: 18px;
 }
 
 .col-sm-4 {
