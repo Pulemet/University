@@ -141,6 +141,12 @@ tr {
     font-size: 18px;
 }
 
+.nav-sidebar {
+    width: 100%;
+    padding: 8px 0;
+    border-right: 1px solid #ddd;
+}
+
 .col-sm-4 {
     padding-right: 90px;
 }
