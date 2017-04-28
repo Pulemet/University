@@ -18,7 +18,7 @@ body {
 }
 
 .main {
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 40px;
 }
 
@@ -54,7 +54,7 @@ body {
 
 .navbar {
     min-height: 55px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .navbar-inverse .navbar-brand {
@@ -107,6 +107,16 @@ body {
     width: 1px !important;
 }
 
+.main-footer {
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+}
+
+.title-footer {
+    margin-top: 32px;
+}
+
 .col-sm-4 {
     padding-right: 90px;
 }
@@ -146,8 +156,10 @@ body {
         border-color: #255625;
     }
 
-p #cd-footer {
-    text-align: center;
+#footer-style {
+    margin: 0 0 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 footer {
@@ -156,9 +168,13 @@ footer {
     bottom: 0;
     width: 100%;
     padding: 1rem;
-    background-color: transparent;
     text-align: center;
-    border-top: 1px solid azure;
+    /* border-top: 1px solid azure; */
+    background-color: #222;
+    border-color: #080808;
+    min-height: 55px;
+    border-radius: 4px;
+    color: #9d9d9d;
 }
 
 @media only screen and (min-width: 1170px) {
