@@ -52,6 +52,33 @@ body {
     margin-top: 5px;
 }
 
+.navbar {
+    min-height: 55px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: lightcyan;
+}
+
+.navbar-brand { 
+    font-family: 'Rouge Script', cursive; 
+    font-size: 16px; 
+    font-weight: bold; 
+    text-shadow: 1px 1px 2px #082b34; 
+}
+
+.nav li:hover:nth-child(1), .nav li.active:nth-child(1) {
+    border-bottom: #C4E17F 3px solid;
+}
+
+.nav li:hover:nth-child(2), .nav li.active:nth-child(2) {
+    border-bottom: #db4d4d 3px solid;
+}
+
+.nav li:hover:nth-child(3), .nav li.active:nth-child(3) {
+    border-bottom: #fbf994 3px solid;
+}
+
 .col-sm-4 {
     padding-right: 90px;
 }

@@ -18,11 +18,7 @@
 @font-face {
     font-family: 'Uni-Sans-Thin-Italic';
 
-    src: url('/fonts/uni-sans/Uni-Sans-Thin-Italic.eot');
-    src: url('/fonts/uni-sans/Uni-Sans-Thin-Italic.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/uni-sans/Uni-Sans-Thin-Italic.woff') format('woff'),
-    url('/fonts/uni-sans/Uni-Sans-Thin-Italic.ttf') format('truetype'),
-    url('/fonts/uni-sans/Uni-Sans-Thin-Italic.svg#Uni-Sans-Thin-Italic') format('svg');
+    src: url('/fonts/New Walt Disney UI.ttf');
 }
 
 @font-face {
