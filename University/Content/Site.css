@@ -61,11 +61,11 @@ body {
     color: lightcyan;
 }
 
-.navbar-brand { 
-    font-family: 'Rouge Script', cursive; 
-    font-size: 16px; 
-    font-weight: bold; 
-    text-shadow: 1px 1px 2px #082b34; 
+.navbar-brand {
+    font-family: 'Rouge Script', cursive;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #082b34;
 }
 
 .nav li:hover:nth-child(1), .nav li.active:nth-child(1) {
@@ -88,12 +88,12 @@ body {
     position: absolute;
 }
 
-[type="checkbox"]:not(:checked) + label, [type="checkbox"]:checked + label, [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
-    position: relative;
-    padding-left: 25px;
-    padding-top: 1px;
-    cursor: pointer;
-}
+    [type="checkbox"]:not(:checked) + label, [type="checkbox"]:checked + label, [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+        position: relative;
+        padding-left: 25px;
+        padding-top: 1px;
+        cursor: pointer;
+    }
 
 /* Message form. */
 .select2-hidden-accessible {
@@ -115,6 +115,30 @@ body {
 
 .title-footer {
     margin-top: 32px;
+}
+
+.toppad {
+    margin-top: 20px;
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.circular-square {
+    width: 150px;
+    height: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    -ms-border-radius: 150px;
+    -o-border-radius: 150px;
+    border-radius: 150px;
 }
 
 .col-sm-4 {
@@ -376,14 +400,14 @@ header[role=banner] {
         transform: scale(0.8);
     }
 
-        header[role=banner] #cd-logo img {
-            display: block;
-            width: 100px;
-            height: 60px;
-            margin-top: 5px;
-            margin-left: 130px;
-            margin-right: 50px;
-        }
+    header[role=banner] #cd-logo img {
+        display: block;
+        width: 100px;
+        height: 60px;
+        margin-top: 5px;
+        margin-left: 130px;
+        margin-right: 50px;
+    }
 
     header[role=banner]::after {
         /* clearfix */
@@ -819,7 +843,7 @@ hr {
     margin-right: 0;
 }
 
-#form-line{
+#form-line {
     width: 10%;
     color: #fff;
     margin: 0 auto;
@@ -858,12 +882,12 @@ h2, .h2 {
     margin-left: 5px;
 }
 
-#block-search{
+#block-search {
     width: 409px;
     height: 33px;
 }
 
-#input-search{
+#input-search {
     max-width: none;
     height: 33px;
     width: 355px;
@@ -872,11 +896,11 @@ h2, .h2 {
     padding-right: 5px;
 }
 
-#input-search:focus{
-    border: 1px solid #75D9FF;
-}
+    #input-search:focus {
+        border: 1px solid #75D9FF;
+    }
 
-#form-search{
+#form-search {
     background: url(/Files/icons/button-search-norm.png) no-repeat;
     width: 54px;
     height: 33px;
@@ -885,59 +909,63 @@ h2, .h2 {
     position: absolute;
 }
 
-#form-search:hover{
-    background: url(/Files/icons/button-search-hover.png) no-repeat;
-    width: 54px;
-    height: 33px;
-}
+    #form-search:hover {
+        background: url(/Files/icons/button-search-hover.png) no-repeat;
+        width: 54px;
+        height: 33px;
+    }
 /* Результат поиска */
-#block-search-result{
+#block-search-result {
     border-left: 1px solid #E1DFDD;
     border-right: 1px solid #E1DFDD;
     border-bottom: 1px solid #E1DFDD;
     width: 355px;
-    height:  auto;
+    height: auto;
     background-color: white;
     position: absolute;
     z-index: 9999;
     display: none;
 }
-        
+
 #list-search-result {
     margin-bottom: 0px;
     padding-left: 0px;
 }
 
-#list-search-result > li{ 
-    min-height: 28px;
-    height: auto;
-    padding-left: 10px;
-}
+    #list-search-result > li {
+        min-height: 28px;
+        height: auto;
+        padding-left: 10px;
+    }
 
-#list-search-result > li:hover {
-    background-color: #E1DFDD;
-}
-.block-title-price{
+        #list-search-result > li:hover {
+            background-color: #E1DFDD;
+        }
+
+.block-title-price {
     width: 325px;
     text-align: left;
 }
-.block-title-price > a{
-    font: 15px sans-serif;
-    color: black;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    display: block;  
-}
-.block-title-price > a:hover{
-    text-decoration: none;  
-}
-.block-title-price > p{
-    font: 15px sans-serif;
-    color: black;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    display: block;  
-}
+
+    .block-title-price > a {
+        font: 15px sans-serif;
+        color: black;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        display: block;
+    }
+
+        .block-title-price > a:hover {
+            text-decoration: none;
+        }
+
+    .block-title-price > p {
+        font: 15px sans-serif;
+        color: black;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        display: block;
+    }
 
 .select-default {
     color: #999;

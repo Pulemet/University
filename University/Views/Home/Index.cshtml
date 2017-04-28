@@ -8,29 +8,6 @@
 
 <head>
     <style>
-        img {
-            display: block;
-            max-width: 230px;
-            max-height: 250px;
-            width: auto;
-            height: auto;
-        }
-        
-        .block-image {
-            margin-top: 30px;
-        }
-
-        .block-said-bar {
-            margin-top: 15px;
-        }
-
-        .control-label, .labeled {
-            color: #494949;
-        }
-
-        .block-name {
-            padding-left: 30px;
-        }
     </style>
 </head>
 
@@ -40,57 +17,75 @@
         @Html.Partial("PartialViewSaidBar")
     </div>
 
-    <div class="col-md-3 block-image" float="right">
-        <img class="image" src="@Model.Photo">
-    </div>
-
-    <div class="col-md-4">
-        <div class="block-name">
-            <h3>@Model.SurName @Model.PatronymicName @Model.FirstName</h3>
-        </div>
-        <br/>
-        <div class="form-group col-md-12">
-            @Html.Label("Дата рождения", new {@class = "col-md-6 control-label"})
-            <div class="col-md-6 labeled">@Model.BirthDate.ToLongDateString()</div>
-        </div>
-
-        @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский";}
-        <div class="form-group col-md-12">
-            @Html.Label("Пол", new {@class = "col-md-6 control-label"})
-            <div class="col-md-6 labeled">@gender</div>
-        </div>
-
-        @if (Model.UserRole == UserRoles.Student)
-        {
-            <div class="form-group col-md-12">
-                @Html.Label("Группа", new {@class = "col-md-6 control-label"})
-                <div class="col-md-6 labeled">@Model.Group</div>
-            </div>
-            <div class="form-group col-md-12">
-                @Html.Label("Специальность", new {@class = "col-md-6 control-label"})
-                <div class="col-md-6 labeled">@Model.Speciality</div>
-            </div>
-
-            <div class="form-group col-md-12">
-                @Html.Label("Факультет", new {@class = "col-md-6 control-label"})
-                <div class="col-md-6 labeled">@Model.Faculty</div>
-            </div>
-        }
-        else
-        {
-            if (Model.UserRole == UserRoles.Admin)
-            {
-                <div class="form-group col-md-12">
-                    @Html.Label("Администратор", new { @class = "col-md-12 control-label", align = "center" })
+    <div class="row">
+        <div class="col-xs-12 col-md-6 toppad">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Model.SurName @Model.PatronymicName @Model.FirstName</h3>
                 </div>
-            }
-            else
-            {
-                <div class="form-group col-md-12">
-                    @Html.Label("Преподаватель кафедры", new { @class = "col-md-6 control-label" })
-                    <div class="col-md-6 labeled">@Model.Department</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4" align="center">
+                            <img alt="Фото" src="@Model.Photo" class="circular-square">
+                        </div>
+                        <div class="col-md-8 col-lg-8">
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <tr>
+                                        <td>E-mail</td>
+                                        <td>@Model.Email</td>
+                                    </tr>
+                                    <tr>
+                                        @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский";}
+                                        <td>Пол</td>
+                                        <td>@gender</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Дата рождения</td>
+                                        <td>@Model.BirthDate.ToLongDateString()</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Роль</td>
+                                        <td>@Model.UserRole</td>
+                                    </tr>
+                                    @if (Model.UserRole == UserRoles.Student)
+                                    {
+                                        <tr>
+                                            <td>Факультет</td>
+                                            <td>@Model.Faculty</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Специальность</td>
+                                            <td>@Model.Speciality</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Группа</td>
+                                            <td>@Model.Group</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        if (Model.UserRole == UserRoles.Admin)
+                                        {
+                                            <tr>
+                                                <td>Роль</td>
+                                                <td>Администратор</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>Преподаватель кафедры</td>
+                                                <td>@Model.Department</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            }
-        }
+            </div>
+        </div>
     </div>
 </div>
