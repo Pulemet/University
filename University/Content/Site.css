@@ -18,7 +18,7 @@ body {
 }
 
 .main {
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 40px;
 }
 
@@ -54,6 +54,7 @@ body {
 
 .navbar {
     min-height: 55px;
+    margin-bottom: 0px;
 }
 
 .navbar-inverse .navbar-brand {
@@ -77,6 +78,33 @@ body {
 
 .nav li:hover:nth-child(3), .nav li.active:nth-child(3) {
     border-bottom: #fbf994 3px solid;
+}
+
+.login-group-checkbox {
+    padding: 5px 0;
+}
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: absolute;
+}
+
+[type="checkbox"]:not(:checked) + label, [type="checkbox"]:checked + label, [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+    position: relative;
+    padding-left: 25px;
+    padding-top: 1px;
+    cursor: pointer;
+}
+
+/* Message form. */
+.select2-hidden-accessible {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
 }
 
 .col-sm-4 {
