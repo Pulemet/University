@@ -149,7 +149,7 @@
             <a onclick="ShowFormSendMessage('@Model.Id')" id="show-button" class="btn btn-success btn-sm">Написать сообщение</a>
             @if (!(bool)ViewData["IsFriend"])
             {
-                <button type="submit" class="btn btn-danger btn-sm" id="buttonAddFriend" onclick="AddFriend('@Model.Id')">Добавить в друзья</button>
+                <button type="submit" class="btn btn-danger btn-sm" id="buttonAddFriend" onclick="AddFriend('@Model.Id', 'buttonAddFriend')">Добавить в друзья</button>
             }            
         </p>
 

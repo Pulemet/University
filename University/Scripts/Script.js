@@ -33,20 +33,10 @@
         });
 });
 
-$(function () {
-    $("#ListUsers").on("click", ".js-add-friend-button", function () {
-        var data = $(this).attr("id");
-        $.post("/FindUser/AddFriend", { id: data }, function () {
-            $('#' + data).text("Добавлен");
-            $('#' + data).prop('disabled', true);
-        });
-    });
-});
-
-function AddFriend(id) {
+function AddFriend(id, buttonId) {
     $.post("/FindUser/AddFriend", { id: id }, function () {
-        $("#buttonAddFriend").text("Добавлен");
-        $("#buttonAddFriend").prop('disabled', true);
+        $("#" + buttonId).text("Добавлен");
+        $("#" + buttonId).prop('disabled', true);
     });
 }
 

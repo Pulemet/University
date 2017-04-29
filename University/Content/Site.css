@@ -13,7 +13,7 @@ body {
     padding-bottom: 6rem;
     min-height: 100%;
     width: 100%;
-    background: linear-gradient(141deg, #b0e0e6 0%, #87ceeb 51%, #f5fffa 75%) center center fixed;
+    background: linear-gradient(141deg, #b0e0e6 0%, #87ceeb 51%, #2e6da4 75%) center center fixed;
     font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -132,6 +132,12 @@ tr {
 }
 
 .circular-square {
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+}
+
+.circular-square-users {
     width: 150px;
     height: 150px;
     border-radius: 150px;
@@ -153,8 +159,22 @@ tr {
     text-shadow: 1px 1px 1px #2e6da4;
 }
 
-.col-sm-4 {
-    padding-right: 90px;
+.bs-callout {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #eee;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px 1px 1px 5px;
+    margin-bottom: 5px;
+    padding: 20px;
+}
+
+.bs-callout-danger {
+    border-left-color: rgb(24, 75, 142);
 }
 
 /* 'Signup' button. */
