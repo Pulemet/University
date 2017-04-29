@@ -35,20 +35,35 @@ function NewDialog() {
 }
 
 function CreateDialog() {
-    $("#newDialogBar").hide();
-    $("#dialogsBar").show();
+    var inputId = "#NameConversation";
     var arr = $('input:checkbox:checked').map(function () { return this.value; }).get();
     if (arr.length !== 0) {
-        var name = $("#NameConversation").val();
-        var url = '/Communion/NewConversation';
-        $("input[type=checkbox]").prop('checked', false);
-        $.post(url, { listUsersId: arr, nameConversation: name }, function (responce) {
-            $('#ListDialogs').append(responce);
-            var dialogId = $('#ListDialogs tr:last-child').attr('id');
-            OpenDialog(dialogId);
-            ShowDialogs();
-        });
-    }   
+        if (arr.length === 1 && $(inputId).val() === '') {
+            var id = arr[0];
+            $.get('/Communion/GetViewDialogByUser',
+                { id: id },
+                function(data) {
+                    $('#currentDialog').replaceWith(data);
+                    ScrollingDialog();
+            });
+        } else {
+            var name = $("#NameConversation").val();
+            var url = '/Communion/NewConversation';
+            $.post(url, { listUsersId: arr, nameConversation: name }, function (responce) {
+                $('#ListDialogs').append(responce);
+                var dialogId = $('#ListDialogs tr:last-child').attr('id');
+                OpenDialog(dialogId);
+            });
+        }
+        ShowDialogs();
+    }
+    ClearValuesInPageNewDialog(inputId);
+}
+
+function ClearValuesInPageNewDialog(inputId) {
+    $("input[type=checkbox]").prop('checked', false);
+    $(inputId).val('');
+    $("#buttonCreateDialog").prop('disabled', true);
 }
 
 function ShowDialogs() {

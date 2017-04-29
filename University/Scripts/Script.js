@@ -97,7 +97,11 @@ var IsChecked = function () {
     if (n !== 0 && $(inputId).val() !== '') {
         $(buttonId).prop('disabled', false);
     } else {
-        $(buttonId).prop('disabled', true);
+        if (n === 1) {
+            $(buttonId).prop('disabled', false);
+        } else {
+            $(buttonId).prop('disabled', true);
+        } 
     }
 };
 
