@@ -174,26 +174,18 @@ namespace University.Controllers
 
             dialogDto.Name = dialog.IsConversation ? dialog.Name : GetDialogName(dialogDto.Members);
 
-            var messagesInDialog = db.Messages.Where(m => m.DialogId == dialog.Id).Select(m => m).ToList();
-            if (messagesInDialog.Count != 0)
-            {
-                foreach (var msg in messagesInDialog)
-                {
-                    MessageDto msgDto = new MessageDto();
+            var messagesInDialog = db.Messages.Where(m => m.DialogId == dialog.Id)
+                                              .Join(db.Users, m => m.SenderId, u => u.Id, (m, u) =>
+                                                  new MessageDto
+                                                  {
+                                                      Id = m.Id,
+                                                      DateSend = m.DateSend,
+                                                      Text = m.Text,
+                                                      FirstName = u.FirstName,
+                                                      SurName = u.SurName
+                                                  }).ToList();
 
-                    if (msg != null)
-                    {
-                        msgDto.Id = msg.Id;
-                        msgDto.DateSend = msg.DateSend;
-                        msgDto.Text = msg.Text;
-                        var sender = db.Users.Find(msg.SenderId);
-                        msgDto.FirstName = sender.FirstName;
-                        msgDto.SurName = sender.SurName;
-                    }
-
-                    dialogDto.Messages.Add(msgDto);
-                }
-            }
+            dialogDto.Messages = messagesInDialog;
             return dialogDto;
         }
 
