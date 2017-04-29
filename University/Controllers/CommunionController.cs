@@ -18,8 +18,13 @@ namespace University.Controllers
         public ActionResult Index()
         {
             var currentUserId = User.Identity.GetUserId();
-            var listDialogId = db.UserToDialogs.Where(d => d.UserId == currentUserId).Select(d => d.DialogId);
-            var listDialogs = db.Dialogs.Join(listDialogId, d => d.Id, i => i, (d, i) => d).ToList();
+            var listDialogs = db.Dialogs.Join(db.UserToDialogs.Where(d => d.UserId == currentUserId), d => d.Id, i => i.DialogId, (d, i) => d).ToList();
+            var usersDialogs = db.UserToDialogs.Join(db.UserToDialogs.Where(d => d.UserId == currentUserId), u1 => u1.DialogId, u2 => u2.DialogId, (u1, u2) => u1)
+                .GroupBy(u => u.DialogId, (key, elements) => new { Key = key, Count = elements.Distinct().Count() })
+                .Where(d => d.Count == 2).Join(db.Dialogs, i => i.Key, d => d.Id, (i, d) => d).Where(d => d.IsConversation == false)
+                .Join(db.UserToDialogs, d => d.Id, ud => ud.DialogId, (d, ud) => ud)
+                .Join(db.Users, ud => ud.UserId, u => u.Id, (ud, u) => new { User = u, DialogId = ud.DialogId }).ToList();
+
             List<DialogDto> dialogs = new List<DialogDto>();
 
             var listRelationsUsers = db.Friends.Where(t => t.UserOneId == currentUserId || t.UserTwoId == currentUserId).Select(t => t);
@@ -30,13 +35,21 @@ namespace University.Controllers
 
             foreach (var dialog in listDialogs)
             {
-                var listUserId = db.UserToDialogs.Where(u => u.DialogId == dialog.Id).Select(u => u.UserId).ToList();
                 DialogDto dialogDto = new DialogDto();
-                List<ApplicationUser> membersToDialog = db.Users.Join(listUserId, u => u.Id, i => i, (u, i) => u).ToList();
+
                 dialogDto.Id = dialog.Id;
-                dialogDto.Members = membersToDialog;
                 dialogDto.IsConversation = dialog.IsConversation;
-                dialogDto.Name = GetDialogName(dialog.IsConversation, dialogDto.Members, dialog.Name);     
+
+                if (!dialog.IsConversation)
+                {
+                    List<ApplicationUser> membersToDialog = usersDialogs.Where(u => u.DialogId == dialog.Id).Select(u => u.User).ToList();
+                    dialogDto.Name = GetDialogName(membersToDialog);
+                }
+                    else
+                {
+                    dialogDto.Name = dialog.Name;
+                }
+                
                 dialogs.Add(dialogDto);
             }
             return View(dialogs);
@@ -103,24 +116,8 @@ namespace University.Controllers
 
             var dialog = GetDialogByUser(id);
 
-            int dialogId = dialog != null ? dialog.Id : 0;
-
-            if (dialog == null)
-            {
-                db.Dialogs.Add(new Dialog() { IsConversation = false, Name = "" });
-                db.SaveChanges();
-
-                var lislDialogs = db.Dialogs.ToList();
-                int lastDialogId = lislDialogs.Last().Id;
-                dialogId = lastDialogId;
-
-                db.UserToDialogs.Add(new UserToDialog() { DialogId = lastDialogId, UserId = userId });
-                db.UserToDialogs.Add(new UserToDialog() { DialogId = lastDialogId, UserId = id });
-                db.SaveChanges();
-            }
-
             Message msg = new Message();
-            msg.DialogId = dialogId;
+            msg.DialogId = dialog.Id;
             msg.DateSend = DateTime.Now;
             msg.SenderId = userId;
             msg.Text = text;
@@ -130,11 +127,11 @@ namespace University.Controllers
 
         //---------------------------------------------------------------------------------------------------------------------
 
-        private string GetDialogName(bool isConversation, List<ApplicationUser> users, string name)
+        private string GetDialogName(List<ApplicationUser> users)
         {
-            return isConversation ? name : (users.Count == 2 ? (users[0].Id == User.Identity.GetUserId()
-                                                             ? users[1].SurName + " " + users[1].FirstName
-                                                             : users[0].SurName + " " + users[0].FirstName) : "Undefined");
+            return users[0].Id == User.Identity.GetUserId()
+                   ? users[1].SurName + " " + users[1].FirstName
+                   : users[0].SurName + " " + users[0].FirstName;
         }
 
         private Dialog GetDialogByUser(string id)
@@ -146,8 +143,24 @@ namespace University.Controllers
 
             var dialogs = listDialogs1.Join(listDialogs2, u => u.DialogId, d => d.DialogId, (u, d) => u);
 
-            return db.Dialogs.Join(dialogs, d1 => d1.Id, d2 => d2.DialogId, (d1, d2) => d1)
+            Dialog dialog = db.Dialogs.Join(dialogs, d1 => d1.Id, d2 => d2.DialogId, (d1, d2) => d1)
                                     .FirstOrDefault(d => d.IsConversation == false);
+
+            if (dialog == null)
+            {
+                db.Dialogs.Add(new Dialog() { IsConversation = false, Name = "" });
+                db.SaveChanges();
+
+                var lislDialogs = db.Dialogs.ToList();
+                dialog = lislDialogs.Last();
+                int lastDialogId = dialog.Id;
+
+                db.UserToDialogs.Add(new UserToDialog() { DialogId = lastDialogId, UserId = userId });
+                db.UserToDialogs.Add(new UserToDialog() { DialogId = lastDialogId, UserId = id });
+                db.SaveChanges();
+            }
+
+            return dialog;
         }
 
         private DialogDto GetDialogDto(Dialog dialog)
@@ -159,7 +172,7 @@ namespace University.Controllers
             var dialogUsers = db.UserToDialogs.Where(ud => ud.DialogId == dialog.Id);
             dialogDto.Members = db.Users.Join(dialogUsers, u => u.Id, d => d.UserId, (u, d) => u).ToList();
 
-            dialogDto.Name = GetDialogName(dialog.IsConversation, dialogDto.Members, dialog.Name);
+            dialogDto.Name = dialog.IsConversation ? dialog.Name : GetDialogName(dialogDto.Members);
 
             var messagesInDialog = db.Messages.Where(m => m.DialogId == dialog.Id).Select(m => m).ToList();
             if (messagesInDialog.Count != 0)
