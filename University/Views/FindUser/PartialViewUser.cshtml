@@ -12,15 +12,12 @@
                         <div class="col-sm-6 col-md-8">
                             <h4>@Model.SurName @Model.FirstName</h4>
                             <p>
+                                <i class="glyphicon glyphicon-user">Студент/Преподаватель</i>
+                                <br />
                                 <i class="glyphicon glyphicon-envelope">
                                 </i>
                                 @Model.Email
                                 <br />
-                                <i class="glyphicon glyphicon-user">Студент/Преподаватель</i>
-                                <br />
-                                <i class="glyphicon glyphicon-gift">
-                                </i>
-                                @Model.BirthDate.ToLongDateString()
                             </p>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary" onclick="window.location.href='/Home/UserPage/@Model.Id'">Просмотреть профиль</button>
