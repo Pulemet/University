@@ -18,7 +18,8 @@ namespace University.Controllers
         public ActionResult Index()
         {
             var currentUserId = User.Identity.GetUserId();
-            var listDialogId = db.UserToDialogs.Where(d => d.UserId == currentUserId).Select(d=>d.DialogId).ToList();
+            var listDialogId = db.UserToDialogs.Where(d => d.UserId == currentUserId).Select(d => d.DialogId);
+            var listDialogs = db.Dialogs.Join(listDialogId, d => d.Id, i => i, (d, i) => d).ToList();
             List<DialogDto> dialogs = new List<DialogDto>();
 
             var listRelationsUsers = db.Friends.Where(t => t.UserOneId == currentUserId || t.UserTwoId == currentUserId).Select(t => t);
@@ -27,24 +28,25 @@ namespace University.Controllers
 
             ViewData["Friends"] = listFriends;
 
-            foreach (var dialogId in listDialogId)
+            foreach (var dialog in listDialogs)
             {
-                var listUserId = db.UserToDialogs.Where(u => u.DialogId == dialogId).Select(u => u.UserId).ToList();
-                DialogDto dialog = new DialogDto();
-                List<ApplicationUser> membersToDialog = new List<ApplicationUser>();
-                foreach (var userId in listUserId)
-                {
-                    if (userId != currentUserId)
-                    {
-                        ApplicationUser member = db.Users.Find(userId);
-                        membersToDialog.Add(member);
-                    }            
-                }
-                dialog.Id = dialogId;
-                dialog.Members = membersToDialog;
-                dialogs.Add(dialog);
+                var listUserId = db.UserToDialogs.Where(u => u.DialogId == dialog.Id).Select(u => u.UserId).ToList();
+                DialogDto dialogDto = new DialogDto();
+                List<ApplicationUser> membersToDialog = db.Users.Join(listUserId, u => u.Id, i => i, (u, i) => u).ToList();
+                dialogDto.Id = dialog.Id;
+                dialogDto.Members = membersToDialog;
+                dialogDto.IsConversation = dialog.IsConversation;
+                dialogDto.Name = GetDialogName(dialog.IsConversation, dialogDto.Members, dialog.Name);     
+                dialogs.Add(dialogDto);
             }
             return View(dialogs);
+        }
+
+        public string GetDialogName(bool isConversation, List<ApplicationUser> users, string name)
+        {
+            return isConversation ? name : (users.Count == 2 ? (users[0].Id == User.Identity.GetUserId()
+                                                             ? users[1].SurName + " " + users[1].FirstName
+                                                             : users[0].SurName + " " + users[0].FirstName) : "Undefined");
         }
 
         [HttpGet]
@@ -55,12 +57,10 @@ namespace University.Controllers
 
             dialogDto.IsConversation = dialog.IsConversation;            
             dialogDto.Id = id;
-            var dialogUsers = db.UserToDialogs.Join(db.Dialogs, u => u.DialogId, d => d.Id, (u, d) => u);
+            var dialogUsers = db.UserToDialogs.Where(ud => ud.DialogId == id);
             dialogDto.Members = db.Users.Join(dialogUsers, u => u.Id, d => d.UserId, (u, d) => u).ToList();
 
-            dialogDto.Name = dialog.IsConversation ? dialog.Name : (dialogDto.Members.Count == 2 ? (dialogDto.Members[0].Id == User.Identity.GetUserId()
-                                                                    ? dialogDto.Members[1].SurName + " " + dialogDto.Members[1].FirstName
-                                                                    : dialogDto.Members[0].SurName + " " + dialogDto.Members[0].FirstName) : "Undefined" );
+            dialogDto.Name = GetDialogName(dialog.IsConversation, dialogDto.Members, dialog.Name);
 
             var messagesInDialog = db.Messages.Where(m => m.DialogId == id).Select(m => m).ToList();
             if (messagesInDialog.Count != 0)
@@ -84,6 +84,32 @@ namespace University.Controllers
             }
 
             return PartialView("Dialog", dialogDto);
+        }
+
+        public ActionResult NewConversation(List<string> listUsersId, string nameConversation)
+        {
+            var users = db.Users.Join(listUsersId, u => u.Id, i => i, (u, i) => u).ToList();
+            Dialog dialog = new Dialog() { IsConversation = true, Name = nameConversation};
+            db.Dialogs.Add(dialog);
+            db.SaveChanges();
+            var allDialogs = db.Dialogs.ToList();
+            int dialogId = allDialogs.Last().Id;
+            string currentUserId = User.Identity.GetUserId();
+            listUsersId.Add(currentUserId);
+            foreach (var userId in listUsersId)
+            {
+                UserToDialog userToDialog = new UserToDialog() { DialogId = dialogId, UserId = userId};
+                db.UserToDialogs.Add(userToDialog);
+                db.SaveChanges();
+            }
+
+            DialogDto dialogDto = new DialogDto();
+            dialogDto.Id = dialogId;
+            dialogDto.IsConversation = true;
+            dialogDto.Name = nameConversation;
+            dialogDto.Members = users;
+
+            return PartialView("PartialViewDialog", dialogDto);
         }
 
         [HttpPost]
