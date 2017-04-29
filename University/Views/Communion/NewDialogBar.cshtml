@@ -1,11 +1,15 @@
 ﻿@model IEnumerable<University.Models.ApplicationUser>
 
 <div id="newDialogBar" hidden>
-    <a href="#" class="btn btn-success btn-sm" onclick="CreateDialog()">Создать беседу</a>
+    <button type="submit" class="btn btn-success btn-sm" id="buttonCreateDialog" onclick="CreateDialog()" disabled>Создать беседу</button>
     <a href="#" class="btn btn-warning btn-sm" onclick="ShowDialogs()">Отменить</a>
-    <input type="text" id="NameConversation"/>
-    @foreach (var user in Model)
-    {
-        @Html.Partial("PartialViewUser", user)
-    }
+    <div>
+        <input type="text" id="NameConversation" oninput="IsChecked()"/>
+    </div>
+    <form class="formbox" id="formBox">
+        @foreach (var user in Model)
+        {
+            @Html.Partial("PartialViewUser", user)
+        }
+    </form>
 </div>

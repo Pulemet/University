@@ -1,3 +1,6 @@
 ﻿@model University.Models.ApplicationUser
 
-<input type="checkbox" value="@Model.Id" name="selectedUsers">@Model.SurName @Model.FirstName
+<div>
+    <input type="checkbox" value="@Model.Id" id="@Model.Id" name="selectedUsers">
+    <label for="@Model.Id">@Model.SurName @Model.FirstName</label>
+</div>

@@ -1,14 +1,7 @@
 ﻿@model University.Models.Dto.DialogDto
 
-<tr class="dialog-container">
+<tr class="dialog-container" id="@Model.Id">
     <td>
-        @if(Model.IsConversation)
-        {
-            <a href="#" onclick="OpenDialog(@Model.Id)">@Model.Name</a>
-        }
-        else
-        {
-            <a href="#" onclick="OpenDialog(@Model.Id)">@Model.Members[0].SurName @Model.Members[0].FirstName</a>
-        }
+        <a href="#" onclick="OpenDialog(@Model.Id)">@Model.Name</a>
     </td>
 </tr>
