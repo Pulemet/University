@@ -13,7 +13,7 @@ body {
     padding-bottom: 6rem;
     min-height: 100%;
     width: 100%;
-    background: linear-gradient(141deg, #b0e0e6 0%, #87ceeb 51%, #2e6da4 75%) center center fixed;
+    background: linear-gradient(141deg, #e0fbfb 0%, #ccc 51%, #86a1b9 75%) center center fixed;
     font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -183,6 +183,34 @@ tr {
 
 .bs-callout-danger {
     border-left-color: rgb(24, 75, 142);
+}
+
+.blockquote-box {
+    border-left: 5px solid #522472;
+    margin-bottom: 25px;
+}
+
+.blockquote-box:nth-child(2n+1) {
+    display: inline-block;
+}
+
+.blockquote-box.blockquote-primary .square {
+    background-color: #2e6da4;
+    color: #2e6da4;
+}
+
+.blockquote-box .square {
+    width: 100px;
+    min-height: 50px;
+    margin-right: 22px;
+    text-align: center!important;
+    padding: 20px 0;
+}
+
+.cd-font h3 {
+    padding: 0 0 6px 10px;
+    text-align: left;
+    font-family: 'Bodoni Bk BT';
 }
 
 /* 'Signup' button. */
@@ -606,6 +634,7 @@ header[role=banner] {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 30px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
