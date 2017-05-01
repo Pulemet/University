@@ -21,6 +21,7 @@
         }
 
         .form-element-label-time {
+            padding-left: 10px;
             font: inherit;
             font-size: 90%;
         }
@@ -34,8 +35,15 @@
             word-wrap: break-word;
         }
 
-        .formbox {
-            
+        #formMessages {
+            height: 80%;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        #currentDialog {
+            height: 600px;
         }
 
     </style>
@@ -49,7 +57,23 @@
         @Html.Partial("DialogsBar", Model)
         @Html.Partial("NewDialogBar", (List<ApplicationUser>)ViewData["Friends"])
     </div>
-    <div class="col-md-6" id="currentDialog">
-        <p>Выберите диалог или создайте новый</p>
+    <div class="form-horizontal col-md-6" id="currentDialog">
+        <h4 id="dialogName"> </h4>
+        <div id="formMessages">
+            <p>Выберите диалог или создайте новый</p>
+        </div>
+        <div class="form-horizontal col-md-6 col-md-offset-3" id="formSendMessage" hidden>
+            <form method="POST" id="sendMessage" onsubmit="return SendMessage()" action="/Communion/SendMessageInDialog">
+                <div>
+                    <input type="text" id="dialogId" name="DialogId" value="" class="hide">
+                    <textarea class="form-element form-element-textarea" id="messageInput" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="5" placeholder="Напишите сообщение..."></textarea>
+                    <br />
+                    <br />
+                    <p>
+                        <button type="submit" class="btn btn-success btn-sm" id="buttonSendMessage" disabled>Отправить</button>
+                    </p>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

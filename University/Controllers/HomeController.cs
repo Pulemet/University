@@ -69,21 +69,6 @@ namespace University.Controllers
             return uDto;
         }
 
-        [Authorize]
-        public ActionResult ShowFriedns(string userId)
-        {
-            var listFriendsId = db.Friends.Where(t => t.UserOneId == userId);
-            List<ApplicationUser> listFriends = new List<ApplicationUser>();
-
-            foreach (var friedId in listFriendsId)
-            {
-                ApplicationUser user = db.Users.Find(friedId.UserTwoId);
-                if(user != null)
-                    listFriends.Add(user);
-            }
-            return View(listFriends);
-        }
-
         public ActionResult CompletionRegistration()
         {
             return View();
