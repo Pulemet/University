@@ -43,6 +43,12 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.fa-lg {
+    font-size: 1.33333333em;
+    line-height: 0.75em;
+    vertical-align: -15%;
+}
+
 .fa-envelope:before {
     content: "\f0e0";
 }
@@ -172,7 +178,11 @@ tr {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: #eee;
+    background-color: #f5f5f5;
+    border-left-color: rgb(24, 75, 142);
+    border-bottom-color: #eee;
+    border-top-color: #eee;
+    border-right-color: #eee;
     border-image: none;
     border-radius: 3px;
     border-style: solid;
@@ -181,17 +191,43 @@ tr {
     padding: 20px;
 }
 
-.bs-callout-danger {
+.panel {
     border-left-color: rgb(24, 75, 142);
+    border-width: 1px 1px 1px 5px;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+}
+
+bs-callout-danger {
+    border-left-color: rgb(24, 75, 142);
+    background-color: #f5f5f5;
+    border-right-color: #ddd;
+    border-bottom-color: #ddd;
+    border-top-color: #ddd;
 }
 
 .blockquote-box {
-    border-left: 5px solid #522472;
-    margin-bottom: 25px;
+    border-left: 5px solid #677c36;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #f5f5f5;
+    border-bottom-color: #ddd;
+    border-top-color: #ddd;
+    border-right-color: #ddd;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px 1px 1px 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    margin-left: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 
-.blockquote-box:nth-child(2n+1) {
-    display: inline-block;
+.col-xs-6 {
+    width: 49%;
 }
 
 .blockquote-box.blockquote-primary .square {
@@ -205,12 +241,6 @@ tr {
     margin-right: 22px;
     text-align: center!important;
     padding: 20px 0;
-}
-
-.cd-font h3 {
-    padding: 0 0 6px 10px;
-    text-align: left;
-    font-family: 'Bodoni Bk BT';
 }
 
 /* 'Signup' button. */

@@ -1,23 +1,43 @@
-﻿<nav class="nav-justified">
+﻿@using System.Drawing
+
+@Styles.Render("~/Content/css")
+
+<head>
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
+</head>
+
+<nav class="nav-justified">
     <ul class="nav">
         <li class="active">
-            <a href="~/">Моя страница</a>
+            <a href="~/">
+                <i class="fa fa-home fa"></i> Моя страница
+            </a>
         </li>
         <li>
-            <a href="FindUser/Index">Поиск людей</a>
+            <a href="FindUser/Index">
+                <i class="fa fa-search fa"></i> Поиск людей
+            </a>
         </li>
         <li>
-            <a href="Friends/Index">Мои друзья</a>
+            <a href="Friends/Index">
+                <i class="fa fa-users fa"></i> Мои друзья
+            </a>
         </li>
         <li>
-            <a href="Communion/Index">Мои сообщения</a>
+            <a href="Communion/Index">
+                <i class="fa fa-envelope fa"></i> Мои сообщения
+            </a>
         </li>
         <li>
-            <a href="~/">Новости</a>
+            <a href="~/">
+                <i class="fa fa-bell fa"></i> Новости
+            </a>
         </li>
         <li class="nav-divider"></li>
         <li>
-            <a href="~/">Настройки</a>
+            <a href="~/">
+                <i class="fa fa-wrench fa"></i> Настройки
+            </a>
         </li>
     </ul>
 </nav>
