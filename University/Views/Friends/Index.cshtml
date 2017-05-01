@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<University.Models.ApplicationUser>
-    
+
 @{
-    ViewBag.Title = "Друзья";
+    ViewBag.Title = "Мои друзья";
 }
 
 @Scripts.Render("~/scripts/jquery-3.1.1.js")
@@ -9,19 +9,18 @@
 
 <head>
     <script type="text/javascript" src="/scripts/script.js">
-    
+
     </script>
 
     <style>
-        
-         #prompt-form {
-             display: inline-block;
-             padding: 5px 5px 5px 70px;
-             width: 500px;
-             border: 1px solid black;
-             background: white url(https://js.cx/clipart/prompt.png) no-repeat left 5px;
-             vertical-align: middle;
-         }
+        #prompt-form {
+            display: inline-block;
+            padding: 5px 5px 5px 70px;
+            width: 500px;
+            border: 1px solid black;
+            background: white url(https://js.cx/clipart/prompt.png) no-repeat left 5px;
+            vertical-align: middle;
+        }
 
         #prompt-form-container {
             position: fixed;
@@ -34,12 +33,12 @@
             text-align: center;
         }
 
-        #prompt-form-container:before {
-            display: inline-block;
-            height: 100%;
-            content: '';
-            vertical-align: middle;
-        }
+            #prompt-form-container:before {
+                display: inline-block;
+                height: 100%;
+                content: '';
+                vertical-align: middle;
+            }
 
         #cover-div {
             position: fixed;
@@ -56,16 +55,12 @@
             max-width: none;
             display: block;
             margin: 5px;
-            width: 95%;  
+            width: 95%;
         }
-
     </style>
 </head>
 
-<h2>Мои друзья</h2>
-
 <div class="container">
-
     <div id="prompt-form-container">
         <form id="prompt-form">
             <div id="prompt-message">Новое сообщение</div>
@@ -75,14 +70,27 @@
         </form>
     </div>
 
-    <div class="col-md-6">
-        <table class="table" id="ListFriends">
-            <tbody>
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+            @Html.Partial("~/Views/Home/PartialViewSaidBar.cshtml")
+        </div>
+
+        <div class="col-sm-9 col-md-10" style="margin-top: 10px;">
+            <div id="block-search">
+                <form method="get">
+                    <input type="text" id="input-search" oninput="SearchUser()" placeholder="Поиск">
+                    <input type="submit" id="form-search" value=" ">
+                </form>
+                <div id="block-search-result">
+                    <ul id="list-search-result" style="list-style-type: none;"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" id="ListFriends">
             @foreach (var friend in Model)
             {
                 @Html.Partial("PartialViewFriend", friend)
             }
-            </tbody>
-        </table>
+        </div>
     </div>
 </div>

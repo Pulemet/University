@@ -1,15 +1,26 @@
 ﻿@model IEnumerable<University.Models.ApplicationUser>
 
 <div id="newDialogBar" hidden>
-    <button type="submit" class="btn btn-success btn-sm" id="buttonCreateDialog" onclick="CreateDialog()" disabled>Создать беседу</button>
-    <a href="#" class="btn btn-warning btn-sm" onclick="ShowDialogs()">Отменить</a>
-    <div>
-        <input type="text" id="NameConversation" oninput="IsChecked()"/>
+    <div class="form-group">
+        @Html.Label("Беседа", new { @class = "cols-sm-2 control-label" })
+        <div class="form-group">
+            <input type="text" id="NameConversation" oninput="IsChecked()" placeholder="Введите название" style="display: block; width: 100%; margin-bottom: 8px;" />
+        </div>
+        </div>
+        <div class="btn-group" style="width: 100%; margin-bottom: 8px;">
+            <button type="submit" class="btn btn-success btn-sm btn-block" onclick="CreateDialog()" id="buttonCreateDialog" disabled>
+                <i class="fa fa-envelope fa"> Создать беседу </i>
+            </button>
+        </div>
+        <div class="btn-group" style="width: 100%; margin-bottom: 8px;">
+            <a class="btn btn-warning btn-sm btn-block" onclick="ShowDialogs()">
+                <i class="fa fa-envelope fa"> Отменить беседу </i>
+            </a>
+        </div>
+        <form class="formbox" id="formBox">
+            @foreach (var user in Model)
+            {
+                @Html.Partial("PartialViewUser", user)
+            }
+        </form>
     </div>
-    <form class="formbox" id="formBox">
-        @foreach (var user in Model)
-        {
-            @Html.Partial("PartialViewUser", user)
-        }
-    </form>
-</div>

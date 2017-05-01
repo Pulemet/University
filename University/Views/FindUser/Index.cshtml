@@ -10,7 +10,7 @@
 <head>
     <script type="text/javascript" src="/scripts/script.js">
 
-    
+
     </script>
 
     @{ List<string> userNamesCs = (List<string>)@ViewData["UserNames"]; }
@@ -23,9 +23,9 @@
         @foreach (string str in userNamesCs)
         {
             <text>
-                ar[i] = '@str';
-                i++;
-            </text>
+        ar[i] = '@str';
+        i++;
+        </text>
         }
 
         //пока не вышли из скрипта инициализируем полученный массив; пусть функция initArrayInExternalFile() находится в externalfile.js
@@ -36,29 +36,31 @@
         .add-li {
         }
 
-         A {
-             text-decoration: none;
-         }
+        A {
+            text-decoration: none;
+        }
     </style>
 </head>
 
-<div class="panel-title text-center">
-    <h2 class="title">Пользователи</h2>
-    <hr id="form-line" />
-</div>
-
 <div class="container">
-    <div class="col-md-6">
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+            @Html.Partial("~/Views/Home/PartialViewSaidBar.cshtml")
+        </div>
+
+        <div class="col-sm-9 col-md-10" style="margin-top: 10px;">
             <div id="block-search">
                 <form method="get">
                     <input type="text" id="input-search" oninput="SearchUser()" placeholder="Поиск">
                     <input type="submit" id="form-search" value=" ">
                 </form>
                 <div id="block-search-result">
-                    <ul id="list-search-result" style="list-style-type: none;"></ul> 
+                    <ul id="list-search-result" style="list-style-type: none;"></ul>
                 </div>
             </div>
+        </div>
+        <div class="col-md-9">
+            @Html.Partial("PartialViewUsers", Model)
+        </div>
     </div>
-    @Html.Partial("PartialViewUsers", Model)
 </div>
-

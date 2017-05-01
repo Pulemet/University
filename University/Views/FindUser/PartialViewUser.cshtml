@@ -6,37 +6,33 @@
     <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
 </head>
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4" align="center">
-                            <img alt="Фото" src="@Model.Photo" class="circular-square-users">
-                        </div>
-                        <div class="col-sm-6 col-md-8">
-                            <h4>
-                                <i class="fa fa-university fa"></i> @Model.SurName @Model.FirstName 
-                            </h4>
-                            <p>
-                                <i class="glyphicon glyphicon-user"> Студент/Преподаватель </i>
-                                <br />
+<div class="col-md-10">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4 col-lg-4" align="center">
+                    <img alt="Фото" src="@Model.Photo" class="circular-square-users">
+                </div>
+                <div class="col-sm-6 col-md-8">
+                    <h4>
+                        <i class="fa fa-university fa"></i> @Model.SurName @Model.FirstName
+                    </h4>
+                    <p>
+                        <i class="glyphicon glyphicon-user"> Студент/Преподаватель </i>
+                        <br />
 
-                                <i class="glyphicon glyphicon-envelope"> @Model.Email </i>
-                                <br />
-                            </p>
-                            <div class="btn-group">
-                                <a class="btn btn-primary" onclick="window.location.href='/Home/UserPage/@Model.Id'">
-                                    <i class="fa fa-eye fa"> Просмотреть </i>
-                                </a>
-                            </div>
-                            <div class="btn-group">
-                                <a class="btn btn-danger" onclick="AddFriend('@Model.Id', '@Model.Id')" id="@Model.Id">
-                                    <i class="fa fa-plus fa"> Добавить в друзья </i>
-                                </a>
-                            </div>
-                        </div>
+                        <i class="glyphicon glyphicon-envelope"> @Model.Email </i>
+                        <br />
+                    </p>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" onclick="window.location.href='/Home/UserPage/@Model.Id'">
+                            <i class="fa fa-eye fa"> Просмотреть </i>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-danger" onclick="AddFriend('@Model.Id', '@Model.Id')" id="@Model.Id">
+                            <i class="fa fa-plus fa"> Добавить в друзья </i>
+                        </a>
                     </div>
                 </div>
             </div>

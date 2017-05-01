@@ -196,9 +196,10 @@ tr {
     border-width: 1px 1px 1px 5px;
     border-radius: 3px;
     background-color: #f5f5f5;
+    margin-bottom: 10px;
 }
 
-bs-callout-danger {
+.bs-callout-danger {
     border-left-color: rgb(24, 75, 142);
     background-color: #f5f5f5;
     border-right-color: #ddd;
@@ -241,6 +242,22 @@ bs-callout-danger {
     margin-right: 22px;
     text-align: center!important;
     padding: 20px 0;
+}
+
+.inbox-head {
+    background: none repeat scroll 0 0 #41cac0;
+    border-radius: 0 4px 0 0;
+    color: #fff;
+    min-height: 80px;
+    padding: 20px;
+}
+
+.inbox-body {
+    padding: 20px;
+}
+
+.mail-option .btn-group {
+    margin-right: 5px;
 }
 
 /* 'Signup' button. */
@@ -826,6 +843,11 @@ h2, .h2 {
 #block-search {
     width: 409px;
     height: 33px;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
 }
 
 #input-search {
