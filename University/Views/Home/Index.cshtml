@@ -2,14 +2,10 @@
 @using University.Models
 @using University.Models.Helper
 @model University.Models.Dto.UserDto
+
 @{
     ViewBag.Title = "Моя страница";
 }
-
-<head>
-    <style>
-    </style>
-</head>
 
 <div class="container">
     <div class="row">
@@ -17,41 +13,40 @@
             @Html.Partial("PartialViewSaidBar")
         </div>
 
-            <div class="col-sm-9 toppad">
-                <div class="panel panel-default">
-                    <div class="panel-heading resume-heading">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="col-xs-12 col-sm-4" align="center">
-                                    <img alt="Фото" src="@Model.Photo" class="circular-square">
-                                </div>
+        <div class="col-sm-9 toppad">
+            <div class="panel panel-default">
+                <div class="panel-heading resume-heading">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-12 col-sm-4" align="center">
+                                <img alt="Фото" src="@Model.Photo" class="circular-square">
+                            </div>
 
-                                <div class="col-xs-12 col-sm-8">
-                                    <table class="table table-user-information">
-                                        <tbody>
+                            <div class="col-xs-12 col-sm-8">
+                                <h3>
+                                    <i class="fa fa-university fa"></i> @Model.SurName @Model.PatronymicName @Model.FirstName
+                                </h3>
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>E-mail</td>
+                                            <td>@Model.Email</td>
+                                        </tr>
+                                        <tr>
+                                            @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский"; }
+                                            <td>Пол</td>
+                                            <td>@gender</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Дата рождения</td>
+                                            <td>@Model.BirthDate.ToLongDateString()</td>
+                                        </tr>
+                                        @if (Model.UserRole == UserRoles.Student)
+                                        {
                                             <tr>
-                                                <td>ФИО</td>
-                                                <td>@Model.SurName @Model.PatronymicName @Model.FirstName</td>
+                                                <td>Факультет</td>
+                                                <td>@Model.Faculty</td>
                                             </tr>
-                                            <tr>
-                                                <td>E-mail</td>
-                                                <td>@Model.Email</td>
-                                            </tr>
-                                            <tr>
-                                                @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский"; }
-                                                <td>Пол</td>
-                                                <td>@gender</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Дата рождения</td>
-                                                <td>@Model.BirthDate.ToLongDateString()</td>
-                                            </tr>
-                                            @if (Model.UserRole == UserRoles.Student)
-                                            {
-                                                <tr>
-                                                    <td>Факультет</td>
-                                                    <td>@Model.Faculty</td>
-                                                </tr>
                                                 <tr>
                                                     <td>Специальность</td>
                                                     <td>@Model.Speciality</td>
@@ -60,40 +55,41 @@
                                                     <td>Группа</td>
                                                     <td>@Model.Group</td>
                                                 </tr>
+                                        }
+                                        else
+                                        {
+                                            if (Model.UserRole == UserRoles.Admin)
+                                            {
+                                                <tr>
+                                                    <td>Роль</td>
+                                                    <td>Администратор</td>
+                                                </tr>
                                             }
                                             else
                                             {
-                                                if (Model.UserRole == UserRoles.Admin)
-                                                {
-                                                    <tr>
-                                                        <td>Роль</td>
-                                                        <td>Администратор</td>
-                                                    </tr>
-                                                }
-                                                else
-                                                {
-                                                    <tr>
-                                                        <td>Преподаватель кафедры</td>
-                                                        <td>@Model.Department</td>
-                                                    </tr>
-                                                }
+                                                <tr>
+                                                    <td>Преподаватель кафедры</td>
+                                                    <td>@Model.Department</td>
+                                                </tr>
                                             }
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
-                <div class="bs-callout bs-callout-danger">
-                    <h4>О себе</h4>
-                    <p>Summary... Let me introduce myself. My name is Igor. I’m sixteen years old. I’m at 10-th grade. I’m tall, slender, dark-haired boy with blue eyes.
+            </div>
+            <div class="bs-callout">
+                <h4>О себе</h4>
+                <p>
+                    Summary... Let me introduce myself. My name is Igor. I’m sixteen years old. I’m at 10-th grade. I’m tall, slender, dark-haired boy with blue eyes.
 
                     I live in Kiev. I have a brother and a sister. My elder brother Sergey is twenty, he studies at the Kiev National University, and he will be a lawyer. My younger sister Olga is ten, she studies at school. By the way, we have one more member of our family, cat Ryzhik. We love him very much.
 
                     My Mum is forty-two, she is a Spanish teacher. My Dad is forty-five, he is a computer programmer.
-    
+
                     My grandparents are already retired. My Grandma likes gardening, and Grandpa likes fishing. They live in our city and visit us at weekends.
 
                     I have many friends. We spend a lot of time together. We play football, volleyball, basketball. In summer we like swimming in river and lakes.
@@ -102,42 +98,39 @@
 
                     Soon I will graduate a school and I have to choose a profession. However, I have many interests and hobbies, for example, sports, travelling, music, so it’s not so easy to choose an occupation. My parents want me to be a computer programmer, like my Dad.
 
-                    But I’m not sure because I’m not very good in mathematics. I like computer games, I like to surf the Net, to communicate with people in different social nets and forums. I even have my own blog. But I don’t want a computer programming to be my profession. Also I like tennis, but I don’t want to be a professional sportsman. You can ask me, why? Because I have another passion!</p>
-                </div>
-                <div class="bs-callout bs-callout-danger">
-                    <h4>Интересы</h4>
-                    <p>Research Interests...</p>
-                </div>
-                <div class="bs-callout bs-callout-danger">
-                    <h4>Образование</h4>
-                    <table class="table table-user-information">
-                        <tbody>
-                            <tr>
-                                <td>Институт</td>
-                                <td>БГУИР</td>
-                            </tr>
-                            <tr>
-                                <td>Годы обучения</td>
-                                <td>2012-2017</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="bs-callout bs-callout-danger">
-                    <h4>Загруженные материалы</h4>
-                    <table class="table table-user-information">
-                        <tbody>
-                            <tr>
-                                <td>Дата загрузки</td>
-                                <td>28.04.2017</td>
-                            </tr>
-                            <tr>
-                                <td>Файл</td>
-                                <td>Link</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    But I’m not sure because I’m not very good in mathematics. I like computer games, I like to surf the Net, to communicate with people in different social nets and forums. I even have my own blog. But I don’t want a computer programming to be my profession. Also I like tennis, but I don’t want to be a professional sportsman. You can ask me, why? Because I have another passion!
+                </p>
+            </div>
+            <div class="bs-callout bs-callout-danger">
+                <h4>Образование</h4>
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>Институт</td>
+                            <td>БГУИР</td>
+                        </tr>
+                        <tr>
+                            <td>Годы обучения</td>
+                            <td>2012-2017</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bs-callout bs-callout-danger">
+                <h4>Загруженные материалы</h4>
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>Дата загрузки</td>
+                            <td>28.04.2017</td>
+                        </tr>
+                        <tr>
+                            <td>Файл</td>
+                            <td>Link</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
