@@ -2,8 +2,10 @@
     $.get('/Communion/GetDialog',
         { id: id },
         function(data) {
-            $('#currentDialog').replaceWith(data);
+            $('#formMessages').replaceWith(GetDialogHtml(data));
+            $('#dialogId').val(data.Id);
             ScrollingDialog();
+            ShowViewSendMessage();
         });
 }
 
@@ -12,12 +14,9 @@ function SendMessage() {
     var data = $('#sendMessage').serialize();
     var url = $('#sendMessage').attr('action');
     $.post(url, data, function (responce) {
-        $('#messageInput').val('');
-        $('#formMessages').append(responce);
+        ShowViewSendMessage();
+        $('#formMessages').append(GetMessageHtml(responce));
         ScrollingDialog();
-        $('#buttonSendMessage').prop('disabled', true);
-        var div = document.getElementById('formMessages');
-        div.scrollTop = div.scrollHeight - div.clientHeight;
         if ($('#noMessages').length > 0) {
             $('#noMessages').remove();
         }
@@ -27,6 +26,12 @@ function SendMessage() {
 function ScrollingDialog() {
     var div = document.getElementById('formMessages');
     div.scrollTop = div.scrollHeight - div.clientHeight;
+}
+
+function ShowViewSendMessage() {
+    $('#messageInput').val('');
+    $('#formSendMessage').show();
+    $('#buttonSendMessage').prop('disabled', true);
 }
 
 function NewDialog() {
@@ -42,22 +47,56 @@ function CreateDialog() {
             var id = arr[0];
             $.get('/Communion/GetViewDialogByUser',
                 { id: id },
-                function(data) {
-                    $('#currentDialog').replaceWith(data);
-                    ScrollingDialog();
+                function (data) {
+                    if (data.IsNewDialog) {
+                        $('#ListDialogs').append(GetPartialDialogHtml(data.Dialog.Id, data.Dialog.Name));
+                    }
+                    $('#formMessages').replaceWith(GetDialogHtml(data.Dialog));
+                    $('#dialogId').val(data.Dialog.Id);
             });
         } else {
             var name = $("#NameConversation").val();
             var url = '/Communion/NewConversation';
-            $.post(url, { listUsersId: arr, nameConversation: name }, function (responce) {
-                $('#ListDialogs').append(responce);
-                var dialogId = $('#ListDialogs tr:last-child').attr('id');
-                OpenDialog(dialogId);
+            $.post(url, { listUsersId: arr, nameConversation: name }, function (data) {
+                $('#ListDialogs').append(GetPartialDialogHtml(data.Id, data.Name));
+                $('#formMessages').replaceWith(GetDialogHtml(data));
+                $('#dialogId').val(data.Id);
             });
         }
+        ScrollingDialog();
+        ShowViewSendMessage();
         ShowDialogs();
     }
     ClearValuesInPageNewDialog(inputId);
+}
+
+function GetPartialDialogHtml(id, name) {
+    var result = '<tr class="dialog-container" + id="' + id +
+        '"><td><a href="#" onclick="OpenDialog(' + id + ')">' + 
+        name + '</a></td></tr>';
+    return result;
+}
+
+function GetDialogHtml(dialog) {
+    $('#dialogName').text(dialog.Name);
+    var messagesHtml = "";
+    if (dialog.Messages.length === 0) {
+        messagesHtml = '<div id="noMessages"><p>Список сообщений пуст</p></div>';
+    } else {
+        for (var index = 0, len = dialog.Messages.length; index < len; ++index) {
+            messagesHtml += GetMessageHtml(dialog.Messages[index]);
+        }
+    }
+    var result = '<div id="formMessages">' + messagesHtml + '</div>';
+    return result;
+}
+
+function GetMessageHtml(message) {
+    return '<label class="control-label form-element-label-name"><b>' +
+                message.SurName + ' ' + message.FirstName +
+                ' </b></label><label class="control-label form-element-label-time">' +
+                message.DateSend + '</label><div><p class="form-element-label-time">' + message.Text +
+                '</p></div>';
 }
 
 function ClearValuesInPageNewDialog(inputId) {

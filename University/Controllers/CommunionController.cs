@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
@@ -56,21 +57,25 @@ namespace University.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetDialog(int id)
+        public JsonResult GetDialog(int id)
         {
             var dialog = db.Dialogs.Find(id);
-            return PartialView("Dialog", GetDialogDto(dialog));
+            return Json(GetDialogDto(dialog), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public ActionResult GetViewDialogByUser(string id)
+        public JsonResult GetViewDialogByUser(string id)
         {
-            var dialog = GetDialogByUser(id);
-            return PartialView("Dialog", GetDialogDto(dialog));
+            bool isNewDialog = false;
+            var dialog = GetDialogByUser(id, ref isNewDialog);       
+            DialogJson dialogJson = new DialogJson(GetDialogDto(dialog));
+            dialogJson.IsNewDialog = isNewDialog;
+
+            return Json(dialogJson, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult NewConversation(List<string> listUsersId, string nameConversation)
+        public JsonResult NewConversation(List<string> listUsersId, string nameConversation)
         {
             var users = db.Users.Join(listUsersId, u => u.Id, i => i, (u, i) => u).ToList();
             Dialog dialog = new Dialog() { IsConversation = true, Name = nameConversation};
@@ -80,12 +85,9 @@ namespace University.Controllers
             int dialogId = allDialogs.Last().Id;
             string currentUserId = User.Identity.GetUserId();
             listUsersId.Add(currentUserId);
-            foreach (var userId in listUsersId)
-            {
-                UserToDialog userToDialog = new UserToDialog() { DialogId = dialogId, UserId = userId};
-                db.UserToDialogs.Add(userToDialog);
-                db.SaveChanges();
-            }
+            var usersToDialog = listUsersId.Select(i => new UserToDialog() { DialogId = dialogId, UserId = i }).ToList();
+            db.UserToDialogs.AddRange(usersToDialog);
+            db.SaveChanges();
 
             DialogDto dialogDto = new DialogDto();
             dialogDto.Id = dialogId;
@@ -93,11 +95,11 @@ namespace University.Controllers
             dialogDto.Name = nameConversation;
             dialogDto.Members = users;
 
-            return PartialView("PartialViewDialog", dialogDto);
+            return Json(dialogDto, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult SendMessageInDialog(Message msg)
+        public JsonResult SendMessageInDialog(Message msg)
         {
             var userId = User.Identity.GetUserId();
             msg.DateSend = DateTime.Now;
@@ -106,15 +108,15 @@ namespace University.Controllers
             db.SaveChanges();
             var allMsg = db.Messages.ToList();
             int id = allMsg.Last().Id;
-            return PartialView("Message", GetMessage(id));
+            return Json(GetMessage(id), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public void SendMessage(string id, string text)
         {
             var userId = User.Identity.GetUserId();
-
-            var dialog = GetDialogByUser(id);
+            bool isNewDialog = false;
+            var dialog = GetDialogByUser(id, ref isNewDialog);
 
             Message msg = new Message();
             msg.DialogId = dialog.Id;
@@ -134,7 +136,7 @@ namespace University.Controllers
                    : users[0].SurName + " " + users[0].FirstName;
         }
 
-        private Dialog GetDialogByUser(string id)
+        private Dialog GetDialogByUser(string id, ref bool isNewDialog)
         {
             var userId = User.Identity.GetUserId();
 
@@ -148,6 +150,7 @@ namespace University.Controllers
 
             if (dialog == null)
             {
+                isNewDialog = true;
                 db.Dialogs.Add(new Dialog() { IsConversation = false, Name = "" });
                 db.SaveChanges();
 
@@ -174,10 +177,10 @@ namespace University.Controllers
 
             dialogDto.Name = dialog.IsConversation ? dialog.Name : GetDialogName(dialogDto.Members);
 
-            var messagesInDialog = db.Messages.Where(m => m.DialogId == dialog.Id)
+            var messages = db.Messages.Where(m => m.DialogId == dialog.Id)
                                               .Join(db.Users, m => m.SenderId, u => u.Id, (m, u) =>
-                                                  new MessageDto
-                                                  {
+                                                  new
+                                                  { 
                                                       Id = m.Id,
                                                       DateSend = m.DateSend,
                                                       Text = m.Text,
@@ -185,8 +188,24 @@ namespace University.Controllers
                                                       SurName = u.SurName
                                                   }).ToList();
 
-            dialogDto.Messages = messagesInDialog;
+            foreach (var message in messages)
+            {
+                dialogDto.Messages.Add(new MessageDto()
+                {
+                    Id = message.Id,
+                    DateSend = GetStringDate(message.DateSend),
+                    Text = message.Text,
+                    FirstName = message.FirstName,
+                    SurName = message.SurName
+                });
+            }
+
             return dialogDto;
+        }
+
+        public string GetStringDate(DateTime date)
+        {
+            return string.Format("{0:dd.MM.yyyy} в {0:H.mm}", date);
         }
 
         private MessageDto GetMessage(int msgId)
@@ -197,9 +216,7 @@ namespace University.Controllers
             if (msg != null)
             {
                 var user = db.Users.Find(msg.SenderId);
-                msgDto.Id = msg.Id;
-                msgDto.DateSend = msg.DateSend;
-                msgDto.Text = msg.Text;
+                msgDto = new MessageDto(msg);
                 msgDto.FirstName = user.FirstName;
                 msgDto.SurName = user.SurName;
             }
