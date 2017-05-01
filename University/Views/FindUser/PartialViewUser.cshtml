@@ -1,4 +1,5 @@
-﻿@model University.Models.ApplicationUser
+﻿@using University.Models.Helper
+@model University.Models.Dto.UserDto
 
 @Styles.Render("~/Content/css")
 
@@ -18,11 +19,12 @@
                         <i class="fa fa-university fa"></i> @Model.SurName @Model.FirstName
                     </h4>
                     <p>
-                        <i class="glyphicon glyphicon-user"> Студент/Преподаватель </i>
-                        <br />
+                        @{ string role = @Model.UserRole == @UserRoles.Student ? "Студент" : "Преподаватель"; }
+                        <i class="glyphicon glyphicon-user"> @role </i>
+                        <br/>
 
                         <i class="glyphicon glyphicon-envelope"> @Model.Email </i>
-                        <br />
+                        <br/>
                     </p>
                     <div class="btn-group">
                         <a class="btn btn-primary" onclick="window.location.href='/Home/UserPage/@Model.Id'">

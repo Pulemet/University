@@ -8,6 +8,8 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using University.Models;
+using University.Models.Dto;
+using University.Models.Helper;
 using University.Models.Tables;
 
 namespace University.Controllers
@@ -49,6 +51,37 @@ namespace University.Controllers
             }
         }
 
+        private UserDto GetUserDto(ApplicationUser user)
+        {
+            UserDto uDto = new UserDto(user);
+
+            var role = db.Roles.Where(r => r.Name == ConstDictionary.ROLE_STUDENT).Select(r => r).FirstOrDefault();
+            if (user.Roles.Select(r => r.RoleId).Contains(role.Id))
+            {
+                var group = db.StudentGroups.Find(user.GroupId);
+                var speciality = db.Specialities.Find(group.SpecialityId);
+                var facultity = db.Faculties.Find(speciality.FacultyId);
+                uDto.Group = group.Name;
+                uDto.Speciality = speciality.NameAbridgment;
+                uDto.Faculty = facultity.NameAbridgment;
+                uDto.UserRole = UserRoles.Student;
+            }
+            else
+            {
+                role = db.Roles.Where(r => r.Name == ConstDictionary.ROLE_ADMIN).Select(r => r).FirstOrDefault();
+                uDto.UserRole = user.Roles.Select(r => r.RoleId).Contains(role.Id)
+                                       ? UserRoles.Admin
+                                       : UserRoles.Teacher;
+                if (uDto.UserRole == UserRoles.Teacher)
+                {
+                    var department = db.Departments.Find(user.GroupId);
+                    uDto.Department = department.NameAbridgment;
+                }
+            }
+
+            return uDto;
+        }
+
         [HttpGet]
         public ActionResult SearchUser(string name)
         {
@@ -60,7 +93,7 @@ namespace University.Controllers
             return PartialView("PartialViewUsers", users);
         }
 
-        private IEnumerable<ApplicationUser> GetUsers(string id)
+        private List<UserDto> GetUsers(string id)
         {
             const string strRoleAdmin = "admin";
             var listRelationsUsers = db.Friends.Where(t => t.UserOneId == id || t.UserTwoId == id).Select(t => t);
@@ -73,8 +106,14 @@ namespace University.Controllers
 
             // убрать из списка ожидающих активацию аккаунта и друзей
             users = (from user in users where !(from a in db.AwaitingUsers.ToList() select a.UserId).Contains(user.Id) select user);
-            users = users.Except(listFriends).OrderBy(u => u.SurName);
-            return users;
+            users = users.Except(listFriends).OrderBy(u => u.SurName).ToList();
+            List<UserDto> usersDto = new List<UserDto>();
+            foreach (var user in users)
+            {
+                usersDto.Add(GetUserDto(user));
+            }
+
+            return usersDto;
         }
     }
 }
