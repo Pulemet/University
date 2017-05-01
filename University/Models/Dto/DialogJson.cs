@@ -9,7 +9,7 @@ namespace University.Models.Dto
     {
         public DialogJson()
         {
-            
+
         }
 
         public DialogJson(DialogDto dialog)

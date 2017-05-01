@@ -216,6 +216,7 @@
     <Compile Include="Models\Dto\AnswerDto.cs" />
     <Compile Include="Models\Dto\CommentDto.cs" />
     <Compile Include="Models\Dto\DialogDto.cs" />
+    <Compile Include="Models\Dto\DialogJson.cs" />
     <Compile Include="Models\Dto\Infrastructure.cs" />
     <Compile Include="Models\Dto\MaterialDto.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
