@@ -201,8 +201,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CommunionController.cs" />
-    <Compile Include="Controllers\FindUserController.cs" />
-    <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
@@ -222,6 +220,7 @@
     <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\Dto\QuestionDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
+    <Compile Include="Models\Dto\UserInfoDto.cs" />
     <Compile Include="Models\Helper\ConstDictionary.cs" />
     <Compile Include="Models\Helper\EmailService.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -368,11 +367,7 @@
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Communion\Message.cshtml" />
-    <Content Include="Views\Friends\Index.cshtml" />
-    <Content Include="Views\Friends\PartialViewFriend.cshtml" />
-    <Content Include="Views\FindUser\Index.cshtml" />
-    <Content Include="Views\FindUser\PartialViewUser.cshtml" />
+    <Content Include="Views\Home\FindUsers.cshtml" />
     <Content Include="Views\Communion\PartialSendMessage.cshtml" />
     <Content Include="Views\Account\GetSpecialities.cshtml" />
     <Content Include="Views\Account\GetGroups.cshtml" />
@@ -397,14 +392,17 @@
     <Content Include="Views\Account\PartialAwaitingUser.cshtml" />
     <Content Include="Views\Home\CompletionRegistration.cshtml" />
     <Content Include="Views\Admin\PageSubmitRegistration.cshtml" />
-    <Content Include="Views\FindUser\PartialViewUsers.cshtml" />
     <Content Include="Views\Home\UserPage.cshtml" />
     <Content Include="Views\Manage\GetSubjects.cshtml" />
-    <Content Include="Views\Communion\Dialog.cshtml" />
     <Content Include="Views\Communion\DialogsBar.cshtml" />
     <Content Include="Views\Communion\NewDialogBar.cshtml" />
     <Content Include="Views\Communion\PartialViewUser.cshtml" />
     <Content Include="Views\Home\PartialViewSaidBar.cshtml" />
+    <Content Include="Views\Home\PartialViewUser.cshtml" />
+    <Content Include="Views\Home\PartialViewUsers.cshtml" />
+    <Content Include="Views\Home\Friends.cshtml" />
+    <Content Include="Views\Home\PageNewMessage.cshtml" />
+    <Content Include="Views\Home\TemplateUserPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

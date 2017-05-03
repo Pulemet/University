@@ -34,7 +34,7 @@
 });
 
 function AddFriend(id, buttonId) {
-    $.post("/FindUser/AddFriend", { id: id }, function () {
+    $.post("/Home/AddFriend", { id: id }, function () {
         $("#" + buttonId).text("Добавлен");
         $("#" + buttonId).prop('disabled', true);
     });
@@ -168,7 +168,7 @@ function SearchUser() {
 $(document).ready(function () {
     $("#list-search-result").on("click", ".add-li", function () {
         var userName = $(this).text();
-        $.get("/FindUser/SearchUser", { name: userName }, function (responce) {
+        $.get("/Home/SearchUser", { name: userName }, function (responce) {
             $('#input-search').val('');
             $("#block-search-result").hide();
             $('#ListUsers').replaceWith(responce);

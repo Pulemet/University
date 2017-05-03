@@ -1,10 +1,6 @@
 ﻿@using University.Models.Helper
-@model University.Models.Dto.UserDto
-   
-<head>
-    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
-</head>
- 
+@model University.Models.Dto.UserInfoDto
+
 <div class="col-md-10">
     <div class="panel panel-default">
         <div class="panel-body">
@@ -14,7 +10,7 @@
                 </div>
                 <div class="col-sm-6 col-md-8">
                     <h4>
-                        <i class="fa fa-university fa"></i> @Model.SurName @Model.FirstName
+                        <i class="fa fa-university fa"> <a href="/Home/UserPage/@Model.Id"> @Model.SurName @Model.FirstName </a></i>
                     </h4>
                     <p>
                         @{ string role = @Model.UserRole == @UserRoles.Student ? "Студент" : "Преподаватель"; }
@@ -25,15 +21,20 @@
                         <br/>
                     </p>
                     <div class="btn-group">
-                        <a class="btn btn-primary" onclick="window.location.href='/Home/UserPage/@Model.Id'">
-                            <i class="fa fa-eye fa"> Просмотреть </i>
-                        </a>
-                    </div>
-                    <div class="btn-group">
                         <a class="btn btn-success" onclick="ShowFormSendMessageD('@Model.Id', '@Model.SurName @Model.FirstName')" id="show-button">
                             <i class="fa fa-envelope fa"> Написать сообщение </i>
                         </a>
                     </div>
+                    @{
+                        if (!Model.IsFriend)
+                        {
+                            <div class="btn-group">
+                                <a class="btn btn-danger" onclick="AddFriend('@Model.Id', '@Model.Id')" id="@Model.Id">
+                                    <i class="fa fa-plus fa"> Добавить в друзья </i>
+                                </a>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>

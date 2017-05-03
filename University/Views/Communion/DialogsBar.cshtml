@@ -6,12 +6,16 @@
             <tr>
                 <td>
                     <div class="btn-group" style="width: 100%;">
-                        <a class="btn btn-success btn-sm btn-block" onclick="NewDialog()">
+                        <a class="btn btn-success btn-sm btn-block" onclick=" NewDialog() ">
                             <i class="fa fa-envelope fa"> Начать беседу </i>
                         </a>
                     </div>
                 </td>
             </tr>
+            @foreach (var dialog in Model)
+            {
+                @Html.Partial("PartialViewDialog", dialog)
+            }
         </tbody>
     </table>
 </div>

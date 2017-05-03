@@ -36,7 +36,7 @@ namespace University.Controllers
             {
                 return Redirect("/Account/Register");
             }
-
+            ViewData["CurrentUser"] = true;
             var user = _db.Users.Find(User.Identity.GetUserId());
             return View(GetUserDto(user));
         }
@@ -50,7 +50,87 @@ namespace University.Controllers
             var isFriend = _db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == user.Id ? f.UserTwoId : f.UserOneId, (u, f) => u).
                                        FirstOrDefault(u => u.Id == userId);
             ViewData["IsFriend"] = isFriend != null;
+            ViewData["CurrentUser"] = false;
             return View(GetUserDto(user));
+        }
+
+        public ActionResult Friends()
+        {
+            string userId = User.Identity.GetUserId();
+            var listRelationsUsers = _db.Friends.Where(t => t.UserOneId == userId || t.UserTwoId == userId).Select(t => t);
+            var listFriends = _db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == userId ? f.UserTwoId : f.UserOneId, (u, f) => u).
+                                       OrderBy(u => u.SurName).ToList();
+
+            List<UserInfoDto> usersInfo = GetUsersInfoDto(listFriends, true);
+
+            return View(usersInfo);
+        }
+
+        [HttpPost]
+        public void AddFriend(string id)
+        {
+            string userId = User.Identity.GetUserId();
+            ApplicationUser user = _db.Users.Find(userId);
+            ApplicationUser userFriend = _db.Users.Find(id);
+            if (userFriend != null)
+            {
+                var listFriedsUser = _db.Friends.Where(f => (f.UserOneId == user.Id && f.UserTwoId == userFriend.Id)
+                                                       || (f.UserOneId == userFriend.Id && f.UserTwoId == user.Id)).Select(f => f).ToList();
+                if (listFriedsUser.Count == 0)
+                {
+                    Friend friend = new Friend()
+                    {
+                        UserOneId = user.Id,
+                        UserTwoId = userFriend.Id
+                    };
+                    _db.Friends.Add(friend);
+                    _db.SaveChanges();
+                }
+            }
+        }
+
+        public ActionResult FindUsers()
+        {
+            string userId = User.Identity.GetUserId();
+
+            var users = GetUsers(userId);
+
+            List<UserInfoDto> usersInfo = GetUsersInfoDto(users, false);
+
+            List<string> userNames = (from u in users select u.SurName + " " + u.FirstName).Distinct().ToList();
+            ViewData["UserNames"] = userNames;
+
+            return View(usersInfo);
+        }
+
+        [HttpGet]
+        public ActionResult SearchUser(string name)
+        {
+            string userId = User.Identity.GetUserId();
+            string surName = name.Split(' ')[0];
+            string firstName = name.Split(' ')[1];
+            var allUsers = GetUsers(userId);
+            var users = allUsers.Where(u => u.FirstName == firstName && u.SurName == surName).Select(u => u).ToList();
+            List<UserInfoDto> usersInfo = GetUsersInfoDto(users, false);
+            return PartialView("PartialViewUsers", usersInfo);
+        }
+
+        private List<ApplicationUser> GetUsers(string id)
+        {
+            const string strRoleAdmin = "admin";
+            var listRelationsUsers = _db.Friends.Where(t => t.UserOneId == id || t.UserTwoId == id).Select(t => t);
+            var listFriends = _db.Users.Join(listRelationsUsers, u => u.Id, f => f.UserOneId == id ? f.UserTwoId : f.UserOneId, (u, f) => u);
+
+            var role = _db.Roles.Where(r => r.Name == strRoleAdmin).Select(r => r).FirstOrDefault();
+            var users = _db.Users.ToList().Where(t => t.Id != id).
+                                          Where(m => !m.Roles.Select(r => r.RoleId).Contains(role.Id)).
+                                          Select(m => m);
+
+            // убрать из списка ожидающих активацию аккаунта и друзей
+            users = (from user in users where !(from a in _db.AwaitingUsers.ToList() select a.UserId).Contains(user.Id) select user);
+            List<ApplicationUser> listUsers = users.Except(listFriends).OrderBy(u => u.SurName).ToList();
+
+            return listUsers;
         }
 
         private UserDto GetUserDto(ApplicationUser user)
@@ -79,6 +159,21 @@ namespace University.Controllers
             }
 
             return uDto;
+        }
+
+        private List<UserInfoDto> GetUsersInfoDto(List<ApplicationUser> users, bool isFriend)
+        {
+            List<UserInfoDto> usersInfo = new List<UserInfoDto>();
+
+            foreach (var user in users)
+            {
+                UserInfoDto uDto = new UserInfoDto(user);
+                uDto.UserRole = GetUserRole(user);
+                uDto.IsFriend = isFriend;
+                usersInfo.Add(uDto);
+            }
+
+            return usersInfo;
         }
 
         [Authorize(Roles = "admin")]

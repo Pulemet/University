@@ -1,4 +1,4 @@
-﻿@model IEnumerable<University.Models.Dto.UserDto>
+﻿@model IEnumerable<University.Models.Dto.UserInfoDto>
 
 @{
     ViewBag.Title = "Поиск";
@@ -6,12 +6,14 @@
 
 @Scripts.Render("~/scripts/jquery-3.1.1.js")
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+@Styles.Render("~/Content/css")
 
 <head>
     <script type="text/javascript" src="/scripts/script.js">
 
-
     </script>
+
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
 
     @{ List<string> userNamesCs = (List<string>)@ViewData["UserNames"]; }
 
@@ -43,6 +45,8 @@
 </head>
 
 <div class="container">
+    @Html.Partial("PageNewMessage")
+
     <div class="row">
         <div class="col-sm-3 col-md-2">
             @Html.Partial("~/Views/Home/PartialViewSaidBar.cshtml")
@@ -50,9 +54,8 @@
 
         <div class="col-sm-9 col-md-10" style="margin-top: 10px;">
             <div id="block-search">
-                <form method="get">
+                <form method="get" onkeypress=" if (event.keyCode === 13) return false; ">
                     <input type="text" id="input-search" oninput="SearchUser()" placeholder="Поиск">
-                    <input type="submit" id="form-search" value=" ">
                 </form>
                 <div id="block-search-result">
                     <ul id="list-search-result" style="list-style-type: none;"></ul>
