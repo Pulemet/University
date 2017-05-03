@@ -15,9 +15,9 @@ namespace University.Models.Helper
         public const string NO_IMAGE = "/Files/icons/NoImage.jpg";
         public const string AVATARS_FOLDER = "/Files/Avatars/";
         public const string MATERIALS_FOLDER = "/Files/Materials/";
-        public static IdentityRole RoleAdmin = new IdentityRole { Name = "admin" };
-        public static IdentityRole RoleStudent = new IdentityRole { Name = "student" };
-        public static IdentityRole RoleTeacher = new IdentityRole { Name = "teacher" };
+        public static IdentityRole RoleAdmin = new IdentityRole { Name = UserRoles.Admin };
+        public static IdentityRole RoleStudent = new IdentityRole { Name = UserRoles.Student };
+        public static IdentityRole RoleTeacher = new IdentityRole { Name = UserRoles.Teacher };
     }
 
     public enum TypeLesson
@@ -26,11 +26,11 @@ namespace University.Models.Helper
         Practic
     }
 
-    public enum UserRoles
+    public static class UserRoles
     {
-        Teacher,
-        Student,
-        Admin
+        public const string Teacher = "teacher";
+        public const string Student = "student";
+        public const string Admin = "admin";
     }
 
     public enum UserGenders

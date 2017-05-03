@@ -42,7 +42,7 @@ namespace University.Models.Dto
 
         public string Email { get; set; }
 
-        public UserRoles UserRole { get; set; }
+        public string UserRole { get; set; }
 
         public string Department { get; set; }
 
