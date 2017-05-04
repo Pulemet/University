@@ -213,12 +213,14 @@
     <Compile Include="Models\AppDbInitializer.cs" />
     <Compile Include="Models\Dto\AnswerDto.cs" />
     <Compile Include="Models\Dto\CommentDto.cs" />
+    <Compile Include="Models\Dto\CommentToTeacherDto.cs" />
     <Compile Include="Models\Dto\DialogDto.cs" />
     <Compile Include="Models\Dto\DialogJson.cs" />
     <Compile Include="Models\Dto\Infrastructure.cs" />
     <Compile Include="Models\Dto\MaterialDto.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\Dto\QuestionDto.cs" />
+    <Compile Include="Models\Dto\TeacherDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\Dto\UserInfoDto.cs" />
     <Compile Include="Models\Helper\ConstDictionary.cs" />
@@ -228,6 +230,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Tables\Answer.cs" />
     <Compile Include="Models\Tables\AwaitingUser.cs" />
+    <Compile Include="Models\Tables\CommentToTeacher.cs" />
     <Compile Include="Models\Tables\Department.cs" />
     <Compile Include="Models\Tables\Dialog.cs" />
     <Compile Include="Models\Tables\Faculty.cs" />
