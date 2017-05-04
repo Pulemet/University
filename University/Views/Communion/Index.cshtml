@@ -49,15 +49,15 @@
     </style>
 </head>
 
-<h2>Диалоги</h2>
-
-
 <div class="container">
-    <div class="col-md-6">
-        @Html.Partial("DialogsBar", Model)
-        @Html.Partial("NewDialogBar", (List<ApplicationUser>)ViewData["Friends"])
+    <div class="col-sm-3 col-md-2">
+        @Html.Partial("../Home/PartialViewSaidBar")
     </div>
-    <div class="form-horizontal col-md-6" id="currentDialog">
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Partial("DialogsBar", Model)
+        @Html.Partial("NewDialogBar", (List<ApplicationUser>) ViewData["Friends"])
+    </div>
+    <div class="form-horizontal col-md-5" id="currentDialog">
         <h4 id="dialogName"> </h4>
         <div id="formMessages">
             <p>Выберите диалог или создайте новый</p>
@@ -67,8 +67,8 @@
                 <div>
                     <input type="text" id="dialogId" name="DialogId" value="" class="hide">
                     <textarea class="form-element form-element-textarea" id="messageInput" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="5" placeholder="Напишите сообщение..."></textarea>
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <p>
                         <button type="submit" class="btn btn-success btn-sm" id="buttonSendMessage" disabled>Отправить</button>
                     </p>

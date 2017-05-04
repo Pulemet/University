@@ -97,7 +97,7 @@ namespace University.Controllers
 
             List<UserInfoDto> usersInfo = GetUsersInfoDto(users, false);
 
-            List<string> userNames = (from u in users select u.SurName + " " + u.FirstName).Distinct().ToList();
+            List<string> userNames = users.Select(u => u.SurName + " " + u.FirstName).Distinct().ToList();
             ViewData["UserNames"] = userNames;
 
             return View(usersInfo);

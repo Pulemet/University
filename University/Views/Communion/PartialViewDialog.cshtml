@@ -1,7 +1,8 @@
 ﻿@model University.Models.Dto.DialogDto
 
-<tr class="dialog-container" id="@Model.Id">
-    <td>
-        <a href="#" onclick="OpenDialog(@Model.Id)">@Model.Name</a>
-    </td>
-</tr>
+<div id="@Model.Id" onclick="OpenDialog(@Model.Id)">
+    <a href="#" class="list-group-item">
+        <span class="glyphicon glyphicon-star-empty"> </span>
+        <span class="name" style="min-width: 120px; display: inline-block;"> @Model.Name </span>
+    </a>
+</div>

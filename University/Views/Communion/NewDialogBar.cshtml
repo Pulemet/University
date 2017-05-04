@@ -2,7 +2,6 @@
 
 <div id="newDialogBar" hidden>
     <div class="form-group">
-        @Html.Label("Беседа", new { @class = "cols-sm-2 control-label" })
         <div class="form-group">
             <input type="text" id="NameConversation" oninput="IsChecked()" placeholder="Введите название" style="display: block; width: 100%; margin-bottom: 8px;" />
         </div>
@@ -14,7 +13,7 @@
         </div>
         <div class="btn-group" style="width: 100%; margin-bottom: 8px;">
             <a class="btn btn-warning btn-sm btn-block" onclick="ShowDialogs()">
-                <i class="fa fa-envelope fa"> Отменить беседу </i>
+                <i class="fa fa-envelope fa"> Отменить </i>
             </a>
         </div>
         <form class="formbox" id="formBox">

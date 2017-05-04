@@ -71,9 +71,11 @@ function CreateDialog() {
 }
 
 function GetPartialDialogHtml(id, name) {
-    var result = '<tr class="dialog-container" + id="' + id +
-        '"><td><a href="#" onclick="OpenDialog(' + id + ')">' + 
-        name + '</a></td></tr>';
+    var result = '<div id="' + id + '" ' + 'onclick="OpenDialog(' +
+        id + ')"><a href="#" class="list-group-item">' +
+        '<span class="glyphicon glyphicon-star-empty"></span>' +
+        '<span class="name" style="min-width: 120px; display: inline-block;">' +
+        name + '</span></a></div>';
     return result;
 }
 
