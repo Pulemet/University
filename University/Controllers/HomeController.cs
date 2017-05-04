@@ -189,7 +189,7 @@ namespace University.Controllers
             return View();
         }
 
-        private string GetUserRole(ApplicationUser user)
+        public string GetUserRole(ApplicationUser user)
         {
             var roles = user.Roles.Select(r => r.RoleId).ToList();
 
@@ -198,6 +198,26 @@ namespace University.Controllers
                 : roles.Contains(_roles[UserRoles.Teacher])
                 ? UserRoles.Teacher
                 : UserRoles.Student;
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult AdminPage()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult PageSubmitRegistration(string id)
+        {
+            ApplicationUser user = _db.Users.Find(id);
+
+            if (user != null)
+            {
+                UserDto uDto = GetUserDto(user);
+                return View(uDto);
+            }
+            ModelState.AddModelError("", "User does not exist");
+            return View(new UserDto());
         }
     }
 }
