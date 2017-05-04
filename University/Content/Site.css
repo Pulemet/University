@@ -13,7 +13,7 @@ body {
     padding-bottom: 6rem;
     min-height: 100%;
     width: 100%;
-    background: linear-gradient(141deg, #e0fbfb 0%, #ccc 51%, #86a1b9 75%) center center fixed;
+    background: linear-gradient(#e0fbfb, #86a1b9) center center fixed;
     font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -258,6 +258,67 @@ tr {
 
 .mail-option .btn-group {
     margin-right: 5px;
+}
+
+.btn-panel {
+    background: #f7f7f9;
+}
+
+.btn-panel-conversation .btn {
+    background: #f8f8f8;
+}
+
+.btn-panel .btn {
+    color: #b8b8b8;
+    transition: 0.2s all ease-in-out;
+}
+
+.conversation-wrap {
+    box-shadow: -2px 0 3px #dddd;
+    padding: 0;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.conversation {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+}
+
+.message-wrap {
+    box-shadow: 0 0 3px #ddd;
+    padding: 0;
+}
+
+.msg-wrap {
+    padding: 10px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.msg {
+    padding: 5px;
+    margin: 0;
+}
+
+.time {
+    color: #bfbfbf;
+}
+
+.msg-wrap .media-heading {
+    color: #003bb3;
+    font-weight: 700;
+}
+
+.send-wrap {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+}
+
+.send-message {
+    resize: none;
 }
 
 /* 'Signup' button. */
