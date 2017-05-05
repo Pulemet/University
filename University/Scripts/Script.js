@@ -72,6 +72,22 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('#addReview').submit(function (event) {
+        event.preventDefault();
+        var data = $(this).serialize();
+        var url = $(this).attr('action');
+        $.post(url, data, function (responce) {
+            $('#reviewInput').val('');
+            $('#formReviews').append(responce);
+            $('#buttonAddReview').prop('disabled', true);
+            if ($('#noReviews').length > 0) {
+                $('#noReviews').remove();
+            }
+        });
+    });
+});
+
 function LockedButton(thisInput, lockedButton) {
     if ($("#" + thisInput).val() === '') {
         $("#" + lockedButton).prop('disabled', true);

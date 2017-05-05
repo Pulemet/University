@@ -45,9 +45,9 @@
                 }
                 else
                 {
-                    foreach (var msg in Model.Answers)
+                    foreach (var answer in Model.Answers)
                     {
-                        @Html.Partial("Answer", msg)
+                        @Html.Partial("Answer", answer)
                     }
                 }
             }

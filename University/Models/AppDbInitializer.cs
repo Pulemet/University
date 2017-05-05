@@ -27,7 +27,7 @@ namespace University.Models
                 roleManager.Create(ConstDictionary.RoleTeacher);
 
                 // создаем пользователей
-                var admin = new ApplicationUser { Email = "runec@mail.ru", UserName = "runec@mail.ru", BirthDate = DateTime.Now, Photo = "/Files/icons/NoImage.jpg", FirstName = "Катя", SurName = "Админ", PatronymicName = "", Gender = "female"};
+                var admin = new ApplicationUser { Email = "runec@mail.ru", UserName = "runec@mail.ru", BirthDate = DateTime.Now, Photo = "/Files/icons/NoImage.jpg", FirstName = "Катя", SurName = "Админ", PatronymicName = "", Gender = "female", UserInfo = "Я тут главный"};
                 string password = "12!Qaz";
                 var result = userManager.Create(admin, password);
 
@@ -92,7 +92,8 @@ namespace University.Models
         {
             new Subject() { NameAbridgment = "МОИС", NameFull = "Математические основы интеллектуальных систем"},
             new Subject() { NameAbridgment = "ОАИП", NameFull = "Основы алгоритмизации и программирования"},
-            new Subject() { NameAbridgment = "ППВИС", NameFull = "Проектирование программ в интеллектуальных системах"}
+            new Subject() { NameAbridgment = "ППВИС", NameFull = "Проектирование программ в интеллектуальных системах"},
+            new Subject() { NameAbridgment = "ИГ", NameFull = "Инженерная графика"}
         };
         public static void Init()
         {

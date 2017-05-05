@@ -1,11 +1,15 @@
 ﻿@model University.Models.Tables.Subject
 
 <div class="blockquote-box clearfix col-xs-6">
+    <p>
+        <a href="@Url.Action("Index", "Teachers", new { id = Model.Id })"> Преподаватели </a>
+    </p>
     <h4>@Model.NameFull</h4>
     <p>
-        <a href="@Url.Action("MaterialsSubject", "Subjects", new { id = Model.Id })"> Перейти к материалам </a>
+        <a href="@Url.Action("MaterialsSubject", "Subjects", new {id = Model.Id})"> Перейти к материалам </a>
     </p>
     <p>
-        <a href="@Url.Action("Questions", "Questions", new { id = Model.Id })"> Перейти к вопросам </a>
+        <a href="@Url.Action("Questions", "Questions", new {id = Model.Id})"> Перейти к вопросам </a>
     </p>
+
 </div>

@@ -1,0 +1,14 @@
+﻿@model University.Models.Dto.TeacherDto
+
+
+<form method="POST" id="addReview" action="/Teachers/AddReview">
+    <div>
+        <input type="text" name="TeacherId" value="@Model.Id" class="hide">
+        <textarea class="form-element form-element-textarea" id="reviewInput" name="Text" rows="5" oninput="LockedButton('reviewInput', 'buttonAddReview')" placeholder="Введите комментарий..."></textarea>
+        <br />
+        <br />
+        <p>
+            <button type="submit" class="btn btn-success btn-sm" id="buttonAddReview" disabled>Опубликовать</button>
+        </p>
+    </div>
+</form>
