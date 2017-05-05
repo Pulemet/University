@@ -94,11 +94,10 @@ function GetDialogHtml(dialog) {
 }
 
 function GetMessageHtml(message) {
-    return '<label class="control-label form-element-label-name"><b>' +
-                message.SurName + ' ' + message.FirstName +
-                ' </b></label><label class="control-label form-element-label-time">' +
-                message.DateSend + '</label><div><p class="form-element-label-time">' + message.Text +
-                '</p></div>';
+    return '<div class="msg-wrap"><div class="media msg"><div class="media-body">' +
+        '<small class="pull-right time"><i class="fa fa-clock-o">' + message.DateSend +
+        '</i></small><h5 class="media-heading">' + message.SurName + ' ' + message.FirstName +
+        '</h5><small>' + message.Text + '</small></div></div></div>';
 }
 
 function ClearValuesInPageNewDialog(inputId) {
