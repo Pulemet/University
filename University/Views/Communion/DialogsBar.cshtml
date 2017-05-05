@@ -1,17 +1,16 @@
 ﻿@model IEnumerable<University.Models.Dto.DialogDto>
 
 <div class="col-sm-9 col-md-10" style="margin-top: 10px;" id="dialogsBar">
-    
-    <div class="mail-option">
-        <div class="btn-group">
-            <a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false" onclick="NewDialog()">
-                Начать беседу
-                <i class="fa fa-angle-down fa"> </i>
+
+    <div class="mail-option col-md-12">
+        <div class="btn-panel btn-panel-conversation">
+            <a href="#" class="btn col-lg-12 send-message-btn pull-right" onclick="NewDialog()">
+                <i class="fa fa-plus"> Создать беседу</i>
             </a>
         </div>
     </div>
 
-    <div class="tab-content">
+    <div class="tab-content col-md-12" style="margin-top: 10px;">
         <div class="tab-pane fade in active" id="home">
             <div class="list-group" id="ListDialogs">
                 @foreach (var dialog in Model)

@@ -55,12 +55,7 @@
             @Html.Partial("../Home/PartialViewSaidBar")
         </div>
 
-        <div class="col-md-4 col-md-offset-1">
-            <div class="btn-panel btn-panel-conversation">
-                <a href="#" class="btn col-lg-12 send-message-btn pull-right">
-                    <i class="fa fa-plus"> Создать беседу</i>
-                </a>
-            </div>
+        <div class="col-md-4 col-md-offset-1"> 
             @Html.Partial("DialogsBar", Model)
             @Html.Partial("NewDialogBar", (List<ApplicationUser>) ViewData["Friends"])
         </div>
