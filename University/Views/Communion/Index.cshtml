@@ -63,16 +63,18 @@
             <div id="formMessages">
                 <p>Выберите диалог или создайте новый</p>
             </div>
-            <div class="form-horizontal col-md-6 col-md-offset-3" id="formSendMessage" hidden>
+            <div id="formSendMessage" hidden>
                 <form method="POST" id="sendMessage" onsubmit="return SendMessage()" action="/Communion/SendMessageInDialog">
                     <div>
                         <input type="text" id="dialogId" name="DialogId" value="" class="hide">
-                        <textarea class="form-element form-element-textarea" id="messageInput" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="5" placeholder="Напишите сообщение..."></textarea>
-                        <br />
-                        <br />
-                        <p>
-                            <button type="submit" class="btn btn-success btn-sm" id="buttonSendMessage" disabled>Отправить</button>
-                        </p>
+                        <div class="send-wrap">
+                            <textarea class="form-control send-message" id="messageInput" style="max-width: none;" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="3" placeholder="Введите сообщение..."></textarea>
+                        </div>
+                        <div class="btn-panel">
+                            <button type="submit" class="col-lg-4 text-right btn send-message-btn pull-right" id="buttonSendMessage" disabled>
+                                <i class="fa fa-plus"> Отправить </i>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

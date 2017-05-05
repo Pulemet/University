@@ -93,9 +93,10 @@ function GetDialogHtml(dialog) {
 }
 
 function GetMessageHtml(message) {
-    return '<small class="pull-right" style="color: #bfbfbf;"><i class="fa fa-clock-o"> ' + message.DateSend +
-        '</i></small><h5 style="color: #003bb3; font-weight: 700;">' + message.SurName + ' ' + message.FirstName +
-        '</h5><small>' + message.Text + '</small>';
+    return '<div class="msg-wrap"><div class="media msg">' +
+            '<small class="pull-right time"><i class="fa fa-clock-o" style="color: #6E6E6E;"> ' + message.DateSend +
+            '</i></small><h5 class="media-heading" style="color: #003bb3;"><b>' + message.SurName + ' ' + message.FirstName +
+            '</b></h5><small>' + message.Text + '</small></div></div>';
 }
 
 function ClearValuesInPageNewDialog(inputId) {
