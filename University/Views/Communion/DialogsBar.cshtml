@@ -1,20 +1,20 @@
 ﻿@model IEnumerable<University.Models.Dto.DialogDto>
 
-<div class="col-md-12" style="margin-top: 10px; margin-bottom: 20px;" id="dialogsBar">
-    <div class="btn-panel btn-panel-conversation">
-        <a href="#" class="btn col-lg-6 send-message-btn pull-right" onclick="NewDialog()">
-            <i class="fa fa-plus"> Создать беседу </i>
-        </a>
-    </div>
+    <div class="col-md-12" style="margin-top: 10px; margin-bottom: 20px;" id="dialogsBar">
+        <div class="btn-panel btn-panel-conversation">
+            <a href="#" class="btn col-lg-6 send-message-btn pull-right" onclick="NewDialog()">
+                <i class="fa fa-plus"> Создать беседу </i>
+            </a>
+        </div>
 
-    <div class="conversation-wrap col-md-12" style="margin-top: 10px;">
-        <div class="tab-pane fade in active" id="home">
-            <div id="ListDialogs" class="media conversation">
-                @foreach (var dialog in Model)
-                {
-                    @Html.Partial("PartialViewDialog", dialog)
-                }
+        <div class="conversation-wrap col-md-12" style="margin-top: 10px;">
+            <div class="tab-pane fade in active" id="home">
+                <div id="ListDialogs" class="media conversation">
+                    @foreach (var dialog in Model)
+                    {
+                        @Html.Partial("PartialViewDialog", dialog)
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>

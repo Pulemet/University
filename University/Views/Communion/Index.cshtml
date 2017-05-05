@@ -57,27 +57,66 @@
             @Html.Partial("DialogsBar", Model)
             @Html.Partial("NewDialogBar", (List<ApplicationUser>)ViewData["Friends"])
         </div>
-
-        <div class="message-wrap col-md-5" id="currentDialog">
-            <h4 id="dialogName" style="margin-bottom: 20px;"> </h4>
-
-            <div class="msg-wrap" id="formMessages">
+        
+        <div class="col-lg-offset-1 col-lg-7">
+            
+        </div>
+        
+        <div class="form-horizontal col-md-5" id="currentDialog">
+            <h4 id="dialogName"> </h4>
+            <div id="formMessages">
                 <p>Выберите диалог или создайте новый</p>
             </div>
-            <div class="col-md-12" id="formSendMessage" hidden>
+            <div class="form-horizontal col-md-6 col-md-offset-3" id="formSendMessage" hidden>
                 <form method="POST" id="sendMessage" onsubmit="return SendMessage()" action="/Communion/SendMessageInDialog">
                     <div>
                         <input type="text" id="dialogId" name="DialogId" value="" class="hide">
-                        <div class="send-wrap">
-                            <textarea class="form-control send-message" id="messageInput" style="max-width: none;" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="3" placeholder="Введите сообщение..."></textarea>
-                        </div>
-                        <div class="btn-panel">
-                            <button type="submit" class="col-lg-4 text-right btn send-message-btn pull-right" id="buttonSendMessage" disabled>
-                                <i class="fa fa-plus"> Отправить </i>
-                            </button>
-                        </div>
+                        <textarea class="form-element form-element-textarea" id="messageInput" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="5" placeholder="Напишите сообщение..."></textarea>
+                        <br />
+                        <br />
+                        <p>
+                            <button type="submit" class="btn btn-success btn-sm" id="buttonSendMessage" disabled>Отправить</button>
+                        </p>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="conversation-wrap col-lg-3">
+            <div class="media conversation">
+                <div class="media-body">
+                    <h5 class="media-heading"></h5>
+                    <small>Click</small>
+                </div>
+            </div>
+        </div>
+        <div class="message-wrap col-lg-8">
+            <div class="msg-wrap">
+                <div class="media msg">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" style="width: 32px; height: 32px;"/>
+                    </a>
+                    <div class="media-body">
+                        <small class="pull-right time">
+                            <i class="fa fa-clock-o">
+                                12:10
+                            </i>
+                        </small>
+                        <h5 class="media-heading">Name</h5>
+                        <small class="col-lg-10">
+                            Message text
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="send-wrap">
+                <textarea class="form-control send-message" rows="3" placeholder="Введите сообщение..."></textarea>
+            </div>
+            <div class="bnt-panel">
+                <a href class="col-lg-4 text-right btn send-message-btn pull-right" role="button">
+                    <i class="fa fa-plus"> Отослать сообщение </i>
+                </a>
             </div>
         </div>
     </div>
