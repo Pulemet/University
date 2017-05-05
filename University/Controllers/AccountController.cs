@@ -235,7 +235,8 @@ namespace University.Controllers
                         Gender = model.Gender,
                         BirthDate = model.BirthDate,
                         Photo = fileName,
-                        GroupId = model.Group != null ? Int32.Parse(model.Group) : Int32.Parse(model.Department)
+                        GroupId = model.Group != null ? Int32.Parse(model.Group) : Int32.Parse(model.Department),
+                        UserInfo = ""
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);

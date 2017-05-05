@@ -9,7 +9,7 @@ namespace University.Models.Tables
     {
         public int Id { get; set; }
 
-        public int TeacherId { get; set; }
+        public string TeacherId { get; set; }
 
         public DateTime DateAdd { get; set; }
 

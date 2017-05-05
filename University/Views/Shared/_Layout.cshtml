@@ -16,12 +16,14 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Предметы", "Index", "Subjects")</li>
-                        <li>@Html.ActionLink("Задать вопрос", "NewQuestion", "Questions")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        @if (User.IsInRole("admin"))
+                        @if (Request.IsAuthenticated)
                         {
-                            <li>@Html.ActionLink("Admin", "AdminPage", "Home")</li>
+                            <li>@Html.ActionLink("Предметы", "Index", "Subjects")</li>
+                            <li>@Html.ActionLink("Задать вопрос", "NewQuestion", "Questions")</li>
+                            if (User.IsInRole("admin"))
+                            {
+                                <li>@Html.ActionLink("Admin", "AdminPage", "Home")</li>
+                            }
                         }
                     </ul>
                     @Html.Partial("_LoginPartial")

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<University.Models.Dto.TeacherDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+            @Html.Partial("../Home/PartialViewSaidBar")
+        </div>
+        <div class="col-md-9">
+            @Html.Partial("PartialViewTeachers", Model)
+        </div>
+    </div>
+</div>

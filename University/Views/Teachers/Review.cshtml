@@ -1,0 +1,10 @@
+﻿@model University.Models.Dto.CommentToTeacherDto
+
+<hr />
+<label class="control-label form-element-label-name"><b>@Model.SurName @Model.FirstName</b></label>
+<label class="control-label form-element-label-time">@String.Format("{0:dd.MM.yyyy}", Model.DateAdd) в @String.Format("{0:H.mm}", Model.DateAdd)</label>
+<br />
+<div>
+    <p class="form-element-label-time">@Model.Text</p>
+</div>
+

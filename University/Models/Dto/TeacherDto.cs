@@ -21,6 +21,7 @@ namespace University.Models.Dto
             FirstName = user.FirstName;
             SurName = user.SurName;
             PatronymicName = user.PatronymicName;
+            Email = user.Email;
             Photo = user.Photo == "" ? ConstDictionary.NO_IMAGE : user.Photo;
             Subjects = new List<Subject>();
             Comments = new List<CommentToTeacherDto>();
@@ -33,6 +34,8 @@ namespace University.Models.Dto
         public string SurName { get; set; }
 
         public string PatronymicName { get; set; }
+
+        public string Email { get; set; }
 
         public string Photo { get; set; }
 

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<University.Models.Dto.TeacherDto>
+
+<div id="ListTeachers">
+    @foreach (var teacher in Model)
+    {
+        @Html.Partial("PartialViewTeacher", teacher)
+    }
+</div>
+

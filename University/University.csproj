@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
+    <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -404,6 +405,12 @@
     <Content Include="Views\Home\TemplateUserPage.cshtml" />
     <Content Include="Views\Home\AdminPage.cshtml" />
     <Content Include="Views\Home\PageSubmitRegistration.cshtml" />
+    <Content Include="Views\Teachers\Index.cshtml" />
+    <Content Include="Views\Teachers\PartialViewTeachers.cshtml" />
+    <Content Include="Views\Teachers\PartialViewTeacher.cshtml" />
+    <Content Include="Views\Teachers\TeacherPage.cshtml" />
+    <Content Include="Views\Teachers\Review.cshtml" />
+    <Content Include="Views\Teachers\PartialAddReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

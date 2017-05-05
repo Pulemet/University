@@ -48,9 +48,9 @@
                 }
                 else
                 {
-                    foreach (var msg in Model.Comments)
+                    foreach (var comment in Model.Comments)
                     {
-                        @Html.Partial("Comment", msg)
+                        @Html.Partial("Comment", comment)
                     }
                 }
             }

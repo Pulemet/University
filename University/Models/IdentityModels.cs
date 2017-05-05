@@ -33,6 +33,7 @@ namespace University.Models
             userIdentity.AddClaim(new Claim("Photo", this.Photo));
             userIdentity.AddClaim(new Claim("BirthDate", this.BirthDate.ToShortDateString()));
             userIdentity.AddClaim(new Claim("GroupId", this.GroupId.ToString()));
+            userIdentity.AddClaim(new Claim("UserInfo", this.UserInfo));
             return userIdentity;
         }
 
@@ -49,6 +50,8 @@ namespace University.Models
         public DateTime BirthDate { get; set; }
 
         public int GroupId { get; set; }
+
+        public string UserInfo { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -82,6 +85,8 @@ namespace University.Models
         public DbSet<AwaitingUser> AwaitingUsers { get; set; }
 
         public DbSet<TeacherToSubject> TeacherToSubjects { get; set; }
+
+        public DbSet<CommentToTeacher> CommentsToTeacher { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
