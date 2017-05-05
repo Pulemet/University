@@ -93,7 +93,7 @@ function GetDialogHtml(dialog) {
 }
 
 function GetMessageHtml(message) {
-    return '<small class="pull-right" style="color: #bfbfbf;"><i class="fa fa-clock-o">' + message.DateSend +
+    return '<small class="pull-right" style="color: #bfbfbf;"><i class="fa fa-clock-o"> ' + message.DateSend +
         '</i></small><h5 style="color: #003bb3; font-weight: 700;">' + message.SurName + ' ' + message.FirstName +
         '</h5><small>' + message.Text + '</small>';
 }

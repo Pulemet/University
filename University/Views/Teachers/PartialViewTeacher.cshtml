@@ -1,4 +1,5 @@
-﻿@model University.Models.Dto.TeacherDto
+﻿@using Microsoft.AspNet.Identity
+@model University.Models.Dto.TeacherDto
 
 <div class="col-md-10">
     <div class="panel panel-default">
@@ -9,7 +10,17 @@
                 </div>
                 <div class="col-sm-6 col-md-6">
                     <h4>
-                        <i class="fa fa-university fa"> <a href="/Home/UserPage/@Model.Id"> @Model.SurName @Model.FirstName @Model.PatronymicName </a></i>
+                        <i class="fa fa-university fa">
+                            @{ string userId = User.Identity.GetUserId(); }
+                            @if (userId != Model.Id)
+                            {
+                                <a href="/Home/UserPage/@Model.Id"> @Model.SurName @Model.PatronymicName @Model.FirstName </a>
+                            }
+                            else
+                            {
+                                <span> @Model.SurName @Model.PatronymicName @Model.FirstName </span>
+                            }
+                        </i>
                     </h4>
                     <p>
                         <i class="glyphicon glyphicon-envelope"> @Model.Email </i>
