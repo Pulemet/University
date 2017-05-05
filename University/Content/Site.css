@@ -271,6 +271,9 @@ tr {
 .btn-panel .btn {
     color: #b8b8b8;
     transition: 0.2s all ease-in-out;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #eae3e3;
 }
 
 .conversation-wrap {
@@ -304,6 +307,12 @@ tr {
 
 .send-message {
     resize: none;
+}
+
+.list-group-item:last-child {
+    margin-bottom: 2px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 /* 'Signup' button. */

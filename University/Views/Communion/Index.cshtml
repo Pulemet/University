@@ -37,13 +37,14 @@
         }
 
         #formMessages {
-            padding: 10px;
-            max-height: 400px;
+            max-height: 60%;
             overflow: auto;
+            min-height: 60%;
         }
 
         #currentDialog {
             height: 600px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -53,15 +54,15 @@
         <div class="col-sm-3 col-md-2">
             @Html.Partial("../Home/PartialViewSaidBar")
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             @Html.Partial("DialogsBar", Model)
             @Html.Partial("NewDialogBar", (List<ApplicationUser>)ViewData["Friends"])
         </div>
         
         <div class="form-horizontal col-md-5" id="currentDialog">
-            <h4 id="dialogName"> </h4>
+            <h4 id="dialogName" style="font-family: 'Rouge Script';"> </h4>
             <div id="formMessages">
-                <p>Выберите диалог или создайте новый</p>
+                <p style="margin-top: 40%; margin-left: 25%;">Выберите диалог или <a href="#" onclick="NewDialog()">создайте новый</a></p>
             </div>
             <div id="formSendMessage" hidden>
                 <form method="POST" id="sendMessage" onsubmit="return SendMessage()" action="/Communion/SendMessageInDialog">
@@ -72,7 +73,7 @@
                         </div>
                         <div class="btn-panel">
                             <button type="submit" class="col-lg-4 text-right btn send-message-btn pull-right" id="buttonSendMessage" disabled>
-                                <i class="fa fa-plus"> Отправить </i>
+                                <i class="fa fa-envelope"> Отправить </i>
                             </button>
                         </div>
                     </div>
