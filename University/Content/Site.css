@@ -291,24 +291,9 @@ tr {
     padding: 0;
 }
 
-.msg-wrap {
-    padding: 10px;
-    max-height: 400px;
-    overflow: auto;
-}
-
 .msg {
     padding: 5px;
     margin: 0;
-}
-
-.time {
-    color: #bfbfbf;
-}
-
-.msg-wrap .media-heading {
-    color: #003bb3;
-    font-weight: 700;
 }
 
 .send-wrap {
@@ -592,7 +577,6 @@ header[role=banner] {
 
 .form-control {
     display: block;
-    width: 270px;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;

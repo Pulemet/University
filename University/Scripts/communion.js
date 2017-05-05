@@ -73,7 +73,6 @@ function CreateDialog() {
 function GetPartialDialogHtml(id, name) {
     var result = '<div id="' + id + '" ' + 'onclick="OpenDialog(' +
         id + ')"><a href="#" class="list-group-item">' +
-        '<span class="glyphicon glyphicon-star-empty"></span>' +
         '<span class="name" style="min-width: 120px; display: inline-block;">' +
         name + '</span></a></div>';
     return result;
@@ -94,11 +93,9 @@ function GetDialogHtml(dialog) {
 }
 
 function GetMessageHtml(message) {
-    return '<label class="control-label form-element-label-name"><b>' +
-                message.SurName + ' ' + message.FirstName +
-                ' </b></label><label class="control-label form-element-label-time">' +
-                message.DateSend + '</label><div><p class="form-element-label-time">' + message.Text +
-                '</p></div>';
+    return '<small class="pull-right" style="color: #bfbfbf;"><i class="fa fa-clock-o">' + message.DateSend +
+        '</i></small><h5 style="color: #003bb3; font-weight: 700;">' + message.SurName + ' ' + message.FirstName +
+        '</h5><small>' + message.Text + '</small>';
 }
 
 function ClearValuesInPageNewDialog(inputId) {
