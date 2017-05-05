@@ -273,7 +273,7 @@ tr {
     transition: 0.2s all ease-in-out;
     margin-top: 10px;
     margin-right: 10px;
-    background-color: #eae3e3;
+    background-color: #f0fff0;
 }
 
 .conversation-wrap {
@@ -302,7 +302,10 @@ tr {
 .send-wrap {
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
-    padding: 10px;
+    padding-bottom: 10px;
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 10px;
 }
 
 .send-message {
