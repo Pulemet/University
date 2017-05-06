@@ -13,7 +13,8 @@ body {
     padding-bottom: 6rem;
     min-height: 100%;
     width: 100%;
-    background: linear-gradient(#e0fbfb, #86a1b9) center center fixed;
+    background: -webkit-linear-gradient(top,#9face6 0%,#74ebd5 100%) center center fixed;
+    background: linear-gradient(to bottom,#9face6 0%,#74ebd5 100%) center center fixed;
     font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
