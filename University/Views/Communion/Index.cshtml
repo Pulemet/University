@@ -40,11 +40,12 @@
             max-height: 60%;
             overflow: auto;
             min-height: 60%;
+            margin-top: 20px;
         }
 
         #currentDialog {
             height: 600px;
-            margin-top: 20px;
+            margin-top: 0;
         }
     </style>
 </head>
@@ -60,23 +61,21 @@
         </div>
         
         <div class="form-horizontal col-md-5" id="currentDialog">
-            <h4 id="dialogName" style="font-family: 'Rouge Script';"> </h4>
+            <h4 id="dialogName" style="font-family: 'Rouge Script'; margin-top: 20px; margin-bottom: 15px;"> </h4>
             <div id="formMessages">
                 <p style="margin-top: 40%; margin-left: 25%;">Выберите диалог или <a href="#" onclick="NewDialog()">создайте новый</a></p>
             </div>
             <div id="formSendMessage" hidden>
                 <form method="POST" id="sendMessage" onsubmit="return SendMessage()" action="/Communion/SendMessageInDialog">
-                    <div>
                         <input type="text" id="dialogId" name="DialogId" value="" class="hide">
                         <div class="send-wrap">
-                            <textarea class="form-control send-message" id="messageInput" style="max-width: none;" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="3" placeholder="Введите сообщение..."></textarea>
+                            <textarea class="form-control send-message" id="messageInput" style="max-width: none; display: -webkit-inline-box;" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="3" placeholder="Введите сообщение..."></textarea>
                         </div>
                         <div class="btn-panel">
                             <button type="submit" class="col-lg-4 text-right btn send-message-btn pull-right" id="buttonSendMessage" disabled>
                                 <i class="fa fa-envelope"> Отправить </i>
                             </button>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>
