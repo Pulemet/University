@@ -13,7 +13,12 @@
 
     </script>
 
-    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
+
+    <script>
+        var arr = @Html.Raw(Json.Encode(Model));
+        initArrayUsers(arr);
+    </script>
 </head>
 
 <div class="container">
@@ -26,9 +31,8 @@
 
         <div class="col-sm-9 col-md-10" style="margin-top: 10px;">
             <div id="block-search">
-                <form method="get">
-                    <input type="text" id="input-search" oninput="SearchUser()" placeholder="Поиск">
-                    <input type="submit" id="form-search" value=" ">
+                <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
+                    <input type="text" id="input-search" oninput="SearchFriend()" placeholder="Поиск">
                 </form>
                 <div id="block-search-result">
                     <ul id="list-search-result" style="list-style-type: none;"></ul>

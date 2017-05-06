@@ -1,39 +1,4 @@
-﻿$(function () {
-    $("input[type='date']")
-                .datepicker({ dateFormat: 'dd/mm/yy' })
-                .get(0).setAttribute("type", "text");
-    $.datepicker.regional['ru'] = {
-        prevText: 'Пред',
-        nextText: 'След',
-        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-        monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн',
-        'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
-        dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
-        dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
-        dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-        weekHeader: 'Не',
-        dateFormat: 'dd/mm/yy',
-        firstDay: 1,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: ''
-    };
-    $.datepicker.setDefaults($.datepicker.regional['ru']);
-    $.validator.addMethod('date',
-        function (value, element) {
-            var ok = true;
-            try {
-                $.datepicker.parseDate('dd/mm/yy', value);
-            }
-            catch (err) {
-                ok = false;
-            }
-            return ok;
-        });
-});
-
-function AddFriend(id, buttonId) {
+﻿function AddFriend(id, buttonId) {
     $.post("/Home/AddFriend", { id: id }, function () {
         $("#" + buttonId).text("Добавлен");
         $("#" + buttonId).prop('disabled', true);
@@ -149,25 +114,100 @@ function AddMaterialClick() {
 
 var userNames;
 var userName;
+var Friends;
+var Surnames;
+var FirstNames;
 
 function initArrayInExternFile(arr) {
     userNames = arr;
+    Surnames = new Array();
+    FirstNames = new Array();
+    for (var index = 0, len = userNames.length; index < len; ++index) {
+        var temp = userNames[index].split(" ");
+        Surnames.push(temp[0].toLowerCase());
+        FirstNames.push(temp[1].toLowerCase());
+    }
 }
 
 function initUserName(name) {
     userName = name;
 }
 
+function initArrayUsers(arr) {
+    Friends = arr;
+    Surnames = new Array();
+    FirstNames = new Array();
+    for (var index = 0, len = Friends.length; index < len; ++index) {
+        Surnames.push(Friends[index].SurName.toLowerCase());
+        FirstNames.push(Friends[index].FirstName.toLowerCase());
+    }
+}
+
+function SearchFriend() {
+    var inputSearch = $("#input-search").val();
+    var data = new Array();
+    var dataHtml = "";
+    if (inputSearch.length > 0 && inputSearch.length < 50) {
+        // Делаем запрос в обработчик в котором будет происходить поиск.
+
+        for (var index = 0, len = Friends.length; index < len; ++index) {
+            var loverInputSearch = inputSearch.toLowerCase();
+            if (Surnames[index].substring(0, inputSearch.length) === loverInputSearch
+                || FirstNames[index].substring(0, inputSearch.length) === loverInputSearch) {
+                data.push(Friends[index]);
+            }
+        }
+        if (data.length !== 0) {
+            dataHtml = GetViewFriends(data);
+            $('#ListUsers').replaceWith(dataHtml);
+        }
+    } else {
+        dataHtml = GetViewFriends(Friends);
+        $('#ListUsers').replaceWith(dataHtml);
+    }
+    
+}
+
+function GetViewFriends(friends) {
+    var data = '<div id="ListUsers">';
+    for (var index = 0, len = friends.length; index < len; ++index) {
+        data += GetViewFriend(friends[index]);
+    }
+    data = data + '</div>';
+    return data;
+}
+
+function GetViewFriend(friend) {
+    var role;
+    if (friend.UserRole === "student") {
+        role = "Студент";
+    } else {
+        role = "Преподаватель";
+    }
+    return '<div class="col-md-10"><div class="panel panel-default">' +
+        '<div class="panel-body"><div class="row"><div class="col-md-4 col-lg-4" align="center">' +
+        '<img src="' + friend.Photo + '" class="circular-square-users"></div>' +
+        '<div class="col-sm-6 col-md-8"><h4><i class="fa fa-university fa">' +
+        '<a href="/Home/UserPage/' + friend.Id + '"> ' + friend.SurName + ' ' + friend.FirstName +' </a></i>' +
+        '</h4><p><i class="glyphicon glyphicon-user"> ' + role + ' </i><br/>' +
+        '<i class="glyphicon glyphicon-envelope"> ' + friend.Email + ' </i><br/></p>' +
+        '<div class="btn-group"><a class="btn btn-success" onclick="ShowFormSendMessageD("' + friend.Id +
+        '", "' + friend.SurName + ' ' + friend.FirstName + '")"' +
+        'id="show-button"><i class="fa fa-envelope fa"> Написать сообщение </i></a></div>' +
+        '</div></div></div></div></div>';
+}
+
 function SearchUser() {
     var inputSearch = $("#input-search").val();
     // Проверяем поисковое значение. Если оно больше или ровняется Трём, то всё нормально и также если меньше 50 символов.
     var data = "";
-    if (inputSearch.length >= 3 && inputSearch.length < 50) {
+    if (inputSearch.length > 0 && inputSearch.length < 50) {
         // Делаем запрос в обработчик в котором будет происходить поиск.
         
-        for (var index = 0, len = userNames.length; index < len; ++index)
-        {
-            if (userNames[index].toLowerCase().substring(0, inputSearch.length) === inputSearch.toLowerCase()) {
+        for (var index = 0, len = userNames.length; index < len; ++index) {
+            var loverInputSearch = inputSearch.toLowerCase();
+            if (Surnames[index].substring(0, inputSearch.length) === loverInputSearch
+                || FirstNames[index].substring(0, inputSearch.length) === loverInputSearch) {
                 data = data + '<li class="add-li"><div class="block-title-price" >' + '<a href="#">' + userNames[index] + "</a></div></li>";
             }
         }

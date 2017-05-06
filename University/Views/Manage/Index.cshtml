@@ -14,6 +14,10 @@
 
     </script>
 
+    <script type="text/javascript" src="/scripts/script.js">
+
+    </script>
+
     <script>
         $(document).ready(function () {
             StartSelect("subject");
@@ -47,7 +51,17 @@
                     <input type="file" id="avatar" class="upload" onchange="changeAvatar(event)"/>
                 </div>
             </div>
-            <button type="submit" class="btn" onclick="SubmitAvatar()" id="buttonChangePhoto" disabled>Изменить</button>
+            <button type="submit" class="btn" onclick="SubmitAvatar()" id="buttonChangePhoto" disabled> Изменить </button>
+            <hr/>
+            <span>Добавить информацию о себе</span>
+            <div class="send-wrap">
+                <textarea class="form-control send-message" id="aboutInfoInput" style="max-width: none;" oninput="LockedButton('aboutInfoInput', 'buttonAddAboutInfo')" rows="3" placeholder="О себе..."></textarea>
+            </div>
+            <button type="submit" class="btn" onclick="ChangeAboutInfo()" id="buttonAddAboutInfo" disabled> Добавить </button>
+            <hr/>
+            <div class="dl-horizontal">
+                @Html.ActionLink("Изменить пароль", "ChangePassword")
+            </div>
         </div>
         @if(ViewBag.IsTeacher)
         {
@@ -69,10 +83,5 @@
                 </div>
             </div>
         }
-    </div>
-
-    <div class="dl-horizontal">
-        <hr />
-        @Html.ActionLink("Изменить пароль", "ChangePassword")
-    </div>
+    </div> 
 </div>

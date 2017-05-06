@@ -19,7 +19,8 @@ namespace University.Models.Dto
             Gender = user.Gender == "female" ? UserGenders.Female : UserGenders.Male;
             BirthDate = user.BirthDate;
             Photo = user.Photo == "" ? ConstDictionary.NO_IMAGE : user.Photo;
-            Email = user.Email;   
+            Email = user.Email;
+            UserInfo = user.UserInfo;
         }
 
         public string Id { get; set; }
@@ -47,5 +48,7 @@ namespace University.Models.Dto
         public string Department { get; set; }
 
         public UserGenders Gender { get; set; }
+
+        public string UserInfo { get; set; }
     }
 }

@@ -68,6 +68,15 @@ namespace University.Controllers
             }
         }
 
+        [HttpPost]
+        public void ChangeAboutInfo(string aboutInfo)
+        {
+            var user = db.Users.Find(User.Identity.GetUserId());
+            user.UserInfo = aboutInfo;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
         public ApplicationUserManager UserManager
         {
             get

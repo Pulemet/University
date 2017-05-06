@@ -106,6 +106,15 @@ var changeAvatar = function (event) {
     $("#buttonChangePhoto").text("Изменить");
 };
 
+function ChangeAboutInfo() {
+    var aboutInfo = $('#aboutInfoInput').val();
+    var url = '/Manage/ChangeAboutInfo';
+    $.post(url, { aboutInfo: aboutInfo }, function() {
+        $("#buttonAddAboutInfo").prop('disabled', true);
+        $("#aboutInfoInput").val("");
+    });
+}
+
 $(function() {
     $('#date').change(function () {
         if ($(this).val() !== "") {
