@@ -1,4 +1,4 @@
-﻿@using University.Models.Tables
+﻿@using University.Models.Helper
 @model IEnumerable<University.Models.Dto.MaterialDto>
 
 @{
@@ -14,56 +14,84 @@
     </script>
 </head>
 
-<div class="col-md-8">
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <h3> @ViewBag.SubjectName </h3>
-        </div>
-    </div>
-</div>
+<style>
+    #border-style {
+        display: block;
+        -webkit-margin-before: 0.5em;
+        -webkit-margin-after: 0.5em;
+        -webkit-margin-start: auto;
+        -webkit-margin-end: auto;
+    }
+</style>
 
 <div class="container">
-    
-    <div class="col-md-6">
-        <div class="col-md-8">
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    @Html.Partial("PartialViewMaterials", Model)
+    <div class="row">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h2 class="title">@ViewBag.SubjectName</h2>
+                <hr id="form-line" />
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-subject" style="border-left-color:none; border-style:none;">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="lecture-form-link">Лекции</a>
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#" id="practical-form-link">Практические занятия</a>
+                            
+                        </div>
+                        <div class="col-md-12" id="lecture-materials">
+                            @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 0)))
+                            {
+                                @Html.Partial("PartialViewMaterial", material)
+                            }
+                        </div>
+                        <div class="col-md-12" id="practical-materials" hidden>
+                            @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 1)))
+                            {
+                                @Html.Partial("PartialViewMaterial", material)
+                            }
+                        </div>
+                    </div>
+                    <hr id="border-style" />
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-6">
-        @{
-            string subjectId = Url.RequestContext.RouteData.Values["id"].ToString();
-            <input type="text" name="SubjectId" id="SubjectId" value="@Int32.Parse(subjectId)" class="hide">
-            <br/>
-            <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="7" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Добавьте описание"></textarea>
-            <br/>
-
-            <div class="form-group">
-                <select class="form-material" name="TypeLesson" id="TypeLesson">
-                    <option value="Lecture"> Лекции </option>
-                    <option value="Practic"> Практические занятия </option>
-                </select>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="fileUpload btn-upload">
-                        <span> Прикрепить </span>
-                        <input type="file" class="upload" name="loadFile" id="loadFile"/>
-                    </div>
-                </div>
+        <div class="col-md-6">
+            @{
+                string subjectId = Url.RequestContext.RouteData.Values["id"].ToString();
+                <input type="text" name="SubjectId" id="SubjectId" value="@Int32.Parse(subjectId)" class="hide">
+                <br />
+                <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="7" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Добавьте описание"></textarea>
+                <br />
 
                 <div class="form-group">
+                    <select class="form-material" name="TypeLesson" id="TypeLesson">
+                        <option value="Lecture"> Лекции </option>
+                        <option value="Practic"> Практические занятия </option>
+                    </select>
+                </div>
+
+                <div class="row">
                     <div class="col-sm-3">
-                        <button type="submit" class="btn" onclick="AddMaterialClick()" id="buttonAddMaterial" disabled> Добавить </button>
+                        <div class="fileUpload btn-upload">
+                            <span> Прикрепить </span>
+                            <input type="file" class="upload" name="loadFile" id="loadFile" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn" onclick="AddMaterialClick()" id="buttonAddMaterial" disabled> Добавить </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-
 </div>

@@ -95,7 +95,7 @@ function AddMaterialClick() {
 
     $.ajax({
         type: "POST",
-        url: '/Subjects/PartialViewMaterials',
+        url: '/Subjects/AddMaterial',
         data: formData,
         dataType: 'html',
         contentType: false,
@@ -103,7 +103,11 @@ function AddMaterialClick() {
         success: function (responce) {
             $('#inputDescriptionMaterial').val('');
             $('#buttonAddMaterial').prop('disabled', true);
-            $('#listMaterials').replaceWith(responce);
+            if (typeLesson === "Lecture") {
+                $("#lecture-materials").append(responce);
+            } else {
+                $("#practical-materials").append(responce);
+            }
         },
         error: function () {
             window.location.reload();
@@ -379,3 +383,25 @@ function SendMessage(id, value) {
     });
 }
 // ---------------------------------------------------------------------------------------
+
+$(function () {
+    $('#lecture-form-link').click(function (e) {
+        $("#lecture-materials").show();
+        $("#practical-materials").hide();
+        $("#lecture-materials").delay(100).fadeIn(100);
+        $("#practical-materials").fadeOut(100);
+        $('#practical-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#practical-form-link').click(function (e) {
+        $("#lecture-materials").hide();
+        $("#practical-materials").show();
+        $("#practical-materials").delay(100).fadeIn(100);
+        $("#lecture-materials").fadeOut(100);
+        $('#lecture-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+
+});

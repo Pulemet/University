@@ -69,6 +69,27 @@ body {
     text-transform: uppercase;
 }
 
+.panel-subject {
+    border-color: #ccc;
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+
+.panel-subject > .panel-heading a.active {
+    color: #029f5b;
+    font-size: 18px;
+}
+
+.panel-subject > .panel-heading a {
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.1s linear;
+    font-size: 15px;
+}
+
+.panel-subject > .panel-heading {
+    text-align: center;
+}
+
 /* 'Login' button. */
 .login-button {
     margin-top: 5px;

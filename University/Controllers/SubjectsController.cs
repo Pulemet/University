@@ -30,7 +30,7 @@ namespace University.Controllers
         }
 
         [HttpPost]
-        public ActionResult PartialViewMaterials()
+        public ActionResult AddMaterial()
         {
             Material material = new Material();
             material.DateLoad = DateTime.Now;
@@ -52,7 +52,14 @@ namespace University.Controllers
 
             db.Materials.Add(material);
             db.SaveChanges();
-            return PartialView(SelectMaterials(db.Materials.Where(m => m.SubjectId == material.SubjectId).Select(m => m).ToList()));
+            var newMaterial = db.Materials.ToList().Last();
+
+            MaterialDto mDto = new MaterialDto(newMaterial);
+            ApplicationUser user = db.Users.Find(newMaterial.AuthorId);
+            mDto.FirstName = user.FirstName;
+            mDto.SurName = user.SurName;
+
+            return PartialView("PartialViewMaterial", mDto);
         }
 
         public ActionResult Material(int id)

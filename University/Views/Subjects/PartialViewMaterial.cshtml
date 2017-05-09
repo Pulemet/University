@@ -1,10 +1,8 @@
 ﻿@model University.Models.Dto.MaterialDto
     
-<tr class="dialog-container">
-    <td>
+<div class="dialog-container">
         <a href="@Url.Action("Material", "Subjects", new {id = Model.Id})">@Model.Name</a>
         <p></p><label class="control-label form-element-label-name">@String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad)</label>
         <label class="control-label form-element-label-time"><b>@Model.SurName @Model.FirstName</b></label>
         <br />
-    </td>
-</tr>
+</div>

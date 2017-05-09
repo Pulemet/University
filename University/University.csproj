@@ -380,7 +380,6 @@
     <Content Include="Views\Subjects\PartialViewSubject.cshtml" />
     <Content Include="Views\Subjects\MaterialsSubject.cshtml" />
     <Content Include="Views\Subjects\PartialViewMaterial.cshtml" />
-    <Content Include="Views\Subjects\PartialViewMaterials.cshtml" />
     <Content Include="Views\Subjects\Comment.cshtml" />
     <Content Include="Views\Subjects\PartialAddComment.cshtml" />
     <Content Include="Views\Subjects\Material.cshtml" />
