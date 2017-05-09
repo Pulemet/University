@@ -5,28 +5,57 @@
     ViewBag.Title = "Questions";
 }
 
-<h3>@ViewBag.SubjectName</h3>
+@Scripts.Render("~/scripts/jquery-3.1.1.js")
+@Scripts.Render("~/scripts/jquery.form.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 
-<div id="listQuestions">
-    <label class="control-label form-element-label-name"><b>Вопросы к лекциям</b></label>
-    <br />
-    <table class="table">
-        <tbody>
-            @foreach (var question in Model.Where(q => q.TypeQuestion == Enum.GetName(typeof(TypeLesson), 0)))
-            {
-                @Html.Partial("PartialViewQuestion", question)
-            }
-        </tbody>
-    </table>
-    <br />
-    <label class="control-label form-element-label-name"><b>Вопросы к практическим занятиям</b></label>
-    <br />
-    <table class="table">
-        <tbody>
-            @foreach (var question in Model.Where(q => q.TypeQuestion == Enum.GetName(typeof(TypeLesson), 1)))
-            {
-                @Html.Partial("PartialViewQuestion", question)
-            }
-        </tbody>
-    </table>
+<head>
+    <script type="text/javascript" src="/scripts/script.js">
+    </script>
+</head>
+
+<style>
+    #border-style {
+        display: block;
+        -webkit-margin-before: 0.5em;
+        -webkit-margin-after: 0.5em;
+        -webkit-margin-start: auto;
+        -webkit-margin-end: auto;
+    }
+</style>
+
+<div class="panel-heading">
+    <div class="panel-title text-center">
+        <h2 class="title">@ViewBag.SubjectName</h2>
+        <hr id="form-line" />
+    </div>
+</div>
+<div id="listQuestions" class="col-md-6 col-md-offset-3">
+    <div class="panel panel-subject" style="border-left-color:none; border-style:none;">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-6">
+                    <a href="#" class="active" id="lecture-form-link">Лекции</a>
+
+                </div>
+                <div class="col-xs-6">
+                    <a href="#" id="practical-form-link">Практические занятия</a>
+
+                </div>
+                <div class="col-md-12" id="lecture-content">
+                    @foreach (var question in Model.Where(m => m.TypeQuestion == Enum.GetName(typeof(TypeLesson), 0)))
+                    {
+                        @Html.Partial("PartialViewQuestion", question)
+                    }
+                </div>
+                <div class="col-md-12" id="practical-content" hidden>
+                    @foreach (var question in Model.Where(m => m.TypeQuestion == Enum.GetName(typeof(TypeLesson), 1)))
+                    {
+                        @Html.Partial("PartialViewQuestion", question)
+                    }
+                </div>
+            </div>
+            <hr id="border-style" />
+        </div>
+    </div>
 </div>

@@ -104,9 +104,9 @@ function AddMaterialClick() {
             $('#inputDescriptionMaterial').val('');
             $('#buttonAddMaterial').prop('disabled', true);
             if (typeLesson === "Lecture") {
-                $("#lecture-materials").append(responce);
+                $("#lecture-content").append(responce);
             } else {
-                $("#practical-materials").append(responce);
+                $("#practical-content").append(responce);
             }
         },
         error: function () {
@@ -386,19 +386,19 @@ function SendMessage(id, value) {
 
 $(function () {
     $('#lecture-form-link').click(function (e) {
-        $("#lecture-materials").show();
-        $("#practical-materials").hide();
-        $("#lecture-materials").delay(100).fadeIn(100);
-        $("#practical-materials").fadeOut(100);
+        $("#lecture-content").show();
+        $("#practical-content").hide();
+        $("#lecture-content").delay(100).fadeIn(100);
+        $("#practical-content").fadeOut(100);
         $('#practical-form-link').removeClass('active');
         $(this).addClass('active');
         e.preventDefault();
     });
     $('#practical-form-link').click(function (e) {
-        $("#lecture-materials").hide();
-        $("#practical-materials").show();
-        $("#practical-materials").delay(100).fadeIn(100);
-        $("#lecture-materials").fadeOut(100);
+        $("#lecture-content").hide();
+        $("#practical-content").show();
+        $("#practical-content").delay(100).fadeIn(100);
+        $("#lecture-content").fadeOut(100);
         $('#lecture-form-link').removeClass('active');
         $(this).addClass('active');
         e.preventDefault();

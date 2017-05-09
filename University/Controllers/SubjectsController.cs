@@ -54,10 +54,7 @@ namespace University.Controllers
             db.SaveChanges();
             var newMaterial = db.Materials.ToList().Last();
 
-            MaterialDto mDto = new MaterialDto(newMaterial);
-            ApplicationUser user = db.Users.Find(newMaterial.AuthorId);
-            mDto.FirstName = user.FirstName;
-            mDto.SurName = user.SurName;
+            MaterialDto mDto = GetMaterialDto(newMaterial);
 
             return PartialView("PartialViewMaterial", mDto);
         }
@@ -65,18 +62,8 @@ namespace University.Controllers
         public ActionResult Material(int id)
         {
             Material material = db.Materials.Find(id);
-            MaterialDto mDto = new MaterialDto(material);
-            if (material != null)
-            {
-                ApplicationUser user = db.Users.Find(material.AuthorId);
-                mDto.FirstName = user.FirstName;
-                mDto.SurName = user.SurName;
-            }
-            var comments = db.MaterialComments.Where(c => c.MaterialId == material.Id).Select(c => c).ToList();
-            foreach (var comment in comments)
-            {
-                mDto.Comments.Add(GetComment(comment));
-            }
+            MaterialDto mDto = GetMaterialDto(material);
+            mDto.Comments = GetComments(mDto.Id);
             return View(mDto);
         }
 
@@ -99,21 +86,17 @@ namespace University.Controllers
             return PartialView(GetComment(db.MaterialComments.Find(commentId)));
         }
 
-        public List<MaterialDto> SelectMaterials(List<Material> listMaterials)
+        private List<MaterialDto> SelectMaterials(List<Material> listMaterials)
         {
             List<MaterialDto> materialsDto = new List<MaterialDto>();
             foreach (var material in listMaterials)
             {
-                MaterialDto mDto = new MaterialDto(material);
-                ApplicationUser user = db.Users.Find(material.AuthorId);
-                mDto.FirstName = user.FirstName;
-                mDto.SurName = user.SurName;
-                materialsDto.Add(mDto);
+                materialsDto.Add(GetMaterialDto(material));
             }
             return materialsDto;
         }
 
-        public CommentDto GetComment(MaterialComment comment)
+        private CommentDto GetComment(MaterialComment comment)
         {
             CommentDto commentDto = new CommentDto();
 
@@ -128,6 +111,31 @@ namespace University.Controllers
             }
 
             return commentDto;
+        }
+
+        public List<CommentDto> GetComments(int id)
+        {
+            return db.MaterialComments.Where(c => c.MaterialId == id).Join(db.Users,
+                c => c.AuthorId, u => u.Id, (c, u) => new CommentDto()
+                {
+                    Id = c.Id,
+                    DateAdd = c.DateAdd,
+                    Text = c.Text,
+                    FirstName = u.FirstName,
+                    SurName = u.SurName
+                }).ToList();
+        }
+
+        private MaterialDto GetMaterialDto(Material material)
+        {
+            MaterialDto mDto = new MaterialDto(material);
+            if (material != null)
+            {
+                ApplicationUser user = db.Users.Find(material.AuthorId);
+                mDto.FirstName = user.FirstName;
+                mDto.SurName = user.SurName;
+            }
+            return mDto;
         }
     }    
 }

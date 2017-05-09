@@ -44,13 +44,13 @@
                             <a href="#" id="practical-form-link">Практические занятия</a>
                             
                         </div>
-                        <div class="col-md-12" id="lecture-materials">
+                        <div class="col-md-12" id="lecture-content">
                             @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 0)))
                             {
                                 @Html.Partial("PartialViewMaterial", material)
                             }
                         </div>
-                        <div class="col-md-12" id="practical-materials" hidden>
+                        <div class="col-md-12" id="practical-content" hidden>
                             @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 1)))
                             {
                                 @Html.Partial("PartialViewMaterial", material)
