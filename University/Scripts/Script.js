@@ -117,6 +117,19 @@ var userName;
 var Friends;
 var Surnames;
 var FirstNames;
+var SubjectFullNames;
+var SubjectNames;
+var Subjects;
+
+function initArraySubjects(arr) {
+    Subjects = arr;
+    SubjectFullNames = new Array();
+    SubjectNames = new Array();
+    for (var index = 0, len = Subjects.length; index < len; ++index) {
+        SubjectFullNames.push(Subjects[index].NameFull.toLowerCase());
+        SubjectNames.push(Subjects[index].NameAbridgment.toLowerCase());
+    }
+}
 
 function initArrayInExternFile(arr) {
     userNames = arr;
@@ -143,6 +156,35 @@ function initArrayUsers(arr) {
     }
 }
 
+function NotSearchResult(name) {
+    return '<div style="text-align: center; color: black;"><p> Ниодного ' + name + ' не найдено';
+}
+
+function SearchSubject() {
+    var inputSearch = $("#input-search").val();
+    var data = new Array();
+    var dataHtml = "";
+    if (inputSearch.length > 0 && inputSearch.length < 50) {
+        for (var index = 0, len = Subjects.length; index < len; ++index) {
+            var loverInputSearch = inputSearch.toLowerCase();
+            if (SubjectFullNames[index].substring(0, inputSearch.length) === loverInputSearch
+                || SubjectNames[index].substring(0, inputSearch.length) === loverInputSearch) {
+                data.push(Subjects[index]);
+            }
+        }
+        if (data.length !== 0) {
+            dataHtml = GetViewSubjects(data);
+            $('#ListSubjects').replaceWith(dataHtml);
+        } else {
+            $('#ListSubjects').replaceWith('<div class="col-md-12" id="ListSubjects">' + NotSearchResult("предмета") + '</div>');
+        }
+    } else {
+        dataHtml = GetViewSubjects(Subjects);
+        $('#ListSubjects').replaceWith(dataHtml);
+    }
+
+}
+
 function SearchFriend() {
     var inputSearch = $("#input-search").val();
     var data = new Array();
@@ -160,12 +202,32 @@ function SearchFriend() {
         if (data.length !== 0) {
             dataHtml = GetViewFriends(data);
             $('#ListUsers').replaceWith(dataHtml);
+        } else {
+            $('#ListUsers').replaceWith('<div id="ListUsers">' + NotSearchResult("друга") + '</div>');
         }
     } else {
         dataHtml = GetViewFriends(Friends);
         $('#ListUsers').replaceWith(dataHtml);
     }
     
+}
+
+function GetViewSubjects(subjects) {
+    var data = '<div class="col-md-12" id="ListSubjects">';
+    for (var index = 0, len = subjects.length; index < len; ++index) {
+        data += GetViewSubject(subjects[index]);
+    }
+    data = data + '</div>';
+    return data;
+}
+
+function GetViewSubject(subject) {
+    var id = subject.Id;
+    return '<div class="blockquote-box clearfix col-xs-6"><p>' +
+        '<a href="/Teachers/Index/' + id + '"> Преподаватели </a></p><h4> ' +
+        subject.NameFull + '</h4><p><a href="/Subjects/MaterialsSubject/' + id +
+        '"> Перейти к материалам </a></p>' +
+        '<p><a href="/Questions/Questions/' + id + '"> Перейти к вопросам </a></p></div>';
 }
 
 function GetViewFriends(friends) {

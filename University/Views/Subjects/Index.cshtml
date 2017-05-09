@@ -4,13 +4,34 @@
     ViewBag.Title = "Предметы";
 }
 
+<head>
+    <script type="text/javascript" src="/scripts/script.js">
+
+    </script>
+
+    <script>
+        var arr = @Html.Raw(Json.Encode(Model));
+        initArraySubjects(arr);
+    </script>
+</head>
+
 <div class="container">
     <div class="panel-title text-center">
         <h2 class="title">@ViewBag.Title</h2>
         <hr id="form-line" />
     </div>
+    <div class="col-md-12" style="margin-top: 10px;">
+        <div id="block-search">
+            <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
+                <input type="text" id="input-search" oninput="SearchSubject()" placeholder="Поиск">
+            </form>
+            <div id="block-search-result">
+                <ul id="list-search-result" style="list-style-type: none;"></ul>
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" id="ListSubjects">
             @foreach (var subject in Model)
             {
                 @Html.Partial("PartialViewSubject", subject)
