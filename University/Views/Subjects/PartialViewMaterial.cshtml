@@ -1,8 +1,29 @@
 ﻿@model University.Models.Dto.MaterialDto
-    
-<div class="dialog-container">
-        <a href="@Url.Action("Material", "Subjects", new {id = Model.Id})">@Model.Name</a>
-        <p></p><label class="control-label form-element-label-name">@String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad)</label>
-        <label class="control-label form-element-label-time"><b>@Model.SurName @Model.FirstName</b></label>
-        <br />
+
+<head>
+    <link href="/Content/Site.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
+    <style>
+        .msg-wrap {
+            padding: 10px;
+            max-height: 400px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<div class="msg-wrap" style="border-bottom: 1px solid #ddd; padding: 5px; background-color: aliceblue; border-radius: 3px;">
+    <div class="media msg">
+        <div class="media-body">
+            <small class="pull-right time">
+                <i class="fa fa-clock-o fa" style="color: #6E6E6E;"> @String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad)</i>
+            </small>
+        </div>
+        
+        <h5 class="media-heading" style="color: #003bb3;">
+            <a href="@Url.Action("Material", "Subjects", new {id = Model.Id})">@Model.Name</a>
+        </h5>
+        <small><b>@Model.SurName @Model.FirstName</b></small>
+        <br/>
+    </div>
 </div>

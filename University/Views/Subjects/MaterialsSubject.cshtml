@@ -15,7 +15,7 @@
 </head>
 
 <style>
-    #border-style {
+    #style-border {
         display: block;
         -webkit-margin-before: 0.5em;
         -webkit-margin-after: 0.5em;
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-subject" style="border-left-color:none; border-style:none;">
+            <div class="panel panel-subject" style="border-style:none;">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
@@ -45,19 +45,20 @@
                             
                         </div>
                         <div class="col-md-12" id="lecture-content">
+                            <hr id="border-style" />
                             @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 0)))
                             {
                                 @Html.Partial("PartialViewMaterial", material)
                             }
                         </div>
                         <div class="col-md-12" id="practical-content" hidden>
+                            <hr id="style-border" />
                             @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 1)))
                             {
                                 @Html.Partial("PartialViewMaterial", material)
                             }
                         </div>
                     </div>
-                    <hr id="border-style" />
                 </div>
             </div>
         </div>

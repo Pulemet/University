@@ -8,8 +8,8 @@
 @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
 
 <head>
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
     <script type="text/javascript" src="/scripts/script.js">
-    
     </script>
 
     <link href="/Content/Site.css" rel="stylesheet">
@@ -26,17 +26,38 @@
     </style>
 </head>
 
-<h2>@Model.Name</h2>
 <div class="container">
-    <div class="col-md-8">
-        <div class="form-horizontal" id="materialInfo">
-                <label class="control-label form-element-label-name">@String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad)</label>
-                <label class="control-label form-element-label-time"><b>@Model.SurName @Model.FirstName</b></label>
-            <p>
-                <a href="@Model.FileLink" download>Скачать файл</a>
-            <p>
-                <br />
+    <div class="row">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h2 class="title">@Model.Name</h2>
+                <hr id="form-line" />
+            </div>
         </div>
+
+        <blockquote class="quote-box">
+            <p class="quotation-mark">
+                “
+            </p>
+            <p class="quote-text btn btn-success">
+                <a href="@Model.FileLink" download>
+                    <i class="fa fa-download fa" style="color: #fff;">
+                        Скачать файл
+                    </i>
+                </a>
+            </p>
+            <hr>
+            <div class="blog-post-actions">
+                <p class="blog-post-bottom pull-left" style="color: #337ab7;">
+                    @Model.SurName @Model.FirstName
+                </p>
+                <p class="blog-post-bottom pull-right">
+                    <span class="badge quote-badge">
+                        <i class="fa fa-clock-o fa"> @String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad) </i>
+                    </span>
+                </p>
+            </div>
+        </blockquote>
 
         <div id="formComments" class="form-horizontal">
             @{
@@ -60,4 +81,3 @@
         </div>
     </div>
 </div>
-
