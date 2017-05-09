@@ -103,7 +103,7 @@ var changeAvatar = function (event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
     $("#buttonChangePhoto").prop('disabled', false);
-    $("#buttonChangePhoto").text("Изменить");
+    $("#buttonChangePhoto").html("<i class='fa fa-save fa'> Изменить </i>");
 };
 
 function ChangeAboutInfo() {
@@ -138,7 +138,7 @@ function SubmitAvatar() {
         processData: false,
         success: function () {
             $('#buttonChangePhoto').prop('disabled', true);
-            $("#buttonChangePhoto").text("Изменено");
+            $("#buttonChangePhoto").html("<i class='fa fa-save fa'> Изменено </i>");
         },
         error: function () {
             window.location.reload();

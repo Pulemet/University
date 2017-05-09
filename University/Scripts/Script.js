@@ -191,7 +191,7 @@ function GetViewFriend(friend) {
         '<a href="/Home/UserPage/' + friend.Id + '"> ' + friend.SurName + ' ' + friend.FirstName +' </a></i>' +
         '</h4><p><i class="glyphicon glyphicon-user"> ' + role + ' </i><br/>' +
         '<i class="glyphicon glyphicon-envelope"> ' + friend.Email + ' </i><br/></p>' +
-        '<div class="btn-group"><a class="btn btn-success" onclick="ShowFormSendMessageD("' + friend.Id +
+        '<div class="btn-group"><a class="btn btn-primary" onclick="ShowFormSendMessageD("' + friend.Id +
         '", "' + friend.SurName + ' ' + friend.FirstName + '")"' +
         'id="show-button"><i class="fa fa-envelope fa"> Написать сообщение </i></a></div>' +
         '</div></div></div></div></div>';

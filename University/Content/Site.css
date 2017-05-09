@@ -13,9 +13,19 @@ body {
     padding-bottom: 6rem;
     min-height: 100%;
     width: 100%;
-    background: -webkit-linear-gradient(top,#9face6 0%,#74ebd5 100%) center center fixed;
-    background: linear-gradient(to bottom,#9face6 0%,#74ebd5 100%) center center fixed;
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(90deg, #16222A 10%, #3A6073 90%) center center fixed;
+    font-family: Roboto,sans-serif;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+    padding: 7px 7px;
+    border-radius: 3px;
 }
 
 .main {
@@ -54,6 +64,11 @@ body {
     content: "\f0e0";
 }
 
+.navbar-inverse .navbar-nav > li > a {
+    color: #d7e2ec;
+    text-transform: uppercase;
+}
+
 /* 'Login' button. */
 .login-button {
     margin-top: 5px;
@@ -77,22 +92,27 @@ body {
 
 .nav.navbar-nav li:hover:nth-child(1), .nav .navbar-nav li.active:nth-child(1) {
     border-bottom: #C4E17F 3px solid;
+    background-color: rgba(255,255,255,.20);
 }
 
 .nav.navbar-nav li:hover:nth-child(2), .nav.navbar-nav li.active:nth-child(2) {
     border-bottom: #db4d4d 3px solid;
+    background-color: rgba(255,255,255,.20);
 }
 
 .nav.navbar-nav li:hover:nth-child(3), .nav.navbar-navli.active:nth-child(3) {
     border-bottom: #fbf994 3px solid;
+    background-color: rgba(255,255,255,.20);
 }
 
 .nav.navbar-nav.navbar-right li:hover:nth-child(1), .nav .navbar-nav.navbar-right li.active:nth-child(1) {
     border-bottom: #2e6da4 3px solid;
+    background-color: rgba(255,255,255,.20);
 }
 
 .nav.navbar-nav.navbar-right li:hover:nth-child(2), .nav.navbar-nav.navbar-right li.active:nth-child(2) {
     border-bottom: #62258d 3px solid;
+    background-color: rgba(255,255,255,.20);
 }
 
 .login-group-checkbox {
@@ -167,11 +187,24 @@ tr {
     padding: 8px 0;
 }
 
-.nav-justified .active a {
-    cursor: default;
-    background-color: #428bca;
+.nav > li > a {
+    color: #d7e2ec;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: rgba(255,255,255,.20);
     color: #fff;
-    text-shadow: 1px 1px 1px #2e6da4;
+}
+
+.panel-default > .panel-heading {
+    background-color: aliceblue;
+    border-radius: 2px;
+}
+
+.panel-default {
+    background-color: aliceblue;
+    border-radius: 2px;
 }
 
 .bs-callout {
@@ -179,13 +212,10 @@ tr {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    background-color: #f5f5f5;
+    background-color: aliceblue;
     border-left-color: rgb(24, 75, 142);
-    border-bottom-color: #eee;
-    border-top-color: #eee;
-    border-right-color: #eee;
     border-image: none;
-    border-radius: 3px;
+    border-radius: 2px;
     border-style: solid;
     border-width: 1px 1px 1px 5px;
     margin-bottom: 5px;
@@ -193,19 +223,26 @@ tr {
 }
 
 .panel {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: aliceblue;
     border-left-color: rgb(24, 75, 142);
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
     border-width: 1px 1px 1px 5px;
     border-radius: 3px;
-    background-color: #f5f5f5;
+    background-color: aliceblue;
     margin-bottom: 10px;
 }
 
 .bs-callout-danger {
     border-left-color: rgb(24, 75, 142);
-    background-color: #f5f5f5;
-    border-right-color: #ddd;
-    border-bottom-color: #ddd;
-    border-top-color: #ddd;
+    border-width: 1px 1px 1px 5px;
+    border-radius: 3px;
+    background-color: aliceblue;
 }
 
 .blockquote-box {
@@ -319,30 +356,6 @@ tr {
     border-bottom-left-radius: 3px;
 }
 
-/* 'Signup' button. */
-.signup-button {
-    width: 270px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: default;
-    margin-top: 0px;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-    font-weight: 500;
-    font-size: 14px;
-    height: 40px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: none;
-    -o-transition: all 0.218s;
-    -moz-transition: all 0.218s;
-    -webkit-transition: all 0.218s;
-    transition: all 0.218s;
-    margin-bottom: 10px;
-}
-
     .login-button:hover,
     .login-button:active,
     .login-button:focus,
@@ -350,14 +363,15 @@ tr {
     .signup-button:active,
     .signup-button:focus {
         color: #fff;
-        background-color: #449d44;
-        border-color: #255625;
+        background-color: #3071a9;
+        border-color: #285e8e;
     }
 
 #footer-style {
     margin: 0 0 0;
     padding-top: 15px;
     padding-bottom: 15px;
+    color: #fff;
 }
 
 footer {
@@ -428,6 +442,10 @@ footer {
 #TypeQuestion, #SubjectId, #file {
     margin-top: 3px;
     margin-bottom: 5px;
+}
+
+.table {
+    margin-bottom: 10px;
 }
 
 .radio label, .checkbox label {
@@ -504,45 +522,6 @@ header[role=banner] {
             margin-right: 50px;
         }
 }
-
-.main-nav {
-    float: right;
-    margin-right: 5%;
-    width: 44px;
-    height: 100%;
-    background: url("../img/cd-icon-menu.svg") no-repeat center center;
-    cursor: pointer;
-}
-
-    .main-nav ul {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        -webkit-transform: translateY(-100%);
-        -moz-transform: translateY(-100%);
-        -ms-transform: translateY(-100%);
-        -o-transform: translateY(-100%);
-        transform: translateY(-100%);
-    }
-
-        .main-nav ul.is-visible {
-            -webkit-transform: translateY(50px);
-            -moz-transform: translateY(50px);
-            -ms-transform: translateY(50px);
-            -o-transform: translateY(50px);
-            transform: translateY(50px);
-        }
-
-    .main-nav a {
-        display: block;
-        height: 50px;
-        line-height: 50px;
-        padding-left: 5%;
-        background: #292a34;
-        border-top: 1px solid #3b3d4b;
-        color: #FFF;
-    }
 
 @media only screen and (min-width: 768px) {
     .main-nav {
@@ -896,6 +875,7 @@ header[role="banner"] .wrapper {
 h2, .h2 {
     font-size: 30px;
     margin-left: 5px;
+    color: aliceblue;
 }
 
 #block-search {

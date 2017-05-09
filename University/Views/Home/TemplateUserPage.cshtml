@@ -33,7 +33,7 @@
             @Html.Partial("PartialViewSaidBar")
         </div>
 
-        @if (!(bool) ViewData["CurrentUser"])
+        @if (!(bool)ViewData["CurrentUser"])
         {
             @Html.Partial("PageNewMessage")
         }
@@ -53,57 +53,57 @@
                                 </h3>
                                 <table class="table table-user-information">
                                     <tbody>
-                                    <tr>
-                                        <td>E-mail</td>
-                                        <td>@Model.Email</td>
-                                    </tr>
-                                    <tr>
-                                        @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский"; }
-                                        <td>Пол</td>
-                                        <td>@gender</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Дата рождения</td>
-                                        <td>@Model.BirthDate.ToLongDateString()</td>
-                                    </tr>
-                                    @if (Model.UserRole == UserRoles.Student)
-                                    {
                                         <tr>
-                                            <td>Факультет</td>
-                                            <td>@Model.Faculty</td>
+                                            <td>E-mail</td>
+                                            <td>@Model.Email</td>
                                         </tr>
                                         <tr>
-                                            <td>Специальность</td>
-                                            <td>@Model.Speciality</td>
+                                            @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский"; }
+                                            <td>Пол</td>
+                                            <td>@gender</td>
                                         </tr>
                                         <tr>
-                                            <td>Группа</td>
-                                            <td>@Model.Group</td>
+                                            <td>Дата рождения</td>
+                                            <td>@Model.BirthDate.ToLongDateString()</td>
                                         </tr>
-                                    }
-                                    else
-                                    {
-                                        if (Model.UserRole == UserRoles.Admin)
+                                        @if (Model.UserRole == UserRoles.Student)
                                         {
                                             <tr>
-                                                <td>Роль</td>
-                                                <td>Администратор</td>
+                                                <td>Факультет</td>
+                                                <td>@Model.Faculty</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Специальность</td>
+                                                <td>@Model.Speciality</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Группа</td>
+                                                <td>@Model.Group</td>
                                             </tr>
                                         }
                                         else
                                         {
-                                            <tr>
-                                                <td>Преподаватель кафедры</td>
-                                                <td>@Model.Department</td>
-                                            </tr>
+                                            if (Model.UserRole == UserRoles.Admin)
+                                            {
+                                                <tr>
+                                                    <td>Роль</td>
+                                                    <td>Администратор</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>Преподаватель кафедры</td>
+                                                    <td>@Model.Department</td>
+                                                </tr>
+                                            }
                                         }
-                                    }
                                     </tbody>
                                 </table>
                                 @if (!(bool)ViewData["CurrentUser"])
                                 {
                                     <div class="btn-group">
-                                        <a class="btn btn-success" onclick="ShowFormSendMessage('@Model.Id')" id="show-button">
+                                        <a class="btn btn-primary" onclick="ShowFormSendMessage('@Model.Id')" id="show-button">
                                             <i class="fa fa-envelope fa"> Написать сообщение </i>
                                         </a>
                                     </div>
@@ -117,32 +117,34 @@
                                     }
                                 }
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bs-callout">
-                <h4>О себе</h4>
-                <p>
-                    @Model.UserInfo
-                </p>
+            <div class="panel panel-defaultt">
+                <div class="panel-heading resume-heading">
+                    <h4>О себе</h4>
+                    <p>
+                        @Model.UserInfo
+                    </p>
+                </div>
             </div>
-            <div class="bs-callout bs-callout-danger">
-                <h4>Загруженные материалы</h4>
-                <table class="table table-user-information">
-                    <tbody>
-                        <tr>
-                            <td>Дата загрузки</td>
-                            <td>28.04.2017</td>
-                        </tr>
-                        <tr>
-                            <td>Файл</td>
-                            <td>Link</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="panel panel-defaultt">
+                <div class="panel-heading resume-heading">
+                    <h4>Загруженные материалы</h4>
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td>Дата загрузки</td>
+                                <td>28.04.2017</td>
+                            </tr>
+                            <tr>
+                                <td>Файл</td>
+                                <td>Link</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
