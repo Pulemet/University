@@ -32,12 +32,15 @@ namespace University.Controllers
         [HttpPost]
         public ActionResult AddMaterial()
         {
+            //Если файл не прикреплен, то массив будет больше на 1 элемент
+            //и первым элементом будет файл = null
+            int isAttachedFileCounter = Request.Form.Count == 3 ? 0 : 1;
             Material material = new Material();
             material.DateLoad = DateTime.Now;
             material.AuthorId = User.Identity.GetUserId();
-            material.SubjectId = Int32.Parse(Request.Form[0]);
-            material.Name = Request.Form[1];
-            material.TypeLesson = Request.Form[2];
+            material.SubjectId = Int32.Parse(Request.Form[isAttachedFileCounter]);
+            material.Name = Request.Form[++isAttachedFileCounter];
+            material.TypeLesson = Request.Form[++isAttachedFileCounter];
             
             if (Request.Files.Count != 0 && Request.Files[0] != null)
             {

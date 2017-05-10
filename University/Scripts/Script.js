@@ -101,13 +101,12 @@ function AddMaterialClick() {
         contentType: false,
         processData: false,
         success: function (responce) {
-            $('#inputDescriptionMaterial').val('');
-            $('#buttonAddMaterial').prop('disabled', true);
             if (typeLesson === "Lecture") {
                 $("#lecture-content").append(responce);
             } else {
                 $("#practical-content").append(responce);
             }
+            CloseFormAddMaterial();
         },
         error: function () {
             window.location.reload();
@@ -405,3 +404,16 @@ $(function () {
     });
 
 });
+
+function NewMaterialClick() {
+    $("#formAddMaterial").show();
+    $("#buttonNewMaterial").hide();
+}
+
+function CloseFormAddMaterial() {
+    $('#buttonAddMaterial').prop('disabled', true);
+    $('#inputDescriptionMaterial').val('');
+    $('#loadFile').val('');
+    $("#formAddMaterial").hide();
+    $("#buttonNewMaterial").show();
+}
