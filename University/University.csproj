@@ -218,6 +218,7 @@
     <Compile Include="Models\Dto\DialogJson.cs" />
     <Compile Include="Models\Dto\Infrastructure.cs" />
     <Compile Include="Models\Dto\MaterialDto.cs" />
+    <Compile Include="Models\Dto\MaterialInfoForAutor.cs" />
     <Compile Include="Models\Dto\MessageDto.cs" />
     <Compile Include="Models\Dto\QuestionDto.cs" />
     <Compile Include="Models\Dto\TeacherDto.cs" />

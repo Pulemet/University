@@ -134,14 +134,17 @@
                     <h4>Загруженные материалы</h4>
                     <table class="table table-user-information">
                         <tbody>
+                        @foreach (var material in Model.Materials)
+                        {
                             <tr>
-                                <td>Дата загрузки</td>
-                                <td>28.04.2017</td>
+                                <td>Предмет</td>
+                                <td><a href="/Subjects/MaterialsSubject/@material.SubjectId">@material.SubjectName</a></td>
                             </tr>
                             <tr>
-                                <td>Файл</td>
-                                <td>Link</td>
+                                <td>Материал</td>
+                                <td><a href="/Subjects/Material/@material.Id">@material.Name</a></td>
                             </tr>
+                        }
                         </tbody>
                     </table>
                 </div>

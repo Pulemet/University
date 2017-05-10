@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using University.Models;
@@ -157,6 +158,15 @@ namespace University.Controllers
                     uDto.Department = department.NameAbridgment;
                 }
             }
+
+            uDto.Materials = _db.Materials.Where(m => m.AuthorId == user.Id).Join(_db.Subjects, m => m.SubjectId, s => s.Id,
+                                (m, s) => new MaterialInfoForAutor()
+                                {
+                                    Id = m.Id,
+                                    SubjectId = s.Id,
+                                    Name = m.Name,
+                                    SubjectName = s.NameAbridgment
+                                }).OrderBy(m => m.SubjectName).ToList();
 
             return uDto;
         }

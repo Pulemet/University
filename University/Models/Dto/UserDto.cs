@@ -8,7 +8,10 @@ namespace University.Models.Dto
 {
     public class UserDto
     {
-        public UserDto() { }
+        public UserDto()
+        {
+            Materials = new List<MaterialInfoForAutor>();
+        }
 
         public UserDto(ApplicationUser user)
         {
@@ -21,6 +24,7 @@ namespace University.Models.Dto
             Photo = user.Photo == "" ? ConstDictionary.NO_IMAGE : user.Photo;
             Email = user.Email;
             UserInfo = user.UserInfo;
+            Materials = new List<MaterialInfoForAutor>();
         }
 
         public string Id { get; set; }
@@ -50,5 +54,7 @@ namespace University.Models.Dto
         public UserGenders Gender { get; set; }
 
         public string UserInfo { get; set; }
+
+        public List<MaterialInfoForAutor> Materials { get; set; }
     }
 }
