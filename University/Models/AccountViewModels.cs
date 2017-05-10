@@ -8,12 +8,12 @@ namespace University.Models
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Введите логин")]
+        [EmailAddress(ErrorMessage = "Некорректный адрес электронной почты")]
         [Display(Name = "Логин")]
-        [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
