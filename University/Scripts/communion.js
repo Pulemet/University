@@ -55,6 +55,7 @@ function CreateDialog() {
                     }
                     $('#formMessages').replaceWith(GetDialogHtml(data.Dialog));
                     $('#dialogId').val(data.Dialog.Id);
+                    ScrollingDialog();
             });
         } else {
             var name = $("#NameConversation").val();
@@ -65,7 +66,6 @@ function CreateDialog() {
                 $('#dialogId').val(data.Id);
             });
         }
-        ScrollingDialog();
         ShowViewSendMessage();
         ShowDialogs();
     }
