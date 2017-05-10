@@ -9,18 +9,21 @@
         });
 }
 
-function SendMessage() {
-    var data = $('#sendMessage').serialize();
-    var url = $('#sendMessage').attr('action');
-    $.post(url, data, function (responce) {
-        ShowViewSendMessage();
-        $('#formMessages').append(GetMessageHtml(responce));
-        ScrollingDialog();
-        if ($('#noMessages').length > 0) {
-            $('#noMessages').remove();
-        }
+$(document).ready(function () {
+    $('#sendMessage').submit(function (event) {
+        event.preventDefault();
+        var data = $('#sendMessage').serialize();
+        var url = $('#sendMessage').attr('action');
+        $.post(url, data, function (responce) {
+            ShowViewSendMessage();
+            $('#formMessages').append(GetMessageHtml(responce));
+            ScrollingDialog();
+            if ($('#noMessages').length > 0) {
+                $('#noMessages').remove();
+            }
+        });
     });
-}
+});
 
 function ScrollingDialog() {
     var div = document.getElementById('formMessages');

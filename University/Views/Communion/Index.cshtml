@@ -66,7 +66,7 @@
                 <p style="margin-top: 40%; margin-left: 25%; color: #c8c2c2; ">Выберите диалог или <a href="#" onclick="NewDialog()" style="color: #0094ff;">создайте новый</a></p>
             </div>
             <div id="formSendMessage" hidden>
-                <form method="POST" id="sendMessage" onsubmit="return SendMessage()" action="/Communion/SendMessageInDialog">
+                <form method="POST" id="sendMessage" action="/Communion/SendMessageInDialog">
                         <input type="text" id="dialogId" name="DialogId" value="" class="hide">
                         <div class="send-wrap">
                             <textarea class="form-control send-message" id="messageInput" style="max-width: none; display: -webkit-inline-box;" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="3" placeholder="Введите сообщение..."></textarea>
