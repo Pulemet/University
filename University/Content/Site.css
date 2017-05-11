@@ -439,7 +439,8 @@ tr {
 }
 
 .btn-panel .btn {
-    color: #b8b8b8;
+    background-color: #58d068;
+    color: white;
     transition: 0.2s all ease-in-out;
     margin-top: 10px;
     margin-right: 10px;
