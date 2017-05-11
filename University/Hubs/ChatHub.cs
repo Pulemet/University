@@ -6,27 +6,28 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using University.Models.Dto;
 
 namespace University.Hubs
 {
-    [HubName("msg")]
     public class ChatHub : Hub
     {
-        //public Task Send(dynamic message)
-        //{
-        //    return Clients.All.SendMessage(message);
-        //}
-
-        public void Register(long userId)
+        public void Send(string groupId, MessageDto msg)
         {
-            Groups.Add(Context.ConnectionId, userId.ToString(CultureInfo.InvariantCulture));
-
+            Clients.Group(groupId).sendMessage(msg);
         }
 
-        public Task Send(dynamic id, string message)
+        public void Connect(string groupId)
         {
-            return Clients.Group(id.ToString()).SendMessage(message);
+            var id = Context.ConnectionId;
+
+            Groups.Add(id, groupId);
         }
 
+        public void OnDisconnected(string groupId)
+        {
+            var id = Context.ConnectionId;
+            Groups.Remove(id, groupId);
+        }
     }
 }
