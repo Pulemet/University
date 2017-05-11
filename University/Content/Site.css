@@ -217,9 +217,9 @@ blockquote {
 
 .navbar-brand {
     font-family: 'Rouge Script', cursive;
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
-    text-shadow: 1px 1px 2px #082b34;
+    text-shadow: 1px 1px 2px aliceblue;
 }
 
 .nav.navbar-nav li:hover:nth-child(1), .nav .navbar-nav li.active:nth-child(1) {
@@ -1016,7 +1016,7 @@ header[role="banner"] .wrapper {
 }
 
 h2, .h2 {
-    font-size: 30px;
+    font-size: 26px;
     margin-left: 5px;
     color: aliceblue;
 }
