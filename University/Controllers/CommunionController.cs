@@ -77,13 +77,13 @@ namespace University.Controllers
         [HttpPost]
         public JsonResult NewConversation(List<string> listUsersId, string nameConversation)
         {
-            var users = db.Users.Join(listUsersId, u => u.Id, i => i, (u, i) => u).ToList();
+            string currentUserId = User.Identity.GetUserId();
+            var users = db.Users.Join(listUsersId, u => u.Id, i => i, (u, i) => u).Where(u => u.Id != currentUserId).ToList();
             Dialog dialog = new Dialog() { IsConversation = true, Name = nameConversation};
             db.Dialogs.Add(dialog);
             db.SaveChanges();
             var allDialogs = db.Dialogs.ToList();
             int dialogId = allDialogs.Last().Id;
-            string currentUserId = User.Identity.GetUserId();
             listUsersId.Add(currentUserId);
             var usersToDialog = listUsersId.Select(i => new UserToDialog() { DialogId = dialogId, UserId = i }).ToList();
             db.UserToDialogs.AddRange(usersToDialog);
@@ -168,12 +168,13 @@ namespace University.Controllers
 
         private DialogDto GetDialogDto(Dialog dialog)
         {
+            string currentUserId = User.Identity.GetUserId();
             DialogDto dialogDto = new DialogDto();
 
             dialogDto.IsConversation = dialog.IsConversation;
             dialogDto.Id = dialog.Id;
             var dialogUsers = db.UserToDialogs.Where(ud => ud.DialogId == dialog.Id);
-            dialogDto.Members = db.Users.Join(dialogUsers, u => u.Id, d => d.UserId, (u, d) => u).ToList();
+            dialogDto.Members = db.Users.Join(dialogUsers, u => u.Id, d => d.UserId, (u, d) => u).Where(u => u.Id != currentUserId).ToList();
 
             dialogDto.Name = dialog.IsConversation ? dialog.Name : GetDialogName(dialogDto.Members);
 

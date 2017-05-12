@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<University.Models.Dto.UserInfoDto>
 
-<div id="ListUsers">
+<div id="listUsers">
         @foreach (var user in Model)
         {
             @Html.Partial("PartialViewUser", user)

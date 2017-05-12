@@ -40,6 +40,45 @@
     }
 </style>
 
+<div id="subjModal" class="modal fade" style="padding-top: 10%;">
+    <div class="modal-dialog">
+        <div class="modal-content alert alert-info">
+            <!-- Заголовок модального окна -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="dialogName-modal"> Добавить материал </h4>
+            </div>
+            <!-- Основное содержимое модального окна -->
+            <div class="modal-body" id="participantsDialog">
+                @{
+                    string subjectId = Url.RequestContext.RouteData.Values["id"].ToString();
+                    <input type="text" name="SubjectId" id="SubjectId" value="@Int32.Parse(subjectId)" class="hide">
+                    <br />
+                    <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="5" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Добавьте описание" style="max-width: none; width: 100%;"></textarea>
+                    <br />
+
+                    <div class="form-group">
+                        <select class="form-material" name="TypeLesson" id="TypeLesson">
+                            <option value="Lecture"> Лекции </option>
+                            <option value="Practic"> Практические занятия </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <span> Прикрепить файл </span>
+                        <input type="file" class="upload" name="loadFile" id="loadFile" style="max-width: none; width: 100%; margin-top: 5px;"/>
+                    </div>
+                }
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AddMaterialClick()" id="buttonAddMaterial" disabled> Добавить </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CloseFormAddMaterial()"> Закрыть </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="panel-heading">
@@ -50,51 +89,11 @@
         </div>
         <div class="col-md-6 col-md-offset-3" id="buttonNewMaterial">
             <div class="form-group">
-                <div class="col-sm-3">
-                    <button type="submit" class="btn" onclick="NewMaterialClick()"> Добавить новый материал </button>
-                </div>
+                <a href="#subjModal" role="button" class="btn btn-primary pull-right" data-toggle="modal"> Добавить новый материал </a>
             </div>
         </div>
 
-        <div class="col-md-4 col-md-offset-4" id="formAddMaterial" hidden>
-            @{
-                string subjectId = Url.RequestContext.RouteData.Values["id"].ToString();
-                <input type="text" name="SubjectId" id="SubjectId" value="@Int32.Parse(subjectId)" class="hide">
-                <br />
-                <textarea class="form-element form-element-textarea" id="inputDescriptionMaterial" name="Name" rows="5" oninput="LockedButton('inputDescriptionMaterial', 'buttonAddMaterial')" placeholder="Добавьте описание"></textarea>
-                <br />
-
-                <div class="form-group">
-                    <select class="form-material" name="TypeLesson" id="TypeLesson">
-                        <option value="Lecture"> Лекции </option>
-                        <option value="Practic"> Практические занятия </option>
-                    </select>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="fileUpload btn-upload">
-                            <span> Прикрепить </span>
-                            <input type="file" class="upload" name="loadFile" id="loadFile" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <button type="submit" class="btn" onclick="AddMaterialClick()" id="buttonAddMaterial" disabled> Добавить </button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-9" align="right">
-                            <button type="reset" class="btn" id="buttonAddMaterial" onclick="CloseFormAddMaterial()"> Отмена </button>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3" style="padding-top: 15px; ">
             <div class="panel panel-subject" style="border-style:none;">
                 <div class="panel-heading">
                     <div class="row" id="panel-id">

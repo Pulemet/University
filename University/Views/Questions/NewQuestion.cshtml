@@ -14,48 +14,40 @@
 
 @Styles.Render("~/Content/css")
 
-<div class="question-form-container">
-    <section id="loginForm">
-        @using (Html.BeginForm("AddQuestion", "Questions", FormMethod.Post, new { @class = "login-form", role = "form", enctype = "multipart/form-data" }))
+<div class="col-md-6 col-md-offset-3">
+    <div class="col-md-12 question-form-container">
+        <h3> @ViewBag.Title </h3>
+        <hr style="border-top-color: #DCDCDC;"/>
+        @using (Html.BeginForm("AddQuestion", "Questions", FormMethod.Post, new {role = "form", enctype = "multipart/form-data"}))
         {
-            @Html.AntiForgeryToken()
-            <h3> @ViewBag.Title </h3>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <form class="login-form">
-                <div class="login-label">
-                    <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="7" oninput="LockedButton('Topic', 'buttonNewQuestion')" placeholder="Добавьте описание"></textarea>
-                </div>
+            <div class="col-md-12">
+                <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="5" oninput="LockedButton('Topic', 'buttonNewQuestion')" placeholder="Добавьте описание" style="max-width: none; width: 100%;"></textarea>
+            </div>
 
-                <div class="login-label">
-                    <select class="form-question" name="SubjectId" id="SubjectId">
-                        @foreach (var subject in Model)
-                        {
-                            <option value="@subject.Id">@subject.NameAbridgment</option>
-                        }
-                    </select>
-                </div>
+            <div class="col-md-12">
+                <select class="form-question" name="SubjectId" id="SubjectId">
+                    @foreach (var subject in Model)
+                    {
+                        <option value="@subject.Id">@subject.NameAbridgment</option>
+                    }
+                </select>
+            </div>
 
-                <div class="login-label">
-                    <select class="form-question" name="TypeQuestion" id="TypeQuestion">
-                        <option value="Lecture"> Лекции </option>
-                        <option value="Practic"> Практические занятия </option>
-                    </select>
-                </div>
+            <div class="col-md-12">
+                <select class="form-question" name="TypeQuestion" id="TypeQuestion">
+                    <option value="Lecture"> Лекции </option>
+                    <option value="Practic"> Практические занятия </option>
+                </select>
+            </div>
 
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="fileUpload btn-upload" id="file">
-                            <span> Прикрепить файл </span>
-                            <input type="file" class="upload" name="loadFile" id="file" />
-                        </div>
-                    </div>
+            <div class="col-md-12" style="padding-top: 10px">
+                <span style="color: #31708f;"> Прикрепить файл </span>
+                <input type="file" class="upload" name="file" id="file" style="max-width: none; width: 100%; margin-top: 5px;"/>
+            </div>
 
-                    <div class="col-sm-4">
-                        <button type="submit" class="btn" onclick="AddMaterialClick()" id="buttonNewQuestion" disabled> Отправить </button>
-                    </div>
-                </div>
-            </form>
+            <div class="col-md-12" style="padding-top: 10px">
+                <button type="submit" class="btn btn-primary pull-right" id="buttonNewQuestion" disabled> Отправить </button>
+            </div>
         }
-    </section>
+    </div>
 </div>
