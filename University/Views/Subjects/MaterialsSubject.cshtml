@@ -42,7 +42,7 @@
 
 <div id="subjModal" class="modal fade" style="padding-top: 10%;">
     <div class="modal-dialog">
-        <div class="modal-content alert alert-info">
+        <div class="modal-content" style="background: whitesmoke;">
             <!-- Заголовок модального окна -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -64,10 +64,13 @@
                         </select>
                     </div>
 
-                    <div>
-                        <span> Прикрепить файл </span>
-                        <input type="file" class="upload" name="loadFile" id="loadFile" style="max-width: none; width: 100%; margin-top: 5px;"/>
+                    <div class="file-upload" style="width: 30%; ">
+                        <label>
+                            <input type="file" name="loadFile" id="loadFile" />
+                            <span> Прикрепить файл </span>
+                        </label>
                     </div>
+                    <input type="text" id="filename" class="filename" disabled>
                 }
             </div>
 

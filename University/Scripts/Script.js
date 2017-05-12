@@ -409,4 +409,12 @@ function CloseFormAddMaterial() {
     $('#buttonAddMaterial').prop('disabled', true);
     $('#inputDescriptionMaterial').val('');
     $('#loadFile').val('');
+    $("#filename").val('');
 }
+
+$(document).ready(function () {
+    $(".file-upload input[type=file]").change(function () {
+        var filename = $(this).val().replace(/.*\\/, "");
+        $("#filename").val(filename);
+    });
+});
