@@ -70,41 +70,41 @@
                                         <i class="fa fa-university fa">
                                             @if (!(bool) ViewData["CurrentUser"])
                                             {
-                                                <a href="/Home/UserPage/@Model.Id"> @Model.SurName @Model.PatronymicName @Model.FirstName </a>
+                                            <a href="/Home/UserPage/@Model.Id"> @Model.SurName @Model.PatronymicName @Model.FirstName </a>
                                             }
                                             else
                                             {
-                                                <span> @Model.SurName @Model.PatronymicName @Model.FirstName </span>
+                                            <span> @Model.SurName @Model.PatronymicName @Model.FirstName </span>
                                             }
                                         </i>
                                     </h3>
                                     <table class="table table-user-information">
                                         <tbody>
-                                        <tr>
-                                            <td>E-mail</td>
-                                            <td>@Model.Email</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Преподаватель кафедры</td>
-                                            <td>@Model.Department</td>
-                                        </tr>
+                                            <tr>
+                                                <td>E-mail</td>
+                                                <td>@Model.Email</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Преподаватель кафедры</td>
+                                                <td>@Model.Department</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     @if (!(bool) ViewData["CurrentUser"])
                                     {
-                                        <div class="btn-group">
-                                            <a class="btn btn-success" onclick="ShowFormSendMessage('@Model.Id')" id="show-button">
-                                                <i class="fa fa-envelope fa"> Написать сообщение </i>
-                                            </a>
-                                        </div>
+                                    <div class="btn-group">
+                                        <a class="btn btn-success" onclick="ShowFormSendMessage('@Model.Id')" id="show-button">
+                                            <i class="fa fa-envelope fa"> Написать сообщение </i>
+                                        </a>
+                                    </div>
                                     }
                                     <h5> Предметы: </h5>
                                     @foreach (var subject in Model.Subjects)
                                     {
-                                        <p>
-                                            <i> <a href="/Subjects/MaterialsSubject/@subject.Id"> @subject.NameAbridgment </a></i>
-                                            <br />
-                                        </p>
+                                    <p>
+                                        <i> <a href="/Subjects/MaterialsSubject/@subject.Id"> @subject.NameAbridgment </a></i>
+                                        <br />
+                                    </p>
                                     }
                                 </div>
                             </div>
@@ -112,13 +112,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-offset-1">
+            <div class="col-md-12">
                 <div id="formReviews" class="form-horizontal">
                     @{
                         if (Model.Comments.Count == 0)
                         {
                             <div id="noReviews">
-                                <p>Пользователи пока не оставляли отзывов</p>
+                                <p style="color: #fff; ">Пользователи пока не оставляли отзывов.</p>
                             </div>
                         }
                         else
@@ -130,9 +130,9 @@
                         }
                     }
                 </div>
-                <div class="form-horizontal">
-                    @Html.Partial("PartialAddReview")
-                </div>
+            </div>
+            <div class="form-horizontal col-md-12">
+                @Html.Partial("PartialAddReview")
             </div>
         </div>
     </div>
