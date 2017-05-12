@@ -53,8 +53,6 @@ function ShowDialogs() {
     $("#dialogsBar").show();
 }
 
-var openDialog;
-
 $(function () {
     // Ссылка на автоматически-сгенерированный прокси хаба
     var chat = $.connection.chatHub;
@@ -88,7 +86,8 @@ $(function () {
             }
             $.get('/Communion/GetDialog',
                 { id: id },
-                function(data) {
+                function (data) {
+                    DialogMembers(data);
                     $('#formMessages').replaceWith(GetDialogHtml(data));
                     $('#dialogId').val(data.Id);
                     ScrollingDialog();
@@ -112,6 +111,7 @@ $(function () {
                             if (data.IsNewDialog) {
                                 $('#ListDialogs').append(GetPartialDialogHtml(data.Dialog.Id, data.Dialog.Name));
                             }
+                            DialogMembers(data.Dialog);
                             $('#formMessages').replaceWith(GetDialogHtml(data.Dialog));
                             $('#dialogId').val(data.Dialog.Id);
                             ScrollingDialog();
@@ -120,7 +120,8 @@ $(function () {
                 } else {
                     var name = $("#NameConversation").val();
                     var url = '/Communion/NewConversation';
-                    $.post(url, { listUsersId: arr, nameConversation: name }, function(data) {
+                    $.post(url, { listUsersId: arr, nameConversation: name }, function (data) {
+                        DialogMembers(data);
                         $('#ListDialogs').append(GetPartialDialogHtml(data.Id, data.Name));
                         $('#formMessages').replaceWith(GetDialogHtml(data));
                         $('#dialogId').val(data.Id);
@@ -135,3 +136,25 @@ $(function () {
 
     });
 });
+
+function DialogMembers(dialog) {
+    if (dialog.IsConversation) {
+        $('#participantsDialog').replaceWith(GetDialogMembersHtml(dialog));
+        $("#btnShowMembersToDialog").show();
+    } else {
+        $("#btnShowMembersToDialog").hide();
+    }
+}
+function GetDialogMembersHtml(dialog) {
+    $('#dialogName-modal').text('Участники диалога "' + dialog.Name + '"');
+    var membersHtml = "";
+    for (var index = 0, len = dialog.Members.length; index < len; ++index) {
+        membersHtml += GetDialogMemberHtml(dialog.Members[index]);
+    }
+    return '<div class="modal-body" id="participantsDialog">' + membersHtml + '</div>';
+}
+
+function GetDialogMemberHtml(member) {
+    return '<p><a href="/Home/UserPage/' + member.Id +
+           '"> ' + member.SurName + ' ' + member.FirstName + ' </a></p>';
+}

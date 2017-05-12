@@ -51,6 +51,21 @@
     </style>
 </head>
 
+<div id="myModal" class="modal fade" style="padding-top: 10%; ">
+    <div class="modal-dialog">
+        <div class="modal-content alert alert-info">
+            <!-- Заголовок модального окна -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="dialogName-modal">Участники диалога</h4>
+            </div>
+            <!-- Основное содержимое модального окна -->
+            <div class="modal-body" id="participantsDialog">
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-3 col-md-2">
@@ -60,23 +75,28 @@
             @Html.Partial("DialogsBar", Model)
             @Html.Partial("NewDialogBar", (List<ApplicationUser>)ViewData["Friends"])
         </div>
-        
+
         <div class="form-horizontal col-md-5" id="currentDialog">
-            <h2 id="dialogName" style="font-family: 'Rouge Script', cursive; margin-top: 20px; margin-bottom: 15px; color: aliceblue; "> </h2>
+            <div id="btnShowMembersToDialog" hidden>
+                <a href="#myModal" role="button" class="btn pull-right" data-toggle="modal">Участники диалога</a>
+            </div>
+            
+            <h2 id="dialogName" style="font-family: 'Rouge Script', cursive; margin-top: 20px; margin-bottom: 15px; color: aliceblue;"> </h2>
             <div id="formMessages">
-                <p style="margin-top: 40%; margin-left: 25%; color: #c8c2c2; ">Выберите диалог или <a href="#" onclick="NewDialog()" style="color: #0094ff;">создайте новый</a></p>
+                <p style="margin-top: 40%; margin-left: 25%; color: #c8c2c2;">Выберите диалог или <a href="#" onclick=" NewDialog() " style="color: #0094ff;">создайте новый</a>
+                </p>
             </div>
             <div id="formSendMessage" hidden>
                 <form method="POST" id="sendMessage" action="/Communion/SendMessageInDialog">
-                        <input type="text" id="dialogId" name="DialogId" value="" class="hide">
-                        <div class="send-wrap">
-                            <textarea class="form-control send-message" id="messageInput" style="max-width: none; display: -webkit-inline-box;" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="3" placeholder="Введите сообщение..."></textarea>
-                        </div>
-                        <div class="btn-panel">
-                            <button type="submit" class="col-lg-4 text-right btn send-message-btn pull-right" id="buttonSendMessage" style="background-color: #58d068; color: #fff; " disabled>
-                                <i class="fa fa-envelope"> Отправить </i>
-                            </button>
-                        </div>
+                    <input type="text" id="dialogId" name="DialogId" value="" class="hide">
+                    <div class="send-wrap">
+                        <textarea class="form-control send-message" id="messageInput" style="max-width: none; display: -webkit-inline-box;" oninput="LockedButton('messageInput', 'buttonSendMessage')" name="Text" rows="3" placeholder="Введите сообщение..."></textarea>
+                    </div>
+                    <div class="btn-panel">
+                        <button type="submit" class="col-lg-4 text-right btn send-message-btn pull-right" id="buttonSendMessage" style="background-color: #58d068; color: #fff;" disabled>
+                            <i class="fa fa-envelope"> Отправить </i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

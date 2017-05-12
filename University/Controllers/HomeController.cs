@@ -186,7 +186,6 @@ namespace University.Controllers
             return usersInfo;
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult CompletionRegistration()
         {
             return View();
