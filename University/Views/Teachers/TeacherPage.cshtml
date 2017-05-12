@@ -90,14 +90,6 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <h5> Предметы: </h5>
-                                    @foreach (var subject in Model.Subjects)
-                                    {
-                                        <p>
-                                            <i> <a href="/Subjects/MaterialsSubject/@subject.Id"> @subject.NameAbridgment </a></i>
-                                            <br/>
-                                        </p>
-                                    }
                                     @if (!(bool) ViewData["CurrentUser"])
                                     {
                                         <div class="btn-group">
@@ -105,6 +97,14 @@
                                                 <i class="fa fa-envelope fa"> Написать сообщение </i>
                                             </a>
                                         </div>
+                                    }
+                                    <h5> Предметы: </h5>
+                                    @foreach (var subject in Model.Subjects)
+                                    {
+                                        <p>
+                                            <i> <a href="/Subjects/MaterialsSubject/@subject.Id"> @subject.NameAbridgment </a></i>
+                                            <br />
+                                        </p>
                                     }
                                 </div>
                             </div>
