@@ -20,10 +20,11 @@
             </small>
         </div>
         
-        <h5 class="media-heading" style="color: #003bb3;">
+        <h5 class="media-heading" style="color: #003bb3; text-align: left; ">
             <a href="@Url.Action("Material", "Subjects", new {id = Model.Id})">@Model.Name</a>
+            <br style="text-align: left; ">
+            <b>@Model.SurName @Model.FirstName</b>
         </h5>
-        <small><b>@Model.SurName @Model.FirstName</b></small>
         <br/>
     </div>
 </div>

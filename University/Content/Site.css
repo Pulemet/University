@@ -17,6 +17,8 @@ body {
     font-family: Roboto,sans-serif;
 }
 
+/*url(http://p1.pichost.me/i/11/1344899.jpg)*/
+
 p {
     word-break: break-word;
 }
@@ -192,8 +194,11 @@ hr.message-inner-separator
     font-size: 15px;
 }
 
-.panel-subject > .panel-heading {
-    text-align: left;
+.panel-subject>.panel-heading {
+	color: #00415d;
+	background-color: #fff;
+	border-color: #fff;
+	text-align: center;
     margin-bottom: 10px;
     height: 440px;
 }
