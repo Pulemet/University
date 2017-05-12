@@ -696,10 +696,11 @@ footer {
 
 /* 'Question' form. */
 .question-form-container {
-    margin: auto auto;
-    width: 400px;
-    padding-top: 20px;
-    display: block;
+    margin-top: 15px;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background-color: whitesmoke; 
 }
 
 header[role=banner] {

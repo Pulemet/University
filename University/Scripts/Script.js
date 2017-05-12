@@ -405,15 +405,8 @@ $(function () {
 
 });
 
-function NewMaterialClick() {
-    $("#formAddMaterial").show();
-    $("#buttonNewMaterial").hide();
-}
-
 function CloseFormAddMaterial() {
     $('#buttonAddMaterial').prop('disabled', true);
     $('#inputDescriptionMaterial').val('');
     $('#loadFile').val('');
-    $("#formAddMaterial").hide();
-    $("#buttonNewMaterial").show();
 }
