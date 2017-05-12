@@ -160,7 +160,7 @@ function initArrayUsers(arr) {
 }
 
 function NotSearchResult(name) {
-    return '<div style="text-align: center; color: black;"><p> Ниодного ' + name + ' не найдено';
+    return '<div style="text-align: center; color: black; padding-top: 20%; "><p> Ниодного ' + name + ' не найдено';
 }
 
 function SearchSubject() {
@@ -177,13 +177,13 @@ function SearchSubject() {
         }
         if (data.length !== 0) {
             dataHtml = GetViewSubjects(data);
-            $('#ListSubjects').replaceWith(dataHtml);
+            $('#listSubjects').replaceWith(dataHtml);
         } else {
-            $('#ListSubjects').replaceWith('<div class="col-md-12" id="ListSubjects">' + NotSearchResult("предмета") + '</div>');
+            $('#listSubjects').replaceWith('<div class="col-md-7" id="listSubjects">' + NotSearchResult("предмета") + '</div>');
         }
     } else {
         dataHtml = GetViewSubjects(Subjects);
-        $('#ListSubjects').replaceWith(dataHtml);
+        $('#listSubjects').replaceWith(dataHtml);
     }
 
 }
@@ -204,19 +204,19 @@ function SearchFriend() {
         }
         if (data.length !== 0) {
             dataHtml = GetViewFriends(data);
-            $('#ListUsers').replaceWith(dataHtml);
+            $('#listUsers').replaceWith(dataHtml);
         } else {
-            $('#ListUsers').replaceWith('<div id="ListUsers">' + NotSearchResult("друга") + '</div>');
+            $('#listUsers').replaceWith('<div id="listUsers">' + NotSearchResult("друга") + '</div>');
         }
     } else {
         dataHtml = GetViewFriends(Friends);
-        $('#ListUsers').replaceWith(dataHtml);
+        $('#listUsers').replaceWith(dataHtml);
     }
 
 }
 
 function GetViewSubjects(subjects) {
-    var data = '<div class="col-md-12" id="ListSubjects">';
+    var data = '<div class="col-md-7" id="listSubjects">';
     for (var index = 0, len = subjects.length; index < len; ++index) {
         data += GetViewSubject(subjects[index]);
     }
@@ -226,15 +226,15 @@ function GetViewSubjects(subjects) {
 
 function GetViewSubject(subject) {
     var id = subject.Id;
-    return '<div class="blockquote-box clearfix col-xs-6"><p>' +
+    return '<div class="panel panel-default"><div class="panel-heading resume-heading"><p>' +
         '<a href="/Teachers/Index/' + id + '"> Преподаватели </a></p><h4> ' +
         subject.NameFull + '</h4><p><a href="/Subjects/MaterialsSubject/' + id +
         '"> Перейти к материалам </a></p>' +
-        '<p><a href="/Questions/Questions/' + id + '"> Перейти к вопросам </a></p></div>';
+        '<p><a href="/Questions/Questions/' + id + '"> Перейти к вопросам </a></p></div></div>';
 }
 
 function GetViewFriends(friends) {
-    var data = '<div id="ListUsers">';
+    var data = '<div id="listUsers">';
     for (var index = 0, len = friends.length; index < len; ++index) {
         data += GetViewFriend(friends[index]);
     }
@@ -249,8 +249,8 @@ function GetViewFriend(friend) {
     } else {
         role = "Преподаватель";
     }
-    return '<div class="col-md-10"><div class="panel panel-default">' +
-        '<div class="panel-body"><div class="row"><div class="col-md-4 col-lg-4" align="center">' +
+    return '<div class="panel panel-default">' +
+        '<div class="panel-heading resume-heading"><div class="row">' + '<div class="col-md-4 col-lg-4" align="center">' +
         '<img src="' + friend.Photo + '" class="circular-square-users"></div>' +
         '<div class="col-sm-6 col-md-8"><h4><i class="fa fa-university fa">' +
         '<a href="/Home/UserPage/' + friend.Id + '"> ' + friend.SurName + ' ' + friend.FirstName + ' </a></i>' +
@@ -259,7 +259,7 @@ function GetViewFriend(friend) {
         '<div class="btn-group"><a class="btn btn-primary" onclick="ShowFormSendMessageD("' + friend.Id +
         '", "' + friend.SurName + ' ' + friend.FirstName + '")"' +
         'id="show-button"><i class="fa fa-envelope fa"> Написать сообщение </i></a></div>' +
-        '</div></div></div></div></div>';
+        '</div></div></div></div>';
 }
 
 function SearchUser() {
@@ -292,7 +292,7 @@ $(document).ready(function () {
         $.get("/Home/SearchUser", { name: userName }, function (responce) {
             $('#input-search').val('');
             $("#block-search-result").hide();
-            $('#ListUsers').replaceWith(responce);
+            $('#listUsers').replaceWith(responce);
         });
     });
 });
