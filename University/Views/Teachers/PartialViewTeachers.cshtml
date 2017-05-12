@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<University.Models.Dto.TeacherDto>
 
-<h4>Преподаватели предмета "@ViewData["Subject"]"</h4>
+<div class="panel-title text-center">
+    <h2 class="title">Преподаватели предмета "@ViewData["Subject"]"</h2>
+    <hr id="form-line" />
+</div>
+
 <div id="ListTeachers">
     @foreach (var teacher in Model)
     {
