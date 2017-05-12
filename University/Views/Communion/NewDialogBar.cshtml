@@ -7,7 +7,7 @@
     </div>
 
     <p class="text-center" style="color: #fff; ">Выберите участников</p>
-    <div class="well col-md-12" style="max-height: 150px; overflow: auto;">
+    <div class="well col-md-12" id="get-checked-data" style="max-height: 150px; overflow: auto;">
         @foreach (var user in Model)
         {
             @Html.Partial("PartialViewUser", user)
