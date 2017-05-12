@@ -29,7 +29,7 @@
             @Html.Partial("~/Views/Home/PartialViewSaidBar.cshtml")
         </div>
 
-        <div class="col-sm-9 col-md-10" style="margin-top: 10px;">
+        <div class="col-md-7" style="margin-top: 15px;">
             <div id="block-search">
                 <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
                     <input type="text" id="input-search" oninput="SearchFriend()" placeholder="Поиск">
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-7">
             @Html.Partial("PartialViewUsers", Model)
         </div>
     </div>

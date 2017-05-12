@@ -15,22 +15,22 @@
 </head>
 
 <div class="container">
-    <div class="panel-title text-center">
-        <h2 class="title">@ViewBag.Title</h2>
-        <hr id="form-line" />
-    </div>
-    <div class="col-md-12" style="margin-top: 10px;">
-        <div id="block-search">
-            <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
-                <input type="text" id="input-search" oninput="SearchSubject()" placeholder="Поиск">
-            </form>
-            <div id="block-search-result">
-                <ul id="list-search-result" style="list-style-type: none;"></ul>
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+            @Html.Partial("../Home/PartialViewSaidBar")
+        </div>
+
+        <div class="col-md-7" style="margin-top: 15px;">
+            <div id="block-search">
+                <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
+                    <input type="text" id="input-search" oninput="SearchSubject()" placeholder="Поиск предмета">
+                </form>
+                <div id="block-search-result">
+                    <ul id="list-search-result" style="list-style-type: none;"></ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12" id="ListSubjects">
+        <div class="col-md-7" id="ListSubjects">
             @foreach (var subject in Model)
             {
                 @Html.Partial("PartialViewSubject", subject)
