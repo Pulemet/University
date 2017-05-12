@@ -2,25 +2,31 @@
 
 <div id="newDialogBar" hidden>
     <div class="form-group">
-        <label for="contain" style="color: #fff; ">Название беседы</label>
-        <input type="text" id="NameConversation" oninput="IsChecked()" placeholder="Название беседы" style="display: block; width: 70%; margin-bottom: 4px;" />
+        @Html.Label("Название беседы", new { @class = "cols-sm-2 control-label", style = "color: white; margin-top: 8px;" })
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <input type="text" id="NameConversation" oninput="IsChecked()" placeholder="Название беседы" style="display: block; width: 100%; margin-bottom: 4px;" />
+            </div>
+        </div>
     </div>
 
-    <p class="text-center" style="color: #fff; ">Выберите участников</p>
-    <div class="well col-md-12" id="get-checked-data" style="max-height: 150px; overflow: auto;">
+    <div class="row">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-success btn-block" id="buttonCreateDialog" style="margin-bottom: 4px;" disabled>
+                <i class="fa fa-envelope fa"> Создать беседу </i>
+            </button>
+
+            <button class="btn btn-warning btn-block" onclick="ShowDialogs()">
+                <i class="fa fa-envelope fa"> Отменить </i>
+            </button>
+        </div>
+    </div>
+
+    <form class="formbox" id="formBox" style="color: white; margin-top: 10px; ">
+        @Html.Label("Выберите участников:", new { @class = "cols-sm-2 control-label", style = "color: #0094ff; margin-top: 4px;" })
         @foreach (var user in Model)
         {
             @Html.Partial("PartialViewUser", user)
         }
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-success pull-left" id="buttonCreateDialog" style="margin-right: 4px; " disabled>
-            <i class="fa fa-envelope fa"> Создать беседу </i>
-        </button>
-
-        <button class="btn btn-warning pull-right" onclick="ShowDialogs()">
-            <i class="fa fa-envelope fa"> Отменить </i>
-        </button>
-        </div>
-    </div>
+    </form>
+</div>

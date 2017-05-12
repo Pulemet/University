@@ -1,15 +1,6 @@
 ﻿@model University.Models.ApplicationUser
 
-<head>
-    <script type="text/javascript" src="/scripts/script.js">
-    </script>
-</head>
-
-<ul id="check-list-box" class="list-group checked-list-box">
-    <li class="list-group-item list-group-item-primary" style="cursor: pointer;">
-        <span class="state-icon glyphicon glyphicon-check">
-            <input type="checkbox" value="@Model.Id" id="@Model.Id" name="selectedUsers" class="hidden"/>
-            <label for="@Model.Id">@Model.SurName @Model.FirstName</label>
-        </span>
-    </li>
-</ul>
+<div>
+    <input type="checkbox" value="@Model.Id" id="@Model.Id" name="selectedUsers">
+    <label for="@Model.Id">@Model.SurName @Model.FirstName</label>
+</div>

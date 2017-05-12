@@ -7,8 +7,8 @@
         </a>
     </div>
 
-    <div class="col-md-12" id="ListDialogs" style="margin-top: 10px;">
-        <div class="media conversation" style="border: 3px;">
+    <div class="col-md-12" style="margin-top: 10px;">
+        <div id="ListDialogs" class="media conversation" style="border: 3px;">
             @foreach (var dialog in Model)
             {
                 @Html.Partial("PartialViewDialog", dialog)

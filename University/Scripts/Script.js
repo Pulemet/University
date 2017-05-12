@@ -16,7 +16,7 @@ $(document).ready(function () {
             $('#buttonAddComment').prop('disabled', true);
             if ($('#noComments').length > 0) {
                 $('#noComments').remove();
-            }      
+            }
         });
     });
 });
@@ -72,11 +72,11 @@ var IsChecked = function () {
             $(buttonId).prop('disabled', false);
         } else {
             $(buttonId).prop('disabled', true);
-        } 
+        }
     }
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('input[type=checkbox]').on('click', IsChecked);
 });
 
@@ -212,7 +212,7 @@ function SearchFriend() {
         dataHtml = GetViewFriends(Friends);
         $('#ListUsers').replaceWith(dataHtml);
     }
-    
+
 }
 
 function GetViewSubjects(subjects) {
@@ -253,7 +253,7 @@ function GetViewFriend(friend) {
         '<div class="panel-body"><div class="row"><div class="col-md-4 col-lg-4" align="center">' +
         '<img src="' + friend.Photo + '" class="circular-square-users"></div>' +
         '<div class="col-sm-6 col-md-8"><h4><i class="fa fa-university fa">' +
-        '<a href="/Home/UserPage/' + friend.Id + '"> ' + friend.SurName + ' ' + friend.FirstName +' </a></i>' +
+        '<a href="/Home/UserPage/' + friend.Id + '"> ' + friend.SurName + ' ' + friend.FirstName + ' </a></i>' +
         '</h4><p><i class="glyphicon glyphicon-user"> ' + role + ' </i><br/>' +
         '<i class="glyphicon glyphicon-envelope"> ' + friend.Email + ' </i><br/></p>' +
         '<div class="btn-group"><a class="btn btn-primary" onclick="ShowFormSendMessageD("' + friend.Id +
@@ -268,7 +268,7 @@ function SearchUser() {
     var data = "";
     if (inputSearch.length > 0 && inputSearch.length < 50) {
         // Делаем запрос в обработчик в котором будет происходить поиск.
-        
+
         for (var index = 0, len = userNames.length; index < len; ++index) {
             var loverInputSearch = inputSearch.toLowerCase();
             if (Surnames[index].substring(0, inputSearch.length) === loverInputSearch
@@ -276,7 +276,7 @@ function SearchUser() {
                 data = data + '<li class="add-li"><div class="block-title-price" >' + '<a href="#">' + userNames[index] + "</a></div></li>";
             }
         }
-    } 
+    }
     if (data !== "") {
         $("#block-search-result").show(); // Показываем блок с результатом.
         $("#list-search-result").html(data); // Добавляем в список результат поиска.
@@ -367,10 +367,10 @@ function ShowFormSendMessageD(id, name) {
     ShowFormSendMessage(id);
 }
 
-function ShowFormSendMessage (id) {
+function ShowFormSendMessage(id) {
     showPrompt(id, function (value) {
         if (value !== null) {
-            SendMessage(id, value); 
+            SendMessage(id, value);
         }
     });
 };
@@ -417,85 +417,3 @@ function CloseFormAddMaterial() {
     $("#formAddMaterial").hide();
     $("#buttonNewMaterial").show();
 }
-
-/**
- Function for check-box. 
- */
-$(function () {
-    $('.list-group.checked-list-box .list-group-item').each(function () {
-
-        // Settings
-        var $widget = $(this),
-            $checkbox = $('<input type="checkbox" class="hidden" />'),
-            color = ($widget.data('color') ? $widget.data('color') : "primary"),
-            style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
-            settings = {
-                on: {
-                    icon: 'glyphicon glyphicon-check'
-                },
-                off: {
-                    icon: 'glyphicon glyphicon-unchecked'
-                }
-            };
-
-        $widget.css('cursor', 'pointer')
-        $widget.append($checkbox);
-
-        // Event Handlers
-        $widget.on('click', function () {
-            $checkbox.prop('checked', !$checkbox.is(':checked'));
-            $checkbox.triggerHandler('change');
-            updateDisplay();
-        });
-        $checkbox.on('change', function () {
-            updateDisplay();
-        });
-
-
-        // Actions
-        function updateDisplay() {
-            var isChecked = $checkbox.is(':checked');
-
-            // Set the button's state
-            $widget.data('state', (isChecked) ? "on" : "off");
-
-            // Set the button's icon
-            $widget.find('.state-icon')
-                .removeClass()
-                .addClass('state-icon ' + settings[$widget.data('state')].icon);
-
-            // Update the button's color
-            if (isChecked) {
-                $widget.addClass(style + color + ' active');
-            } else {
-                $widget.removeClass(style + color + ' active');
-            }
-        }
-
-        // Initialization
-        function init() {
-
-            if ($widget.data('checked') == true) {
-                $checkbox.prop('checked', !$checkbox.is(':checked'));
-            }
-
-            updateDisplay();
-
-            // Inject the icon if applicable
-            if ($widget.find('.state-icon').length == 0) {
-                $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
-            }
-        }
-        init();
-    });
-
-    $('#get-checked-data').on('click', function (event) {
-        event.preventDefault();
-        var checkedItems = {}, counter = 0;
-        $("#check-list-box li.active").each(function (idx, li) {
-            checkedItems[counter] = $(li).text();
-            counter++;
-        });
-        $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
-    });
-});
