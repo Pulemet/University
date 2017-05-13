@@ -2,13 +2,14 @@
 
 
 <form method="POST" id="addComment" action="/Subjects/AddComment">
-    <div>
-        <input type="text" name="MaterialId" value="@Model.Id" class="hide">
-        <textarea class="form-element form-element-textarea" id="commentInput" name="Text" rows="5" oninput="LockedButton('commentInput', 'buttonAddComment')" placeholder="Введите комментарий..."></textarea>
-        <br />
-        <br />
-        <p>
-            <button type="submit" class="btn btn-success btn-sm" id="buttonAddComment" disabled>Опубликовать</button>
-        </p>
+    <input type="text" name="MaterialId" value="@Model.Id" class="hide">
+    <div class="send-wrap">
+        <textarea class="form-control send-message" id="commentInput" name="Text" rows="5" oninput="LockedButton('commentInput', 'buttonAddComment')" style="width: 100%; " placeholder="Введите комментарий..."></textarea>
+    </div>
+    <div class="btn-panel">
+        <button type="submit" class="col-lg-4 text-right btn btn-success send-message-btn pull-right" id="buttonAddComment"
+                style="background-color: #58d068; color: #fff;" disabled>
+            <i class="fa fa-envelope"> Опубликовать </i>
+        </button>
     </div>
 </form>

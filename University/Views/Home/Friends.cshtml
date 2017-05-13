@@ -32,7 +32,10 @@
         <div class="col-md-7" style="margin-top: 15px;">
             <div id="block-search">
                 <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
-                    <input type="text" id="input-search" oninput="SearchFriend()" placeholder="Поиск">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" id="input-search" oninput="SearchFriend()" placeholder="Поиск">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
                 </form>
                 <div id="block-search-result">
                     <ul id="list-search-result" style="list-style-type: none;"></ul>

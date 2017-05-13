@@ -23,86 +23,69 @@
         div {
             word-wrap: break-word;
         }
+
+        #formComments {
+            margin-top: 5px;
+            max-height: 60%;
+            overflow: auto;
+            min-height: 60%;
+            margin-top: 20px;
+
+        }
+
+        #panel-id {
+            height: 600px;
+            margin-top: 0;
+            width: 99%;
+        }
     </style>
 </head>
 
 <div class="container">
     <div class="row">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h2 class="title">@Model.Name</h2>
-                <hr id="form-line" />
-            </div>
+        <div class="col-sm-3 col-md-2">
+            @Html.Partial("../Home/PartialViewSaidBar")
         </div>
-        
-        <article class="row">
-            <div class="col-md-2 col-sm-2 hidden-xs">
-                <figure class="thumbnail">
-                    <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                    <figcaption class="text-center">username</figcaption>
-                </figure>
-            </div>
-            <div class="col-md-10 col-sm-10">
-                <div class="panel panel-default arrow left">
-                    <div class="panel-body">
-                        <header class="text-left">
-                            <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                        </header>
-                        <div class="comment-post">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                        </div>
-                        <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+
+        <div class="col-md-8" style="margin-top: 15px;">
+            <div class="panel panel-default arrow left">
+                <div class="panel-body">
+                    <header class="text-left">
+                        <div class="comment-user"><i class="fa fa-user fa"></i> @Model.SurName @Model.FirstName </div>
+                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> @String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad)</time>
+                    </header>
+                    <div class="comment-post">
+                        <h5 class="media-heading" style="color: #003bb3; ">
+                            <small>Имя файла: </small><b style="text-align: left; margin-top: 10px; font-weight: bold; color: #6E6E6E">@Model.Name</b>
+                        </h5>
                     </div>
+                    <p class="text-right"><a href="#" class="btn btn-primary pull-right"><i class="fa fa-download"></i> Скачать</a></p>
                 </div>
             </div>
-        </article>
+        </div>
 
-        <blockquote class="quote-box">
-            <p class="quotation-mark">
-                “
-            </p>
-            <p class="quote-text btn btn-success">
-                <a href="@Model.FileLink" download>
-                    <i class="fa fa-download fa" style="color: #fff;">
-                        Скачать файл
-                    </i>
-                </a>
-            </p>
-            <hr>
-            <div class="blog-post-actions">
-                <p class="blog-post-bottom pull-left" style="color: #337ab7;">
-                    @Model.SurName @Model.FirstName
-                </p>
-                <p class="blog-post-bottom pull-right">
-                    <span class="badge quote-badge">
-                        <i class="fa fa-clock-o fa"> @String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad) </i>
-                    </span>
-                </p>
-            </div>
-        </blockquote>
-
-        <div id="formComments" class="form-horizontal">
-            @{
-                if (Model.Comments.Count == 0)
-                {
-                    <div id="noComments">
-                        <p>Пользователи пока не оставляли комментариев</p>
-                    </div>
-                }
-                else
-                {
-                    foreach (var comment in Model.Comments)
+        <div class="col-md-6 col-md-offset-2" style="margin-top: 15px; ">
+            @Html.Partial("PartialAddComment")
+        </div>
+    
+        <div class="row col-md-offset-2 col-md-8" id="panel-id">
+            <div id="formComments" class="panel col-md-8" style="height: 100px; ">
+                @{
+                    if (Model.Comments.Count == 0)
                     {
-                        @Html.Partial("Comment", comment)
+                        <div id="noComments">
+                            <p>Пользователи пока не оставляли комментариев</p>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var comment in Model.Comments)
+                        {
+                            @Html.Partial("Comment", comment)
+                        }
                     }
                 }
-            }
-        </div>
-        <div class="form-horizontal">
-            @Html.Partial("PartialAddComment")
+            </div>
         </div>
     </div>
 </div>

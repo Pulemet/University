@@ -14,18 +14,13 @@
 
 <div class="msg-wrap" style="border-bottom: 1px solid #ddd; padding: 5px; background-color: #fff; border-radius: 3px;">
     <div class="media msg">
-
-            <small class="pull-right time">
-                <i class="fa fa-clock-o fa" style="color: #6E6E6E;"> @String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad)</i>
-            </small>
-
-        
-        <h5 class="media-heading" style="color: #003bb3; text-align: left; ">
+        <small class="pull-right time">
+            <i class="fa fa-clock-o fa" style="color: #6E6E6E;"> @String.Format("{0:dd.MM.yyyy}", Model.DateLoad) в @String.Format("{0:H.mm}", Model.DateLoad)</i>
+        </small>
+        <h5 class="media-heading" style="color: #003bb3; text-align: left; font-size: 24px; ">
             <a href="@Url.Action("Material", "Subjects", new {id = Model.Id})">@Model.Name</a>
-            
         </h5>
         <h5 class="media-heading" style="color: #003bb3; text-align: left; ">
-            
             <small>Автор: </small><b style="text-align: left; margin-top: 10px; font-weight: bold; color: #6E6E6E">@Model.SurName @Model.FirstName</b>
         </h5>
     </div>

@@ -25,9 +25,9 @@
         @foreach (string str in userNamesCs)
         {
             <text>
-            ar[i] = '@str';
-            i++;
-            </text>
+        ar[i] = '@str';
+        i++;
+        </text>
         }
 
         //пока не вышли из скрипта инициализируем полученный массив; пусть функция initArrayInExternalFile() находится в externalfile.js
@@ -52,10 +52,13 @@
             @Html.Partial("~/Views/Home/PartialViewSaidBar.cshtml")
         </div>
 
-        <div class="col-md-8" style="margin-top: 10px;">
+        <div class="col-md-8" style="margin-top: 15px;">
             <div id="block-search">
                 <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
-                    <input type="text" id="input-search" oninput="SearchUser()" placeholder="Поиск">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" id="input-search" oninput="SearchUser()" placeholder="Поиск">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
                 </form>
                 <div id="block-search-result">
                     <ul id="list-search-result" style="list-style-type: none;"></ul>
