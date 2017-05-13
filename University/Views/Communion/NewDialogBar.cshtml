@@ -1,25 +1,18 @@
 ﻿@model IEnumerable<University.Models.ApplicationUser>
 
 <style>
- #scrollbox {
+ .scrollbox {
     overflow: auto;
     width: 200px;
     max-height: 200px;
     margin: 30px auto;
-    background:
-    linear-gradient(white 30%, rgba(255,255,255,0)),
-    linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-    radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
-    radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-    background-repeat: no-repeat;
     background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
     background-attachment: local, local, scroll, scroll;
 }
 </style>
-<div class="col-md-12" style="margin-top: 15px;">
+<div class="col-md-12" style="margin-top: 15px;" id="newDialogBar" hidden>
     <div class="panel panel-default">
         <div class="panel-heading resume-heading">
-            <div id="newDialogBar" hidden>
                 <div class="form-group">
                     @Html.Label("Название беседы", new { @class = "cols-sm-2 control-label", style = "color: #0094ff; margin-top: 8px;" })
                     <div class="cols-sm-10">
@@ -42,13 +35,12 @@
                 </div>
 
                 <form class="formbox scrollbox" id="formBox" style="color: black; margin-top: 10px; ">
-                    @Html.Label("Выберите участников:", new { @class = "cols-sm-2 control-label", style = "color: #0094ff; margin-top: 4px;" })
+                    @Html.Label("Выберите участников:", new { @class = "cols-md-12 control-label", style = "color: #0094ff; margin-top: 4px;" })
                     @foreach (var user in Model)
                     {
                         @Html.Partial("PartialViewUser", user)
                     }
                 </form>
-            </div>
         </div>
     </div>
 </div>

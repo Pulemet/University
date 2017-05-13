@@ -28,9 +28,9 @@
                         if (!Model.IsFriend)
                         {
                             <div class="btn-group">
-                                <a class="btn btn-danger" onclick="AddFriend('@Model.Id', '@Model.Id')" id="@Model.Id">
+                                <button class="btn btn-danger" onclick="AddFriend('@Model.Id', '@Model.Id')" id="@Model.Id">
                                     <i class="fa fa-plus fa"> Добавить в друзья </i>
-                                </a>
+                                </button>
                             </div>
                         }
                     }
