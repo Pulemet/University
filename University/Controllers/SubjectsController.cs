@@ -57,9 +57,8 @@ namespace University.Controllers
             db.SaveChanges();
             var newMaterial = db.Materials.ToList().Last();
 
-            MaterialDto mDto = GetMaterialDto(newMaterial);
-
-            return PartialView("PartialViewMaterial", mDto);
+            //RedirectToAction("Material", GetMaterialDto(newMaterial));
+            return PartialView("PartialViewMaterial", GetMaterialDto(newMaterial));
         }
 
         public ActionResult Material(int id)

@@ -49,20 +49,24 @@ namespace University.Controllers
         public ActionResult Question(int id)
         {
             Question question = db.Questions.Find(id);
-            QuestionDto qDto = new QuestionDto(question);
+
+            return View(GetQuestion(question));
+        }
+
+        private QuestionDto GetQuestion(Question question)
+        {
+            QuestionDto qDto = new QuestionDto();
+
             if (question != null)
             {
+                qDto = new QuestionDto(question);
                 ApplicationUser user = db.Users.Find(question.AuthorId);
                 qDto.FirstName = user.FirstName;
                 qDto.SurName = user.SurName;
-            }
-            var answers = db.Answers.Where(a => a.QuestionId == question.Id).Select(a => a).ToList();
-            foreach (var answer in answers)
-            {
-                qDto.Answers.Add(GetAnswer(answer));
+                qDto.Answers = GetAnswers(question.Id);
             }
 
-            return View(qDto);
+            return qDto;
         }
 
         [HttpPost]
@@ -83,7 +87,8 @@ namespace University.Controllers
 
             db.Questions.Add(question);
             db.SaveChanges();
-            return RedirectToAction("Questions", new { id = question.SubjectId });
+            var newQuestion = db.Questions.ToList().Last();
+            return RedirectToAction("Question", GetQuestion(newQuestion));
         }
 
         [HttpPost]
@@ -105,7 +110,7 @@ namespace University.Controllers
             return PartialView(GetAnswer(db.Answers.Find(answerId)));
         }
 
-        public AnswerDto GetAnswer(Answer answer)
+        private AnswerDto GetAnswer(Answer answer)
         {
             AnswerDto answerDto = new AnswerDto();
 
@@ -120,6 +125,19 @@ namespace University.Controllers
             }
 
             return answerDto;
+        }
+
+        private List<AnswerDto> GetAnswers(int id)
+        {
+            return db.Answers.Where(a => a.QuestionId == id).Join(db.Users, a => a.AuthorId, u => u.Id, (a, u) =>
+                                    new AnswerDto()
+                                    {
+                                        Id = a.Id,
+                                        CreateDate = a.CreateDate,
+                                        Text = a.Text,
+                                        FirstName = u.FirstName,
+                                        SurName = u.SurName
+                                    }).ToList();
         }
     }
 }
