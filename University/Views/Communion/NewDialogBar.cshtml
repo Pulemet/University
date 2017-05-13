@@ -1,32 +1,54 @@
 ﻿@model IEnumerable<University.Models.ApplicationUser>
 
-<div id="newDialogBar" hidden>
-    <div class="form-group">
-        @Html.Label("Название беседы", new { @class = "cols-sm-2 control-label", style = "color: white; margin-top: 8px;" })
-        <div class="cols-sm-10">
-            <div class="input-group">
-                <input type="text" id="NameConversation" oninput="IsChecked()" placeholder="Название беседы" style="display: block; width: 100%; margin-bottom: 4px;" />
+<style>
+ #scrollbox {
+    overflow: auto;
+    width: 200px;
+    max-height: 200px;
+    margin: 30px auto;
+    background:
+    linear-gradient(white 30%, rgba(255,255,255,0)),
+    linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+    radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+    radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    background-attachment: local, local, scroll, scroll;
+}
+</style>
+<div class="col-md-12" style="margin-top: 15px;">
+    <div class="panel panel-default">
+        <div class="panel-heading resume-heading">
+            <div id="newDialogBar" hidden>
+                <div class="form-group">
+                    @Html.Label("Название беседы", new { @class = "cols-sm-2 control-label", style = "color: #0094ff; margin-top: 8px;" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="NameConversation" oninput="IsChecked()" placeholder="Название беседы" style="border-radius: 3px; width: 100%; margin-bottom: 4px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success btn-block" id="buttonCreateDialog" style="margin-bottom: 4px;" disabled>
+                            <i class="fa fa-envelope fa"> Создать беседу </i>
+                        </button>
+
+                        <button class="btn btn-warning btn-block" onclick="ShowDialogs()">
+                            <i class="fa fa-envelope fa"> Отменить </i>
+                        </button>
+                    </div>
+                </div>
+
+                <form class="formbox scrollbox" id="formBox" style="color: black; margin-top: 10px; ">
+                    @Html.Label("Выберите участников:", new { @class = "cols-sm-2 control-label", style = "color: #0094ff; margin-top: 4px;" })
+                    @foreach (var user in Model)
+                    {
+                        @Html.Partial("PartialViewUser", user)
+                    }
+                </form>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <button type="submit" class="btn btn-success btn-block" id="buttonCreateDialog" style="margin-bottom: 4px;" disabled>
-                <i class="fa fa-envelope fa"> Создать беседу </i>
-            </button>
-
-            <button class="btn btn-warning btn-block" onclick="ShowDialogs()">
-                <i class="fa fa-envelope fa"> Отменить </i>
-            </button>
-        </div>
-    </div>
-
-    <form class="formbox" id="formBox" style="color: white; margin-top: 10px; ">
-        @Html.Label("Выберите участников:", new { @class = "cols-sm-2 control-label", style = "color: #0094ff; margin-top: 4px;" })
-        @foreach (var user in Model)
-        {
-            @Html.Partial("PartialViewUser", user)
-        }
-    </form>
 </div>
