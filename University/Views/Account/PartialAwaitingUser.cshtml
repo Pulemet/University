@@ -1,10 +1,23 @@
 ﻿@model University.Models.ApplicationUser
 
-<tr class="dialog-container" id="@Model.Id">
-    <td>
-        <a href="@Url.Action("PageSubmitRegistration", "Home", new {id = Model.Id})">@Model.SurName @Model.FirstName</a>
-    </td>
-    <td>
-        <button type="submit" class="btn btn-danger btn-sm" onclick="DeleteUser('@Model.Id')">Отклонить</button>
-    </td>
-</tr>
+<div class="panel panel-default" id="@Model.Id">
+    <div class="panel-heading resume-heading">
+        <div class="row">
+            <div class="col-sm-6 col-md-8">
+                <h4>
+                    <i class="fa fa-university fa"> @Model.SurName @Model.FirstName </i>
+                </h4>
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="/Home/PageSubmitRegistration/@Model.Id">
+                        <i class="fa"> Подвердить </i>
+                    </a>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-danger" onclick="DeleteUser('@Model.Id')">
+                        <i class="fa"> Отклонить </i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

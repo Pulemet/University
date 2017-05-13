@@ -52,21 +52,23 @@
             @Html.Partial("~/Views/Home/PartialViewSaidBar.cshtml")
         </div>
 
-        <div class="col-md-8" style="margin-top: 15px;">
-            <div id="block-search">
-                <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control" id="input-search" oninput="SearchUser()" placeholder="Поиск">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        <div class="col-md-7">
+            <div class="col-md-12" style="margin-top: 15px;">
+                <div id="block-search">
+                    <form method="get" onkeypress="if (event.keyCode === 13) return false;" autocomplete="off">
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" id="input-search" oninput="SearchUser()" placeholder="Поиск">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </form>
+                    <div id="block-search-result">
+                        <ul id="list-search-result" style="list-style-type: none;"></ul>
                     </div>
-                </form>
-                <div id="block-search-result">
-                    <ul id="list-search-result" style="list-style-type: none;"></ul>
                 </div>
             </div>
-        </div>
-        <div class="col-md-8">
-            @Html.Partial("PartialViewUsers", Model)
+            <div class="col-md-12">
+                @Html.Partial("PartialViewUsers", Model)
+            </div>
         </div>
     </div>
 </div>

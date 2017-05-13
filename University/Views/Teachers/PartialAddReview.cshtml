@@ -1,12 +1,14 @@
 ﻿@model University.Models.Dto.TeacherDto
 
-
 <form method="POST" id="addReview" action="/Teachers/AddReview">
-        <input type="text" name="TeacherId" value="@Model.Id" class="hide">
-        <textarea class="form-element form-element-textarea form-control" id="reviewInput" name="Text" rows="5" oninput="LockedButton('reviewInput', 'buttonAddReview')" placeholder="Введите комментарий..." style="width: 70%; "></textarea>
-        <br />
-        <br />
-        <p>
-            <button type="submit" class="btn btn-success btn-sm" id="buttonAddReview" disabled>Опубликовать</button>
-        </p>
+    <input type="text" name="TeacherId" value="@Model.Id" class="hide">
+    <div class="send-wrap">
+        <textarea class="form-control send-message" id="reviewInput" name="Text" rows="5" oninput="LockedButton('reviewInput', 'buttonAddReview')" style="width: 100%; " placeholder="Введите комментарий..."></textarea>
+    </div>
+    <div class="btn-panel">
+        <button type="submit" class="col-lg-4 text-right btn btn-success send-message-btn pull-right" id="buttonAddReview"
+                style="background-color: #58d068; color: #fff;" disabled>
+            <i class="fa fa-envelope"> Опубликовать </i>
+        </button>
+    </div>
 </form>

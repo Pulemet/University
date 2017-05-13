@@ -1,4 +1,5 @@
-﻿@model University.Models.Dto.QuestionDto
+﻿@using Microsoft.AspNet.Identity
+@model University.Models.Dto.QuestionDto
 
 @{
     ViewBag.Title = "Question";
@@ -11,6 +12,7 @@
     <script type="text/javascript" src="/scripts/script.js">
     </script>
     <link href="/Content/Site.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
     <style>
         .form-element-textarea {
             width: 100%;
@@ -23,37 +25,68 @@
     </style>
 </head>
 
-<h2>@Model.Topic</h2>
 <div class="container">
-    <div class="col-md-8">
-        <div class="form-horizontal" id="questionInfo">
-            <label class="control-label form-element-label-name">@String.Format("{0:dd.MM.yyyy}", Model.CreateDate) в @String.Format("{0:H.mm}", Model.CreateDate)</label>
-            <label class="control-label form-element-label-time"><b>@Model.SurName @Model.FirstName</b></label>
-            <p>
-                <a href="@Model.FileLink" download>Скачать файл</a>
-            <p>
-                <br />
-</div>
-
-        <div id="formAnswers" class="form-horizontal">
-            @{
-                if (Model.Answers.Count == 0)
-                {
-                    <div id="noAnswers">
-                        <p>Будьте первым, напишите свой ответ</p>
-                    </div>
-                }
-                else
-                {
-                    foreach (var answer in Model.Answers)
-                    {
-                        @Html.Partial("Answer", answer)
-                    }
-                }
-            }
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+            @Html.Partial("../Home/PartialViewSaidBar")
         </div>
-        <div class="form-horizontal">
-            @Html.Partial("PartialAddAnswer")
+
+        <div class="col-md-8">
+            <div class="col-md-12" style="margin-top: 15px;">
+                <div class="panel panel-default arrow left">
+                    <div class="panel-body">
+                        <div class="comment-post">
+                            <h5 class="media-heading" style="color: #003bb3;">
+                                <small>Вопрос: </small><b style="text-align: left; margin-top: 10px; font-weight: bold; color: #6E6E6E">@Model.Topic</b>
+                            </h5>
+                        </div>
+                        <header class="text-left">
+                            <div class="comment-user">
+                                <i class="fa fa-user fa"></i>
+                                @{ string userId = User.Identity.GetUserId(); }
+                                @if (userId != Model.AuthorId)
+                                {
+                                    <a href="/Home/UserPage/@Model.AuthorId"> @Model.SurName @Model.FirstName </a>
+                                }
+                                else
+                                {
+                                    <span> @Model.SurName @Model.FirstName </span>
+                                }
+                            </div>
+                            <small class="pull-left time">
+                                <i class="fa fa-clock-o fa" style="color: #6E6E6E;"> @String.Format("{0:dd.MM.yyyy}", Model.CreateDate) в @String.Format("{0:H.mm}", Model.CreateDate)</i>
+                            </small>
+                        </header>
+                        <p class="text-right">
+                            <a href="@Model.FileLink" class="btn btn-primary pull-right"><i class="fa fa-download"></i> Скачать</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" id="panel-id">
+                <div id="formAnswers" class="form-horizontal">
+                    @{
+                        if (Model.Answers.Count == 0)
+                        {
+                            <div id="noAnswers" style="text-align: center; color: black; padding-top: 20%;">
+                                <p>Будьте первым, напишите свой ответ</p>
+                            </div>
+                        }
+                        else
+                        {
+                            foreach (var answer in Model.Answers)
+                            {
+                                @Html.Partial("Answer", answer)
+                            }
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-8 pull-right">
+                @Html.Partial("PartialAddAnswer")
+            </div>
         </div>
     </div>
 </div>

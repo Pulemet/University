@@ -103,8 +103,12 @@ function AddMaterialClick() {
         success: function (responce) {
             if (typeLesson === "Lecture") {
                 $("#lecture-content").append(responce);
+                LectureContentShow();
+                ScrollingForm("lecture-content");
             } else {
                 $("#practical-content").append(responce);
+                PracticalContentShow();
+                ScrollingForm("practical-content");
             }
             CloseFormAddMaterial();
         },
@@ -385,25 +389,38 @@ function SendMessage(id, value) {
 
 $(function () {
     $('#lecture-form-link').click(function (e) {
-        $("#lecture-content").show();
-        $("#practical-content").hide();
-        $("#lecture-content").delay(100).fadeIn(100);
-        $("#practical-content").fadeOut(100);
-        $('#practical-form-link').removeClass('active');
-        $(this).addClass('active');
+        LectureContentShow();
         e.preventDefault();
     });
     $('#practical-form-link').click(function (e) {
-        $("#lecture-content").hide();
-        $("#practical-content").show();
-        $("#practical-content").delay(100).fadeIn(100);
-        $("#lecture-content").fadeOut(100);
-        $('#lecture-form-link').removeClass('active');
-        $(this).addClass('active');
+        PracticalContentShow();
         e.preventDefault();
     });
 
 });
+
+function LectureContentShow() {
+    $("#lecture-content").show();
+    $("#practical-content").hide();
+    $("#lecture-content").delay(100).fadeIn(100);
+    $("#practical-content").fadeOut(100);
+    $('#practical-form-link').removeClass('active');
+    $('#lecture-form-link').addClass('active');
+}
+
+function PracticalContentShow() {
+    $("#lecture-content").hide();
+    $("#practical-content").show();
+    $("#practical-content").delay(100).fadeIn(100);
+    $("#lecture-content").fadeOut(100);
+    $('#lecture-form-link').removeClass('active');
+    $('#practical-form-link').addClass('active');
+}
+
+function ScrollingForm(id) {
+    var div = document.getElementById(id);
+    div.scrollTop = div.scrollHeight - div.clientHeight;
+}
 
 function CloseFormAddMaterial() {
     $('#buttonAddMaterial').prop('disabled', true);

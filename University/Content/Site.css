@@ -1316,3 +1316,32 @@ h2, .h2 {
      width: 100%;
      margin-top: 5px;
 }
+
+#style-border, #border-style {
+    display: block;
+    -webkit-margin-before: 0.5em;
+    -webkit-margin-after: 0.5em;
+    -webkit-margin-start: auto;
+    -webkit-margin-end: auto;
+}
+
+#lecture-content, #practical-content {
+    height: 100%;
+    overflow: auto;
+    min-height: 60%;
+    margin-top: 20px;
+}
+
+#formComments, #formAnswers, #formReviews {
+    overflow: auto;
+    height: 95%;
+}
+
+#panel-id {
+    height: 350px;
+    margin-top: 0;
+}
+
+#panel-heading {
+    max-height: 400px;
+}

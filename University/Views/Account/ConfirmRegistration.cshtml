@@ -5,25 +5,21 @@
 }
 
 @Scripts.Render("~/scripts/jquery-3.1.1.js")
-@Scripts.Render("~/scripts/jquery.min.js")
 
 <head>    
     <script type="text/javascript" src="/scripts/admin.js"> 
     </script>
 </head>
 
-<h3>Ожидающие подтверждения регистрации</h3>
-
 <div class="container">
-    <div class="col-md-6">
-        <table class="table" id="tableAwaitingUsers">
-            <tbody>
-                @foreach (var user in Model)
-                {
-                    @Html.Partial("PartialAwaitingUser", user)
-                }
-            </tbody>
-        </table>
+    <div class="col-lg-11 col-lg-offset-1">
+        <h4 style="color: black;"> Ожидающие подтверждения регистрации </h4>
+    </div>
+    <div class="col-md-6 col-lg-offset-1" style="padding-top: 10px;">
+        @foreach (var user in Model)
+        {
+            @Html.Partial("PartialAwaitingUser", user)
+        }
     </div>
 </div>
 

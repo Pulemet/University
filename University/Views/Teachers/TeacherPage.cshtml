@@ -55,7 +55,7 @@
             @Html.Partial("../Home/PageNewMessage")
         }
 
-        <div class="col-sm-9 col-md-10" style="margin-top: 10px;">
+        <div class="col-md-8" style="margin-top: 10px;">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading resume-heading">
@@ -112,12 +112,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+
+            <div class="col-md-12" id="panel-id">
                 <div id="formReviews" class="form-horizontal">
                     @{
                         if (Model.Comments.Count == 0)
                         {
-                            <div id="noReviews">
+                            <div id="noReviews" style="text-align: center; color: black; padding-top: 20%;">
                                 <p style="color: #fff; ">Пользователи пока не оставляли отзывов.</p>
                             </div>
                         }
@@ -131,7 +132,8 @@
                     }
                 </div>
             </div>
-            <div class="form-horizontal col-md-12">
+
+            <div class="col-md-8 pull-right">
                 @Html.Partial("PartialAddReview")
             </div>
         </div>

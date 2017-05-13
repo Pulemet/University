@@ -14,32 +14,6 @@
     </script>
 </head>
 
-<style>
-    #style-border {
-        display: block;
-        -webkit-margin-before: 0.5em;
-        -webkit-margin-after: 0.5em;
-        -webkit-margin-start: auto;
-        -webkit-margin-end: auto;
-    }
-
-    #lecture-content {
-        max-height: 60%;
-        overflow: auto;
-        min-height: 60%;
-        margin-top: 20px;
-    }
-
-    #panel-id {
-        height: 600px;
-        margin-top: 0;
-    }
-
-    #panel-heading {
-        max-height: 400px;
-    }
-</style>
-
 <div id="subjModal" class="modal fade" style="padding-top: 10%;">
     <div class="modal-dialog">
         <div class="modal-content" style="background: whitesmoke;">
@@ -84,43 +58,50 @@
 
 <div class="container">
     <div class="row">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h2 class="title">@ViewBag.SubjectName</h2>
-                <hr id="form-line" />
-            </div>
+        
+        <div class="col-sm-3 col-md-2">
+            @Html.Partial("../Home/PartialViewSaidBar")
         </div>
-        <div class="col-md-6 col-md-offset-3" id="buttonNewMaterial">
-            <div class="form-group">
-                <a href="#subjModal" role="button" class="btn btn-primary pull-right" data-toggle="modal"> Добавить новый материал </a>
+        
+        <div class="col-md-10">
+            <div class="panel-heading col-md-8 col-md-offset-1">
+                <div class="panel-title text-center">
+                    <h2 class="title">@ViewBag.SubjectName</h2>
+                    <hr id="form-line" />
+                </div>
             </div>
-        </div>
+            <div class="col-md-6 col-md-offset-3" id="buttonNewMaterial">
+                <div class="form-group">
+                    <a href="#subjModal" role="button" class="btn btn-primary pull-right" data-toggle="modal"> Добавить новый материал </a>
+                </div>
+            </div>
 
-        <div class="col-md-6 col-md-offset-3" style="padding-top: 15px; ">
-            <div class="panel panel-subject" style="border-style:none;">
-                <div class="panel-heading">
-                    <div class="row" id="panel-id">
-                        <div class="col-xs-6">
-                            <a href="#" class="active" id="lecture-form-link">Лекции</a>
+            <div class="col-md-8 col-md-offset-1" style="padding-top: 15px;">
+                <div class="panel panel-subject" style="border-style: none;">
+                    <div class="panel-heading">
+                        <div class="row" id="panel-id">
+                            <div class="col-xs-6">
+                                <a href="#" class="active" id="lecture-form-link">Лекции</a>
 
-                        </div>
-                        <div class="col-xs-6">
-                            <a href="#" id="practical-form-link">Практические занятия</a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="#" id="practical-form-link">Практические занятия</a>
 
-                        </div>
-                        <div class="col-md-12" id="lecture-content">
-                            <hr id="border-style" />
-                            @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 0)))
-                            {
-                                @Html.Partial("PartialViewMaterial", material)
-                            }
-                        </div>
-                        <div class="col-md-12" id="practical-content" hidden>
-                            <hr id="style-border" />
-                            @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 1)))
-                            {
-                                @Html.Partial("PartialViewMaterial", material)
-                            }
+                            </div>
+                            <div class="col-md-12" id="lecture-content">
+                                <hr id="border-style" />
+                                @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 0)))
+                                {
+                                    @Html.Partial("PartialViewMaterial", material)
+                                }
+                            </div>
+                            <div class="col-md-12" id="practical-content" hidden>
+                                <hr id="style-border" />
+                                @foreach (var material in Model.Where(m => m.TypeLesson == Enum.GetName(typeof(TypeLesson), 1)))
+                                {
+                                    @Html.Partial("PartialViewMaterial", material)
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

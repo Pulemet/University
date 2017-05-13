@@ -1,15 +1,14 @@
 ﻿@model University.Models.Dto.QuestionDto
 
-
 <form method="POST" id="addAnswer" action="/Questions/AddAnswer">
-    <div>
-        <input type="text" name="QuestionId" value="@Model.Id" class="hide">
-        <textarea class="form-element form-element-textarea" id="answerInput" oninput="LockedButton('answerInput', 'buttonAddAnswer')" name="Text" rows="5" placeholder="Напишите ответ..."></textarea>
-        <br />
-        <br />
-        <p>
-            <button type="submit" id="buttonAddAnswer" class="btn btn-success btn-sm" disabled>Опубликовать</button>
-        </p>
+    <input type="text" name="QuestionId" value="@Model.Id" class="hide">
+    <div class="send-wrap">
+        <textarea class="form-control send-message" id="answerInput" name="Text" rows="5" oninput="LockedButton('answerInput', 'buttonAddAnswer')" style="width: 100%; " placeholder="Напишите ответ..."></textarea>
+    </div>
+    <div class="btn-panel">
+        <button type="submit" class="col-lg-4 text-right btn btn-success send-message-btn pull-right" id="buttonAddAnswer"
+                style="background-color: #58d068; color: #fff;" disabled>
+            <i class="fa fa-envelope"> Опубликовать </i>
+        </button>
     </div>
 </form>
-

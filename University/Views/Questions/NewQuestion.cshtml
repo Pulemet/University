@@ -14,48 +14,56 @@
 
 @Styles.Render("~/Content/css")
 
-<div class="col-md-6 col-md-offset-3">
-    <div class="col-md-12 question-form-container">
-        <h3> @ViewBag.Title </h3>
-        <hr style="border-top-color: #DCDCDC;"/>
-        @using (Html.BeginForm("AddQuestion", "Questions", FormMethod.Post, new {role = "form", enctype = "multipart/form-data"}))
-        {
-            <div class="col-md-12">
-                <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="5" oninput="LockedButton('Topic', 'buttonNewQuestion')" placeholder="Добавьте описание" style="max-width: none; width: 100%;"></textarea>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @Html.Partial("../Home/PartialViewSaidBar")
+        </div>
 
-            <div class="col-md-12">
-                <select class="form-question" name="SubjectId" id="SubjectId">
-                    @foreach (var subject in Model)
-                    {
-                        <option value="@subject.Id">@subject.NameAbridgment</option>
-                    }
-                </select>
-            </div>
+        <div class="col-md-6 col-md-offset-1">
+            <div class="col-md-12 question-form-container">
+                <h3> @ViewBag.Title </h3>
+                <hr style="border-top-color: #DCDCDC;" />
+                @using (Html.BeginForm("AddQuestion", "Questions", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+                {
+                    <div class="col-md-12">
+                        <textarea class="form-element form-element-textarea" id="Topic" name="Topic" rows="5" oninput="LockedButton('Topic', 'buttonNewQuestion')" placeholder="Добавьте описание" style="max-width: none; width: 100%;"></textarea>
+                    </div>
 
-            <div class="col-md-12">
-                <select class="form-question" name="TypeQuestion" id="TypeQuestion">
-                    <option value="Lecture"> Лекции </option>
-                    <option value="Practic"> Практические занятия </option>
-                </select>
-            </div>
+                    <div class="col-md-12">
+                        <select class="form-question" name="SubjectId" id="SubjectId">
+                            @foreach (var subject in Model)
+                            {
+                                <option value="@subject.Id">@subject.NameAbridgment</option>
+                            }
+                        </select>
+                    </div>
 
-            <div class="col-md-12">
-                <div class="file-upload">
-                    <label>
-                        <input type="file" name="file" id="file"/>
-                        <span> Прикрепить файл </span>
-                    </label>
-                </div>
-            </div>
+                    <div class="col-md-12">
+                        <select class="form-question" name="TypeQuestion" id="TypeQuestion">
+                            <option value="Lecture"> Лекции </option>
+                            <option value="Practic"> Практические занятия </option>
+                        </select>
+                    </div>
 
-            <div class="col-md-12">
-                <input type="text" id="filename" class="filename" disabled>
-            </div>
+                    <div class="col-md-12">
+                        <div class="file-upload">
+                            <label>
+                                <input type="file" name="file" id="file" />
+                                <span> Прикрепить файл </span>
+                            </label>
+                        </div>
+                    </div>
 
-            <div class="col-md-12" style="padding-top: 10px">
-                <button type="submit" class="btn btn-primary pull-right" id="buttonNewQuestion" disabled> Отправить </button>
+                    <div class="col-md-12">
+                        <input type="text" id="filename" class="filename" disabled>
+                    </div>
+
+                    <div class="col-md-12" style="padding-top: 10px">
+                        <button type="submit" class="btn btn-primary pull-right" id="buttonNewQuestion" disabled> Отправить </button>
+                    </div>
+                }
             </div>
-        }
+        </div>
     </div>
 </div>

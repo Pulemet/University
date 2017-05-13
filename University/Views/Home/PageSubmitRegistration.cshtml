@@ -5,82 +5,80 @@
     ViewBag.Title = "PageSubmitRegistration";
 }
 
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/scripts/jquery-3.1.1.js")
+@Scripts.Render("~/scripts/jquery-ui-1.12.1.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+
 <head>
-    <script src="/scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/scripts/admin.js">
-
-
-    
-    </script>
-
-    <style>
-        img {
-            display: block;
-            max-width: 230px;
-            max-height: 250px;
-            width: auto;
-            height: auto;
-        }
-    </style>
+    <script type="text/javascript" src="/scripts/admin.js"></script>
 </head>
 
-<h3>Страница подтверждения регистрации</h3>
-
 <div class="container">
-    <div class="col-md-8">
-        <div class="form-group col-md-12">
-            @Html.Label("Фамилия", new {@class = "col-md-2 control-label"})
-            <div class="col-md-10">@Model.SurName</div>
-        </div>
-
-        <div class="form-group col-md-12">
-            @Html.Label("Имя", new {@class = "col-md-2 control-label"})
-            <div class="col-md-10">@Model.FirstName</div>
-        </div>
-
-        <div class="form-group col-md-12">
-            @Html.Label("Отчество", new {@class = "col-md-2 control-label"})
-            <div class="col-md-10">@Model.PatronymicName</div>
-        </div>
-
-        @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский";}
-        <div class="form-group col-md-12">
-            @Html.Label("Пол", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10 labeled">@gender</div>
-        </div>
-
-        <div class="form-group col-md-12">
-            @Html.Label("Дата рождения", new {@class = "col-md-2 control-label"})
-            <div class="col-md-10">@Model.BirthDate.ToLongDateString()</div>
-        </div>
-
-        @if (Model.UserRole == UserRoles.Student)
-        {
-            <div class="form-group col-md-12">
-                @Html.Label("Группа", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">@Model.Group</div>
-            </div>
-        }
-        else
-        {
-            <div class="form-group col-md-12">
-                @Html.Label("Преподаватель кафедры", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10 labeled">@Model.Department</div>
-            </div>
-        }
-
-        <div class="form-group col-md-12">
-            @Html.Label("Электронный адрес", new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">@Model.Email</div>
-        </div>
-
-        <p>
-            <button type="submit" class="btn btn-primary btn-sm" onclick="SubmitUser('@Model.Id')">Принять</button>
-            <button type="submit" class="btn btn-danger btn-sm" onclick="DeleteUser('@Model.Id')">Отклонить</button>
-        </p>
+    <div class="col-lg-11 col-lg-offset-1">
+        <h4 style="color: black;"> Страница подтверждения регистрации </h4>
     </div>
-
-    <div class="col-md-4 stock-group-item large">
-        <img class="image" src="@Model.Photo">
+    <div class="col-md-8 col-lg-offset-1" style="margin-top: 15px;">
+        <div class="panel panel-default">
+            <div class="panel-heading resume-heading">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>
+                            <i class="fa fa-university fa"></i> @Model.SurName @Model.PatronymicName @Model.FirstName
+                        </h3>
+                        <table class="table table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td>E-mail</td>
+                                    <td>@Model.Email</td>
+                                </tr>
+                                <tr>
+                                    @{ string gender = Model.Gender == UserGenders.Male ? "Мужской" : "Женский"; }
+                                    <td>Пол</td>
+                                    <td>@gender</td>
+                                </tr>
+                                <tr>
+                                    <td>Дата рождения</td>
+                                    <td>@Model.BirthDate.ToLongDateString()</td>
+                                </tr>
+                                @if (Model.UserRole == UserRoles.Student)
+                                {
+                                    <tr>
+                                        <td>Факультет</td>
+                                        <td>@Model.Faculty</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Специальность</td>
+                                        <td>@Model.Speciality</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Группа</td>
+                                        <td>@Model.Group</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>Преподаватель кафедры</td>
+                                        <td>@Model.Department</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="btn-group">
+                            <a class="btn btn-primary" onclick="SubmitUser('@Model.Id')">
+                                <i class="fa"> Принять </i>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-danger" onclick="DeleteUser('@Model.Id')">
+                                <i class="fa"> Отклонить </i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+

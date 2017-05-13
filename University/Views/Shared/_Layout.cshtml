@@ -22,7 +22,7 @@
                             <li>@Html.ActionLink("Задать вопрос", "NewQuestion", "Questions")</li>
                             if (User.IsInRole("admin"))
                             {
-                                <li>@Html.ActionLink("Admin", "AdminPage", "Home")</li>
+                                <li>@Html.ActionLink("Администратор", "AdminPage", "Home")</li>
                             }
                         }
                     </ul>
