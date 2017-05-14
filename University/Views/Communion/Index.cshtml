@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc.Html
+@using Microsoft.AspNet.Identity
 @using University.Models
 @model IEnumerable<University.Models.Dto.DialogDto>
 @{
@@ -16,11 +17,27 @@
 
     <link href="/Content/Site.css" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
+    
+    <script>
+        var arr = @Html.Raw(Json.Encode((List<ApplicationUser>)ViewData["Friends"]));
+        var id = '@User.Identity.GetUserId()';
+        initArrayListFriendsForDialogs(arr, id);
+    </script>
+
     <style>
-        .form-element-label-name {
-            font: inherit;
-            font-size: 120%;
+        .scrollbox {
+            overflow: auto;
+            width: 200px;
+            max-height: 200px;
+            margin: 30px auto;
+            background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+            background-attachment: local, local, scroll, scroll;
         }
+
+         .form-element-label-name {
+             font: inherit;
+             font-size: 120%;
+         }
 
         .form-element-label-time {
             padding-left: 10px;
@@ -61,7 +78,7 @@
                 <h4 class="modal-title" id="dialogName-modal">Участники диалога</h4>
             </div>
             <!-- Основное содержимое модального окна -->
-            <div class="modal-body" id="participantsDialog">
+            <div class="modal-body" id="membersDialog">
             </div>
         </div>
     </div>
@@ -74,17 +91,24 @@
         </div>
         <div class="col-md-4">
             @Html.Partial("DialogsBar", Model)
+            @Html.Partial("AddMembersToDialog_Bar")
             @Html.Partial("NewDialogBar", (List<ApplicationUser>)ViewData["Friends"])
         </div>
 
         <div class="form-horizontal col-md-5" id="currentDialog">
-            <div id="btnShowMembersToDialog" hidden>
-                <a href="#myModal" role="button" class="btn pull-right" data-toggle="modal">Участники диалога</a>
+            <div class="row" style="padding-top: 5px;">
+                <div id="btnAddMembersToDialog" hidden>
+                    <a href="#" role="button" class="btn pull-right" id="buttonShowFormAddMembers" onclick="AddMembersToDialogBar()">Добавить участников</a>
+                </div>
+                <div id="btnShowMembersToDialog" hidden>
+                    <a href="#myModal" role="button" class="btn pull-right" data-toggle="modal">Участники диалога</a>
+                </div>
             </div>
-            
-            <h2 id="dialogName" style="font-family: 'Rouge Script', cursive; margin-top: 20px; margin-bottom: 15px; color: aliceblue;"> </h2>
+
+            <h2 id="dialogName" value="" style="font-family: 'Rouge Script', cursive; margin-top: 20px; margin-bottom: 15px; color: aliceblue;"> </h2>
+            <input type="text" id="userId" value="" class="hide">
             <div id="formMessages">
-                <p style="margin-top: 40%; margin-left: 25%; color: #c8c2c2;">Выберите диалог или <a href="#" onclick=" NewDialog() " style="color: #0094ff;">создайте новый</a>
+                <p style="margin-top: 40%; margin-left: 25%; color: #c8c2c2;">Выберите диалог или <a href="#" onclick="NewDialog()" style="color: #0094ff;">создайте новый</a>
                 </p>
             </div>
             <div id="formSendMessage" hidden>

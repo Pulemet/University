@@ -11,7 +11,19 @@ function ShowViewSendMessage() {
 
 function NewDialog() {
     $("#dialogsBar").hide();
+    $("#addMembersToDialogBar").hide();
     $("#newDialogBar").show();
+    var id = $("#userId").val();
+    if (id !== "") {
+        console.log(id);
+        $("#" + id).prop("checked", true);
+    }
+}
+
+function AddMembersToDialogBar() {
+    $("#dialogsBar").hide();
+    $("#newDialogBar").hide();
+    $("#addMembersToDialogBar").show();
 }
 
 function GetPartialDialogHtml(id, name) {
@@ -42,14 +54,18 @@ function GetMessageHtml(message) {
             '</b></h5><small>' + message.Text + '</small></div></div>';
 }
 
-function ClearValuesInPageNewDialog(inputId) {
-    $("input[type=checkbox]").prop('checked', false);
+function ClearValuesInPageDialog(inputId) {
+    $("input[type=checkbox]", "#formBoxFriends").prop('checked', false);
+    $("input[type=checkbox]", "#formBox").prop('checked', false);
     $(inputId).val('');
     $("#buttonCreateDialog").prop('disabled', true);
+    $("#buttonAddMembers").prop('disabled', true);
 }
 
 function ShowDialogs() {
     $("#newDialogBar").hide();
+    $("#addMembersToDialogBar").hide();
+    ClearValuesInPageDialog("#NameConversation");
     $("#dialogsBar").show();
 }
 
@@ -66,6 +82,10 @@ $(function () {
         }
     };
 
+    chat.client.addMembers = function (dialog) {
+        $('#membersDialog').replaceWith(GetDialogMembersHtml(dialog));
+    }
+
     // Открываем соединение
     $.connection.hub.start().done(function () {
 
@@ -73,13 +93,14 @@ $(function () {
             event.preventDefault();
             var data = $('#sendMessage').serialize();
             var url = $('#sendMessage').attr('action');
-            $.post(url, data, function (responce) {
+            $.post(url, data, function (data) {
                 ShowViewSendMessage();
-                chat.server.send($('#dialogId').val(), responce);
+                chat.server.send($('#dialogId').val(), data);
             });
         });
 
         $('#ListDialogs').on('click', '.current-dialog', (function () {
+            console.log('here1');
             var id = $(this).attr('id');
             if ($('#dialogId').val() !== "") {
                 chat.server.onDisconnected($('#dialogId').val());
@@ -88,6 +109,11 @@ $(function () {
                 { id: id },
                 function (data) {
                     DialogMembers(data);
+                    if (data.IsConversation) {
+                        $('#membersDialog').replaceWith(GetDialogMembersHtml(data));
+                    } else {
+                        $("#formBox").html("");
+                    }
                     $('#formMessages').replaceWith(GetDialogHtml(data));
                     $('#dialogId').val(data.Id);
                     ScrollingDialog();
@@ -101,7 +127,7 @@ $(function () {
                 chat.server.onDisconnected($('#dialogId').val());
             }
             var inputId = "#NameConversation";
-            var arr = $('input:checkbox:checked').map(function() { return this.value; }).get();
+            var arr = $('input:checkbox:checked', "#formBoxFriends").map(function() { return this.value; }).get();
             if (arr.length !== 0) {
                 if (arr.length === 1 && $(inputId).val() === '') {
                     var id = arr[0];
@@ -112,6 +138,7 @@ $(function () {
                                 $('#ListDialogs').append(GetPartialDialogHtml(data.Dialog.Id, data.Dialog.Name));
                             }
                             DialogMembers(data.Dialog);
+                            $("#formBox").html("");
                             $('#formMessages').replaceWith(GetDialogHtml(data.Dialog));
                             $('#dialogId').val(data.Dialog.Id);
                             ScrollingDialog();
@@ -122,6 +149,7 @@ $(function () {
                     var url = '/Communion/NewConversation';
                     $.post(url, { listUsersId: arr, nameConversation: name }, function (data) {
                         DialogMembers(data);
+                        $('#membersDialog').replaceWith(GetDialogMembersHtml(data));
                         $('#ListDialogs').append(GetPartialDialogHtml(data.Id, data.Name));
                         $('#formMessages').replaceWith(GetDialogHtml(data));
                         $('#dialogId').val(data.Id);
@@ -129,9 +157,21 @@ $(function () {
                     });
                 }
                 ShowViewSendMessage();
-                ShowDialogs();
             }
-            ClearValuesInPageNewDialog(inputId);
+            ShowDialogs();
+        });
+
+        $('#buttonAddMembers').click(function () {
+            var dualogId = $('#dialogId').val();
+            var arr = $('input:checkbox:checked', "#formBox").map(function () { return this.value; }).get();
+            if (arr.length !== 0) {
+                var url = '/Communion/AddUsersToDialog';
+                $.post(url, { listUsersId: arr, dialogId: dualogId }, function (data) {
+                    DialogMembers(data);
+                    chat.server.addMembers($('#dialogId').val(), data);
+                });
+            }
+            ShowDialogs();
         });
 
     });
@@ -139,22 +179,103 @@ $(function () {
 
 function DialogMembers(dialog) {
     if (dialog.IsConversation) {
-        $('#participantsDialog').replaceWith(GetDialogMembersHtml(dialog));
         $("#btnShowMembersToDialog").show();
+        $("#btnAddMembersToDialog").show();
+        $("#buttonShowFormAddMembers").attr('onclick', 'AddMembersToDialogBar()');
+        $("#userId").val("");
     } else {
         $("#btnShowMembersToDialog").hide();
+        $("#btnAddMembersToDialog").show();
+        $("#buttonShowFormAddMembers").attr('onclick', 'NewDialog()');
+        var id = dialog.Members[0].Id === userId ? dialog.Members[1].Id : dialog.Members[0].Id;
+        $("#userId").val(id);
     }
 }
+
 function GetDialogMembersHtml(dialog) {
     $('#dialogName-modal').text('Участники диалога "' + dialog.Name + '"');
     var membersHtml = "";
+    var arrFriends = new Array();
+
     for (var index = 0, len = dialog.Members.length; index < len; ++index) {
-        membersHtml += GetDialogMemberHtml(dialog.Members[index]);
+        if (dialog.Members[index].Id !== userId) {
+            membersHtml += GetDialogMemberHtml(dialog.Members[index]);
+        }   
     }
-    return '<div class="modal-body" id="participantsDialog">' + membersHtml + '</div>';
+
+    for (var i = 0, len1 = arrayListFrieds.length; i < len1; ++i) {
+        var isMember = false;
+        for (var j = 0, len2 = dialog.Members.length; j < len2; ++j) {
+            if (arrayListFrieds[i].Id === dialog.Members[j].Id || arrayListFrieds[i].Id === userId) {
+                isMember = true;
+                break;
+            }
+        }
+        if (!isMember) {
+            arrFriends.push(arrayListFrieds[i]);
+        }
+    }
+
+    $("#formBox").html(GetFormListFriendsInDialog(arrFriends));
+    return '<div class="modal-body" id="membersDialog">' + membersHtml + '</div>';
+}
+
+function GetFormListFriendsInDialog(members) {
+    var html = '<label class="cols-md-12 control-label" for="" style="color: #0094ff; margin-top: 4px;">Выберите участников:</label>';
+    for (var index = 0, len = members.length; index < len; ++index) {
+        html += GetFriendInDialogHtml(members[index]);
+    }
+    return html;
+}
+
+function GetFriendInDialogHtml(member) {
+    return '<div class="col-md-12 selectedUsers"><input type="checkbox" value="' + member.Id +
+        '" id="' + member.Id + '"><label for="' +
+        member.Id + '">' + member.SurName + ' ' + member.FirstName + '</label><br /></div>';
 }
 
 function GetDialogMemberHtml(member) {
     return '<p><a href="/Home/UserPage/' + member.Id +
            '"> ' + member.SurName + ' ' + member.FirstName + ' </a></p>';
 }
+
+var arrayListFrieds;
+var userId;
+
+function initArrayListFriendsForDialogs(arr, id) {
+    arrayListFrieds = arr;
+    userId = id;
+}
+
+var IsChecked = function () {
+    var n = $('input:checked', "#formBoxFriends").length;
+    var inputId = "#NameConversation";
+    var buttonId = "#buttonCreateDialog";
+    if (n !== 0 && $(inputId).val() !== '') {
+        $(buttonId).prop('disabled', false);
+    } else {
+        if (n === 1) {
+            $(buttonId).prop('disabled', false);
+        } else {
+            $(buttonId).prop('disabled', true);
+        }
+    }
+};
+
+var IsCheckedFormAddToDialogs = function () {
+    var n = $('input:checked', "#formBox").length;
+    var buttonId = "#buttonAddMembers";
+    if (n !== 0) {
+        $(buttonId).prop('disabled', false);
+    } else {
+        $(buttonId).prop('disabled', true);
+    }
+};
+
+$(document).ready(function () {
+    $("#formBoxFriends").on('click', 'input[type=checkbox]', IsChecked);
+});
+
+$(document).ready(function () {
+    $("#formBox").on('click', 'input[type=checkbox]', IsCheckedFormAddToDialogs);
+});

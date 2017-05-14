@@ -99,6 +99,23 @@ namespace University.Controllers
         }
 
         [HttpPost]
+        public JsonResult AddUsersToDialog(List<string> listUsersId, int dialogId)
+        {
+            List<UserToDialog> usersToDialog = new List<UserToDialog>();
+            foreach (var userId in listUsersId)
+            {
+                UserToDialog userToDialog = new UserToDialog() { DialogId = dialogId, UserId = userId };
+                usersToDialog.Add(userToDialog);
+            }
+            
+            db.UserToDialogs.AddRange(usersToDialog);
+            db.SaveChanges();
+
+            var dialog = db.Dialogs.Find(dialogId);
+            return Json(GetDialogDto(dialog), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public JsonResult SendMessageInDialog(Message msg)
         {
             var userId = User.Identity.GetUserId();
@@ -174,7 +191,7 @@ namespace University.Controllers
             dialogDto.IsConversation = dialog.IsConversation;
             dialogDto.Id = dialog.Id;
             var dialogUsers = db.UserToDialogs.Where(ud => ud.DialogId == dialog.Id);
-            dialogDto.Members = db.Users.Join(dialogUsers, u => u.Id, d => d.UserId, (u, d) => u).Where(u => u.Id != currentUserId).ToList();
+            dialogDto.Members = db.Users.Join(dialogUsers, u => u.Id, d => d.UserId, (u, d) => u).ToList();
 
             dialogDto.Name = dialog.IsConversation ? dialog.Name : GetDialogName(dialogDto.Members);
 

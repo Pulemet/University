@@ -411,6 +411,7 @@
     <Content Include="Views\Teachers\TeacherPage.cshtml" />
     <Content Include="Views\Teachers\Review.cshtml" />
     <Content Include="Views\Teachers\PartialAddReview.cshtml" />
+    <Content Include="Views\Communion\AddMembersToDialog_Bar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

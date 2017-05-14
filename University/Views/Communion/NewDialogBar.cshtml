@@ -1,20 +1,11 @@
-﻿@model IEnumerable<University.Models.ApplicationUser>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<University.Models.ApplicationUser>
 
-<style>
- .scrollbox {
-    overflow: auto;
-    width: 200px;
-    max-height: 200px;
-    margin: 30px auto;
-    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-    background-attachment: local, local, scroll, scroll;
-}
-</style>
 <div class="col-md-12" style="margin-top: 15px;" id="newDialogBar" hidden>
     <div class="panel panel-default">
         <div class="panel-heading resume-heading">
                 <div class="form-group">
-                    @Html.Label("Название беседы", new { @class = "cols-sm-2 control-label", style = "color: #0094ff; margin-top: 8px;" })
+                    @Html.Label("Создать беседу", new { @class = "cols-sm-2 control-label", style = "color: #0094ff; margin-top: 8px;" })
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <input type="text" class="form-control" id="NameConversation" oninput="IsChecked()" placeholder="Название беседы" style="border-radius: 3px; width: 100%; margin-bottom: 4px;" />
@@ -34,11 +25,14 @@
                     </div>
                 </div>
 
-                <form class="formbox scrollbox" id="formBox" style="color: black; margin-top: 10px; ">
+                <form class="formbox scrollbox" id="formBoxFriends" style="color: black; margin-top: 10px; ">
                     @Html.Label("Выберите участников:", new { @class = "cols-md-12 control-label", style = "color: #0094ff; margin-top: 4px;" })
                     @foreach (var user in Model)
                     {
-                        @Html.Partial("PartialViewUser", user)
+                        if (user.Id != User.Identity.GetUserId())
+                        {
+                             @Html.Partial("PartialViewUser", user)
+                        }
                     }
                 </form>
         </div>

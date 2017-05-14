@@ -1,0 +1,23 @@
+﻿<div class="col-md-12" style="margin-top: 15px;" id="addMembersToDialogBar" hidden>
+    <div class="panel panel-default">
+        <div class="panel-heading resume-heading">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success btn-block" id="buttonAddMembers" style="margin-bottom: 4px;" disabled>
+                        <i class="fa fa-envelope fa"> Добавить </i>
+                    </button>
+
+                    <button class="btn btn-warning btn-block" onclick="ShowDialogs()">
+                        <i class="fa fa-envelope fa"> Отменить </i>
+                    </button>
+                </div>
+            </div>
+
+            <form class="scrollbox" id="formBox" style="color: black; margin-top: 10px; ">
+                @Html.Label("Выберите участников:", new { @class = "cols-md-12 control-label", style = "color: #0094ff; margin-top: 4px;" })
+            </form>
+        </div>
+    </div>
+</div>
+

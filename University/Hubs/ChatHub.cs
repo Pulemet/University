@@ -17,6 +17,11 @@ namespace University.Hubs
             Clients.Group(groupId).sendMessage(msg);
         }
 
+        public void AddMembers(string groipId, DialogDto dialog)
+        {
+            Clients.Group(groipId).addMembers(dialog);
+        }
+
         public void Connect(string groupId)
         {
             var id = Context.ConnectionId;

@@ -61,25 +61,6 @@ function LockedButton(thisInput, lockedButton) {
     }
 }
 
-var IsChecked = function () {
-    var n = $('input:checked').length;
-    var inputId = "#NameConversation";
-    var buttonId = "#buttonCreateDialog";
-    if (n !== 0 && $(inputId).val() !== '') {
-        $(buttonId).prop('disabled', false);
-    } else {
-        if (n === 1) {
-            $(buttonId).prop('disabled', false);
-        } else {
-            $(buttonId).prop('disabled', true);
-        }
-    }
-};
-
-$(document).ready(function () {
-    $('input[type=checkbox]').on('click', IsChecked);
-});
-
 function AddMaterialClick() {
     var formData = new FormData();
     var file = document.getElementById("loadFile").files[0];
