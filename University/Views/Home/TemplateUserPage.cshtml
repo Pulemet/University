@@ -134,15 +134,33 @@
                     <h4>Загруженные материалы</h4>
                     <table class="table table-user-information">
                         <tbody>
-                        @foreach (var material in Model.Materials)
+                        @for (int i = 0; i < Model.Materials.Count; i+=2)
                         {
                             <tr>
-                                <td>Предмет</td>
-                                <td><a href="/Subjects/MaterialsSubject/@material.SubjectId">@material.SubjectName</a></td>
-                            </tr>
-                            <tr>
-                                <td>Материал</td>
-                                <td><a href="/Subjects/Material/@material.Id">@material.Name</a></td>
+                                <td>
+                                    <small>Название предмета: </small>
+                                    <a href="/Subjects/MaterialsSubject/@Model.Materials[i].SubjectId" style="text-align: left; margin-top: 10px; font-weight: bold; color: #3104B4">@Model.Materials[i].SubjectName</a>
+                                    <p>
+                                        <small>Материал: </small>
+                                        <a href="/Subjects/Material/@Model.Materials[i].Id" style="text-align: left; margin-top: 10px; font-weight: bold; color: #3104B4">@Model.Materials[i].Name</a>
+                                    </p>
+                                </td>
+                                @if (Model.Materials.Count > i + 1)
+                                {
+                                    <td>
+                                        <small>Название предмета: </small>
+                                        <a href="/Subjects/MaterialsSubject/@Model.Materials[i + 1].SubjectId" style="text-align: left; margin-top: 10px; font-weight: bold; color: #3104B4">@Model.Materials[i + 1].SubjectName</a>
+                                        <p>
+                                            <small>Материал: </small>
+                                            <a href="/Subjects/Material/@Model.Materials[i + 1].Id" style="text-align: left; margin-top: 10px; font-weight: bold; color: #3104B4">@Model.Materials[i + 1].Name</a>
+                                        </p>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                    </td>
+                                }
                             </tr>
                         }
                         </tbody>

@@ -13,6 +13,7 @@ $(document).ready(function () {
         $.post(url, data, function (responce) {
             $('#commentInput').val('');
             $('#formComments').append(responce);
+            ScrollingForm("formComments");
             $('#buttonAddComment').prop('disabled', true);
             if ($('#noComments').length > 0) {
                 $('#noComments').remove();
@@ -29,6 +30,7 @@ $(document).ready(function () {
         $.post(url, data, function (responce) {
             $('#answerInput').val('');
             $('#formAnswers').append(responce);
+            ScrollingForm("formAnswers");
             $('#buttonAddAnswer').prop('disabled', true);
             if ($('#noAnswers').length > 0) {
                 $('#noAnswers').remove();
@@ -45,6 +47,7 @@ $(document).ready(function () {
         $.post(url, data, function (responce) {
             $('#reviewInput').val('');
             $('#formReviews').append(responce);
+            ScrollingForm("formReviews");
             $('#buttonAddReview').prop('disabled', true);
             if ($('#noReviews').length > 0) {
                 $('#noReviews').remove();
